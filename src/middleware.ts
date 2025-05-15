@@ -1,12 +1,13 @@
-import { clerkMiddleware } from '@clerk/nextjs/server'
+// src/middleware.ts
+import { clerkMiddleware } from '@clerk/nextjs/server';
 
-export default clerkMiddleware()
+export default clerkMiddleware();
 
 export const config = {
   matcher: [
-    // Protect everything except static files and Next.js internals
+    // protect all your app routes (except Next.js internals & static files)
     '/((?!_next|.*\\..*).*)',
-    // Always run for your API routes
+    // protect API routes under /api
     '/api/:path*',
   ],
-}
+};

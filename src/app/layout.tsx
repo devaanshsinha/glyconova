@@ -1,5 +1,6 @@
 // src/app/layout.tsx
 import './globals.css'
+import Link from 'next/link'
 import type { ReactNode } from 'react'
 import {
   ClerkProvider,
@@ -11,21 +12,27 @@ import {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <head>
-          <title>Glyconova</title>
-        </head>
-        <body className="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors">
-          <header className="bg-white dark:bg-gray-800 shadow">
+    <html lang="en">
+      <head>
+        <title>Glyconova</title>
+      </head>
+      <body className="bg-gray-50 min-h-screen">
+        <ClerkProvider>
+          {/* fixed navbar */}
+          <header className="fixed inset-x-0 top-0 bg-white shadow z-50">
             <nav className="container mx-auto p-4 flex justify-between items-center">
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              {/* Logo → Home */}
+              <Link
+                href="/"
+                className="text-2xl font-bold text-gray-900"
+              >
                 Glyconova
-              </h1>
-              <div className="space-x-6">
+              </Link>
+              <div className="flex items-center space-x-4">
+                {/* Auth buttons */}
                 <SignedOut>
                   <SignInButton>
-                    <button className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">
+                    <button className="text-gray-700 hover:text-blue-600 transition">
                       Sign In / Sign Up
                     </button>
                   </SignInButton>
@@ -36,9 +43,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               </div>
             </nav>
           </header>
-          <main className="container mx-auto p-6">{children}</main>
-        </body>
-      </html>
-    </ClerkProvider>
+
+          {/* Push content below navbar */}
+          <main className="container mx-auto p-6 pt-24">{children}</main>
+        </ClerkProvider>
+      </body>
+    </html>
   )
 }
