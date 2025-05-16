@@ -136,7 +136,7 @@ export function getDateRangeForInterval(interval: string): { startDate: string, 
   
   switch (interval) {
     case 'day':
-      // Today
+      // Just today
       break;
     case 'week':
       start.setDate(start.getDate() - 7);
@@ -144,9 +144,12 @@ export function getDateRangeForInterval(interval: string): { startDate: string, 
     case 'month':
       start.setMonth(start.getMonth() - 1);
       break;
-    case 'year':
-      start.setFullYear(start.getFullYear() - 1);
-      break;
+    case 'custom':
+      // No change, use existing date range
+      return {
+        startDate: formatDateForAPI(start),
+        endDate: formatDateForAPI(end)
+      };
     default:
       start.setDate(start.getDate() - 7);
   }
@@ -155,4 +158,22 @@ export function getDateRangeForInterval(interval: string): { startDate: string, 
     startDate: formatDateForAPI(start),
     endDate: formatDateForAPI(end)
   };
+}
+
+/**
+ * Generate a random color with pastel tones
+ */
+export function generatePastelColor(seed: string): string {
+  // Generate a deterministic but distributed hash from the string
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) {
+    hash = seed.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  
+  // Use the hash to generate a pastel HSL color
+  const h = Math.abs(hash) % 360; // Hue (0-360)
+  const s = 25 + 25 * ((Math.abs(hash) % 100) / 100); // Saturation (25-50%)
+  const l = 80 + 10 * ((Math.abs(hash >> 8) % 100) / 100); // Lightness (80-90%)
+  
+  return `hsl(${h}, ${s}%, ${l}%)`;
 } 

@@ -9,7 +9,7 @@ import {
   processGlucoseData, 
   formatDateForAPI, 
   getDateRangeForInterval,
-  getDefaultDateRange, 
+  getDefaultDateRange,
   GlucoseDataPoint 
 } from '@/lib/chart-utils';
 import { HIGH_THRESHOLD, LOW_THRESHOLD } from '@/lib/glucose-stats';
@@ -26,7 +26,6 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
   const [averageData, setAverageData] = useState<GlucoseDataPoint[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [showAverage, setShowAverage] = useState<boolean>(false);
 
   // Initialize dates on mount
   useEffect(() => {
@@ -79,13 +78,6 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
         
         setData(dataPointsWithIds);
         setAverageData(averageDataWithIds);
-        
-        // Auto-enable average view for multi-day selections
-        if (interval !== 'day' && dataPoints.length > 100) {
-          setShowAverage(true);
-        } else if (interval === 'day') {
-          setShowAverage(false);
-        }
       } catch (err) {
         console.error('Error fetching glucose data:', err);
         setError('Could not load glucose data. Please try again later.');
@@ -133,17 +125,19 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
       const dataPoint = payload[0].payload as GlucoseDataPoint;
       
       let formattedTime = dataPoint.time;
+      let formattedDate = '';
       
-      // For the daily view, show the full date and time
-      if (!showAverage) {
+      // For daily view, show full date
+      if (interval === 'day') {
         const date = new Date(dataPoint.timestamp);
-        formattedTime = date instanceof Date && !isNaN(date.getTime()) 
-          ? `${date.toLocaleDateString()} ${dataPoint.time}`
-          : dataPoint.time;
+        if (date instanceof Date && !isNaN(date.getTime())) {
+          formattedDate = date.toLocaleDateString();
+        }
       }
       
       return (
         <div className="bg-white p-4 border border-gray-200 rounded shadow-sm">
+          {formattedDate && <p className="text-sm font-medium text-gray-700">{formattedDate}</p>}
           <p className="text-sm text-gray-500">{formattedTime}</p>
           <p className="text-lg font-bold">
             {dataPoint.value} mg/dL
@@ -158,7 +152,7 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
 
   // Determine y-axis domain
   const calculateYDomain = () => {
-    const activeData = showAverage ? averageData : data;
+    const activeData = interval === 'day' ? data : averageData;
     if (activeData.length === 0) return [0, 200];
     
     const values = activeData.map(d => d.value);
@@ -175,9 +169,10 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
 
   // Create an array of interval buttons for proper key assignment
   const intervalButtons = [
-    { id: 'day', label: 'Today' },
-    { id: 'week', label: 'Week' },
-    { id: 'month', label: 'Month' }
+    { id: 'day', label: 'Daily' },
+    { id: 'week', label: 'Weekly' },
+    { id: 'month', label: 'Monthly' },
+    { id: 'custom', label: 'Custom Range' }
   ];
 
   // Legend items with keys
@@ -187,8 +182,41 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
     { id: 'low', label: `Low < ${LOW_THRESHOLD} mg/dL`, color: 'bg-red-500' }
   ];
 
+  // Get chart title based on interval
+  const getChartTitle = () => {
+    switch (interval) {
+      case 'day':
+        return `Daily Glucose Readings (${new Date(startDate).toLocaleDateString()})`;
+      case 'week':
+        return `Weekly Average Profile (${formatDateRange()})`;
+      case 'month':
+        return `Monthly Average Profile (${formatDateRange()})`;
+      case 'custom':
+        return `Custom Range Average (${formatDateRange()})`;
+      default:
+        return `Glucose Readings (${formatDateRange()})`;
+    }
+  };
+
   return (
     <div className={`space-y-4 ${className}`}>
+      {/* Interval buttons */}
+      <div className="flex flex-wrap gap-2 mb-4">
+        {intervalButtons.map(btn => (
+          <button
+            key={`interval-${btn.id}`}
+            onClick={() => handleIntervalChange(btn.id)}
+            className={`px-4 py-2 rounded-md text-sm font-medium ${
+              interval === btn.id
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+          >
+            {btn.label}
+          </button>
+        ))}
+      </div>
+      
       {/* Date range selector */}
       <div className="flex flex-wrap gap-4 items-center">
         <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
@@ -217,53 +245,18 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
           />
         </div>
       </div>
-      
-      {/* Interval buttons */}
-      <div className="flex flex-wrap gap-2">
-        {intervalButtons.map(btn => (
-          <button
-            key={`interval-${btn.id}`}
-            onClick={() => handleIntervalChange(btn.id)}
-            className={`px-4 py-2 rounded-md text-sm font-medium ${
-              interval === btn.id
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
-          >
-            {btn.label}
-          </button>
-        ))}
-        
-        {/* Toggle for average view */}
-        {interval !== 'day' && (
-          <button
-            key="toggle-average"
-            onClick={() => setShowAverage(!showAverage)}
-            className={`px-4 py-2 rounded-md text-sm font-medium ml-auto ${
-              showAverage
-                ? 'bg-green-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
-          >
-            {showAverage ? 'Show Detailed' : 'Show 24h Average'}
-          </button>
-        )}
-      </div>
 
       {/* Chart title */}
       {!loading && !error && (
         <div className="text-center mb-2">
           <h3 className="text-lg font-medium text-gray-700">
-            {showAverage 
-              ? `24-Hour Average Profile (${formatDateRange()})`
-              : `Glucose Readings (${formatDateRange()})`
-            }
+            {getChartTitle()}
           </h3>
-          {showAverage && (
-            <p className="text-sm text-gray-500">
-              Showing the average pattern across all days in selected range
-            </p>
-          )}
+          <p className="text-sm text-gray-500">
+            {interval !== 'day' ? 
+              'Showing the average 24-hour pattern' : 
+              'Showing detailed glucose readings for the day'}
+          </p>
         </div>
       )}
 
@@ -277,61 +270,8 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
           <div className="h-80 flex items-center justify-center">
             <p className="text-gray-500">{error}</p>
           </div>
-        ) : (showAverage && averageData.length > 0) ? (
-          // 24-hour Average Profile
-          <ResponsiveContainer width="100%" height={400}>
-            <LineChart
-              data={averageData}
-              margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis 
-                dataKey="time" 
-                label={{ value: 'Time of Day', position: 'insideBottomRight', offset: -10 }} 
-              />
-              <YAxis 
-                domain={yDomain}
-                label={{ value: 'Glucose (mg/dL)', angle: -90, position: 'insideLeft' }} 
-              />
-              <Tooltip content={<CustomTooltip />} />
-              <Legend />
-              
-              {/* Reference lines for thresholds */}
-              <ReferenceLine y={HIGH_THRESHOLD} stroke="#F59E0B" strokeDasharray="3 3" label={{value: 'High', position: 'right'}} />
-              <ReferenceLine y={LOW_THRESHOLD} stroke="#EF4444" strokeDasharray="3 3" label={{value: 'Low', position: 'right'}} />
-              
-              <Line
-                type="monotone"
-                dataKey="value"
-                name="Average Glucose"
-                stroke="#3B82F6"
-                strokeWidth={2}
-                connectNulls={true}
-                dot={(props) => {
-                  const { cx, cy, payload } = props;
-                  const { status, id } = payload as GlucoseDataPoint & { id: string };
-                  
-                  return (
-                    <circle
-                      key={id || `dot-${cx}-${cy}`}
-                      cx={cx}
-                      cy={cy}
-                      r={4}
-                      fill={
-                        status === 'high' ? '#F59E0B' : 
-                        status === 'low' ? '#EF4444' : 
-                        '#3B82F6'
-                      }
-                      stroke="none"
-                    />
-                  );
-                }}
-                activeDot={{ r: 6, stroke: '#2563EB', strokeWidth: 2 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        ) : (
-          // Detailed data view
+        ) : interval === 'day' ? (
+          // Daily detailed view
           <ResponsiveContainer width="100%" height={400}>
             <LineChart
               data={data}
@@ -359,6 +299,59 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
                 name="Glucose"
                 stroke="#3B82F6"
                 strokeWidth={2}
+                dot={(props) => {
+                  const { cx, cy, payload } = props;
+                  const { status, id } = payload as GlucoseDataPoint & { id: string };
+                  
+                  return (
+                    <circle
+                      key={id || `dot-${cx}-${cy}`}
+                      cx={cx}
+                      cy={cy}
+                      r={4}
+                      fill={
+                        status === 'high' ? '#F59E0B' : 
+                        status === 'low' ? '#EF4444' : 
+                        '#3B82F6'
+                      }
+                      stroke="none"
+                    />
+                  );
+                }}
+                activeDot={{ r: 6, stroke: '#2563EB', strokeWidth: 2 }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        ) : (
+          // Average 24-hour Profile for weekly, monthly, custom
+          <ResponsiveContainer width="100%" height={400}>
+            <LineChart
+              data={averageData}
+              margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis 
+                dataKey="time" 
+                label={{ value: 'Time of Day', position: 'insideBottomRight', offset: -10 }} 
+              />
+              <YAxis 
+                domain={yDomain}
+                label={{ value: 'Glucose (mg/dL)', angle: -90, position: 'insideLeft' }} 
+              />
+              <Tooltip content={<CustomTooltip />} />
+              <Legend />
+              
+              {/* Reference lines for thresholds */}
+              <ReferenceLine y={HIGH_THRESHOLD} stroke="#F59E0B" strokeDasharray="3 3" label={{value: 'High', position: 'right'}} />
+              <ReferenceLine y={LOW_THRESHOLD} stroke="#EF4444" strokeDasharray="3 3" label={{value: 'Low', position: 'right'}} />
+              
+              <Line
+                type="monotone"
+                dataKey="value"
+                name="Average Glucose"
+                stroke="#3B82F6"
+                strokeWidth={2.5}
+                connectNulls={true}
                 dot={(props) => {
                   const { cx, cy, payload } = props;
                   const { status, id } = payload as GlucoseDataPoint & { id: string };
