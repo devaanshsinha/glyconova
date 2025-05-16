@@ -153,6 +153,25 @@ exports.Prisma.DataUploadScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.GlucoseStatsScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  average: 'average',
+  standardDeviation: 'standardDeviation',
+  highCount: 'highCount',
+  lowCount: 'lowCount',
+  inRangeCount: 'inRangeCount',
+  totalReadings: 'totalReadings',
+  highPercentage: 'highPercentage',
+  lowPercentage: 'lowPercentage',
+  inRangePercentage: 'inRangePercentage',
+  minGlucose: 'minGlucose',
+  maxGlucose: 'maxGlucose',
+  timeInRange: 'timeInRange',
+  lastCalculated: 'lastCalculated',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -172,7 +191,8 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   User: 'User',
   GlucoseReading: 'GlucoseReading',
-  DataUpload: 'DataUpload'
+  DataUpload: 'DataUpload',
+  GlucoseStats: 'GlucoseStats'
 };
 
 /**

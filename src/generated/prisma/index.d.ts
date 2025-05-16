@@ -28,6 +28,11 @@ export type GlucoseReading = $Result.DefaultSelection<Prisma.$GlucoseReadingPayl
  * 
  */
 export type DataUpload = $Result.DefaultSelection<Prisma.$DataUploadPayload>
+/**
+ * Model GlucoseStats
+ * 
+ */
+export type GlucoseStats = $Result.DefaultSelection<Prisma.$GlucoseStatsPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -183,6 +188,16 @@ export class PrismaClient<
     * ```
     */
   get dataUpload(): Prisma.DataUploadDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.glucoseStats`: Exposes CRUD operations for the **GlucoseStats** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GlucoseStats
+    * const glucoseStats = await prisma.glucoseStats.findMany()
+    * ```
+    */
+  get glucoseStats(): Prisma.GlucoseStatsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -625,7 +640,8 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     GlucoseReading: 'GlucoseReading',
-    DataUpload: 'DataUpload'
+    DataUpload: 'DataUpload',
+    GlucoseStats: 'GlucoseStats'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -644,7 +660,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "glucoseReading" | "dataUpload"
+      modelProps: "user" | "glucoseReading" | "dataUpload" | "glucoseStats"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -870,6 +886,80 @@ export namespace Prisma {
           }
         }
       }
+      GlucoseStats: {
+        payload: Prisma.$GlucoseStatsPayload<ExtArgs>
+        fields: Prisma.GlucoseStatsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GlucoseStatsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseStatsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GlucoseStatsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseStatsPayload>
+          }
+          findFirst: {
+            args: Prisma.GlucoseStatsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseStatsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GlucoseStatsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseStatsPayload>
+          }
+          findMany: {
+            args: Prisma.GlucoseStatsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseStatsPayload>[]
+          }
+          create: {
+            args: Prisma.GlucoseStatsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseStatsPayload>
+          }
+          createMany: {
+            args: Prisma.GlucoseStatsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GlucoseStatsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseStatsPayload>[]
+          }
+          delete: {
+            args: Prisma.GlucoseStatsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseStatsPayload>
+          }
+          update: {
+            args: Prisma.GlucoseStatsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseStatsPayload>
+          }
+          deleteMany: {
+            args: Prisma.GlucoseStatsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GlucoseStatsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GlucoseStatsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseStatsPayload>[]
+          }
+          upsert: {
+            args: Prisma.GlucoseStatsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseStatsPayload>
+          }
+          aggregate: {
+            args: Prisma.GlucoseStatsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGlucoseStats>
+          }
+          groupBy: {
+            args: Prisma.GlucoseStatsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GlucoseStatsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GlucoseStatsCountArgs<ExtArgs>
+            result: $Utils.Optional<GlucoseStatsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -957,6 +1047,7 @@ export namespace Prisma {
     user?: UserOmit
     glucoseReading?: GlucoseReadingOmit
     dataUpload?: DataUploadOmit
+    glucoseStats?: GlucoseStatsOmit
   }
 
   /* Types for Logging */
@@ -1272,6 +1363,7 @@ export namespace Prisma {
     updatedAt?: boolean
     glucoseReadings?: boolean | User$glucoseReadingsArgs<ExtArgs>
     dataUploads?: boolean | User$dataUploadsArgs<ExtArgs>
+    glucoseStats?: boolean | User$glucoseStatsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1309,6 +1401,7 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     glucoseReadings?: boolean | User$glucoseReadingsArgs<ExtArgs>
     dataUploads?: boolean | User$dataUploadsArgs<ExtArgs>
+    glucoseStats?: boolean | User$glucoseStatsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1319,6 +1412,7 @@ export namespace Prisma {
     objects: {
       glucoseReadings: Prisma.$GlucoseReadingPayload<ExtArgs>[]
       dataUploads: Prisma.$DataUploadPayload<ExtArgs>[]
+      glucoseStats: Prisma.$GlucoseStatsPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1724,6 +1818,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     glucoseReadings<T extends User$glucoseReadingsArgs<ExtArgs> = {}>(args?: Subset<T, User$glucoseReadingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlucoseReadingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     dataUploads<T extends User$dataUploadsArgs<ExtArgs> = {}>(args?: Subset<T, User$dataUploadsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataUploadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    glucoseStats<T extends User$glucoseStatsArgs<ExtArgs> = {}>(args?: Subset<T, User$glucoseStatsArgs<ExtArgs>>): Prisma__GlucoseStatsClient<$Result.GetResult<Prisma.$GlucoseStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2193,6 +2288,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DataUploadScalarFieldEnum | DataUploadScalarFieldEnum[]
+  }
+
+  /**
+   * User.glucoseStats
+   */
+  export type User$glucoseStatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseStats
+     */
+    select?: GlucoseStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseStats
+     */
+    omit?: GlucoseStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseStatsInclude<ExtArgs> | null
+    where?: GlucoseStatsWhereInput
   }
 
   /**
@@ -4494,6 +4608,1281 @@ export namespace Prisma {
 
 
   /**
+   * Model GlucoseStats
+   */
+
+  export type AggregateGlucoseStats = {
+    _count: GlucoseStatsCountAggregateOutputType | null
+    _avg: GlucoseStatsAvgAggregateOutputType | null
+    _sum: GlucoseStatsSumAggregateOutputType | null
+    _min: GlucoseStatsMinAggregateOutputType | null
+    _max: GlucoseStatsMaxAggregateOutputType | null
+  }
+
+  export type GlucoseStatsAvgAggregateOutputType = {
+    average: number | null
+    standardDeviation: number | null
+    highCount: number | null
+    lowCount: number | null
+    inRangeCount: number | null
+    totalReadings: number | null
+    highPercentage: number | null
+    lowPercentage: number | null
+    inRangePercentage: number | null
+    minGlucose: number | null
+    maxGlucose: number | null
+  }
+
+  export type GlucoseStatsSumAggregateOutputType = {
+    average: number | null
+    standardDeviation: number | null
+    highCount: number | null
+    lowCount: number | null
+    inRangeCount: number | null
+    totalReadings: number | null
+    highPercentage: number | null
+    lowPercentage: number | null
+    inRangePercentage: number | null
+    minGlucose: number | null
+    maxGlucose: number | null
+  }
+
+  export type GlucoseStatsMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    average: number | null
+    standardDeviation: number | null
+    highCount: number | null
+    lowCount: number | null
+    inRangeCount: number | null
+    totalReadings: number | null
+    highPercentage: number | null
+    lowPercentage: number | null
+    inRangePercentage: number | null
+    minGlucose: number | null
+    maxGlucose: number | null
+    timeInRange: string | null
+    lastCalculated: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GlucoseStatsMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    average: number | null
+    standardDeviation: number | null
+    highCount: number | null
+    lowCount: number | null
+    inRangeCount: number | null
+    totalReadings: number | null
+    highPercentage: number | null
+    lowPercentage: number | null
+    inRangePercentage: number | null
+    minGlucose: number | null
+    maxGlucose: number | null
+    timeInRange: string | null
+    lastCalculated: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GlucoseStatsCountAggregateOutputType = {
+    id: number
+    userId: number
+    average: number
+    standardDeviation: number
+    highCount: number
+    lowCount: number
+    inRangeCount: number
+    totalReadings: number
+    highPercentage: number
+    lowPercentage: number
+    inRangePercentage: number
+    minGlucose: number
+    maxGlucose: number
+    timeInRange: number
+    lastCalculated: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type GlucoseStatsAvgAggregateInputType = {
+    average?: true
+    standardDeviation?: true
+    highCount?: true
+    lowCount?: true
+    inRangeCount?: true
+    totalReadings?: true
+    highPercentage?: true
+    lowPercentage?: true
+    inRangePercentage?: true
+    minGlucose?: true
+    maxGlucose?: true
+  }
+
+  export type GlucoseStatsSumAggregateInputType = {
+    average?: true
+    standardDeviation?: true
+    highCount?: true
+    lowCount?: true
+    inRangeCount?: true
+    totalReadings?: true
+    highPercentage?: true
+    lowPercentage?: true
+    inRangePercentage?: true
+    minGlucose?: true
+    maxGlucose?: true
+  }
+
+  export type GlucoseStatsMinAggregateInputType = {
+    id?: true
+    userId?: true
+    average?: true
+    standardDeviation?: true
+    highCount?: true
+    lowCount?: true
+    inRangeCount?: true
+    totalReadings?: true
+    highPercentage?: true
+    lowPercentage?: true
+    inRangePercentage?: true
+    minGlucose?: true
+    maxGlucose?: true
+    timeInRange?: true
+    lastCalculated?: true
+    updatedAt?: true
+  }
+
+  export type GlucoseStatsMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    average?: true
+    standardDeviation?: true
+    highCount?: true
+    lowCount?: true
+    inRangeCount?: true
+    totalReadings?: true
+    highPercentage?: true
+    lowPercentage?: true
+    inRangePercentage?: true
+    minGlucose?: true
+    maxGlucose?: true
+    timeInRange?: true
+    lastCalculated?: true
+    updatedAt?: true
+  }
+
+  export type GlucoseStatsCountAggregateInputType = {
+    id?: true
+    userId?: true
+    average?: true
+    standardDeviation?: true
+    highCount?: true
+    lowCount?: true
+    inRangeCount?: true
+    totalReadings?: true
+    highPercentage?: true
+    lowPercentage?: true
+    inRangePercentage?: true
+    minGlucose?: true
+    maxGlucose?: true
+    timeInRange?: true
+    lastCalculated?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type GlucoseStatsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GlucoseStats to aggregate.
+     */
+    where?: GlucoseStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlucoseStats to fetch.
+     */
+    orderBy?: GlucoseStatsOrderByWithRelationInput | GlucoseStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GlucoseStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlucoseStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlucoseStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned GlucoseStats
+    **/
+    _count?: true | GlucoseStatsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: GlucoseStatsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: GlucoseStatsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GlucoseStatsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GlucoseStatsMaxAggregateInputType
+  }
+
+  export type GetGlucoseStatsAggregateType<T extends GlucoseStatsAggregateArgs> = {
+        [P in keyof T & keyof AggregateGlucoseStats]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGlucoseStats[P]>
+      : GetScalarType<T[P], AggregateGlucoseStats[P]>
+  }
+
+
+
+
+  export type GlucoseStatsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GlucoseStatsWhereInput
+    orderBy?: GlucoseStatsOrderByWithAggregationInput | GlucoseStatsOrderByWithAggregationInput[]
+    by: GlucoseStatsScalarFieldEnum[] | GlucoseStatsScalarFieldEnum
+    having?: GlucoseStatsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GlucoseStatsCountAggregateInputType | true
+    _avg?: GlucoseStatsAvgAggregateInputType
+    _sum?: GlucoseStatsSumAggregateInputType
+    _min?: GlucoseStatsMinAggregateInputType
+    _max?: GlucoseStatsMaxAggregateInputType
+  }
+
+  export type GlucoseStatsGroupByOutputType = {
+    id: string
+    userId: string
+    average: number
+    standardDeviation: number
+    highCount: number
+    lowCount: number
+    inRangeCount: number
+    totalReadings: number
+    highPercentage: number
+    lowPercentage: number
+    inRangePercentage: number
+    minGlucose: number
+    maxGlucose: number
+    timeInRange: string
+    lastCalculated: Date
+    updatedAt: Date
+    _count: GlucoseStatsCountAggregateOutputType | null
+    _avg: GlucoseStatsAvgAggregateOutputType | null
+    _sum: GlucoseStatsSumAggregateOutputType | null
+    _min: GlucoseStatsMinAggregateOutputType | null
+    _max: GlucoseStatsMaxAggregateOutputType | null
+  }
+
+  type GetGlucoseStatsGroupByPayload<T extends GlucoseStatsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GlucoseStatsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GlucoseStatsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GlucoseStatsGroupByOutputType[P]>
+            : GetScalarType<T[P], GlucoseStatsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GlucoseStatsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    average?: boolean
+    standardDeviation?: boolean
+    highCount?: boolean
+    lowCount?: boolean
+    inRangeCount?: boolean
+    totalReadings?: boolean
+    highPercentage?: boolean
+    lowPercentage?: boolean
+    inRangePercentage?: boolean
+    minGlucose?: boolean
+    maxGlucose?: boolean
+    timeInRange?: boolean
+    lastCalculated?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["glucoseStats"]>
+
+  export type GlucoseStatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    average?: boolean
+    standardDeviation?: boolean
+    highCount?: boolean
+    lowCount?: boolean
+    inRangeCount?: boolean
+    totalReadings?: boolean
+    highPercentage?: boolean
+    lowPercentage?: boolean
+    inRangePercentage?: boolean
+    minGlucose?: boolean
+    maxGlucose?: boolean
+    timeInRange?: boolean
+    lastCalculated?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["glucoseStats"]>
+
+  export type GlucoseStatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    average?: boolean
+    standardDeviation?: boolean
+    highCount?: boolean
+    lowCount?: boolean
+    inRangeCount?: boolean
+    totalReadings?: boolean
+    highPercentage?: boolean
+    lowPercentage?: boolean
+    inRangePercentage?: boolean
+    minGlucose?: boolean
+    maxGlucose?: boolean
+    timeInRange?: boolean
+    lastCalculated?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["glucoseStats"]>
+
+  export type GlucoseStatsSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    average?: boolean
+    standardDeviation?: boolean
+    highCount?: boolean
+    lowCount?: boolean
+    inRangeCount?: boolean
+    totalReadings?: boolean
+    highPercentage?: boolean
+    lowPercentage?: boolean
+    inRangePercentage?: boolean
+    minGlucose?: boolean
+    maxGlucose?: boolean
+    timeInRange?: boolean
+    lastCalculated?: boolean
+    updatedAt?: boolean
+  }
+
+  export type GlucoseStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "average" | "standardDeviation" | "highCount" | "lowCount" | "inRangeCount" | "totalReadings" | "highPercentage" | "lowPercentage" | "inRangePercentage" | "minGlucose" | "maxGlucose" | "timeInRange" | "lastCalculated" | "updatedAt", ExtArgs["result"]["glucoseStats"]>
+  export type GlucoseStatsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type GlucoseStatsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type GlucoseStatsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $GlucoseStatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GlucoseStats"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      average: number
+      standardDeviation: number
+      highCount: number
+      lowCount: number
+      inRangeCount: number
+      totalReadings: number
+      highPercentage: number
+      lowPercentage: number
+      inRangePercentage: number
+      minGlucose: number
+      maxGlucose: number
+      timeInRange: string
+      lastCalculated: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["glucoseStats"]>
+    composites: {}
+  }
+
+  type GlucoseStatsGetPayload<S extends boolean | null | undefined | GlucoseStatsDefaultArgs> = $Result.GetResult<Prisma.$GlucoseStatsPayload, S>
+
+  type GlucoseStatsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GlucoseStatsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GlucoseStatsCountAggregateInputType | true
+    }
+
+  export interface GlucoseStatsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GlucoseStats'], meta: { name: 'GlucoseStats' } }
+    /**
+     * Find zero or one GlucoseStats that matches the filter.
+     * @param {GlucoseStatsFindUniqueArgs} args - Arguments to find a GlucoseStats
+     * @example
+     * // Get one GlucoseStats
+     * const glucoseStats = await prisma.glucoseStats.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GlucoseStatsFindUniqueArgs>(args: SelectSubset<T, GlucoseStatsFindUniqueArgs<ExtArgs>>): Prisma__GlucoseStatsClient<$Result.GetResult<Prisma.$GlucoseStatsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one GlucoseStats that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GlucoseStatsFindUniqueOrThrowArgs} args - Arguments to find a GlucoseStats
+     * @example
+     * // Get one GlucoseStats
+     * const glucoseStats = await prisma.glucoseStats.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GlucoseStatsFindUniqueOrThrowArgs>(args: SelectSubset<T, GlucoseStatsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GlucoseStatsClient<$Result.GetResult<Prisma.$GlucoseStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GlucoseStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlucoseStatsFindFirstArgs} args - Arguments to find a GlucoseStats
+     * @example
+     * // Get one GlucoseStats
+     * const glucoseStats = await prisma.glucoseStats.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GlucoseStatsFindFirstArgs>(args?: SelectSubset<T, GlucoseStatsFindFirstArgs<ExtArgs>>): Prisma__GlucoseStatsClient<$Result.GetResult<Prisma.$GlucoseStatsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GlucoseStats that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlucoseStatsFindFirstOrThrowArgs} args - Arguments to find a GlucoseStats
+     * @example
+     * // Get one GlucoseStats
+     * const glucoseStats = await prisma.glucoseStats.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GlucoseStatsFindFirstOrThrowArgs>(args?: SelectSubset<T, GlucoseStatsFindFirstOrThrowArgs<ExtArgs>>): Prisma__GlucoseStatsClient<$Result.GetResult<Prisma.$GlucoseStatsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GlucoseStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlucoseStatsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GlucoseStats
+     * const glucoseStats = await prisma.glucoseStats.findMany()
+     * 
+     * // Get first 10 GlucoseStats
+     * const glucoseStats = await prisma.glucoseStats.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const glucoseStatsWithIdOnly = await prisma.glucoseStats.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GlucoseStatsFindManyArgs>(args?: SelectSubset<T, GlucoseStatsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlucoseStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a GlucoseStats.
+     * @param {GlucoseStatsCreateArgs} args - Arguments to create a GlucoseStats.
+     * @example
+     * // Create one GlucoseStats
+     * const GlucoseStats = await prisma.glucoseStats.create({
+     *   data: {
+     *     // ... data to create a GlucoseStats
+     *   }
+     * })
+     * 
+     */
+    create<T extends GlucoseStatsCreateArgs>(args: SelectSubset<T, GlucoseStatsCreateArgs<ExtArgs>>): Prisma__GlucoseStatsClient<$Result.GetResult<Prisma.$GlucoseStatsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many GlucoseStats.
+     * @param {GlucoseStatsCreateManyArgs} args - Arguments to create many GlucoseStats.
+     * @example
+     * // Create many GlucoseStats
+     * const glucoseStats = await prisma.glucoseStats.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GlucoseStatsCreateManyArgs>(args?: SelectSubset<T, GlucoseStatsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many GlucoseStats and returns the data saved in the database.
+     * @param {GlucoseStatsCreateManyAndReturnArgs} args - Arguments to create many GlucoseStats.
+     * @example
+     * // Create many GlucoseStats
+     * const glucoseStats = await prisma.glucoseStats.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many GlucoseStats and only return the `id`
+     * const glucoseStatsWithIdOnly = await prisma.glucoseStats.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GlucoseStatsCreateManyAndReturnArgs>(args?: SelectSubset<T, GlucoseStatsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlucoseStatsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a GlucoseStats.
+     * @param {GlucoseStatsDeleteArgs} args - Arguments to delete one GlucoseStats.
+     * @example
+     * // Delete one GlucoseStats
+     * const GlucoseStats = await prisma.glucoseStats.delete({
+     *   where: {
+     *     // ... filter to delete one GlucoseStats
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GlucoseStatsDeleteArgs>(args: SelectSubset<T, GlucoseStatsDeleteArgs<ExtArgs>>): Prisma__GlucoseStatsClient<$Result.GetResult<Prisma.$GlucoseStatsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one GlucoseStats.
+     * @param {GlucoseStatsUpdateArgs} args - Arguments to update one GlucoseStats.
+     * @example
+     * // Update one GlucoseStats
+     * const glucoseStats = await prisma.glucoseStats.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GlucoseStatsUpdateArgs>(args: SelectSubset<T, GlucoseStatsUpdateArgs<ExtArgs>>): Prisma__GlucoseStatsClient<$Result.GetResult<Prisma.$GlucoseStatsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more GlucoseStats.
+     * @param {GlucoseStatsDeleteManyArgs} args - Arguments to filter GlucoseStats to delete.
+     * @example
+     * // Delete a few GlucoseStats
+     * const { count } = await prisma.glucoseStats.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GlucoseStatsDeleteManyArgs>(args?: SelectSubset<T, GlucoseStatsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GlucoseStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlucoseStatsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GlucoseStats
+     * const glucoseStats = await prisma.glucoseStats.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GlucoseStatsUpdateManyArgs>(args: SelectSubset<T, GlucoseStatsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GlucoseStats and returns the data updated in the database.
+     * @param {GlucoseStatsUpdateManyAndReturnArgs} args - Arguments to update many GlucoseStats.
+     * @example
+     * // Update many GlucoseStats
+     * const glucoseStats = await prisma.glucoseStats.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more GlucoseStats and only return the `id`
+     * const glucoseStatsWithIdOnly = await prisma.glucoseStats.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GlucoseStatsUpdateManyAndReturnArgs>(args: SelectSubset<T, GlucoseStatsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlucoseStatsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one GlucoseStats.
+     * @param {GlucoseStatsUpsertArgs} args - Arguments to update or create a GlucoseStats.
+     * @example
+     * // Update or create a GlucoseStats
+     * const glucoseStats = await prisma.glucoseStats.upsert({
+     *   create: {
+     *     // ... data to create a GlucoseStats
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GlucoseStats we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GlucoseStatsUpsertArgs>(args: SelectSubset<T, GlucoseStatsUpsertArgs<ExtArgs>>): Prisma__GlucoseStatsClient<$Result.GetResult<Prisma.$GlucoseStatsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of GlucoseStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlucoseStatsCountArgs} args - Arguments to filter GlucoseStats to count.
+     * @example
+     * // Count the number of GlucoseStats
+     * const count = await prisma.glucoseStats.count({
+     *   where: {
+     *     // ... the filter for the GlucoseStats we want to count
+     *   }
+     * })
+    **/
+    count<T extends GlucoseStatsCountArgs>(
+      args?: Subset<T, GlucoseStatsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GlucoseStatsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GlucoseStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlucoseStatsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GlucoseStatsAggregateArgs>(args: Subset<T, GlucoseStatsAggregateArgs>): Prisma.PrismaPromise<GetGlucoseStatsAggregateType<T>>
+
+    /**
+     * Group by GlucoseStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlucoseStatsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GlucoseStatsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GlucoseStatsGroupByArgs['orderBy'] }
+        : { orderBy?: GlucoseStatsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GlucoseStatsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGlucoseStatsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the GlucoseStats model
+   */
+  readonly fields: GlucoseStatsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for GlucoseStats.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GlucoseStatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the GlucoseStats model
+   */
+  interface GlucoseStatsFieldRefs {
+    readonly id: FieldRef<"GlucoseStats", 'String'>
+    readonly userId: FieldRef<"GlucoseStats", 'String'>
+    readonly average: FieldRef<"GlucoseStats", 'Float'>
+    readonly standardDeviation: FieldRef<"GlucoseStats", 'Float'>
+    readonly highCount: FieldRef<"GlucoseStats", 'Int'>
+    readonly lowCount: FieldRef<"GlucoseStats", 'Int'>
+    readonly inRangeCount: FieldRef<"GlucoseStats", 'Int'>
+    readonly totalReadings: FieldRef<"GlucoseStats", 'Int'>
+    readonly highPercentage: FieldRef<"GlucoseStats", 'Float'>
+    readonly lowPercentage: FieldRef<"GlucoseStats", 'Float'>
+    readonly inRangePercentage: FieldRef<"GlucoseStats", 'Float'>
+    readonly minGlucose: FieldRef<"GlucoseStats", 'Float'>
+    readonly maxGlucose: FieldRef<"GlucoseStats", 'Float'>
+    readonly timeInRange: FieldRef<"GlucoseStats", 'String'>
+    readonly lastCalculated: FieldRef<"GlucoseStats", 'DateTime'>
+    readonly updatedAt: FieldRef<"GlucoseStats", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * GlucoseStats findUnique
+   */
+  export type GlucoseStatsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseStats
+     */
+    select?: GlucoseStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseStats
+     */
+    omit?: GlucoseStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which GlucoseStats to fetch.
+     */
+    where: GlucoseStatsWhereUniqueInput
+  }
+
+  /**
+   * GlucoseStats findUniqueOrThrow
+   */
+  export type GlucoseStatsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseStats
+     */
+    select?: GlucoseStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseStats
+     */
+    omit?: GlucoseStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which GlucoseStats to fetch.
+     */
+    where: GlucoseStatsWhereUniqueInput
+  }
+
+  /**
+   * GlucoseStats findFirst
+   */
+  export type GlucoseStatsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseStats
+     */
+    select?: GlucoseStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseStats
+     */
+    omit?: GlucoseStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which GlucoseStats to fetch.
+     */
+    where?: GlucoseStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlucoseStats to fetch.
+     */
+    orderBy?: GlucoseStatsOrderByWithRelationInput | GlucoseStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GlucoseStats.
+     */
+    cursor?: GlucoseStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlucoseStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlucoseStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GlucoseStats.
+     */
+    distinct?: GlucoseStatsScalarFieldEnum | GlucoseStatsScalarFieldEnum[]
+  }
+
+  /**
+   * GlucoseStats findFirstOrThrow
+   */
+  export type GlucoseStatsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseStats
+     */
+    select?: GlucoseStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseStats
+     */
+    omit?: GlucoseStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which GlucoseStats to fetch.
+     */
+    where?: GlucoseStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlucoseStats to fetch.
+     */
+    orderBy?: GlucoseStatsOrderByWithRelationInput | GlucoseStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GlucoseStats.
+     */
+    cursor?: GlucoseStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlucoseStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlucoseStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GlucoseStats.
+     */
+    distinct?: GlucoseStatsScalarFieldEnum | GlucoseStatsScalarFieldEnum[]
+  }
+
+  /**
+   * GlucoseStats findMany
+   */
+  export type GlucoseStatsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseStats
+     */
+    select?: GlucoseStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseStats
+     */
+    omit?: GlucoseStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which GlucoseStats to fetch.
+     */
+    where?: GlucoseStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlucoseStats to fetch.
+     */
+    orderBy?: GlucoseStatsOrderByWithRelationInput | GlucoseStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing GlucoseStats.
+     */
+    cursor?: GlucoseStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlucoseStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlucoseStats.
+     */
+    skip?: number
+    distinct?: GlucoseStatsScalarFieldEnum | GlucoseStatsScalarFieldEnum[]
+  }
+
+  /**
+   * GlucoseStats create
+   */
+  export type GlucoseStatsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseStats
+     */
+    select?: GlucoseStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseStats
+     */
+    omit?: GlucoseStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseStatsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a GlucoseStats.
+     */
+    data: XOR<GlucoseStatsCreateInput, GlucoseStatsUncheckedCreateInput>
+  }
+
+  /**
+   * GlucoseStats createMany
+   */
+  export type GlucoseStatsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GlucoseStats.
+     */
+    data: GlucoseStatsCreateManyInput | GlucoseStatsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GlucoseStats createManyAndReturn
+   */
+  export type GlucoseStatsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseStats
+     */
+    select?: GlucoseStatsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseStats
+     */
+    omit?: GlucoseStatsOmit<ExtArgs> | null
+    /**
+     * The data used to create many GlucoseStats.
+     */
+    data: GlucoseStatsCreateManyInput | GlucoseStatsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseStatsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GlucoseStats update
+   */
+  export type GlucoseStatsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseStats
+     */
+    select?: GlucoseStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseStats
+     */
+    omit?: GlucoseStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseStatsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a GlucoseStats.
+     */
+    data: XOR<GlucoseStatsUpdateInput, GlucoseStatsUncheckedUpdateInput>
+    /**
+     * Choose, which GlucoseStats to update.
+     */
+    where: GlucoseStatsWhereUniqueInput
+  }
+
+  /**
+   * GlucoseStats updateMany
+   */
+  export type GlucoseStatsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GlucoseStats.
+     */
+    data: XOR<GlucoseStatsUpdateManyMutationInput, GlucoseStatsUncheckedUpdateManyInput>
+    /**
+     * Filter which GlucoseStats to update
+     */
+    where?: GlucoseStatsWhereInput
+    /**
+     * Limit how many GlucoseStats to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GlucoseStats updateManyAndReturn
+   */
+  export type GlucoseStatsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseStats
+     */
+    select?: GlucoseStatsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseStats
+     */
+    omit?: GlucoseStatsOmit<ExtArgs> | null
+    /**
+     * The data used to update GlucoseStats.
+     */
+    data: XOR<GlucoseStatsUpdateManyMutationInput, GlucoseStatsUncheckedUpdateManyInput>
+    /**
+     * Filter which GlucoseStats to update
+     */
+    where?: GlucoseStatsWhereInput
+    /**
+     * Limit how many GlucoseStats to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseStatsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GlucoseStats upsert
+   */
+  export type GlucoseStatsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseStats
+     */
+    select?: GlucoseStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseStats
+     */
+    omit?: GlucoseStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseStatsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the GlucoseStats to update in case it exists.
+     */
+    where: GlucoseStatsWhereUniqueInput
+    /**
+     * In case the GlucoseStats found by the `where` argument doesn't exist, create a new GlucoseStats with this data.
+     */
+    create: XOR<GlucoseStatsCreateInput, GlucoseStatsUncheckedCreateInput>
+    /**
+     * In case the GlucoseStats was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GlucoseStatsUpdateInput, GlucoseStatsUncheckedUpdateInput>
+  }
+
+  /**
+   * GlucoseStats delete
+   */
+  export type GlucoseStatsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseStats
+     */
+    select?: GlucoseStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseStats
+     */
+    omit?: GlucoseStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseStatsInclude<ExtArgs> | null
+    /**
+     * Filter which GlucoseStats to delete.
+     */
+    where: GlucoseStatsWhereUniqueInput
+  }
+
+  /**
+   * GlucoseStats deleteMany
+   */
+  export type GlucoseStatsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GlucoseStats to delete
+     */
+    where?: GlucoseStatsWhereInput
+    /**
+     * Limit how many GlucoseStats to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * GlucoseStats without action
+   */
+  export type GlucoseStatsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseStats
+     */
+    select?: GlucoseStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseStats
+     */
+    omit?: GlucoseStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseStatsInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -4547,6 +5936,28 @@ export namespace Prisma {
   };
 
   export type DataUploadScalarFieldEnum = (typeof DataUploadScalarFieldEnum)[keyof typeof DataUploadScalarFieldEnum]
+
+
+  export const GlucoseStatsScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    average: 'average',
+    standardDeviation: 'standardDeviation',
+    highCount: 'highCount',
+    lowCount: 'lowCount',
+    inRangeCount: 'inRangeCount',
+    totalReadings: 'totalReadings',
+    highPercentage: 'highPercentage',
+    lowPercentage: 'lowPercentage',
+    inRangePercentage: 'inRangePercentage',
+    minGlucose: 'minGlucose',
+    maxGlucose: 'maxGlucose',
+    timeInRange: 'timeInRange',
+    lastCalculated: 'lastCalculated',
+    updatedAt: 'updatedAt'
+  };
+
+  export type GlucoseStatsScalarFieldEnum = (typeof GlucoseStatsScalarFieldEnum)[keyof typeof GlucoseStatsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4650,6 +6061,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     glucoseReadings?: GlucoseReadingListRelationFilter
     dataUploads?: DataUploadListRelationFilter
+    glucoseStats?: XOR<GlucoseStatsNullableScalarRelationFilter, GlucoseStatsWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -4662,6 +6074,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     glucoseReadings?: GlucoseReadingOrderByRelationAggregateInput
     dataUploads?: DataUploadOrderByRelationAggregateInput
+    glucoseStats?: GlucoseStatsOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -4677,6 +6090,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     glucoseReadings?: GlucoseReadingListRelationFilter
     dataUploads?: DataUploadListRelationFilter
+    glucoseStats?: XOR<GlucoseStatsNullableScalarRelationFilter, GlucoseStatsWhereInput> | null
   }, "id" | "clerkId">
 
   export type UserOrderByWithAggregationInput = {
@@ -4854,6 +6268,118 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"DataUpload"> | string
   }
 
+  export type GlucoseStatsWhereInput = {
+    AND?: GlucoseStatsWhereInput | GlucoseStatsWhereInput[]
+    OR?: GlucoseStatsWhereInput[]
+    NOT?: GlucoseStatsWhereInput | GlucoseStatsWhereInput[]
+    id?: StringFilter<"GlucoseStats"> | string
+    userId?: StringFilter<"GlucoseStats"> | string
+    average?: FloatFilter<"GlucoseStats"> | number
+    standardDeviation?: FloatFilter<"GlucoseStats"> | number
+    highCount?: IntFilter<"GlucoseStats"> | number
+    lowCount?: IntFilter<"GlucoseStats"> | number
+    inRangeCount?: IntFilter<"GlucoseStats"> | number
+    totalReadings?: IntFilter<"GlucoseStats"> | number
+    highPercentage?: FloatFilter<"GlucoseStats"> | number
+    lowPercentage?: FloatFilter<"GlucoseStats"> | number
+    inRangePercentage?: FloatFilter<"GlucoseStats"> | number
+    minGlucose?: FloatFilter<"GlucoseStats"> | number
+    maxGlucose?: FloatFilter<"GlucoseStats"> | number
+    timeInRange?: StringFilter<"GlucoseStats"> | string
+    lastCalculated?: DateTimeFilter<"GlucoseStats"> | Date | string
+    updatedAt?: DateTimeFilter<"GlucoseStats"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type GlucoseStatsOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    average?: SortOrder
+    standardDeviation?: SortOrder
+    highCount?: SortOrder
+    lowCount?: SortOrder
+    inRangeCount?: SortOrder
+    totalReadings?: SortOrder
+    highPercentage?: SortOrder
+    lowPercentage?: SortOrder
+    inRangePercentage?: SortOrder
+    minGlucose?: SortOrder
+    maxGlucose?: SortOrder
+    timeInRange?: SortOrder
+    lastCalculated?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type GlucoseStatsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    AND?: GlucoseStatsWhereInput | GlucoseStatsWhereInput[]
+    OR?: GlucoseStatsWhereInput[]
+    NOT?: GlucoseStatsWhereInput | GlucoseStatsWhereInput[]
+    average?: FloatFilter<"GlucoseStats"> | number
+    standardDeviation?: FloatFilter<"GlucoseStats"> | number
+    highCount?: IntFilter<"GlucoseStats"> | number
+    lowCount?: IntFilter<"GlucoseStats"> | number
+    inRangeCount?: IntFilter<"GlucoseStats"> | number
+    totalReadings?: IntFilter<"GlucoseStats"> | number
+    highPercentage?: FloatFilter<"GlucoseStats"> | number
+    lowPercentage?: FloatFilter<"GlucoseStats"> | number
+    inRangePercentage?: FloatFilter<"GlucoseStats"> | number
+    minGlucose?: FloatFilter<"GlucoseStats"> | number
+    maxGlucose?: FloatFilter<"GlucoseStats"> | number
+    timeInRange?: StringFilter<"GlucoseStats"> | string
+    lastCalculated?: DateTimeFilter<"GlucoseStats"> | Date | string
+    updatedAt?: DateTimeFilter<"GlucoseStats"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId">
+
+  export type GlucoseStatsOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    average?: SortOrder
+    standardDeviation?: SortOrder
+    highCount?: SortOrder
+    lowCount?: SortOrder
+    inRangeCount?: SortOrder
+    totalReadings?: SortOrder
+    highPercentage?: SortOrder
+    lowPercentage?: SortOrder
+    inRangePercentage?: SortOrder
+    minGlucose?: SortOrder
+    maxGlucose?: SortOrder
+    timeInRange?: SortOrder
+    lastCalculated?: SortOrder
+    updatedAt?: SortOrder
+    _count?: GlucoseStatsCountOrderByAggregateInput
+    _avg?: GlucoseStatsAvgOrderByAggregateInput
+    _max?: GlucoseStatsMaxOrderByAggregateInput
+    _min?: GlucoseStatsMinOrderByAggregateInput
+    _sum?: GlucoseStatsSumOrderByAggregateInput
+  }
+
+  export type GlucoseStatsScalarWhereWithAggregatesInput = {
+    AND?: GlucoseStatsScalarWhereWithAggregatesInput | GlucoseStatsScalarWhereWithAggregatesInput[]
+    OR?: GlucoseStatsScalarWhereWithAggregatesInput[]
+    NOT?: GlucoseStatsScalarWhereWithAggregatesInput | GlucoseStatsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"GlucoseStats"> | string
+    userId?: StringWithAggregatesFilter<"GlucoseStats"> | string
+    average?: FloatWithAggregatesFilter<"GlucoseStats"> | number
+    standardDeviation?: FloatWithAggregatesFilter<"GlucoseStats"> | number
+    highCount?: IntWithAggregatesFilter<"GlucoseStats"> | number
+    lowCount?: IntWithAggregatesFilter<"GlucoseStats"> | number
+    inRangeCount?: IntWithAggregatesFilter<"GlucoseStats"> | number
+    totalReadings?: IntWithAggregatesFilter<"GlucoseStats"> | number
+    highPercentage?: FloatWithAggregatesFilter<"GlucoseStats"> | number
+    lowPercentage?: FloatWithAggregatesFilter<"GlucoseStats"> | number
+    inRangePercentage?: FloatWithAggregatesFilter<"GlucoseStats"> | number
+    minGlucose?: FloatWithAggregatesFilter<"GlucoseStats"> | number
+    maxGlucose?: FloatWithAggregatesFilter<"GlucoseStats"> | number
+    timeInRange?: StringWithAggregatesFilter<"GlucoseStats"> | string
+    lastCalculated?: DateTimeWithAggregatesFilter<"GlucoseStats"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GlucoseStats"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     clerkId: string
@@ -4864,6 +6390,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     glucoseReadings?: GlucoseReadingCreateNestedManyWithoutUserInput
     dataUploads?: DataUploadCreateNestedManyWithoutUserInput
+    glucoseStats?: GlucoseStatsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -4876,6 +6403,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     glucoseReadings?: GlucoseReadingUncheckedCreateNestedManyWithoutUserInput
     dataUploads?: DataUploadUncheckedCreateNestedManyWithoutUserInput
+    glucoseStats?: GlucoseStatsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -4888,6 +6416,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     glucoseReadings?: GlucoseReadingUpdateManyWithoutUserNestedInput
     dataUploads?: DataUploadUpdateManyWithoutUserNestedInput
+    glucoseStats?: GlucoseStatsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -4900,6 +6429,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     glucoseReadings?: GlucoseReadingUncheckedUpdateManyWithoutUserNestedInput
     dataUploads?: DataUploadUncheckedUpdateManyWithoutUserNestedInput
+    glucoseStats?: GlucoseStatsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -5091,6 +6621,138 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type GlucoseStatsCreateInput = {
+    id?: string
+    average: number
+    standardDeviation: number
+    highCount: number
+    lowCount: number
+    inRangeCount: number
+    totalReadings: number
+    highPercentage: number
+    lowPercentage: number
+    inRangePercentage: number
+    minGlucose: number
+    maxGlucose: number
+    timeInRange: string
+    lastCalculated?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutGlucoseStatsInput
+  }
+
+  export type GlucoseStatsUncheckedCreateInput = {
+    id?: string
+    userId: string
+    average: number
+    standardDeviation: number
+    highCount: number
+    lowCount: number
+    inRangeCount: number
+    totalReadings: number
+    highPercentage: number
+    lowPercentage: number
+    inRangePercentage: number
+    minGlucose: number
+    maxGlucose: number
+    timeInRange: string
+    lastCalculated?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GlucoseStatsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    average?: FloatFieldUpdateOperationsInput | number
+    standardDeviation?: FloatFieldUpdateOperationsInput | number
+    highCount?: IntFieldUpdateOperationsInput | number
+    lowCount?: IntFieldUpdateOperationsInput | number
+    inRangeCount?: IntFieldUpdateOperationsInput | number
+    totalReadings?: IntFieldUpdateOperationsInput | number
+    highPercentage?: FloatFieldUpdateOperationsInput | number
+    lowPercentage?: FloatFieldUpdateOperationsInput | number
+    inRangePercentage?: FloatFieldUpdateOperationsInput | number
+    minGlucose?: FloatFieldUpdateOperationsInput | number
+    maxGlucose?: FloatFieldUpdateOperationsInput | number
+    timeInRange?: StringFieldUpdateOperationsInput | string
+    lastCalculated?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutGlucoseStatsNestedInput
+  }
+
+  export type GlucoseStatsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    average?: FloatFieldUpdateOperationsInput | number
+    standardDeviation?: FloatFieldUpdateOperationsInput | number
+    highCount?: IntFieldUpdateOperationsInput | number
+    lowCount?: IntFieldUpdateOperationsInput | number
+    inRangeCount?: IntFieldUpdateOperationsInput | number
+    totalReadings?: IntFieldUpdateOperationsInput | number
+    highPercentage?: FloatFieldUpdateOperationsInput | number
+    lowPercentage?: FloatFieldUpdateOperationsInput | number
+    inRangePercentage?: FloatFieldUpdateOperationsInput | number
+    minGlucose?: FloatFieldUpdateOperationsInput | number
+    maxGlucose?: FloatFieldUpdateOperationsInput | number
+    timeInRange?: StringFieldUpdateOperationsInput | string
+    lastCalculated?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GlucoseStatsCreateManyInput = {
+    id?: string
+    userId: string
+    average: number
+    standardDeviation: number
+    highCount: number
+    lowCount: number
+    inRangeCount: number
+    totalReadings: number
+    highPercentage: number
+    lowPercentage: number
+    inRangePercentage: number
+    minGlucose: number
+    maxGlucose: number
+    timeInRange: string
+    lastCalculated?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GlucoseStatsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    average?: FloatFieldUpdateOperationsInput | number
+    standardDeviation?: FloatFieldUpdateOperationsInput | number
+    highCount?: IntFieldUpdateOperationsInput | number
+    lowCount?: IntFieldUpdateOperationsInput | number
+    inRangeCount?: IntFieldUpdateOperationsInput | number
+    totalReadings?: IntFieldUpdateOperationsInput | number
+    highPercentage?: FloatFieldUpdateOperationsInput | number
+    lowPercentage?: FloatFieldUpdateOperationsInput | number
+    inRangePercentage?: FloatFieldUpdateOperationsInput | number
+    minGlucose?: FloatFieldUpdateOperationsInput | number
+    maxGlucose?: FloatFieldUpdateOperationsInput | number
+    timeInRange?: StringFieldUpdateOperationsInput | string
+    lastCalculated?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GlucoseStatsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    average?: FloatFieldUpdateOperationsInput | number
+    standardDeviation?: FloatFieldUpdateOperationsInput | number
+    highCount?: IntFieldUpdateOperationsInput | number
+    lowCount?: IntFieldUpdateOperationsInput | number
+    inRangeCount?: IntFieldUpdateOperationsInput | number
+    totalReadings?: IntFieldUpdateOperationsInput | number
+    highPercentage?: FloatFieldUpdateOperationsInput | number
+    lowPercentage?: FloatFieldUpdateOperationsInput | number
+    inRangePercentage?: FloatFieldUpdateOperationsInput | number
+    minGlucose?: FloatFieldUpdateOperationsInput | number
+    maxGlucose?: FloatFieldUpdateOperationsInput | number
+    timeInRange?: StringFieldUpdateOperationsInput | string
+    lastCalculated?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -5142,6 +6804,11 @@ export namespace Prisma {
     every?: DataUploadWhereInput
     some?: DataUploadWhereInput
     none?: DataUploadWhereInput
+  }
+
+  export type GlucoseStatsNullableScalarRelationFilter = {
+    is?: GlucoseStatsWhereInput | null
+    isNot?: GlucoseStatsWhereInput | null
   }
 
   export type SortOrderInput = {
@@ -5410,6 +7077,91 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type GlucoseStatsCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    average?: SortOrder
+    standardDeviation?: SortOrder
+    highCount?: SortOrder
+    lowCount?: SortOrder
+    inRangeCount?: SortOrder
+    totalReadings?: SortOrder
+    highPercentage?: SortOrder
+    lowPercentage?: SortOrder
+    inRangePercentage?: SortOrder
+    minGlucose?: SortOrder
+    maxGlucose?: SortOrder
+    timeInRange?: SortOrder
+    lastCalculated?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GlucoseStatsAvgOrderByAggregateInput = {
+    average?: SortOrder
+    standardDeviation?: SortOrder
+    highCount?: SortOrder
+    lowCount?: SortOrder
+    inRangeCount?: SortOrder
+    totalReadings?: SortOrder
+    highPercentage?: SortOrder
+    lowPercentage?: SortOrder
+    inRangePercentage?: SortOrder
+    minGlucose?: SortOrder
+    maxGlucose?: SortOrder
+  }
+
+  export type GlucoseStatsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    average?: SortOrder
+    standardDeviation?: SortOrder
+    highCount?: SortOrder
+    lowCount?: SortOrder
+    inRangeCount?: SortOrder
+    totalReadings?: SortOrder
+    highPercentage?: SortOrder
+    lowPercentage?: SortOrder
+    inRangePercentage?: SortOrder
+    minGlucose?: SortOrder
+    maxGlucose?: SortOrder
+    timeInRange?: SortOrder
+    lastCalculated?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GlucoseStatsMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    average?: SortOrder
+    standardDeviation?: SortOrder
+    highCount?: SortOrder
+    lowCount?: SortOrder
+    inRangeCount?: SortOrder
+    totalReadings?: SortOrder
+    highPercentage?: SortOrder
+    lowPercentage?: SortOrder
+    inRangePercentage?: SortOrder
+    minGlucose?: SortOrder
+    maxGlucose?: SortOrder
+    timeInRange?: SortOrder
+    lastCalculated?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GlucoseStatsSumOrderByAggregateInput = {
+    average?: SortOrder
+    standardDeviation?: SortOrder
+    highCount?: SortOrder
+    lowCount?: SortOrder
+    inRangeCount?: SortOrder
+    totalReadings?: SortOrder
+    highPercentage?: SortOrder
+    lowPercentage?: SortOrder
+    inRangePercentage?: SortOrder
+    minGlucose?: SortOrder
+    maxGlucose?: SortOrder
+  }
+
   export type GlucoseReadingCreateNestedManyWithoutUserInput = {
     create?: XOR<GlucoseReadingCreateWithoutUserInput, GlucoseReadingUncheckedCreateWithoutUserInput> | GlucoseReadingCreateWithoutUserInput[] | GlucoseReadingUncheckedCreateWithoutUserInput[]
     connectOrCreate?: GlucoseReadingCreateOrConnectWithoutUserInput | GlucoseReadingCreateOrConnectWithoutUserInput[]
@@ -5424,6 +7176,12 @@ export namespace Prisma {
     connect?: DataUploadWhereUniqueInput | DataUploadWhereUniqueInput[]
   }
 
+  export type GlucoseStatsCreateNestedOneWithoutUserInput = {
+    create?: XOR<GlucoseStatsCreateWithoutUserInput, GlucoseStatsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: GlucoseStatsCreateOrConnectWithoutUserInput
+    connect?: GlucoseStatsWhereUniqueInput
+  }
+
   export type GlucoseReadingUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<GlucoseReadingCreateWithoutUserInput, GlucoseReadingUncheckedCreateWithoutUserInput> | GlucoseReadingCreateWithoutUserInput[] | GlucoseReadingUncheckedCreateWithoutUserInput[]
     connectOrCreate?: GlucoseReadingCreateOrConnectWithoutUserInput | GlucoseReadingCreateOrConnectWithoutUserInput[]
@@ -5436,6 +7194,12 @@ export namespace Prisma {
     connectOrCreate?: DataUploadCreateOrConnectWithoutUserInput | DataUploadCreateOrConnectWithoutUserInput[]
     createMany?: DataUploadCreateManyUserInputEnvelope
     connect?: DataUploadWhereUniqueInput | DataUploadWhereUniqueInput[]
+  }
+
+  export type GlucoseStatsUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<GlucoseStatsCreateWithoutUserInput, GlucoseStatsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: GlucoseStatsCreateOrConnectWithoutUserInput
+    connect?: GlucoseStatsWhereUniqueInput
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -5478,6 +7242,16 @@ export namespace Prisma {
     deleteMany?: DataUploadScalarWhereInput | DataUploadScalarWhereInput[]
   }
 
+  export type GlucoseStatsUpdateOneWithoutUserNestedInput = {
+    create?: XOR<GlucoseStatsCreateWithoutUserInput, GlucoseStatsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: GlucoseStatsCreateOrConnectWithoutUserInput
+    upsert?: GlucoseStatsUpsertWithoutUserInput
+    disconnect?: GlucoseStatsWhereInput | boolean
+    delete?: GlucoseStatsWhereInput | boolean
+    connect?: GlucoseStatsWhereUniqueInput
+    update?: XOR<XOR<GlucoseStatsUpdateToOneWithWhereWithoutUserInput, GlucoseStatsUpdateWithoutUserInput>, GlucoseStatsUncheckedUpdateWithoutUserInput>
+  }
+
   export type GlucoseReadingUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<GlucoseReadingCreateWithoutUserInput, GlucoseReadingUncheckedCreateWithoutUserInput> | GlucoseReadingCreateWithoutUserInput[] | GlucoseReadingUncheckedCreateWithoutUserInput[]
     connectOrCreate?: GlucoseReadingCreateOrConnectWithoutUserInput | GlucoseReadingCreateOrConnectWithoutUserInput[]
@@ -5504,6 +7278,16 @@ export namespace Prisma {
     update?: DataUploadUpdateWithWhereUniqueWithoutUserInput | DataUploadUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: DataUploadUpdateManyWithWhereWithoutUserInput | DataUploadUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: DataUploadScalarWhereInput | DataUploadScalarWhereInput[]
+  }
+
+  export type GlucoseStatsUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<GlucoseStatsCreateWithoutUserInput, GlucoseStatsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: GlucoseStatsCreateOrConnectWithoutUserInput
+    upsert?: GlucoseStatsUpsertWithoutUserInput
+    disconnect?: GlucoseStatsWhereInput | boolean
+    delete?: GlucoseStatsWhereInput | boolean
+    connect?: GlucoseStatsWhereUniqueInput
+    update?: XOR<XOR<GlucoseStatsUpdateToOneWithWhereWithoutUserInput, GlucoseStatsUpdateWithoutUserInput>, GlucoseStatsUncheckedUpdateWithoutUserInput>
   }
 
   export type UserCreateNestedOneWithoutGlucoseReadingsInput = {
@@ -5556,6 +7340,20 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutDataUploadsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDataUploadsInput, UserUpdateWithoutDataUploadsInput>, UserUncheckedUpdateWithoutDataUploadsInput>
+  }
+
+  export type UserCreateNestedOneWithoutGlucoseStatsInput = {
+    create?: XOR<UserCreateWithoutGlucoseStatsInput, UserUncheckedCreateWithoutGlucoseStatsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGlucoseStatsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutGlucoseStatsNestedInput = {
+    create?: XOR<UserCreateWithoutGlucoseStatsInput, UserUncheckedCreateWithoutGlucoseStatsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGlucoseStatsInput
+    upsert?: UserUpsertWithoutGlucoseStatsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutGlucoseStatsInput, UserUpdateWithoutGlucoseStatsInput>, UserUncheckedUpdateWithoutGlucoseStatsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -5799,6 +7597,47 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type GlucoseStatsCreateWithoutUserInput = {
+    id?: string
+    average: number
+    standardDeviation: number
+    highCount: number
+    lowCount: number
+    inRangeCount: number
+    totalReadings: number
+    highPercentage: number
+    lowPercentage: number
+    inRangePercentage: number
+    minGlucose: number
+    maxGlucose: number
+    timeInRange: string
+    lastCalculated?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GlucoseStatsUncheckedCreateWithoutUserInput = {
+    id?: string
+    average: number
+    standardDeviation: number
+    highCount: number
+    lowCount: number
+    inRangeCount: number
+    totalReadings: number
+    highPercentage: number
+    lowPercentage: number
+    inRangePercentage: number
+    minGlucose: number
+    maxGlucose: number
+    timeInRange: string
+    lastCalculated?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GlucoseStatsCreateOrConnectWithoutUserInput = {
+    where: GlucoseStatsWhereUniqueInput
+    create: XOR<GlucoseStatsCreateWithoutUserInput, GlucoseStatsUncheckedCreateWithoutUserInput>
+  }
+
   export type GlucoseReadingUpsertWithWhereUniqueWithoutUserInput = {
     where: GlucoseReadingWhereUniqueInput
     update: XOR<GlucoseReadingUpdateWithoutUserInput, GlucoseReadingUncheckedUpdateWithoutUserInput>
@@ -5860,6 +7699,53 @@ export namespace Prisma {
     userId?: StringFilter<"DataUpload"> | string
   }
 
+  export type GlucoseStatsUpsertWithoutUserInput = {
+    update: XOR<GlucoseStatsUpdateWithoutUserInput, GlucoseStatsUncheckedUpdateWithoutUserInput>
+    create: XOR<GlucoseStatsCreateWithoutUserInput, GlucoseStatsUncheckedCreateWithoutUserInput>
+    where?: GlucoseStatsWhereInput
+  }
+
+  export type GlucoseStatsUpdateToOneWithWhereWithoutUserInput = {
+    where?: GlucoseStatsWhereInput
+    data: XOR<GlucoseStatsUpdateWithoutUserInput, GlucoseStatsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type GlucoseStatsUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    average?: FloatFieldUpdateOperationsInput | number
+    standardDeviation?: FloatFieldUpdateOperationsInput | number
+    highCount?: IntFieldUpdateOperationsInput | number
+    lowCount?: IntFieldUpdateOperationsInput | number
+    inRangeCount?: IntFieldUpdateOperationsInput | number
+    totalReadings?: IntFieldUpdateOperationsInput | number
+    highPercentage?: FloatFieldUpdateOperationsInput | number
+    lowPercentage?: FloatFieldUpdateOperationsInput | number
+    inRangePercentage?: FloatFieldUpdateOperationsInput | number
+    minGlucose?: FloatFieldUpdateOperationsInput | number
+    maxGlucose?: FloatFieldUpdateOperationsInput | number
+    timeInRange?: StringFieldUpdateOperationsInput | string
+    lastCalculated?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GlucoseStatsUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    average?: FloatFieldUpdateOperationsInput | number
+    standardDeviation?: FloatFieldUpdateOperationsInput | number
+    highCount?: IntFieldUpdateOperationsInput | number
+    lowCount?: IntFieldUpdateOperationsInput | number
+    inRangeCount?: IntFieldUpdateOperationsInput | number
+    totalReadings?: IntFieldUpdateOperationsInput | number
+    highPercentage?: FloatFieldUpdateOperationsInput | number
+    lowPercentage?: FloatFieldUpdateOperationsInput | number
+    inRangePercentage?: FloatFieldUpdateOperationsInput | number
+    minGlucose?: FloatFieldUpdateOperationsInput | number
+    maxGlucose?: FloatFieldUpdateOperationsInput | number
+    timeInRange?: StringFieldUpdateOperationsInput | string
+    lastCalculated?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateWithoutGlucoseReadingsInput = {
     id?: string
     clerkId: string
@@ -5869,6 +7755,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     dataUploads?: DataUploadCreateNestedManyWithoutUserInput
+    glucoseStats?: GlucoseStatsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGlucoseReadingsInput = {
@@ -5880,6 +7767,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     dataUploads?: DataUploadUncheckedCreateNestedManyWithoutUserInput
+    glucoseStats?: GlucoseStatsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGlucoseReadingsInput = {
@@ -5907,6 +7795,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dataUploads?: DataUploadUpdateManyWithoutUserNestedInput
+    glucoseStats?: GlucoseStatsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGlucoseReadingsInput = {
@@ -5918,6 +7807,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dataUploads?: DataUploadUncheckedUpdateManyWithoutUserNestedInput
+    glucoseStats?: GlucoseStatsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutDataUploadsInput = {
@@ -5929,6 +7819,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     glucoseReadings?: GlucoseReadingCreateNestedManyWithoutUserInput
+    glucoseStats?: GlucoseStatsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutDataUploadsInput = {
@@ -5940,6 +7831,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     glucoseReadings?: GlucoseReadingUncheckedCreateNestedManyWithoutUserInput
+    glucoseStats?: GlucoseStatsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutDataUploadsInput = {
@@ -5967,6 +7859,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     glucoseReadings?: GlucoseReadingUpdateManyWithoutUserNestedInput
+    glucoseStats?: GlucoseStatsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDataUploadsInput = {
@@ -5978,6 +7871,71 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     glucoseReadings?: GlucoseReadingUncheckedUpdateManyWithoutUserNestedInput
+    glucoseStats?: GlucoseStatsUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutGlucoseStatsInput = {
+    id?: string
+    clerkId: string
+    email?: string | null
+    name?: string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    glucoseReadings?: GlucoseReadingCreateNestedManyWithoutUserInput
+    dataUploads?: DataUploadCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutGlucoseStatsInput = {
+    id?: string
+    clerkId: string
+    email?: string | null
+    name?: string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    glucoseReadings?: GlucoseReadingUncheckedCreateNestedManyWithoutUserInput
+    dataUploads?: DataUploadUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutGlucoseStatsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutGlucoseStatsInput, UserUncheckedCreateWithoutGlucoseStatsInput>
+  }
+
+  export type UserUpsertWithoutGlucoseStatsInput = {
+    update: XOR<UserUpdateWithoutGlucoseStatsInput, UserUncheckedUpdateWithoutGlucoseStatsInput>
+    create: XOR<UserCreateWithoutGlucoseStatsInput, UserUncheckedCreateWithoutGlucoseStatsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutGlucoseStatsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutGlucoseStatsInput, UserUncheckedUpdateWithoutGlucoseStatsInput>
+  }
+
+  export type UserUpdateWithoutGlucoseStatsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseReadings?: GlucoseReadingUpdateManyWithoutUserNestedInput
+    dataUploads?: DataUploadUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutGlucoseStatsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseReadings?: GlucoseReadingUncheckedUpdateManyWithoutUserNestedInput
+    dataUploads?: DataUploadUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type GlucoseReadingCreateManyUserInput = {

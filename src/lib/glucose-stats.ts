@@ -1,4 +1,5 @@
 import { GlucoseReading } from "@/lib/csv-parser";
+import { prisma } from "@/lib/db";
 
 export interface GlucoseStats {
   average: number;
@@ -114,4 +115,78 @@ export function calculateA1C(averageGlucose: number): number {
  */
 export function formatA1C(a1c: number): string {
   return `${a1c.toFixed(1)}%`;
+}
+
+/**
+ * Update glucose statistics in the database for a user
+ * This can be called after new readings are added or on a schedule
+ */
+export async function updateUserGlucoseStats(userId: string): Promise<boolean> {
+  try {
+    // Get all glucose readings for the user
+    const glucoseReadings = await prisma.glucoseReading.findMany({
+      where: { userId },
+      orderBy: { timestamp: 'asc' },
+    });
+
+    // If no readings found, don't update stats
+    if (glucoseReadings.length === 0) {
+      return false;
+    }
+
+    // Calculate statistics
+    const stats = calculateGlucoseStats(
+      glucoseReadings.map(reading => ({
+        timestamp: reading.timestamp,
+        glucoseValue: reading.glucoseValue,
+        eventType: reading.eventType,
+        eventSubtype: reading.eventSubtype || undefined,
+        rateOfChange: reading.rateOfChange || undefined,
+        transmitterId: reading.transmitterId || undefined,
+        transmitterTime: reading.transmitterTime || undefined,
+        sourceDeviceId: reading.sourceDeviceId || undefined,
+      }))
+    );
+
+    // Update or create stats in the database
+    await prisma.glucoseStats.upsert({
+      where: { userId },
+      update: {
+        average: stats.average,
+        standardDeviation: stats.standardDeviation,
+        highCount: stats.highCount,
+        lowCount: stats.lowCount,
+        inRangeCount: stats.inRangeCount,
+        totalReadings: stats.totalReadings,
+        highPercentage: stats.highPercentage,
+        lowPercentage: stats.lowPercentage,
+        inRangePercentage: stats.inRangePercentage,
+        minGlucose: stats.minGlucose,
+        maxGlucose: stats.maxGlucose,
+        timeInRange: stats.timeInRange,
+        lastCalculated: new Date(),
+        updatedAt: new Date(),
+      },
+      create: {
+        userId,
+        average: stats.average,
+        standardDeviation: stats.standardDeviation,
+        highCount: stats.highCount,
+        lowCount: stats.lowCount,
+        inRangeCount: stats.inRangeCount,
+        totalReadings: stats.totalReadings,
+        highPercentage: stats.highPercentage,
+        lowPercentage: stats.lowPercentage,
+        inRangePercentage: stats.inRangePercentage,
+        minGlucose: stats.minGlucose,
+        maxGlucose: stats.maxGlucose,
+        timeInRange: stats.timeInRange,
+      },
+    });
+
+    return true;
+  } catch (error) {
+    console.error('Error updating glucose statistics:', error);
+    return false;
+  }
 } 

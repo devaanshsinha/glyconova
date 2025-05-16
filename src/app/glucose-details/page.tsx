@@ -2,6 +2,7 @@ import { SignedIn, SignedOut } from '@clerk/nextjs';
 import Link from 'next/link';
 import { EnhancedGlucoseStats } from '@/components/EnhancedGlucoseStats';
 import { GlucoseChart } from '@/components/GlucoseChart';
+import { DailyPatterns } from '@/components/DailyPatterns';
 
 export default function GlucoseDetailsPage() {
   return (
@@ -44,12 +45,13 @@ export default function GlucoseDetailsPage() {
             <GlucoseChart />
           </section>
           
-          {/* Placeholder for daily patterns */}
+          {/* Daily Patterns section */}
           <section className="bg-white p-6 rounded-xl shadow">
             <h2 className="text-xl font-semibold text-gray-900 mb-4">Daily Patterns</h2>
-            <div className="h-64 bg-gray-100 rounded flex items-center justify-center">
-              <p className="text-gray-500">Daily glucose patterns will appear here</p>
-            </div>
+            <p className="mb-4 text-gray-600">
+              Analysis of your typical daily glucose patterns, highlighting times when you commonly experience high or low blood sugar.
+            </p>
+            <DailyPatterns />
           </section>
           
           {/* Placeholder for data table */}

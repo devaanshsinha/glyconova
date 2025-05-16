@@ -2,6 +2,7 @@ import { auth } from '@clerk/nextjs/server';
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { parseDexcomCSV } from '@/lib/csv-parser';
+import { calculateGlucoseStats, HIGH_THRESHOLD, LOW_THRESHOLD } from '@/lib/glucose-stats';
 
 export async function POST(request: NextRequest) {
   try {
@@ -108,7 +109,22 @@ export async function POST(request: NextRequest) {
       }, { status: 400 });
     }
 
-    // Save the glucose readings to the database
+    // First, delete all existing readings for this user
+    try {
+      console.log(`Deleting existing glucose readings for user ${user.id}`);
+      await prisma.glucoseReading.deleteMany({
+        where: { userId: user.id }
+      });
+      console.log('Successfully deleted existing readings');
+    } catch (deleteError) {
+      console.error('Error deleting existing readings:', deleteError);
+      return NextResponse.json({ 
+        error: 'Failed to clear existing readings',
+        details: deleteError instanceof Error ? deleteError.message : String(deleteError)
+      }, { status: 500 });
+    }
+
+    // Then, save the new glucose readings to the database
     try {
       const createReadings = glucoseReadings.map(reading => ({
         timestamp: reading.timestamp,
@@ -127,9 +143,72 @@ export async function POST(request: NextRequest) {
         data: createReadings,
       });
 
+      // After uploading new readings, calculate and update statistics
+      try {
+        // Get all user's glucose readings
+        const allReadings = await prisma.glucoseReading.findMany({
+          where: { userId: user.id },
+        });
+        
+        // Calculate statistics
+        const stats = calculateGlucoseStats(
+          allReadings.map(reading => ({
+            timestamp: reading.timestamp,
+            glucoseValue: reading.glucoseValue,
+            eventType: reading.eventType,
+            eventSubtype: reading.eventSubtype || undefined,
+            rateOfChange: reading.rateOfChange || undefined,
+            transmitterId: reading.transmitterId || undefined,
+            transmitterTime: reading.transmitterTime || undefined,
+            sourceDeviceId: reading.sourceDeviceId || undefined,
+          }))
+        );
+        
+        // Store the statistics
+        await prisma.glucoseStats.upsert({
+          where: { userId: user.id },
+          update: {
+            average: stats.average,
+            standardDeviation: stats.standardDeviation,
+            highCount: stats.highCount,
+            lowCount: stats.lowCount,
+            inRangeCount: stats.inRangeCount,
+            totalReadings: stats.totalReadings,
+            highPercentage: stats.highPercentage,
+            lowPercentage: stats.lowPercentage,
+            inRangePercentage: stats.inRangePercentage,
+            minGlucose: stats.minGlucose,
+            maxGlucose: stats.maxGlucose,
+            timeInRange: stats.timeInRange,
+            lastCalculated: new Date(),
+            updatedAt: new Date(),
+          },
+          create: {
+            userId: user.id,
+            average: stats.average,
+            standardDeviation: stats.standardDeviation,
+            highCount: stats.highCount,
+            lowCount: stats.lowCount,
+            inRangeCount: stats.inRangeCount,
+            totalReadings: stats.totalReadings,
+            highPercentage: stats.highPercentage,
+            lowPercentage: stats.lowPercentage,
+            inRangePercentage: stats.inRangePercentage,
+            minGlucose: stats.minGlucose,
+            maxGlucose: stats.maxGlucose,
+            timeInRange: stats.timeInRange,
+          },
+        });
+        
+        console.log('Successfully updated glucose statistics');
+      } catch (statError) {
+        console.error('Error updating glucose statistics:', statError);
+        // Continue execution even if stats update fails
+      }
+
       return NextResponse.json({ 
         success: true, 
-        message: `Successfully uploaded and processed ${glucoseReadings.length} glucose readings.`,
+        message: `Successfully deleted existing readings and uploaded ${glucoseReadings.length} new glucose readings.`,
         dataUpload: dataUpload
       });
     } catch (error) {

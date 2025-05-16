@@ -25,6 +25,7 @@ model User {
   updatedAt       DateTime         @updatedAt
   glucoseReadings GlucoseReading[]
   dataUploads     DataUpload[]
+  glucoseStats    GlucoseStats? // One-to-one relation to stats
 }
 
 model GlucoseReading {
@@ -55,4 +56,25 @@ model DataUpload {
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+}
+
+// New model to store pre-calculated statistics
+model GlucoseStats {
+  id                String   @id @default(cuid())
+  userId            String   @unique // One-to-one relation with User
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  average           Float
+  standardDeviation Float
+  highCount         Int
+  lowCount          Int
+  inRangeCount      Int
+  totalReadings     Int
+  highPercentage    Float
+  lowPercentage     Float
+  inRangePercentage Float
+  minGlucose        Float
+  maxGlucose        Float
+  timeInRange       String
+  lastCalculated    DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }

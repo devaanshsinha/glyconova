@@ -29,27 +29,40 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Get the user's glucose readings
-    const glucoseReadings = await prisma.glucoseReading.findMany({
+    // Only get pre-calculated stats from the database - no on-the-fly calculations
+    const stats = await prisma.glucoseStats.findUnique({
       where: { userId: user.id },
-      orderBy: { timestamp: 'asc' },
     });
 
-    // Calculate statistics
-    const stats = calculateGlucoseStats(
-      glucoseReadings.map(reading => ({
-        timestamp: reading.timestamp,
-        glucoseValue: reading.glucoseValue,
-        eventType: reading.eventType,
-        eventSubtype: reading.eventSubtype || undefined,
-        rateOfChange: reading.rateOfChange || undefined,
-        transmitterId: reading.transmitterId || undefined,
-        transmitterTime: reading.transmitterTime || undefined,
-        sourceDeviceId: reading.sourceDeviceId || undefined,
-      }))
-    );
+    // If stats exist in the database, return them
+    if (stats) {
+      // Format the stats to match the expected structure from calculateGlucoseStats
+      const formattedStats = {
+        average: stats.average,
+        standardDeviation: stats.standardDeviation,
+        highCount: stats.highCount,
+        lowCount: stats.lowCount,
+        inRangeCount: stats.inRangeCount,
+        totalReadings: stats.totalReadings,
+        highPercentage: stats.highPercentage,
+        lowPercentage: stats.lowPercentage,
+        inRangePercentage: stats.inRangePercentage,
+        minGlucose: stats.minGlucose,
+        maxGlucose: stats.maxGlucose,
+        timeInRange: stats.timeInRange,
+        readings: [], // Empty array since we don't need to return all readings
+        lastCalculated: stats.lastCalculated,
+      };
 
-    return NextResponse.json({ stats });
+      return NextResponse.json({ stats: formattedStats });
+    }
+
+    // If no pre-calculated stats exist, return empty stats with a flag indicating recalculation is needed
+    return NextResponse.json({
+      stats: calculateGlucoseStats([]),
+      needsCalculation: true,
+      message: "No statistics have been calculated yet. Please upload data or recalculate statistics."
+    });
   } catch (error) {
     console.error('Error fetching glucose statistics:', error);
     return NextResponse.json(
