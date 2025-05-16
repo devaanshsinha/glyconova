@@ -120,7 +120,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.ProfileScalarFieldEnum = {
+exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   clerkId: 'clerkId',
   email: 'email',
@@ -128,6 +128,29 @@ exports.Prisma.ProfileScalarFieldEnum = {
   image: 'image',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.GlucoseReadingScalarFieldEnum = {
+  id: 'id',
+  timestamp: 'timestamp',
+  glucoseValue: 'glucoseValue',
+  rateOfChange: 'rateOfChange',
+  eventType: 'eventType',
+  eventSubtype: 'eventSubtype',
+  transmitterId: 'transmitterId',
+  transmitterTime: 'transmitterTime',
+  sourceDeviceId: 'sourceDeviceId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DataUploadScalarFieldEnum = {
+  id: 'id',
+  fileName: 'fileName',
+  fileSize: 'fileSize',
+  uploadedAt: 'uploadedAt',
+  userId: 'userId'
 };
 
 exports.Prisma.SortOrder = {
@@ -147,7 +170,9 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  Profile: 'Profile'
+  User: 'User',
+  GlucoseReading: 'GlucoseReading',
+  DataUpload: 'DataUpload'
 };
 
 /**

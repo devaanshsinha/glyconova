@@ -15,12 +15,44 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model Profile {
-  id        String   @id @default(cuid())
-  clerkId   String   @unique
-  email     String?
-  name      String?
-  image     String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model User {
+  id              String           @id @default(cuid())
+  clerkId         String           @unique
+  email           String?
+  name            String?
+  image           String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  glucoseReadings GlucoseReading[]
+  dataUploads     DataUpload[]
+}
+
+model GlucoseReading {
+  id              String   @id @default(cuid())
+  timestamp       DateTime
+  glucoseValue    Float
+  rateOfChange    Float?
+  eventType       String
+  eventSubtype    String?
+  transmitterId   String?
+  transmitterTime String?
+  sourceDeviceId  String?
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([userId])
+  @@index([timestamp])
+}
+
+model DataUpload {
+  id         String   @id @default(cuid())
+  fileName   String
+  fileSize   Int
+  uploadedAt DateTime @default(now())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }

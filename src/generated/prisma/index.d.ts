@@ -14,10 +14,20 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
- * Model Profile
+ * Model User
  * 
  */
-export type Profile = $Result.DefaultSelection<Prisma.$ProfilePayload>
+export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
+ * Model GlucoseReading
+ * 
+ */
+export type GlucoseReading = $Result.DefaultSelection<Prisma.$GlucoseReadingPayload>
+/**
+ * Model DataUpload
+ * 
+ */
+export type DataUpload = $Result.DefaultSelection<Prisma.$DataUploadPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -26,8 +36,8 @@ export type Profile = $Result.DefaultSelection<Prisma.$ProfilePayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Profiles
- * const profiles = await prisma.profile.findMany()
+ * // Fetch zero or more Users
+ * const users = await prisma.user.findMany()
  * ```
  *
  *
@@ -47,8 +57,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Profiles
-   * const profiles = await prisma.profile.findMany()
+   * // Fetch zero or more Users
+   * const users = await prisma.user.findMany()
    * ```
    *
    *
@@ -145,14 +155,34 @@ export class PrismaClient<
   }>>
 
       /**
-   * `prisma.profile`: Exposes CRUD operations for the **Profile** model.
+   * `prisma.user`: Exposes CRUD operations for the **User** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Profiles
-    * const profiles = await prisma.profile.findMany()
+    * // Fetch zero or more Users
+    * const users = await prisma.user.findMany()
     * ```
     */
-  get profile(): Prisma.ProfileDelegate<ExtArgs, ClientOptions>;
+  get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.glucoseReading`: Exposes CRUD operations for the **GlucoseReading** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GlucoseReadings
+    * const glucoseReadings = await prisma.glucoseReading.findMany()
+    * ```
+    */
+  get glucoseReading(): Prisma.GlucoseReadingDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.dataUpload`: Exposes CRUD operations for the **DataUpload** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DataUploads
+    * const dataUploads = await prisma.dataUpload.findMany()
+    * ```
+    */
+  get dataUpload(): Prisma.DataUploadDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -593,7 +623,9 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Profile: 'Profile'
+    User: 'User',
+    GlucoseReading: 'GlucoseReading',
+    DataUpload: 'DataUpload'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -612,81 +644,229 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "profile"
+      modelProps: "user" | "glucoseReading" | "dataUpload"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
-      Profile: {
-        payload: Prisma.$ProfilePayload<ExtArgs>
-        fields: Prisma.ProfileFieldRefs
+      User: {
+        payload: Prisma.$UserPayload<ExtArgs>
+        fields: Prisma.UserFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.ProfileFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload> | null
+            args: Prisma.UserFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.ProfileFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload>
+            args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           findFirst: {
-            args: Prisma.ProfileFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload> | null
+            args: Prisma.UserFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.ProfileFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload>
+            args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           findMany: {
-            args: Prisma.ProfileFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload>[]
+            args: Prisma.UserFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
           }
           create: {
-            args: Prisma.ProfileCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload>
+            args: Prisma.UserCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           createMany: {
-            args: Prisma.ProfileCreateManyArgs<ExtArgs>
+            args: Prisma.UserCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.ProfileCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload>[]
+            args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
           }
           delete: {
-            args: Prisma.ProfileDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload>
+            args: Prisma.UserDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           update: {
-            args: Prisma.ProfileUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload>
+            args: Prisma.UserUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           deleteMany: {
-            args: Prisma.ProfileDeleteManyArgs<ExtArgs>
+            args: Prisma.UserDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.ProfileUpdateManyArgs<ExtArgs>
+            args: Prisma.UserUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.ProfileUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload>[]
+            args: Prisma.UserUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
           }
           upsert: {
-            args: Prisma.ProfileUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload>
+            args: Prisma.UserUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           aggregate: {
-            args: Prisma.ProfileAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateProfile>
+            args: Prisma.UserAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUser>
           }
           groupBy: {
-            args: Prisma.ProfileGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ProfileGroupByOutputType>[]
+            args: Prisma.UserGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserGroupByOutputType>[]
           }
           count: {
-            args: Prisma.ProfileCountArgs<ExtArgs>
-            result: $Utils.Optional<ProfileCountAggregateOutputType> | number
+            args: Prisma.UserCountArgs<ExtArgs>
+            result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      GlucoseReading: {
+        payload: Prisma.$GlucoseReadingPayload<ExtArgs>
+        fields: Prisma.GlucoseReadingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GlucoseReadingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseReadingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GlucoseReadingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseReadingPayload>
+          }
+          findFirst: {
+            args: Prisma.GlucoseReadingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseReadingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GlucoseReadingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseReadingPayload>
+          }
+          findMany: {
+            args: Prisma.GlucoseReadingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseReadingPayload>[]
+          }
+          create: {
+            args: Prisma.GlucoseReadingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseReadingPayload>
+          }
+          createMany: {
+            args: Prisma.GlucoseReadingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GlucoseReadingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseReadingPayload>[]
+          }
+          delete: {
+            args: Prisma.GlucoseReadingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseReadingPayload>
+          }
+          update: {
+            args: Prisma.GlucoseReadingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseReadingPayload>
+          }
+          deleteMany: {
+            args: Prisma.GlucoseReadingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GlucoseReadingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GlucoseReadingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseReadingPayload>[]
+          }
+          upsert: {
+            args: Prisma.GlucoseReadingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GlucoseReadingPayload>
+          }
+          aggregate: {
+            args: Prisma.GlucoseReadingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGlucoseReading>
+          }
+          groupBy: {
+            args: Prisma.GlucoseReadingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GlucoseReadingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GlucoseReadingCountArgs<ExtArgs>
+            result: $Utils.Optional<GlucoseReadingCountAggregateOutputType> | number
+          }
+        }
+      }
+      DataUpload: {
+        payload: Prisma.$DataUploadPayload<ExtArgs>
+        fields: Prisma.DataUploadFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DataUploadFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataUploadPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DataUploadFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataUploadPayload>
+          }
+          findFirst: {
+            args: Prisma.DataUploadFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataUploadPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DataUploadFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataUploadPayload>
+          }
+          findMany: {
+            args: Prisma.DataUploadFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataUploadPayload>[]
+          }
+          create: {
+            args: Prisma.DataUploadCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataUploadPayload>
+          }
+          createMany: {
+            args: Prisma.DataUploadCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DataUploadCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataUploadPayload>[]
+          }
+          delete: {
+            args: Prisma.DataUploadDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataUploadPayload>
+          }
+          update: {
+            args: Prisma.DataUploadUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataUploadPayload>
+          }
+          deleteMany: {
+            args: Prisma.DataUploadDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DataUploadUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DataUploadUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataUploadPayload>[]
+          }
+          upsert: {
+            args: Prisma.DataUploadUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DataUploadPayload>
+          }
+          aggregate: {
+            args: Prisma.DataUploadAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDataUpload>
+          }
+          groupBy: {
+            args: Prisma.DataUploadGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DataUploadGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DataUploadCountArgs<ExtArgs>
+            result: $Utils.Optional<DataUploadCountAggregateOutputType> | number
           }
         }
       }
@@ -774,7 +954,9 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
-    profile?: ProfileOmit
+    user?: UserOmit
+    glucoseReading?: GlucoseReadingOmit
+    dataUpload?: DataUploadOmit
   }
 
   /* Types for Logging */
@@ -864,22 +1046,61 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type UserCountOutputType
+   */
+
+  export type UserCountOutputType = {
+    glucoseReadings: number
+    dataUploads: number
+  }
+
+  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    glucoseReadings?: boolean | UserCountOutputTypeCountGlucoseReadingsArgs
+    dataUploads?: boolean | UserCountOutputTypeCountDataUploadsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+     */
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountGlucoseReadingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GlucoseReadingWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountDataUploadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DataUploadWhereInput
+  }
+
 
   /**
    * Models
    */
 
   /**
-   * Model Profile
+   * Model User
    */
 
-  export type AggregateProfile = {
-    _count: ProfileCountAggregateOutputType | null
-    _min: ProfileMinAggregateOutputType | null
-    _max: ProfileMaxAggregateOutputType | null
+  export type AggregateUser = {
+    _count: UserCountAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
   }
 
-  export type ProfileMinAggregateOutputType = {
+  export type UserMinAggregateOutputType = {
     id: string | null
     clerkId: string | null
     email: string | null
@@ -889,7 +1110,7 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type ProfileMaxAggregateOutputType = {
+  export type UserMaxAggregateOutputType = {
     id: string | null
     clerkId: string | null
     email: string | null
@@ -899,7 +1120,7 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type ProfileCountAggregateOutputType = {
+  export type UserCountAggregateOutputType = {
     id: number
     clerkId: number
     email: number
@@ -911,7 +1132,7 @@ export namespace Prisma {
   }
 
 
-  export type ProfileMinAggregateInputType = {
+  export type UserMinAggregateInputType = {
     id?: true
     clerkId?: true
     email?: true
@@ -921,7 +1142,7 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type ProfileMaxAggregateInputType = {
+  export type UserMaxAggregateInputType = {
     id?: true
     clerkId?: true
     email?: true
@@ -931,7 +1152,7 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type ProfileCountAggregateInputType = {
+  export type UserCountAggregateInputType = {
     id?: true
     clerkId?: true
     email?: true
@@ -942,79 +1163,79 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type ProfileAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Profile to aggregate.
+     * Filter which User to aggregate.
      */
-    where?: ProfileWhereInput
+    where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Profiles to fetch.
+     * Determine the order of Users to fetch.
      */
-    orderBy?: ProfileOrderByWithRelationInput | ProfileOrderByWithRelationInput[]
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: ProfileWhereUniqueInput
+    cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Profiles from the position of the cursor.
+     * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Profiles.
+     * Skip the first `n` Users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Profiles
+     * Count returned Users
     **/
-    _count?: true | ProfileCountAggregateInputType
+    _count?: true | UserCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: ProfileMinAggregateInputType
+    _min?: UserMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: ProfileMaxAggregateInputType
+    _max?: UserMaxAggregateInputType
   }
 
-  export type GetProfileAggregateType<T extends ProfileAggregateArgs> = {
-        [P in keyof T & keyof AggregateProfile]: P extends '_count' | 'count'
+  export type GetUserAggregateType<T extends UserAggregateArgs> = {
+        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateProfile[P]>
-      : GetScalarType<T[P], AggregateProfile[P]>
+        : GetScalarType<T[P], AggregateUser[P]>
+      : GetScalarType<T[P], AggregateUser[P]>
   }
 
 
 
 
-  export type ProfileGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProfileWhereInput
-    orderBy?: ProfileOrderByWithAggregationInput | ProfileOrderByWithAggregationInput[]
-    by: ProfileScalarFieldEnum[] | ProfileScalarFieldEnum
-    having?: ProfileScalarWhereWithAggregatesInput
+  export type UserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithAggregationInput | UserOrderByWithAggregationInput[]
+    by: UserScalarFieldEnum[] | UserScalarFieldEnum
+    having?: UserScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: ProfileCountAggregateInputType | true
-    _min?: ProfileMinAggregateInputType
-    _max?: ProfileMaxAggregateInputType
+    _count?: UserCountAggregateInputType | true
+    _min?: UserMinAggregateInputType
+    _max?: UserMaxAggregateInputType
   }
 
-  export type ProfileGroupByOutputType = {
+  export type UserGroupByOutputType = {
     id: string
     clerkId: string
     email: string | null
@@ -1022,26 +1243,26 @@ export namespace Prisma {
     image: string | null
     createdAt: Date
     updatedAt: Date
-    _count: ProfileCountAggregateOutputType | null
-    _min: ProfileMinAggregateOutputType | null
-    _max: ProfileMaxAggregateOutputType | null
+    _count: UserCountAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
   }
 
-  type GetProfileGroupByPayload<T extends ProfileGroupByArgs> = Prisma.PrismaPromise<
+  type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<ProfileGroupByOutputType, T['by']> &
+      PickEnumerable<UserGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof ProfileGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], ProfileGroupByOutputType[P]>
-            : GetScalarType<T[P], ProfileGroupByOutputType[P]>
+              : GetScalarType<T[P], UserGroupByOutputType[P]>
+            : GetScalarType<T[P], UserGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type ProfileSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     clerkId?: boolean
     email?: boolean
@@ -1049,9 +1270,12 @@ export namespace Prisma {
     image?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-  }, ExtArgs["result"]["profile"]>
+    glucoseReadings?: boolean | User$glucoseReadingsArgs<ExtArgs>
+    dataUploads?: boolean | User$dataUploadsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["user"]>
 
-  export type ProfileSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     clerkId?: boolean
     email?: boolean
@@ -1059,9 +1283,9 @@ export namespace Prisma {
     image?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-  }, ExtArgs["result"]["profile"]>
+  }, ExtArgs["result"]["user"]>
 
-  export type ProfileSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     clerkId?: boolean
     email?: boolean
@@ -1069,9 +1293,9 @@ export namespace Prisma {
     image?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-  }, ExtArgs["result"]["profile"]>
+  }, ExtArgs["result"]["user"]>
 
-  export type ProfileSelectScalar = {
+  export type UserSelectScalar = {
     id?: boolean
     clerkId?: boolean
     email?: boolean
@@ -1081,11 +1305,21 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clerkId" | "email" | "name" | "image" | "createdAt" | "updatedAt", ExtArgs["result"]["profile"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clerkId" | "email" | "name" | "image" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    glucoseReadings?: boolean | User$glucoseReadingsArgs<ExtArgs>
+    dataUploads?: boolean | User$dataUploadsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
-  export type $ProfilePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Profile"
-    objects: {}
+  export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "User"
+    objects: {
+      glucoseReadings: Prisma.$GlucoseReadingPayload<ExtArgs>[]
+      dataUploads: Prisma.$DataUploadPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       clerkId: string
@@ -1094,136 +1328,136 @@ export namespace Prisma {
       image: string | null
       createdAt: Date
       updatedAt: Date
-    }, ExtArgs["result"]["profile"]>
+    }, ExtArgs["result"]["user"]>
     composites: {}
   }
 
-  type ProfileGetPayload<S extends boolean | null | undefined | ProfileDefaultArgs> = $Result.GetResult<Prisma.$ProfilePayload, S>
+  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
 
-  type ProfileCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ProfileFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ProfileCountAggregateInputType | true
+  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserCountAggregateInputType | true
     }
 
-  export interface ProfileDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Profile'], meta: { name: 'Profile' } }
+  export interface UserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
     /**
-     * Find zero or one Profile that matches the filter.
-     * @param {ProfileFindUniqueArgs} args - Arguments to find a Profile
+     * Find zero or one User that matches the filter.
+     * @param {UserFindUniqueArgs} args - Arguments to find a User
      * @example
-     * // Get one Profile
-     * const profile = await prisma.profile.findUnique({
+     * // Get one User
+     * const user = await prisma.user.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends ProfileFindUniqueArgs>(args: SelectSubset<T, ProfileFindUniqueArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends UserFindUniqueArgs>(args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Profile that matches the filter or throw an error with `error.code='P2025'`
+     * Find one User that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {ProfileFindUniqueOrThrowArgs} args - Arguments to find a Profile
+     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
      * @example
-     * // Get one Profile
-     * const profile = await prisma.profile.findUniqueOrThrow({
+     * // Get one User
+     * const user = await prisma.user.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends ProfileFindUniqueOrThrowArgs>(args: SelectSubset<T, ProfileFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Profile that matches the filter.
+     * Find the first User that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProfileFindFirstArgs} args - Arguments to find a Profile
+     * @param {UserFindFirstArgs} args - Arguments to find a User
      * @example
-     * // Get one Profile
-     * const profile = await prisma.profile.findFirst({
+     * // Get one User
+     * const user = await prisma.user.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends ProfileFindFirstArgs>(args?: SelectSubset<T, ProfileFindFirstArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends UserFindFirstArgs>(args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Profile that matches the filter or
+     * Find the first User that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProfileFindFirstOrThrowArgs} args - Arguments to find a Profile
+     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
      * @example
-     * // Get one Profile
-     * const profile = await prisma.profile.findFirstOrThrow({
+     * // Get one User
+     * const user = await prisma.user.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends ProfileFindFirstOrThrowArgs>(args?: SelectSubset<T, ProfileFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Profiles that matches the filter.
+     * Find zero or more Users that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProfileFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {UserFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Profiles
-     * const profiles = await prisma.profile.findMany()
+     * // Get all Users
+     * const users = await prisma.user.findMany()
      * 
-     * // Get first 10 Profiles
-     * const profiles = await prisma.profile.findMany({ take: 10 })
+     * // Get first 10 Users
+     * const users = await prisma.user.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const profileWithIdOnly = await prisma.profile.findMany({ select: { id: true } })
+     * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends ProfileFindManyArgs>(args?: SelectSubset<T, ProfileFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends UserFindManyArgs>(args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Profile.
-     * @param {ProfileCreateArgs} args - Arguments to create a Profile.
+     * Create a User.
+     * @param {UserCreateArgs} args - Arguments to create a User.
      * @example
-     * // Create one Profile
-     * const Profile = await prisma.profile.create({
+     * // Create one User
+     * const User = await prisma.user.create({
      *   data: {
-     *     // ... data to create a Profile
+     *     // ... data to create a User
      *   }
      * })
      * 
      */
-    create<T extends ProfileCreateArgs>(args: SelectSubset<T, ProfileCreateArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends UserCreateArgs>(args: SelectSubset<T, UserCreateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Profiles.
-     * @param {ProfileCreateManyArgs} args - Arguments to create many Profiles.
+     * Create many Users.
+     * @param {UserCreateManyArgs} args - Arguments to create many Users.
      * @example
-     * // Create many Profiles
-     * const profile = await prisma.profile.createMany({
+     * // Create many Users
+     * const user = await prisma.user.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends ProfileCreateManyArgs>(args?: SelectSubset<T, ProfileCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends UserCreateManyArgs>(args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Profiles and returns the data saved in the database.
-     * @param {ProfileCreateManyAndReturnArgs} args - Arguments to create many Profiles.
+     * Create many Users and returns the data saved in the database.
+     * @param {UserCreateManyAndReturnArgs} args - Arguments to create many Users.
      * @example
-     * // Create many Profiles
-     * const profile = await prisma.profile.createManyAndReturn({
+     * // Create many Users
+     * const user = await prisma.user.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Profiles and only return the `id`
-     * const profileWithIdOnly = await prisma.profile.createManyAndReturn({
+     * // Create many Users and only return the `id`
+     * const userWithIdOnly = await prisma.user.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -1233,28 +1467,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends ProfileCreateManyAndReturnArgs>(args?: SelectSubset<T, ProfileCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends UserCreateManyAndReturnArgs>(args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Profile.
-     * @param {ProfileDeleteArgs} args - Arguments to delete one Profile.
+     * Delete a User.
+     * @param {UserDeleteArgs} args - Arguments to delete one User.
      * @example
-     * // Delete one Profile
-     * const Profile = await prisma.profile.delete({
+     * // Delete one User
+     * const User = await prisma.user.delete({
      *   where: {
-     *     // ... filter to delete one Profile
+     *     // ... filter to delete one User
      *   }
      * })
      * 
      */
-    delete<T extends ProfileDeleteArgs>(args: SelectSubset<T, ProfileDeleteArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends UserDeleteArgs>(args: SelectSubset<T, UserDeleteArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Profile.
-     * @param {ProfileUpdateArgs} args - Arguments to update one Profile.
+     * Update one User.
+     * @param {UserUpdateArgs} args - Arguments to update one User.
      * @example
-     * // Update one Profile
-     * const profile = await prisma.profile.update({
+     * // Update one User
+     * const user = await prisma.user.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1264,30 +1498,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends ProfileUpdateArgs>(args: SelectSubset<T, ProfileUpdateArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends UserUpdateArgs>(args: SelectSubset<T, UserUpdateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Profiles.
-     * @param {ProfileDeleteManyArgs} args - Arguments to filter Profiles to delete.
+     * Delete zero or more Users.
+     * @param {UserDeleteManyArgs} args - Arguments to filter Users to delete.
      * @example
-     * // Delete a few Profiles
-     * const { count } = await prisma.profile.deleteMany({
+     * // Delete a few Users
+     * const { count } = await prisma.user.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends ProfileDeleteManyArgs>(args?: SelectSubset<T, ProfileDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends UserDeleteManyArgs>(args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Profiles.
+     * Update zero or more Users.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProfileUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Profiles
-     * const profile = await prisma.profile.updateMany({
+     * // Update many Users
+     * const user = await prisma.user.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1297,14 +1531,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends ProfileUpdateManyArgs>(args: SelectSubset<T, ProfileUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends UserUpdateManyArgs>(args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Profiles and returns the data updated in the database.
-     * @param {ProfileUpdateManyAndReturnArgs} args - Arguments to update many Profiles.
+     * Update zero or more Users and returns the data updated in the database.
+     * @param {UserUpdateManyAndReturnArgs} args - Arguments to update many Users.
      * @example
-     * // Update many Profiles
-     * const profile = await prisma.profile.updateManyAndReturn({
+     * // Update many Users
+     * const user = await prisma.user.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1313,8 +1547,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Profiles and only return the `id`
-     * const profileWithIdOnly = await prisma.profile.updateManyAndReturn({
+     * // Update zero or more Users and only return the `id`
+     * const userWithIdOnly = await prisma.user.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -1327,56 +1561,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends ProfileUpdateManyAndReturnArgs>(args: SelectSubset<T, ProfileUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends UserUpdateManyAndReturnArgs>(args: SelectSubset<T, UserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Profile.
-     * @param {ProfileUpsertArgs} args - Arguments to update or create a Profile.
+     * Create or update one User.
+     * @param {UserUpsertArgs} args - Arguments to update or create a User.
      * @example
-     * // Update or create a Profile
-     * const profile = await prisma.profile.upsert({
+     * // Update or create a User
+     * const user = await prisma.user.upsert({
      *   create: {
-     *     // ... data to create a Profile
+     *     // ... data to create a User
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Profile we want to update
+     *     // ... the filter for the User we want to update
      *   }
      * })
      */
-    upsert<T extends ProfileUpsertArgs>(args: SelectSubset<T, ProfileUpsertArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends UserUpsertArgs>(args: SelectSubset<T, UserUpsertArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Profiles.
+     * Count the number of Users.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProfileCountArgs} args - Arguments to filter Profiles to count.
+     * @param {UserCountArgs} args - Arguments to filter Users to count.
      * @example
-     * // Count the number of Profiles
-     * const count = await prisma.profile.count({
+     * // Count the number of Users
+     * const count = await prisma.user.count({
      *   where: {
-     *     // ... the filter for the Profiles we want to count
+     *     // ... the filter for the Users we want to count
      *   }
      * })
     **/
-    count<T extends ProfileCountArgs>(
-      args?: Subset<T, ProfileCountArgs>,
+    count<T extends UserCountArgs>(
+      args?: Subset<T, UserCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], ProfileCountAggregateOutputType>
+          : GetScalarType<T['select'], UserCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Profile.
+     * Allows you to perform aggregations operations on a User.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProfileAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -1396,13 +1630,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends ProfileAggregateArgs>(args: Subset<T, ProfileAggregateArgs>): Prisma.PrismaPromise<GetProfileAggregateType<T>>
+    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Prisma.PrismaPromise<GetUserAggregateType<T>>
 
     /**
-     * Group by Profile.
+     * Group by User.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProfileGroupByArgs} args - Group by arguments.
+     * @param {UserGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -1417,14 +1651,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends ProfileGroupByArgs,
+      T extends UserGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ProfileGroupByArgs['orderBy'] }
-        : { orderBy?: ProfileGroupByArgs['orderBy'] },
+        ? { orderBy: UserGroupByArgs['orderBy'] }
+        : { orderBy?: UserGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -1473,21 +1707,23 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, ProfileGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProfileGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Profile model
+   * Fields of the User model
    */
-  readonly fields: ProfileFieldRefs;
+  readonly fields: UserFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Profile.
+   * The delegate class that acts as a "Promise-like" for User.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ProfileClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    glucoseReadings<T extends User$glucoseReadingsArgs<ExtArgs> = {}>(args?: Subset<T, User$glucoseReadingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlucoseReadingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    dataUploads<T extends User$dataUploadsArgs<ExtArgs> = {}>(args?: Subset<T, User$dataUploadsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataUploadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1514,379 +1750,2746 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Profile model
+   * Fields of the User model
    */
-  interface ProfileFieldRefs {
-    readonly id: FieldRef<"Profile", 'String'>
-    readonly clerkId: FieldRef<"Profile", 'String'>
-    readonly email: FieldRef<"Profile", 'String'>
-    readonly name: FieldRef<"Profile", 'String'>
-    readonly image: FieldRef<"Profile", 'String'>
-    readonly createdAt: FieldRef<"Profile", 'DateTime'>
-    readonly updatedAt: FieldRef<"Profile", 'DateTime'>
+  interface UserFieldRefs {
+    readonly id: FieldRef<"User", 'String'>
+    readonly clerkId: FieldRef<"User", 'String'>
+    readonly email: FieldRef<"User", 'String'>
+    readonly name: FieldRef<"User", 'String'>
+    readonly image: FieldRef<"User", 'String'>
+    readonly createdAt: FieldRef<"User", 'DateTime'>
+    readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * Profile findUnique
+   * User findUnique
    */
-  export type ProfileFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the User
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the User
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null
     /**
-     * Filter, which Profile to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where: ProfileWhereUniqueInput
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where: UserWhereUniqueInput
   }
 
   /**
-   * Profile findUniqueOrThrow
+   * User findUniqueOrThrow
    */
-  export type ProfileFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the User
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the User
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null
     /**
-     * Filter, which Profile to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where: ProfileWhereUniqueInput
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where: UserWhereUniqueInput
   }
 
   /**
-   * Profile findFirst
+   * User findFirst
    */
-  export type ProfileFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the User
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the User
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null
     /**
-     * Filter, which Profile to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: ProfileWhereInput
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Profiles to fetch.
+     * Determine the order of Users to fetch.
      */
-    orderBy?: ProfileOrderByWithRelationInput | ProfileOrderByWithRelationInput[]
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Profiles.
+     * Sets the position for searching for Users.
      */
-    cursor?: ProfileWhereUniqueInput
+    cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Profiles from the position of the cursor.
+     * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Profiles.
+     * Skip the first `n` Users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Profiles.
+     * Filter by unique combinations of Users.
      */
-    distinct?: ProfileScalarFieldEnum | ProfileScalarFieldEnum[]
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
   /**
-   * Profile findFirstOrThrow
+   * User findFirstOrThrow
    */
-  export type ProfileFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the User
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the User
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null
     /**
-     * Filter, which Profile to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: ProfileWhereInput
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Profiles to fetch.
+     * Determine the order of Users to fetch.
      */
-    orderBy?: ProfileOrderByWithRelationInput | ProfileOrderByWithRelationInput[]
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Profiles.
+     * Sets the position for searching for Users.
      */
-    cursor?: ProfileWhereUniqueInput
+    cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Profiles from the position of the cursor.
+     * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Profiles.
+     * Skip the first `n` Users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Profiles.
+     * Filter by unique combinations of Users.
      */
-    distinct?: ProfileScalarFieldEnum | ProfileScalarFieldEnum[]
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
   /**
-   * Profile findMany
+   * User findMany
    */
-  export type ProfileFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the User
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the User
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null
     /**
-     * Filter, which Profiles to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: ProfileWhereInput
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which Users to fetch.
+     */
+    where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Profiles to fetch.
+     * Determine the order of Users to fetch.
      */
-    orderBy?: ProfileOrderByWithRelationInput | ProfileOrderByWithRelationInput[]
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Profiles.
+     * Sets the position for listing Users.
      */
-    cursor?: ProfileWhereUniqueInput
+    cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Profiles from the position of the cursor.
+     * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Profiles.
+     * Skip the first `n` Users.
      */
     skip?: number
-    distinct?: ProfileScalarFieldEnum | ProfileScalarFieldEnum[]
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
   /**
-   * Profile create
+   * User create
    */
-  export type ProfileCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the User
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the User
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null
     /**
-     * The data needed to create a Profile.
+     * Choose, which related nodes to fetch as well
      */
-    data: XOR<ProfileCreateInput, ProfileUncheckedCreateInput>
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * The data needed to create a User.
+     */
+    data: XOR<UserCreateInput, UserUncheckedCreateInput>
   }
 
   /**
-   * Profile createMany
+   * User createMany
    */
-  export type ProfileCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Profiles.
+     * The data used to create many Users.
      */
-    data: ProfileCreateManyInput | ProfileCreateManyInput[]
+    data: UserCreateManyInput | UserCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Profile createManyAndReturn
+   * User createManyAndReturn
    */
-  export type ProfileCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the User
      */
-    select?: ProfileSelectCreateManyAndReturn<ExtArgs> | null
+    select?: UserSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the User
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null
     /**
-     * The data used to create many Profiles.
+     * The data used to create many Users.
      */
-    data: ProfileCreateManyInput | ProfileCreateManyInput[]
+    data: UserCreateManyInput | UserCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Profile update
+   * User update
    */
-  export type ProfileUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the User
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the User
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null
     /**
-     * The data needed to update a Profile.
+     * Choose, which related nodes to fetch as well
      */
-    data: XOR<ProfileUpdateInput, ProfileUncheckedUpdateInput>
+    include?: UserInclude<ExtArgs> | null
     /**
-     * Choose, which Profile to update.
+     * The data needed to update a User.
      */
-    where: ProfileWhereUniqueInput
+    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+    /**
+     * Choose, which User to update.
+     */
+    where: UserWhereUniqueInput
   }
 
   /**
-   * Profile updateMany
+   * User updateMany
    */
-  export type ProfileUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Profiles.
+     * The data used to update Users.
      */
-    data: XOR<ProfileUpdateManyMutationInput, ProfileUncheckedUpdateManyInput>
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
     /**
-     * Filter which Profiles to update
+     * Filter which Users to update
      */
-    where?: ProfileWhereInput
+    where?: UserWhereInput
     /**
-     * Limit how many Profiles to update.
+     * Limit how many Users to update.
      */
     limit?: number
   }
 
   /**
-   * Profile updateManyAndReturn
+   * User updateManyAndReturn
    */
-  export type ProfileUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the User
      */
-    select?: ProfileSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: UserSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the User
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null
     /**
-     * The data used to update Profiles.
+     * The data used to update Users.
      */
-    data: XOR<ProfileUpdateManyMutationInput, ProfileUncheckedUpdateManyInput>
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
     /**
-     * Filter which Profiles to update
+     * Filter which Users to update
      */
-    where?: ProfileWhereInput
+    where?: UserWhereInput
     /**
-     * Limit how many Profiles to update.
+     * Limit how many Users to update.
      */
     limit?: number
   }
 
   /**
-   * Profile upsert
+   * User upsert
    */
-  export type ProfileUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the User
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the User
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null
     /**
-     * The filter to search for the Profile to update in case it exists.
+     * Choose, which related nodes to fetch as well
      */
-    where: ProfileWhereUniqueInput
+    include?: UserInclude<ExtArgs> | null
     /**
-     * In case the Profile found by the `where` argument doesn't exist, create a new Profile with this data.
+     * The filter to search for the User to update in case it exists.
      */
-    create: XOR<ProfileCreateInput, ProfileUncheckedCreateInput>
+    where: UserWhereUniqueInput
     /**
-     * In case the Profile was found with the provided `where` argument, update it with this data.
+     * In case the User found by the `where` argument doesn't exist, create a new User with this data.
      */
-    update: XOR<ProfileUpdateInput, ProfileUncheckedUpdateInput>
+    create: XOR<UserCreateInput, UserUncheckedCreateInput>
+    /**
+     * In case the User was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
   }
 
   /**
-   * Profile delete
+   * User delete
    */
-  export type ProfileDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the User
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the User
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null
     /**
-     * Filter which Profile to delete.
+     * Choose, which related nodes to fetch as well
      */
-    where: ProfileWhereUniqueInput
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter which User to delete.
+     */
+    where: UserWhereUniqueInput
   }
 
   /**
-   * Profile deleteMany
+   * User deleteMany
    */
-  export type ProfileDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Profiles to delete
+     * Filter which Users to delete
      */
-    where?: ProfileWhereInput
+    where?: UserWhereInput
     /**
-     * Limit how many Profiles to delete.
+     * Limit how many Users to delete.
      */
     limit?: number
   }
 
   /**
-   * Profile without action
+   * User.glucoseReadings
    */
-  export type ProfileDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$glucoseReadingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the GlucoseReading
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: GlucoseReadingSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the GlucoseReading
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: GlucoseReadingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseReadingInclude<ExtArgs> | null
+    where?: GlucoseReadingWhereInput
+    orderBy?: GlucoseReadingOrderByWithRelationInput | GlucoseReadingOrderByWithRelationInput[]
+    cursor?: GlucoseReadingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GlucoseReadingScalarFieldEnum | GlucoseReadingScalarFieldEnum[]
+  }
+
+  /**
+   * User.dataUploads
+   */
+  export type User$dataUploadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataUpload
+     */
+    select?: DataUploadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataUpload
+     */
+    omit?: DataUploadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataUploadInclude<ExtArgs> | null
+    where?: DataUploadWhereInput
+    orderBy?: DataUploadOrderByWithRelationInput | DataUploadOrderByWithRelationInput[]
+    cursor?: DataUploadWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DataUploadScalarFieldEnum | DataUploadScalarFieldEnum[]
+  }
+
+  /**
+   * User without action
+   */
+  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model GlucoseReading
+   */
+
+  export type AggregateGlucoseReading = {
+    _count: GlucoseReadingCountAggregateOutputType | null
+    _avg: GlucoseReadingAvgAggregateOutputType | null
+    _sum: GlucoseReadingSumAggregateOutputType | null
+    _min: GlucoseReadingMinAggregateOutputType | null
+    _max: GlucoseReadingMaxAggregateOutputType | null
+  }
+
+  export type GlucoseReadingAvgAggregateOutputType = {
+    glucoseValue: number | null
+    rateOfChange: number | null
+  }
+
+  export type GlucoseReadingSumAggregateOutputType = {
+    glucoseValue: number | null
+    rateOfChange: number | null
+  }
+
+  export type GlucoseReadingMinAggregateOutputType = {
+    id: string | null
+    timestamp: Date | null
+    glucoseValue: number | null
+    rateOfChange: number | null
+    eventType: string | null
+    eventSubtype: string | null
+    transmitterId: string | null
+    transmitterTime: string | null
+    sourceDeviceId: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GlucoseReadingMaxAggregateOutputType = {
+    id: string | null
+    timestamp: Date | null
+    glucoseValue: number | null
+    rateOfChange: number | null
+    eventType: string | null
+    eventSubtype: string | null
+    transmitterId: string | null
+    transmitterTime: string | null
+    sourceDeviceId: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GlucoseReadingCountAggregateOutputType = {
+    id: number
+    timestamp: number
+    glucoseValue: number
+    rateOfChange: number
+    eventType: number
+    eventSubtype: number
+    transmitterId: number
+    transmitterTime: number
+    sourceDeviceId: number
+    userId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type GlucoseReadingAvgAggregateInputType = {
+    glucoseValue?: true
+    rateOfChange?: true
+  }
+
+  export type GlucoseReadingSumAggregateInputType = {
+    glucoseValue?: true
+    rateOfChange?: true
+  }
+
+  export type GlucoseReadingMinAggregateInputType = {
+    id?: true
+    timestamp?: true
+    glucoseValue?: true
+    rateOfChange?: true
+    eventType?: true
+    eventSubtype?: true
+    transmitterId?: true
+    transmitterTime?: true
+    sourceDeviceId?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GlucoseReadingMaxAggregateInputType = {
+    id?: true
+    timestamp?: true
+    glucoseValue?: true
+    rateOfChange?: true
+    eventType?: true
+    eventSubtype?: true
+    transmitterId?: true
+    transmitterTime?: true
+    sourceDeviceId?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GlucoseReadingCountAggregateInputType = {
+    id?: true
+    timestamp?: true
+    glucoseValue?: true
+    rateOfChange?: true
+    eventType?: true
+    eventSubtype?: true
+    transmitterId?: true
+    transmitterTime?: true
+    sourceDeviceId?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type GlucoseReadingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GlucoseReading to aggregate.
+     */
+    where?: GlucoseReadingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlucoseReadings to fetch.
+     */
+    orderBy?: GlucoseReadingOrderByWithRelationInput | GlucoseReadingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GlucoseReadingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlucoseReadings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlucoseReadings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned GlucoseReadings
+    **/
+    _count?: true | GlucoseReadingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: GlucoseReadingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: GlucoseReadingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GlucoseReadingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GlucoseReadingMaxAggregateInputType
+  }
+
+  export type GetGlucoseReadingAggregateType<T extends GlucoseReadingAggregateArgs> = {
+        [P in keyof T & keyof AggregateGlucoseReading]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGlucoseReading[P]>
+      : GetScalarType<T[P], AggregateGlucoseReading[P]>
+  }
+
+
+
+
+  export type GlucoseReadingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GlucoseReadingWhereInput
+    orderBy?: GlucoseReadingOrderByWithAggregationInput | GlucoseReadingOrderByWithAggregationInput[]
+    by: GlucoseReadingScalarFieldEnum[] | GlucoseReadingScalarFieldEnum
+    having?: GlucoseReadingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GlucoseReadingCountAggregateInputType | true
+    _avg?: GlucoseReadingAvgAggregateInputType
+    _sum?: GlucoseReadingSumAggregateInputType
+    _min?: GlucoseReadingMinAggregateInputType
+    _max?: GlucoseReadingMaxAggregateInputType
+  }
+
+  export type GlucoseReadingGroupByOutputType = {
+    id: string
+    timestamp: Date
+    glucoseValue: number
+    rateOfChange: number | null
+    eventType: string
+    eventSubtype: string | null
+    transmitterId: string | null
+    transmitterTime: string | null
+    sourceDeviceId: string | null
+    userId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: GlucoseReadingCountAggregateOutputType | null
+    _avg: GlucoseReadingAvgAggregateOutputType | null
+    _sum: GlucoseReadingSumAggregateOutputType | null
+    _min: GlucoseReadingMinAggregateOutputType | null
+    _max: GlucoseReadingMaxAggregateOutputType | null
+  }
+
+  type GetGlucoseReadingGroupByPayload<T extends GlucoseReadingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GlucoseReadingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GlucoseReadingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GlucoseReadingGroupByOutputType[P]>
+            : GetScalarType<T[P], GlucoseReadingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GlucoseReadingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timestamp?: boolean
+    glucoseValue?: boolean
+    rateOfChange?: boolean
+    eventType?: boolean
+    eventSubtype?: boolean
+    transmitterId?: boolean
+    transmitterTime?: boolean
+    sourceDeviceId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["glucoseReading"]>
+
+  export type GlucoseReadingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timestamp?: boolean
+    glucoseValue?: boolean
+    rateOfChange?: boolean
+    eventType?: boolean
+    eventSubtype?: boolean
+    transmitterId?: boolean
+    transmitterTime?: boolean
+    sourceDeviceId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["glucoseReading"]>
+
+  export type GlucoseReadingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timestamp?: boolean
+    glucoseValue?: boolean
+    rateOfChange?: boolean
+    eventType?: boolean
+    eventSubtype?: boolean
+    transmitterId?: boolean
+    transmitterTime?: boolean
+    sourceDeviceId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["glucoseReading"]>
+
+  export type GlucoseReadingSelectScalar = {
+    id?: boolean
+    timestamp?: boolean
+    glucoseValue?: boolean
+    rateOfChange?: boolean
+    eventType?: boolean
+    eventSubtype?: boolean
+    transmitterId?: boolean
+    transmitterTime?: boolean
+    sourceDeviceId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type GlucoseReadingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "timestamp" | "glucoseValue" | "rateOfChange" | "eventType" | "eventSubtype" | "transmitterId" | "transmitterTime" | "sourceDeviceId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["glucoseReading"]>
+  export type GlucoseReadingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type GlucoseReadingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type GlucoseReadingIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $GlucoseReadingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GlucoseReading"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      timestamp: Date
+      glucoseValue: number
+      rateOfChange: number | null
+      eventType: string
+      eventSubtype: string | null
+      transmitterId: string | null
+      transmitterTime: string | null
+      sourceDeviceId: string | null
+      userId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["glucoseReading"]>
+    composites: {}
+  }
+
+  type GlucoseReadingGetPayload<S extends boolean | null | undefined | GlucoseReadingDefaultArgs> = $Result.GetResult<Prisma.$GlucoseReadingPayload, S>
+
+  type GlucoseReadingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GlucoseReadingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GlucoseReadingCountAggregateInputType | true
+    }
+
+  export interface GlucoseReadingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GlucoseReading'], meta: { name: 'GlucoseReading' } }
+    /**
+     * Find zero or one GlucoseReading that matches the filter.
+     * @param {GlucoseReadingFindUniqueArgs} args - Arguments to find a GlucoseReading
+     * @example
+     * // Get one GlucoseReading
+     * const glucoseReading = await prisma.glucoseReading.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GlucoseReadingFindUniqueArgs>(args: SelectSubset<T, GlucoseReadingFindUniqueArgs<ExtArgs>>): Prisma__GlucoseReadingClient<$Result.GetResult<Prisma.$GlucoseReadingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one GlucoseReading that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GlucoseReadingFindUniqueOrThrowArgs} args - Arguments to find a GlucoseReading
+     * @example
+     * // Get one GlucoseReading
+     * const glucoseReading = await prisma.glucoseReading.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GlucoseReadingFindUniqueOrThrowArgs>(args: SelectSubset<T, GlucoseReadingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GlucoseReadingClient<$Result.GetResult<Prisma.$GlucoseReadingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GlucoseReading that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlucoseReadingFindFirstArgs} args - Arguments to find a GlucoseReading
+     * @example
+     * // Get one GlucoseReading
+     * const glucoseReading = await prisma.glucoseReading.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GlucoseReadingFindFirstArgs>(args?: SelectSubset<T, GlucoseReadingFindFirstArgs<ExtArgs>>): Prisma__GlucoseReadingClient<$Result.GetResult<Prisma.$GlucoseReadingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GlucoseReading that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlucoseReadingFindFirstOrThrowArgs} args - Arguments to find a GlucoseReading
+     * @example
+     * // Get one GlucoseReading
+     * const glucoseReading = await prisma.glucoseReading.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GlucoseReadingFindFirstOrThrowArgs>(args?: SelectSubset<T, GlucoseReadingFindFirstOrThrowArgs<ExtArgs>>): Prisma__GlucoseReadingClient<$Result.GetResult<Prisma.$GlucoseReadingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GlucoseReadings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlucoseReadingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GlucoseReadings
+     * const glucoseReadings = await prisma.glucoseReading.findMany()
+     * 
+     * // Get first 10 GlucoseReadings
+     * const glucoseReadings = await prisma.glucoseReading.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const glucoseReadingWithIdOnly = await prisma.glucoseReading.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GlucoseReadingFindManyArgs>(args?: SelectSubset<T, GlucoseReadingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlucoseReadingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a GlucoseReading.
+     * @param {GlucoseReadingCreateArgs} args - Arguments to create a GlucoseReading.
+     * @example
+     * // Create one GlucoseReading
+     * const GlucoseReading = await prisma.glucoseReading.create({
+     *   data: {
+     *     // ... data to create a GlucoseReading
+     *   }
+     * })
+     * 
+     */
+    create<T extends GlucoseReadingCreateArgs>(args: SelectSubset<T, GlucoseReadingCreateArgs<ExtArgs>>): Prisma__GlucoseReadingClient<$Result.GetResult<Prisma.$GlucoseReadingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many GlucoseReadings.
+     * @param {GlucoseReadingCreateManyArgs} args - Arguments to create many GlucoseReadings.
+     * @example
+     * // Create many GlucoseReadings
+     * const glucoseReading = await prisma.glucoseReading.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GlucoseReadingCreateManyArgs>(args?: SelectSubset<T, GlucoseReadingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many GlucoseReadings and returns the data saved in the database.
+     * @param {GlucoseReadingCreateManyAndReturnArgs} args - Arguments to create many GlucoseReadings.
+     * @example
+     * // Create many GlucoseReadings
+     * const glucoseReading = await prisma.glucoseReading.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many GlucoseReadings and only return the `id`
+     * const glucoseReadingWithIdOnly = await prisma.glucoseReading.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GlucoseReadingCreateManyAndReturnArgs>(args?: SelectSubset<T, GlucoseReadingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlucoseReadingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a GlucoseReading.
+     * @param {GlucoseReadingDeleteArgs} args - Arguments to delete one GlucoseReading.
+     * @example
+     * // Delete one GlucoseReading
+     * const GlucoseReading = await prisma.glucoseReading.delete({
+     *   where: {
+     *     // ... filter to delete one GlucoseReading
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GlucoseReadingDeleteArgs>(args: SelectSubset<T, GlucoseReadingDeleteArgs<ExtArgs>>): Prisma__GlucoseReadingClient<$Result.GetResult<Prisma.$GlucoseReadingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one GlucoseReading.
+     * @param {GlucoseReadingUpdateArgs} args - Arguments to update one GlucoseReading.
+     * @example
+     * // Update one GlucoseReading
+     * const glucoseReading = await prisma.glucoseReading.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GlucoseReadingUpdateArgs>(args: SelectSubset<T, GlucoseReadingUpdateArgs<ExtArgs>>): Prisma__GlucoseReadingClient<$Result.GetResult<Prisma.$GlucoseReadingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more GlucoseReadings.
+     * @param {GlucoseReadingDeleteManyArgs} args - Arguments to filter GlucoseReadings to delete.
+     * @example
+     * // Delete a few GlucoseReadings
+     * const { count } = await prisma.glucoseReading.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GlucoseReadingDeleteManyArgs>(args?: SelectSubset<T, GlucoseReadingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GlucoseReadings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlucoseReadingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GlucoseReadings
+     * const glucoseReading = await prisma.glucoseReading.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GlucoseReadingUpdateManyArgs>(args: SelectSubset<T, GlucoseReadingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GlucoseReadings and returns the data updated in the database.
+     * @param {GlucoseReadingUpdateManyAndReturnArgs} args - Arguments to update many GlucoseReadings.
+     * @example
+     * // Update many GlucoseReadings
+     * const glucoseReading = await prisma.glucoseReading.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more GlucoseReadings and only return the `id`
+     * const glucoseReadingWithIdOnly = await prisma.glucoseReading.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GlucoseReadingUpdateManyAndReturnArgs>(args: SelectSubset<T, GlucoseReadingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlucoseReadingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one GlucoseReading.
+     * @param {GlucoseReadingUpsertArgs} args - Arguments to update or create a GlucoseReading.
+     * @example
+     * // Update or create a GlucoseReading
+     * const glucoseReading = await prisma.glucoseReading.upsert({
+     *   create: {
+     *     // ... data to create a GlucoseReading
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GlucoseReading we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GlucoseReadingUpsertArgs>(args: SelectSubset<T, GlucoseReadingUpsertArgs<ExtArgs>>): Prisma__GlucoseReadingClient<$Result.GetResult<Prisma.$GlucoseReadingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of GlucoseReadings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlucoseReadingCountArgs} args - Arguments to filter GlucoseReadings to count.
+     * @example
+     * // Count the number of GlucoseReadings
+     * const count = await prisma.glucoseReading.count({
+     *   where: {
+     *     // ... the filter for the GlucoseReadings we want to count
+     *   }
+     * })
+    **/
+    count<T extends GlucoseReadingCountArgs>(
+      args?: Subset<T, GlucoseReadingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GlucoseReadingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GlucoseReading.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlucoseReadingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GlucoseReadingAggregateArgs>(args: Subset<T, GlucoseReadingAggregateArgs>): Prisma.PrismaPromise<GetGlucoseReadingAggregateType<T>>
+
+    /**
+     * Group by GlucoseReading.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GlucoseReadingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GlucoseReadingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GlucoseReadingGroupByArgs['orderBy'] }
+        : { orderBy?: GlucoseReadingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GlucoseReadingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGlucoseReadingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the GlucoseReading model
+   */
+  readonly fields: GlucoseReadingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for GlucoseReading.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GlucoseReadingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the GlucoseReading model
+   */
+  interface GlucoseReadingFieldRefs {
+    readonly id: FieldRef<"GlucoseReading", 'String'>
+    readonly timestamp: FieldRef<"GlucoseReading", 'DateTime'>
+    readonly glucoseValue: FieldRef<"GlucoseReading", 'Float'>
+    readonly rateOfChange: FieldRef<"GlucoseReading", 'Float'>
+    readonly eventType: FieldRef<"GlucoseReading", 'String'>
+    readonly eventSubtype: FieldRef<"GlucoseReading", 'String'>
+    readonly transmitterId: FieldRef<"GlucoseReading", 'String'>
+    readonly transmitterTime: FieldRef<"GlucoseReading", 'String'>
+    readonly sourceDeviceId: FieldRef<"GlucoseReading", 'String'>
+    readonly userId: FieldRef<"GlucoseReading", 'String'>
+    readonly createdAt: FieldRef<"GlucoseReading", 'DateTime'>
+    readonly updatedAt: FieldRef<"GlucoseReading", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * GlucoseReading findUnique
+   */
+  export type GlucoseReadingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseReading
+     */
+    select?: GlucoseReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseReading
+     */
+    omit?: GlucoseReadingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseReadingInclude<ExtArgs> | null
+    /**
+     * Filter, which GlucoseReading to fetch.
+     */
+    where: GlucoseReadingWhereUniqueInput
+  }
+
+  /**
+   * GlucoseReading findUniqueOrThrow
+   */
+  export type GlucoseReadingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseReading
+     */
+    select?: GlucoseReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseReading
+     */
+    omit?: GlucoseReadingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseReadingInclude<ExtArgs> | null
+    /**
+     * Filter, which GlucoseReading to fetch.
+     */
+    where: GlucoseReadingWhereUniqueInput
+  }
+
+  /**
+   * GlucoseReading findFirst
+   */
+  export type GlucoseReadingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseReading
+     */
+    select?: GlucoseReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseReading
+     */
+    omit?: GlucoseReadingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseReadingInclude<ExtArgs> | null
+    /**
+     * Filter, which GlucoseReading to fetch.
+     */
+    where?: GlucoseReadingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlucoseReadings to fetch.
+     */
+    orderBy?: GlucoseReadingOrderByWithRelationInput | GlucoseReadingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GlucoseReadings.
+     */
+    cursor?: GlucoseReadingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlucoseReadings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlucoseReadings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GlucoseReadings.
+     */
+    distinct?: GlucoseReadingScalarFieldEnum | GlucoseReadingScalarFieldEnum[]
+  }
+
+  /**
+   * GlucoseReading findFirstOrThrow
+   */
+  export type GlucoseReadingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseReading
+     */
+    select?: GlucoseReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseReading
+     */
+    omit?: GlucoseReadingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseReadingInclude<ExtArgs> | null
+    /**
+     * Filter, which GlucoseReading to fetch.
+     */
+    where?: GlucoseReadingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlucoseReadings to fetch.
+     */
+    orderBy?: GlucoseReadingOrderByWithRelationInput | GlucoseReadingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GlucoseReadings.
+     */
+    cursor?: GlucoseReadingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlucoseReadings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlucoseReadings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GlucoseReadings.
+     */
+    distinct?: GlucoseReadingScalarFieldEnum | GlucoseReadingScalarFieldEnum[]
+  }
+
+  /**
+   * GlucoseReading findMany
+   */
+  export type GlucoseReadingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseReading
+     */
+    select?: GlucoseReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseReading
+     */
+    omit?: GlucoseReadingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseReadingInclude<ExtArgs> | null
+    /**
+     * Filter, which GlucoseReadings to fetch.
+     */
+    where?: GlucoseReadingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GlucoseReadings to fetch.
+     */
+    orderBy?: GlucoseReadingOrderByWithRelationInput | GlucoseReadingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing GlucoseReadings.
+     */
+    cursor?: GlucoseReadingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GlucoseReadings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GlucoseReadings.
+     */
+    skip?: number
+    distinct?: GlucoseReadingScalarFieldEnum | GlucoseReadingScalarFieldEnum[]
+  }
+
+  /**
+   * GlucoseReading create
+   */
+  export type GlucoseReadingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseReading
+     */
+    select?: GlucoseReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseReading
+     */
+    omit?: GlucoseReadingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseReadingInclude<ExtArgs> | null
+    /**
+     * The data needed to create a GlucoseReading.
+     */
+    data: XOR<GlucoseReadingCreateInput, GlucoseReadingUncheckedCreateInput>
+  }
+
+  /**
+   * GlucoseReading createMany
+   */
+  export type GlucoseReadingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GlucoseReadings.
+     */
+    data: GlucoseReadingCreateManyInput | GlucoseReadingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GlucoseReading createManyAndReturn
+   */
+  export type GlucoseReadingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseReading
+     */
+    select?: GlucoseReadingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseReading
+     */
+    omit?: GlucoseReadingOmit<ExtArgs> | null
+    /**
+     * The data used to create many GlucoseReadings.
+     */
+    data: GlucoseReadingCreateManyInput | GlucoseReadingCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseReadingIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GlucoseReading update
+   */
+  export type GlucoseReadingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseReading
+     */
+    select?: GlucoseReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseReading
+     */
+    omit?: GlucoseReadingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseReadingInclude<ExtArgs> | null
+    /**
+     * The data needed to update a GlucoseReading.
+     */
+    data: XOR<GlucoseReadingUpdateInput, GlucoseReadingUncheckedUpdateInput>
+    /**
+     * Choose, which GlucoseReading to update.
+     */
+    where: GlucoseReadingWhereUniqueInput
+  }
+
+  /**
+   * GlucoseReading updateMany
+   */
+  export type GlucoseReadingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GlucoseReadings.
+     */
+    data: XOR<GlucoseReadingUpdateManyMutationInput, GlucoseReadingUncheckedUpdateManyInput>
+    /**
+     * Filter which GlucoseReadings to update
+     */
+    where?: GlucoseReadingWhereInput
+    /**
+     * Limit how many GlucoseReadings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GlucoseReading updateManyAndReturn
+   */
+  export type GlucoseReadingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseReading
+     */
+    select?: GlucoseReadingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseReading
+     */
+    omit?: GlucoseReadingOmit<ExtArgs> | null
+    /**
+     * The data used to update GlucoseReadings.
+     */
+    data: XOR<GlucoseReadingUpdateManyMutationInput, GlucoseReadingUncheckedUpdateManyInput>
+    /**
+     * Filter which GlucoseReadings to update
+     */
+    where?: GlucoseReadingWhereInput
+    /**
+     * Limit how many GlucoseReadings to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseReadingIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GlucoseReading upsert
+   */
+  export type GlucoseReadingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseReading
+     */
+    select?: GlucoseReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseReading
+     */
+    omit?: GlucoseReadingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseReadingInclude<ExtArgs> | null
+    /**
+     * The filter to search for the GlucoseReading to update in case it exists.
+     */
+    where: GlucoseReadingWhereUniqueInput
+    /**
+     * In case the GlucoseReading found by the `where` argument doesn't exist, create a new GlucoseReading with this data.
+     */
+    create: XOR<GlucoseReadingCreateInput, GlucoseReadingUncheckedCreateInput>
+    /**
+     * In case the GlucoseReading was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GlucoseReadingUpdateInput, GlucoseReadingUncheckedUpdateInput>
+  }
+
+  /**
+   * GlucoseReading delete
+   */
+  export type GlucoseReadingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseReading
+     */
+    select?: GlucoseReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseReading
+     */
+    omit?: GlucoseReadingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseReadingInclude<ExtArgs> | null
+    /**
+     * Filter which GlucoseReading to delete.
+     */
+    where: GlucoseReadingWhereUniqueInput
+  }
+
+  /**
+   * GlucoseReading deleteMany
+   */
+  export type GlucoseReadingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GlucoseReadings to delete
+     */
+    where?: GlucoseReadingWhereInput
+    /**
+     * Limit how many GlucoseReadings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * GlucoseReading without action
+   */
+  export type GlucoseReadingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GlucoseReading
+     */
+    select?: GlucoseReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GlucoseReading
+     */
+    omit?: GlucoseReadingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GlucoseReadingInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model DataUpload
+   */
+
+  export type AggregateDataUpload = {
+    _count: DataUploadCountAggregateOutputType | null
+    _avg: DataUploadAvgAggregateOutputType | null
+    _sum: DataUploadSumAggregateOutputType | null
+    _min: DataUploadMinAggregateOutputType | null
+    _max: DataUploadMaxAggregateOutputType | null
+  }
+
+  export type DataUploadAvgAggregateOutputType = {
+    fileSize: number | null
+  }
+
+  export type DataUploadSumAggregateOutputType = {
+    fileSize: number | null
+  }
+
+  export type DataUploadMinAggregateOutputType = {
+    id: string | null
+    fileName: string | null
+    fileSize: number | null
+    uploadedAt: Date | null
+    userId: string | null
+  }
+
+  export type DataUploadMaxAggregateOutputType = {
+    id: string | null
+    fileName: string | null
+    fileSize: number | null
+    uploadedAt: Date | null
+    userId: string | null
+  }
+
+  export type DataUploadCountAggregateOutputType = {
+    id: number
+    fileName: number
+    fileSize: number
+    uploadedAt: number
+    userId: number
+    _all: number
+  }
+
+
+  export type DataUploadAvgAggregateInputType = {
+    fileSize?: true
+  }
+
+  export type DataUploadSumAggregateInputType = {
+    fileSize?: true
+  }
+
+  export type DataUploadMinAggregateInputType = {
+    id?: true
+    fileName?: true
+    fileSize?: true
+    uploadedAt?: true
+    userId?: true
+  }
+
+  export type DataUploadMaxAggregateInputType = {
+    id?: true
+    fileName?: true
+    fileSize?: true
+    uploadedAt?: true
+    userId?: true
+  }
+
+  export type DataUploadCountAggregateInputType = {
+    id?: true
+    fileName?: true
+    fileSize?: true
+    uploadedAt?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type DataUploadAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DataUpload to aggregate.
+     */
+    where?: DataUploadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DataUploads to fetch.
+     */
+    orderBy?: DataUploadOrderByWithRelationInput | DataUploadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DataUploadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DataUploads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DataUploads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DataUploads
+    **/
+    _count?: true | DataUploadCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DataUploadAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DataUploadSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DataUploadMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DataUploadMaxAggregateInputType
+  }
+
+  export type GetDataUploadAggregateType<T extends DataUploadAggregateArgs> = {
+        [P in keyof T & keyof AggregateDataUpload]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDataUpload[P]>
+      : GetScalarType<T[P], AggregateDataUpload[P]>
+  }
+
+
+
+
+  export type DataUploadGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DataUploadWhereInput
+    orderBy?: DataUploadOrderByWithAggregationInput | DataUploadOrderByWithAggregationInput[]
+    by: DataUploadScalarFieldEnum[] | DataUploadScalarFieldEnum
+    having?: DataUploadScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DataUploadCountAggregateInputType | true
+    _avg?: DataUploadAvgAggregateInputType
+    _sum?: DataUploadSumAggregateInputType
+    _min?: DataUploadMinAggregateInputType
+    _max?: DataUploadMaxAggregateInputType
+  }
+
+  export type DataUploadGroupByOutputType = {
+    id: string
+    fileName: string
+    fileSize: number
+    uploadedAt: Date
+    userId: string
+    _count: DataUploadCountAggregateOutputType | null
+    _avg: DataUploadAvgAggregateOutputType | null
+    _sum: DataUploadSumAggregateOutputType | null
+    _min: DataUploadMinAggregateOutputType | null
+    _max: DataUploadMaxAggregateOutputType | null
+  }
+
+  type GetDataUploadGroupByPayload<T extends DataUploadGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DataUploadGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DataUploadGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DataUploadGroupByOutputType[P]>
+            : GetScalarType<T[P], DataUploadGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DataUploadSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    fileName?: boolean
+    fileSize?: boolean
+    uploadedAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dataUpload"]>
+
+  export type DataUploadSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    fileName?: boolean
+    fileSize?: boolean
+    uploadedAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dataUpload"]>
+
+  export type DataUploadSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    fileName?: boolean
+    fileSize?: boolean
+    uploadedAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dataUpload"]>
+
+  export type DataUploadSelectScalar = {
+    id?: boolean
+    fileName?: boolean
+    fileSize?: boolean
+    uploadedAt?: boolean
+    userId?: boolean
+  }
+
+  export type DataUploadOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fileName" | "fileSize" | "uploadedAt" | "userId", ExtArgs["result"]["dataUpload"]>
+  export type DataUploadInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type DataUploadIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type DataUploadIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $DataUploadPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DataUpload"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      fileName: string
+      fileSize: number
+      uploadedAt: Date
+      userId: string
+    }, ExtArgs["result"]["dataUpload"]>
+    composites: {}
+  }
+
+  type DataUploadGetPayload<S extends boolean | null | undefined | DataUploadDefaultArgs> = $Result.GetResult<Prisma.$DataUploadPayload, S>
+
+  type DataUploadCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DataUploadFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DataUploadCountAggregateInputType | true
+    }
+
+  export interface DataUploadDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DataUpload'], meta: { name: 'DataUpload' } }
+    /**
+     * Find zero or one DataUpload that matches the filter.
+     * @param {DataUploadFindUniqueArgs} args - Arguments to find a DataUpload
+     * @example
+     * // Get one DataUpload
+     * const dataUpload = await prisma.dataUpload.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DataUploadFindUniqueArgs>(args: SelectSubset<T, DataUploadFindUniqueArgs<ExtArgs>>): Prisma__DataUploadClient<$Result.GetResult<Prisma.$DataUploadPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DataUpload that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DataUploadFindUniqueOrThrowArgs} args - Arguments to find a DataUpload
+     * @example
+     * // Get one DataUpload
+     * const dataUpload = await prisma.dataUpload.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DataUploadFindUniqueOrThrowArgs>(args: SelectSubset<T, DataUploadFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DataUploadClient<$Result.GetResult<Prisma.$DataUploadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DataUpload that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataUploadFindFirstArgs} args - Arguments to find a DataUpload
+     * @example
+     * // Get one DataUpload
+     * const dataUpload = await prisma.dataUpload.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DataUploadFindFirstArgs>(args?: SelectSubset<T, DataUploadFindFirstArgs<ExtArgs>>): Prisma__DataUploadClient<$Result.GetResult<Prisma.$DataUploadPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DataUpload that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataUploadFindFirstOrThrowArgs} args - Arguments to find a DataUpload
+     * @example
+     * // Get one DataUpload
+     * const dataUpload = await prisma.dataUpload.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DataUploadFindFirstOrThrowArgs>(args?: SelectSubset<T, DataUploadFindFirstOrThrowArgs<ExtArgs>>): Prisma__DataUploadClient<$Result.GetResult<Prisma.$DataUploadPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DataUploads that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataUploadFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DataUploads
+     * const dataUploads = await prisma.dataUpload.findMany()
+     * 
+     * // Get first 10 DataUploads
+     * const dataUploads = await prisma.dataUpload.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const dataUploadWithIdOnly = await prisma.dataUpload.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DataUploadFindManyArgs>(args?: SelectSubset<T, DataUploadFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataUploadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DataUpload.
+     * @param {DataUploadCreateArgs} args - Arguments to create a DataUpload.
+     * @example
+     * // Create one DataUpload
+     * const DataUpload = await prisma.dataUpload.create({
+     *   data: {
+     *     // ... data to create a DataUpload
+     *   }
+     * })
+     * 
+     */
+    create<T extends DataUploadCreateArgs>(args: SelectSubset<T, DataUploadCreateArgs<ExtArgs>>): Prisma__DataUploadClient<$Result.GetResult<Prisma.$DataUploadPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DataUploads.
+     * @param {DataUploadCreateManyArgs} args - Arguments to create many DataUploads.
+     * @example
+     * // Create many DataUploads
+     * const dataUpload = await prisma.dataUpload.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DataUploadCreateManyArgs>(args?: SelectSubset<T, DataUploadCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DataUploads and returns the data saved in the database.
+     * @param {DataUploadCreateManyAndReturnArgs} args - Arguments to create many DataUploads.
+     * @example
+     * // Create many DataUploads
+     * const dataUpload = await prisma.dataUpload.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DataUploads and only return the `id`
+     * const dataUploadWithIdOnly = await prisma.dataUpload.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DataUploadCreateManyAndReturnArgs>(args?: SelectSubset<T, DataUploadCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataUploadPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DataUpload.
+     * @param {DataUploadDeleteArgs} args - Arguments to delete one DataUpload.
+     * @example
+     * // Delete one DataUpload
+     * const DataUpload = await prisma.dataUpload.delete({
+     *   where: {
+     *     // ... filter to delete one DataUpload
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DataUploadDeleteArgs>(args: SelectSubset<T, DataUploadDeleteArgs<ExtArgs>>): Prisma__DataUploadClient<$Result.GetResult<Prisma.$DataUploadPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DataUpload.
+     * @param {DataUploadUpdateArgs} args - Arguments to update one DataUpload.
+     * @example
+     * // Update one DataUpload
+     * const dataUpload = await prisma.dataUpload.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DataUploadUpdateArgs>(args: SelectSubset<T, DataUploadUpdateArgs<ExtArgs>>): Prisma__DataUploadClient<$Result.GetResult<Prisma.$DataUploadPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DataUploads.
+     * @param {DataUploadDeleteManyArgs} args - Arguments to filter DataUploads to delete.
+     * @example
+     * // Delete a few DataUploads
+     * const { count } = await prisma.dataUpload.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DataUploadDeleteManyArgs>(args?: SelectSubset<T, DataUploadDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DataUploads.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataUploadUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DataUploads
+     * const dataUpload = await prisma.dataUpload.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DataUploadUpdateManyArgs>(args: SelectSubset<T, DataUploadUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DataUploads and returns the data updated in the database.
+     * @param {DataUploadUpdateManyAndReturnArgs} args - Arguments to update many DataUploads.
+     * @example
+     * // Update many DataUploads
+     * const dataUpload = await prisma.dataUpload.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DataUploads and only return the `id`
+     * const dataUploadWithIdOnly = await prisma.dataUpload.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DataUploadUpdateManyAndReturnArgs>(args: SelectSubset<T, DataUploadUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataUploadPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DataUpload.
+     * @param {DataUploadUpsertArgs} args - Arguments to update or create a DataUpload.
+     * @example
+     * // Update or create a DataUpload
+     * const dataUpload = await prisma.dataUpload.upsert({
+     *   create: {
+     *     // ... data to create a DataUpload
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DataUpload we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DataUploadUpsertArgs>(args: SelectSubset<T, DataUploadUpsertArgs<ExtArgs>>): Prisma__DataUploadClient<$Result.GetResult<Prisma.$DataUploadPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DataUploads.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataUploadCountArgs} args - Arguments to filter DataUploads to count.
+     * @example
+     * // Count the number of DataUploads
+     * const count = await prisma.dataUpload.count({
+     *   where: {
+     *     // ... the filter for the DataUploads we want to count
+     *   }
+     * })
+    **/
+    count<T extends DataUploadCountArgs>(
+      args?: Subset<T, DataUploadCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DataUploadCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DataUpload.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataUploadAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DataUploadAggregateArgs>(args: Subset<T, DataUploadAggregateArgs>): Prisma.PrismaPromise<GetDataUploadAggregateType<T>>
+
+    /**
+     * Group by DataUpload.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DataUploadGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DataUploadGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DataUploadGroupByArgs['orderBy'] }
+        : { orderBy?: DataUploadGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DataUploadGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDataUploadGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DataUpload model
+   */
+  readonly fields: DataUploadFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DataUpload.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DataUploadClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DataUpload model
+   */
+  interface DataUploadFieldRefs {
+    readonly id: FieldRef<"DataUpload", 'String'>
+    readonly fileName: FieldRef<"DataUpload", 'String'>
+    readonly fileSize: FieldRef<"DataUpload", 'Int'>
+    readonly uploadedAt: FieldRef<"DataUpload", 'DateTime'>
+    readonly userId: FieldRef<"DataUpload", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DataUpload findUnique
+   */
+  export type DataUploadFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataUpload
+     */
+    select?: DataUploadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataUpload
+     */
+    omit?: DataUploadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataUploadInclude<ExtArgs> | null
+    /**
+     * Filter, which DataUpload to fetch.
+     */
+    where: DataUploadWhereUniqueInput
+  }
+
+  /**
+   * DataUpload findUniqueOrThrow
+   */
+  export type DataUploadFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataUpload
+     */
+    select?: DataUploadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataUpload
+     */
+    omit?: DataUploadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataUploadInclude<ExtArgs> | null
+    /**
+     * Filter, which DataUpload to fetch.
+     */
+    where: DataUploadWhereUniqueInput
+  }
+
+  /**
+   * DataUpload findFirst
+   */
+  export type DataUploadFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataUpload
+     */
+    select?: DataUploadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataUpload
+     */
+    omit?: DataUploadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataUploadInclude<ExtArgs> | null
+    /**
+     * Filter, which DataUpload to fetch.
+     */
+    where?: DataUploadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DataUploads to fetch.
+     */
+    orderBy?: DataUploadOrderByWithRelationInput | DataUploadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DataUploads.
+     */
+    cursor?: DataUploadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DataUploads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DataUploads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DataUploads.
+     */
+    distinct?: DataUploadScalarFieldEnum | DataUploadScalarFieldEnum[]
+  }
+
+  /**
+   * DataUpload findFirstOrThrow
+   */
+  export type DataUploadFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataUpload
+     */
+    select?: DataUploadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataUpload
+     */
+    omit?: DataUploadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataUploadInclude<ExtArgs> | null
+    /**
+     * Filter, which DataUpload to fetch.
+     */
+    where?: DataUploadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DataUploads to fetch.
+     */
+    orderBy?: DataUploadOrderByWithRelationInput | DataUploadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DataUploads.
+     */
+    cursor?: DataUploadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DataUploads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DataUploads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DataUploads.
+     */
+    distinct?: DataUploadScalarFieldEnum | DataUploadScalarFieldEnum[]
+  }
+
+  /**
+   * DataUpload findMany
+   */
+  export type DataUploadFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataUpload
+     */
+    select?: DataUploadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataUpload
+     */
+    omit?: DataUploadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataUploadInclude<ExtArgs> | null
+    /**
+     * Filter, which DataUploads to fetch.
+     */
+    where?: DataUploadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DataUploads to fetch.
+     */
+    orderBy?: DataUploadOrderByWithRelationInput | DataUploadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DataUploads.
+     */
+    cursor?: DataUploadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DataUploads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DataUploads.
+     */
+    skip?: number
+    distinct?: DataUploadScalarFieldEnum | DataUploadScalarFieldEnum[]
+  }
+
+  /**
+   * DataUpload create
+   */
+  export type DataUploadCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataUpload
+     */
+    select?: DataUploadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataUpload
+     */
+    omit?: DataUploadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataUploadInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DataUpload.
+     */
+    data: XOR<DataUploadCreateInput, DataUploadUncheckedCreateInput>
+  }
+
+  /**
+   * DataUpload createMany
+   */
+  export type DataUploadCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DataUploads.
+     */
+    data: DataUploadCreateManyInput | DataUploadCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DataUpload createManyAndReturn
+   */
+  export type DataUploadCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataUpload
+     */
+    select?: DataUploadSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataUpload
+     */
+    omit?: DataUploadOmit<ExtArgs> | null
+    /**
+     * The data used to create many DataUploads.
+     */
+    data: DataUploadCreateManyInput | DataUploadCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataUploadIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DataUpload update
+   */
+  export type DataUploadUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataUpload
+     */
+    select?: DataUploadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataUpload
+     */
+    omit?: DataUploadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataUploadInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DataUpload.
+     */
+    data: XOR<DataUploadUpdateInput, DataUploadUncheckedUpdateInput>
+    /**
+     * Choose, which DataUpload to update.
+     */
+    where: DataUploadWhereUniqueInput
+  }
+
+  /**
+   * DataUpload updateMany
+   */
+  export type DataUploadUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DataUploads.
+     */
+    data: XOR<DataUploadUpdateManyMutationInput, DataUploadUncheckedUpdateManyInput>
+    /**
+     * Filter which DataUploads to update
+     */
+    where?: DataUploadWhereInput
+    /**
+     * Limit how many DataUploads to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DataUpload updateManyAndReturn
+   */
+  export type DataUploadUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataUpload
+     */
+    select?: DataUploadSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataUpload
+     */
+    omit?: DataUploadOmit<ExtArgs> | null
+    /**
+     * The data used to update DataUploads.
+     */
+    data: XOR<DataUploadUpdateManyMutationInput, DataUploadUncheckedUpdateManyInput>
+    /**
+     * Filter which DataUploads to update
+     */
+    where?: DataUploadWhereInput
+    /**
+     * Limit how many DataUploads to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataUploadIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DataUpload upsert
+   */
+  export type DataUploadUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataUpload
+     */
+    select?: DataUploadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataUpload
+     */
+    omit?: DataUploadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataUploadInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DataUpload to update in case it exists.
+     */
+    where: DataUploadWhereUniqueInput
+    /**
+     * In case the DataUpload found by the `where` argument doesn't exist, create a new DataUpload with this data.
+     */
+    create: XOR<DataUploadCreateInput, DataUploadUncheckedCreateInput>
+    /**
+     * In case the DataUpload was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DataUploadUpdateInput, DataUploadUncheckedUpdateInput>
+  }
+
+  /**
+   * DataUpload delete
+   */
+  export type DataUploadDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataUpload
+     */
+    select?: DataUploadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataUpload
+     */
+    omit?: DataUploadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataUploadInclude<ExtArgs> | null
+    /**
+     * Filter which DataUpload to delete.
+     */
+    where: DataUploadWhereUniqueInput
+  }
+
+  /**
+   * DataUpload deleteMany
+   */
+  export type DataUploadDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DataUploads to delete
+     */
+    where?: DataUploadWhereInput
+    /**
+     * Limit how many DataUploads to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DataUpload without action
+   */
+  export type DataUploadDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DataUpload
+     */
+    select?: DataUploadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DataUpload
+     */
+    omit?: DataUploadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DataUploadInclude<ExtArgs> | null
   }
 
 
@@ -1904,7 +4507,7 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-  export const ProfileScalarFieldEnum: {
+  export const UserScalarFieldEnum: {
     id: 'id',
     clerkId: 'clerkId',
     email: 'email',
@@ -1914,7 +4517,36 @@ export namespace Prisma {
     updatedAt: 'updatedAt'
   };
 
-  export type ProfileScalarFieldEnum = (typeof ProfileScalarFieldEnum)[keyof typeof ProfileScalarFieldEnum]
+  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const GlucoseReadingScalarFieldEnum: {
+    id: 'id',
+    timestamp: 'timestamp',
+    glucoseValue: 'glucoseValue',
+    rateOfChange: 'rateOfChange',
+    eventType: 'eventType',
+    eventSubtype: 'eventSubtype',
+    transmitterId: 'transmitterId',
+    transmitterTime: 'transmitterTime',
+    sourceDeviceId: 'sourceDeviceId',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type GlucoseReadingScalarFieldEnum = (typeof GlucoseReadingScalarFieldEnum)[keyof typeof GlucoseReadingScalarFieldEnum]
+
+
+  export const DataUploadScalarFieldEnum: {
+    id: 'id',
+    fileName: 'fileName',
+    fileSize: 'fileSize',
+    uploadedAt: 'uploadedAt',
+    userId: 'userId'
+  };
+
+  export type DataUploadScalarFieldEnum = (typeof DataUploadScalarFieldEnum)[keyof typeof DataUploadScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -1975,6 +4607,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -1991,20 +4637,22 @@ export namespace Prisma {
    */
 
 
-  export type ProfileWhereInput = {
-    AND?: ProfileWhereInput | ProfileWhereInput[]
-    OR?: ProfileWhereInput[]
-    NOT?: ProfileWhereInput | ProfileWhereInput[]
-    id?: StringFilter<"Profile"> | string
-    clerkId?: StringFilter<"Profile"> | string
-    email?: StringNullableFilter<"Profile"> | string | null
-    name?: StringNullableFilter<"Profile"> | string | null
-    image?: StringNullableFilter<"Profile"> | string | null
-    createdAt?: DateTimeFilter<"Profile"> | Date | string
-    updatedAt?: DateTimeFilter<"Profile"> | Date | string
+  export type UserWhereInput = {
+    AND?: UserWhereInput | UserWhereInput[]
+    OR?: UserWhereInput[]
+    NOT?: UserWhereInput | UserWhereInput[]
+    id?: StringFilter<"User"> | string
+    clerkId?: StringFilter<"User"> | string
+    email?: StringNullableFilter<"User"> | string | null
+    name?: StringNullableFilter<"User"> | string | null
+    image?: StringNullableFilter<"User"> | string | null
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
+    glucoseReadings?: GlucoseReadingListRelationFilter
+    dataUploads?: DataUploadListRelationFilter
   }
 
-  export type ProfileOrderByWithRelationInput = {
+  export type UserOrderByWithRelationInput = {
     id?: SortOrder
     clerkId?: SortOrder
     email?: SortOrderInput | SortOrder
@@ -2012,22 +4660,26 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    glucoseReadings?: GlucoseReadingOrderByRelationAggregateInput
+    dataUploads?: DataUploadOrderByRelationAggregateInput
   }
 
-  export type ProfileWhereUniqueInput = Prisma.AtLeast<{
+  export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     clerkId?: string
-    AND?: ProfileWhereInput | ProfileWhereInput[]
-    OR?: ProfileWhereInput[]
-    NOT?: ProfileWhereInput | ProfileWhereInput[]
-    email?: StringNullableFilter<"Profile"> | string | null
-    name?: StringNullableFilter<"Profile"> | string | null
-    image?: StringNullableFilter<"Profile"> | string | null
-    createdAt?: DateTimeFilter<"Profile"> | Date | string
-    updatedAt?: DateTimeFilter<"Profile"> | Date | string
+    AND?: UserWhereInput | UserWhereInput[]
+    OR?: UserWhereInput[]
+    NOT?: UserWhereInput | UserWhereInput[]
+    email?: StringNullableFilter<"User"> | string | null
+    name?: StringNullableFilter<"User"> | string | null
+    image?: StringNullableFilter<"User"> | string | null
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
+    glucoseReadings?: GlucoseReadingListRelationFilter
+    dataUploads?: DataUploadListRelationFilter
   }, "id" | "clerkId">
 
-  export type ProfileOrderByWithAggregationInput = {
+  export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     clerkId?: SortOrder
     email?: SortOrderInput | SortOrder
@@ -2035,25 +4687,222 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _count?: ProfileCountOrderByAggregateInput
-    _max?: ProfileMaxOrderByAggregateInput
-    _min?: ProfileMinOrderByAggregateInput
+    _count?: UserCountOrderByAggregateInput
+    _max?: UserMaxOrderByAggregateInput
+    _min?: UserMinOrderByAggregateInput
   }
 
-  export type ProfileScalarWhereWithAggregatesInput = {
-    AND?: ProfileScalarWhereWithAggregatesInput | ProfileScalarWhereWithAggregatesInput[]
-    OR?: ProfileScalarWhereWithAggregatesInput[]
-    NOT?: ProfileScalarWhereWithAggregatesInput | ProfileScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Profile"> | string
-    clerkId?: StringWithAggregatesFilter<"Profile"> | string
-    email?: StringNullableWithAggregatesFilter<"Profile"> | string | null
-    name?: StringNullableWithAggregatesFilter<"Profile"> | string | null
-    image?: StringNullableWithAggregatesFilter<"Profile"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"Profile"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Profile"> | Date | string
+  export type UserScalarWhereWithAggregatesInput = {
+    AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    OR?: UserScalarWhereWithAggregatesInput[]
+    NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"User"> | string
+    clerkId?: StringWithAggregatesFilter<"User"> | string
+    email?: StringNullableWithAggregatesFilter<"User"> | string | null
+    name?: StringNullableWithAggregatesFilter<"User"> | string | null
+    image?: StringNullableWithAggregatesFilter<"User"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
-  export type ProfileCreateInput = {
+  export type GlucoseReadingWhereInput = {
+    AND?: GlucoseReadingWhereInput | GlucoseReadingWhereInput[]
+    OR?: GlucoseReadingWhereInput[]
+    NOT?: GlucoseReadingWhereInput | GlucoseReadingWhereInput[]
+    id?: StringFilter<"GlucoseReading"> | string
+    timestamp?: DateTimeFilter<"GlucoseReading"> | Date | string
+    glucoseValue?: FloatFilter<"GlucoseReading"> | number
+    rateOfChange?: FloatNullableFilter<"GlucoseReading"> | number | null
+    eventType?: StringFilter<"GlucoseReading"> | string
+    eventSubtype?: StringNullableFilter<"GlucoseReading"> | string | null
+    transmitterId?: StringNullableFilter<"GlucoseReading"> | string | null
+    transmitterTime?: StringNullableFilter<"GlucoseReading"> | string | null
+    sourceDeviceId?: StringNullableFilter<"GlucoseReading"> | string | null
+    userId?: StringFilter<"GlucoseReading"> | string
+    createdAt?: DateTimeFilter<"GlucoseReading"> | Date | string
+    updatedAt?: DateTimeFilter<"GlucoseReading"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type GlucoseReadingOrderByWithRelationInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    glucoseValue?: SortOrder
+    rateOfChange?: SortOrderInput | SortOrder
+    eventType?: SortOrder
+    eventSubtype?: SortOrderInput | SortOrder
+    transmitterId?: SortOrderInput | SortOrder
+    transmitterTime?: SortOrderInput | SortOrder
+    sourceDeviceId?: SortOrderInput | SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type GlucoseReadingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: GlucoseReadingWhereInput | GlucoseReadingWhereInput[]
+    OR?: GlucoseReadingWhereInput[]
+    NOT?: GlucoseReadingWhereInput | GlucoseReadingWhereInput[]
+    timestamp?: DateTimeFilter<"GlucoseReading"> | Date | string
+    glucoseValue?: FloatFilter<"GlucoseReading"> | number
+    rateOfChange?: FloatNullableFilter<"GlucoseReading"> | number | null
+    eventType?: StringFilter<"GlucoseReading"> | string
+    eventSubtype?: StringNullableFilter<"GlucoseReading"> | string | null
+    transmitterId?: StringNullableFilter<"GlucoseReading"> | string | null
+    transmitterTime?: StringNullableFilter<"GlucoseReading"> | string | null
+    sourceDeviceId?: StringNullableFilter<"GlucoseReading"> | string | null
+    userId?: StringFilter<"GlucoseReading"> | string
+    createdAt?: DateTimeFilter<"GlucoseReading"> | Date | string
+    updatedAt?: DateTimeFilter<"GlucoseReading"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type GlucoseReadingOrderByWithAggregationInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    glucoseValue?: SortOrder
+    rateOfChange?: SortOrderInput | SortOrder
+    eventType?: SortOrder
+    eventSubtype?: SortOrderInput | SortOrder
+    transmitterId?: SortOrderInput | SortOrder
+    transmitterTime?: SortOrderInput | SortOrder
+    sourceDeviceId?: SortOrderInput | SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: GlucoseReadingCountOrderByAggregateInput
+    _avg?: GlucoseReadingAvgOrderByAggregateInput
+    _max?: GlucoseReadingMaxOrderByAggregateInput
+    _min?: GlucoseReadingMinOrderByAggregateInput
+    _sum?: GlucoseReadingSumOrderByAggregateInput
+  }
+
+  export type GlucoseReadingScalarWhereWithAggregatesInput = {
+    AND?: GlucoseReadingScalarWhereWithAggregatesInput | GlucoseReadingScalarWhereWithAggregatesInput[]
+    OR?: GlucoseReadingScalarWhereWithAggregatesInput[]
+    NOT?: GlucoseReadingScalarWhereWithAggregatesInput | GlucoseReadingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"GlucoseReading"> | string
+    timestamp?: DateTimeWithAggregatesFilter<"GlucoseReading"> | Date | string
+    glucoseValue?: FloatWithAggregatesFilter<"GlucoseReading"> | number
+    rateOfChange?: FloatNullableWithAggregatesFilter<"GlucoseReading"> | number | null
+    eventType?: StringWithAggregatesFilter<"GlucoseReading"> | string
+    eventSubtype?: StringNullableWithAggregatesFilter<"GlucoseReading"> | string | null
+    transmitterId?: StringNullableWithAggregatesFilter<"GlucoseReading"> | string | null
+    transmitterTime?: StringNullableWithAggregatesFilter<"GlucoseReading"> | string | null
+    sourceDeviceId?: StringNullableWithAggregatesFilter<"GlucoseReading"> | string | null
+    userId?: StringWithAggregatesFilter<"GlucoseReading"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"GlucoseReading"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GlucoseReading"> | Date | string
+  }
+
+  export type DataUploadWhereInput = {
+    AND?: DataUploadWhereInput | DataUploadWhereInput[]
+    OR?: DataUploadWhereInput[]
+    NOT?: DataUploadWhereInput | DataUploadWhereInput[]
+    id?: StringFilter<"DataUpload"> | string
+    fileName?: StringFilter<"DataUpload"> | string
+    fileSize?: IntFilter<"DataUpload"> | number
+    uploadedAt?: DateTimeFilter<"DataUpload"> | Date | string
+    userId?: StringFilter<"DataUpload"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type DataUploadOrderByWithRelationInput = {
+    id?: SortOrder
+    fileName?: SortOrder
+    fileSize?: SortOrder
+    uploadedAt?: SortOrder
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type DataUploadWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DataUploadWhereInput | DataUploadWhereInput[]
+    OR?: DataUploadWhereInput[]
+    NOT?: DataUploadWhereInput | DataUploadWhereInput[]
+    fileName?: StringFilter<"DataUpload"> | string
+    fileSize?: IntFilter<"DataUpload"> | number
+    uploadedAt?: DateTimeFilter<"DataUpload"> | Date | string
+    userId?: StringFilter<"DataUpload"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type DataUploadOrderByWithAggregationInput = {
+    id?: SortOrder
+    fileName?: SortOrder
+    fileSize?: SortOrder
+    uploadedAt?: SortOrder
+    userId?: SortOrder
+    _count?: DataUploadCountOrderByAggregateInput
+    _avg?: DataUploadAvgOrderByAggregateInput
+    _max?: DataUploadMaxOrderByAggregateInput
+    _min?: DataUploadMinOrderByAggregateInput
+    _sum?: DataUploadSumOrderByAggregateInput
+  }
+
+  export type DataUploadScalarWhereWithAggregatesInput = {
+    AND?: DataUploadScalarWhereWithAggregatesInput | DataUploadScalarWhereWithAggregatesInput[]
+    OR?: DataUploadScalarWhereWithAggregatesInput[]
+    NOT?: DataUploadScalarWhereWithAggregatesInput | DataUploadScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DataUpload"> | string
+    fileName?: StringWithAggregatesFilter<"DataUpload"> | string
+    fileSize?: IntWithAggregatesFilter<"DataUpload"> | number
+    uploadedAt?: DateTimeWithAggregatesFilter<"DataUpload"> | Date | string
+    userId?: StringWithAggregatesFilter<"DataUpload"> | string
+  }
+
+  export type UserCreateInput = {
+    id?: string
+    clerkId: string
+    email?: string | null
+    name?: string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    glucoseReadings?: GlucoseReadingCreateNestedManyWithoutUserInput
+    dataUploads?: DataUploadCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateInput = {
+    id?: string
+    clerkId: string
+    email?: string | null
+    name?: string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    glucoseReadings?: GlucoseReadingUncheckedCreateNestedManyWithoutUserInput
+    dataUploads?: DataUploadUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseReadings?: GlucoseReadingUpdateManyWithoutUserNestedInput
+    dataUploads?: DataUploadUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseReadings?: GlucoseReadingUncheckedUpdateManyWithoutUserNestedInput
+    dataUploads?: DataUploadUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateManyInput = {
     id?: string
     clerkId: string
     email?: string | null
@@ -2063,64 +4912,183 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type ProfileUncheckedCreateInput = {
+  export type UserUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GlucoseReadingCreateInput = {
     id?: string
-    clerkId: string
-    email?: string | null
-    name?: string | null
-    image?: string | null
+    timestamp: Date | string
+    glucoseValue: number
+    rateOfChange?: number | null
+    eventType: string
+    eventSubtype?: string | null
+    transmitterId?: string | null
+    transmitterTime?: string | null
+    sourceDeviceId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutGlucoseReadingsInput
+  }
+
+  export type GlucoseReadingUncheckedCreateInput = {
+    id?: string
+    timestamp: Date | string
+    glucoseValue: number
+    rateOfChange?: number | null
+    eventType: string
+    eventSubtype?: string | null
+    transmitterId?: string | null
+    transmitterTime?: string | null
+    sourceDeviceId?: string | null
+    userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type ProfileUpdateInput = {
+  export type GlucoseReadingUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    clerkId?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseValue?: FloatFieldUpdateOperationsInput | number
+    rateOfChange?: NullableFloatFieldUpdateOperationsInput | number | null
+    eventType?: StringFieldUpdateOperationsInput | string
+    eventSubtype?: NullableStringFieldUpdateOperationsInput | string | null
+    transmitterId?: NullableStringFieldUpdateOperationsInput | string | null
+    transmitterTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceDeviceId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutGlucoseReadingsNestedInput
+  }
+
+  export type GlucoseReadingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseValue?: FloatFieldUpdateOperationsInput | number
+    rateOfChange?: NullableFloatFieldUpdateOperationsInput | number | null
+    eventType?: StringFieldUpdateOperationsInput | string
+    eventSubtype?: NullableStringFieldUpdateOperationsInput | string | null
+    transmitterId?: NullableStringFieldUpdateOperationsInput | string | null
+    transmitterTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceDeviceId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ProfileUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    clerkId?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ProfileCreateManyInput = {
+  export type GlucoseReadingCreateManyInput = {
     id?: string
-    clerkId: string
-    email?: string | null
-    name?: string | null
-    image?: string | null
+    timestamp: Date | string
+    glucoseValue: number
+    rateOfChange?: number | null
+    eventType: string
+    eventSubtype?: string | null
+    transmitterId?: string | null
+    transmitterTime?: string | null
+    sourceDeviceId?: string | null
+    userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type ProfileUpdateManyMutationInput = {
+  export type GlucoseReadingUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    clerkId?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseValue?: FloatFieldUpdateOperationsInput | number
+    rateOfChange?: NullableFloatFieldUpdateOperationsInput | number | null
+    eventType?: StringFieldUpdateOperationsInput | string
+    eventSubtype?: NullableStringFieldUpdateOperationsInput | string | null
+    transmitterId?: NullableStringFieldUpdateOperationsInput | string | null
+    transmitterTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceDeviceId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ProfileUncheckedUpdateManyInput = {
+  export type GlucoseReadingUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    clerkId?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseValue?: FloatFieldUpdateOperationsInput | number
+    rateOfChange?: NullableFloatFieldUpdateOperationsInput | number | null
+    eventType?: StringFieldUpdateOperationsInput | string
+    eventSubtype?: NullableStringFieldUpdateOperationsInput | string | null
+    transmitterId?: NullableStringFieldUpdateOperationsInput | string | null
+    transmitterTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceDeviceId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataUploadCreateInput = {
+    id?: string
+    fileName: string
+    fileSize: number
+    uploadedAt?: Date | string
+    user: UserCreateNestedOneWithoutDataUploadsInput
+  }
+
+  export type DataUploadUncheckedCreateInput = {
+    id?: string
+    fileName: string
+    fileSize: number
+    uploadedAt?: Date | string
+    userId: string
+  }
+
+  export type DataUploadUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutDataUploadsNestedInput
+  }
+
+  export type DataUploadUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type DataUploadCreateManyInput = {
+    id?: string
+    fileName: string
+    fileSize: number
+    uploadedAt?: Date | string
+    userId: string
+  }
+
+  export type DataUploadUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataUploadUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2164,12 +5132,32 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type GlucoseReadingListRelationFilter = {
+    every?: GlucoseReadingWhereInput
+    some?: GlucoseReadingWhereInput
+    none?: GlucoseReadingWhereInput
+  }
+
+  export type DataUploadListRelationFilter = {
+    every?: DataUploadWhereInput
+    some?: DataUploadWhereInput
+    none?: DataUploadWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
-  export type ProfileCountOrderByAggregateInput = {
+  export type GlucoseReadingOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DataUploadOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     clerkId?: SortOrder
     email?: SortOrder
@@ -2179,7 +5167,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type ProfileMaxOrderByAggregateInput = {
+  export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
     clerkId?: SortOrder
     email?: SortOrder
@@ -2189,7 +5177,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type ProfileMinOrderByAggregateInput = {
+  export type UserMinOrderByAggregateInput = {
     id?: SortOrder
     clerkId?: SortOrder
     email?: SortOrder
@@ -2249,6 +5237,207 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type GlucoseReadingCountOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    glucoseValue?: SortOrder
+    rateOfChange?: SortOrder
+    eventType?: SortOrder
+    eventSubtype?: SortOrder
+    transmitterId?: SortOrder
+    transmitterTime?: SortOrder
+    sourceDeviceId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GlucoseReadingAvgOrderByAggregateInput = {
+    glucoseValue?: SortOrder
+    rateOfChange?: SortOrder
+  }
+
+  export type GlucoseReadingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    glucoseValue?: SortOrder
+    rateOfChange?: SortOrder
+    eventType?: SortOrder
+    eventSubtype?: SortOrder
+    transmitterId?: SortOrder
+    transmitterTime?: SortOrder
+    sourceDeviceId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GlucoseReadingMinOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    glucoseValue?: SortOrder
+    rateOfChange?: SortOrder
+    eventType?: SortOrder
+    eventSubtype?: SortOrder
+    transmitterId?: SortOrder
+    transmitterTime?: SortOrder
+    sourceDeviceId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GlucoseReadingSumOrderByAggregateInput = {
+    glucoseValue?: SortOrder
+    rateOfChange?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type DataUploadCountOrderByAggregateInput = {
+    id?: SortOrder
+    fileName?: SortOrder
+    fileSize?: SortOrder
+    uploadedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type DataUploadAvgOrderByAggregateInput = {
+    fileSize?: SortOrder
+  }
+
+  export type DataUploadMaxOrderByAggregateInput = {
+    id?: SortOrder
+    fileName?: SortOrder
+    fileSize?: SortOrder
+    uploadedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type DataUploadMinOrderByAggregateInput = {
+    id?: SortOrder
+    fileName?: SortOrder
+    fileSize?: SortOrder
+    uploadedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type DataUploadSumOrderByAggregateInput = {
+    fileSize?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type GlucoseReadingCreateNestedManyWithoutUserInput = {
+    create?: XOR<GlucoseReadingCreateWithoutUserInput, GlucoseReadingUncheckedCreateWithoutUserInput> | GlucoseReadingCreateWithoutUserInput[] | GlucoseReadingUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GlucoseReadingCreateOrConnectWithoutUserInput | GlucoseReadingCreateOrConnectWithoutUserInput[]
+    createMany?: GlucoseReadingCreateManyUserInputEnvelope
+    connect?: GlucoseReadingWhereUniqueInput | GlucoseReadingWhereUniqueInput[]
+  }
+
+  export type DataUploadCreateNestedManyWithoutUserInput = {
+    create?: XOR<DataUploadCreateWithoutUserInput, DataUploadUncheckedCreateWithoutUserInput> | DataUploadCreateWithoutUserInput[] | DataUploadUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DataUploadCreateOrConnectWithoutUserInput | DataUploadCreateOrConnectWithoutUserInput[]
+    createMany?: DataUploadCreateManyUserInputEnvelope
+    connect?: DataUploadWhereUniqueInput | DataUploadWhereUniqueInput[]
+  }
+
+  export type GlucoseReadingUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<GlucoseReadingCreateWithoutUserInput, GlucoseReadingUncheckedCreateWithoutUserInput> | GlucoseReadingCreateWithoutUserInput[] | GlucoseReadingUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GlucoseReadingCreateOrConnectWithoutUserInput | GlucoseReadingCreateOrConnectWithoutUserInput[]
+    createMany?: GlucoseReadingCreateManyUserInputEnvelope
+    connect?: GlucoseReadingWhereUniqueInput | GlucoseReadingWhereUniqueInput[]
+  }
+
+  export type DataUploadUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<DataUploadCreateWithoutUserInput, DataUploadUncheckedCreateWithoutUserInput> | DataUploadCreateWithoutUserInput[] | DataUploadUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DataUploadCreateOrConnectWithoutUserInput | DataUploadCreateOrConnectWithoutUserInput[]
+    createMany?: DataUploadCreateManyUserInputEnvelope
+    connect?: DataUploadWhereUniqueInput | DataUploadWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -2259,6 +5448,114 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type GlucoseReadingUpdateManyWithoutUserNestedInput = {
+    create?: XOR<GlucoseReadingCreateWithoutUserInput, GlucoseReadingUncheckedCreateWithoutUserInput> | GlucoseReadingCreateWithoutUserInput[] | GlucoseReadingUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GlucoseReadingCreateOrConnectWithoutUserInput | GlucoseReadingCreateOrConnectWithoutUserInput[]
+    upsert?: GlucoseReadingUpsertWithWhereUniqueWithoutUserInput | GlucoseReadingUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: GlucoseReadingCreateManyUserInputEnvelope
+    set?: GlucoseReadingWhereUniqueInput | GlucoseReadingWhereUniqueInput[]
+    disconnect?: GlucoseReadingWhereUniqueInput | GlucoseReadingWhereUniqueInput[]
+    delete?: GlucoseReadingWhereUniqueInput | GlucoseReadingWhereUniqueInput[]
+    connect?: GlucoseReadingWhereUniqueInput | GlucoseReadingWhereUniqueInput[]
+    update?: GlucoseReadingUpdateWithWhereUniqueWithoutUserInput | GlucoseReadingUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: GlucoseReadingUpdateManyWithWhereWithoutUserInput | GlucoseReadingUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: GlucoseReadingScalarWhereInput | GlucoseReadingScalarWhereInput[]
+  }
+
+  export type DataUploadUpdateManyWithoutUserNestedInput = {
+    create?: XOR<DataUploadCreateWithoutUserInput, DataUploadUncheckedCreateWithoutUserInput> | DataUploadCreateWithoutUserInput[] | DataUploadUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DataUploadCreateOrConnectWithoutUserInput | DataUploadCreateOrConnectWithoutUserInput[]
+    upsert?: DataUploadUpsertWithWhereUniqueWithoutUserInput | DataUploadUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: DataUploadCreateManyUserInputEnvelope
+    set?: DataUploadWhereUniqueInput | DataUploadWhereUniqueInput[]
+    disconnect?: DataUploadWhereUniqueInput | DataUploadWhereUniqueInput[]
+    delete?: DataUploadWhereUniqueInput | DataUploadWhereUniqueInput[]
+    connect?: DataUploadWhereUniqueInput | DataUploadWhereUniqueInput[]
+    update?: DataUploadUpdateWithWhereUniqueWithoutUserInput | DataUploadUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: DataUploadUpdateManyWithWhereWithoutUserInput | DataUploadUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: DataUploadScalarWhereInput | DataUploadScalarWhereInput[]
+  }
+
+  export type GlucoseReadingUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<GlucoseReadingCreateWithoutUserInput, GlucoseReadingUncheckedCreateWithoutUserInput> | GlucoseReadingCreateWithoutUserInput[] | GlucoseReadingUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GlucoseReadingCreateOrConnectWithoutUserInput | GlucoseReadingCreateOrConnectWithoutUserInput[]
+    upsert?: GlucoseReadingUpsertWithWhereUniqueWithoutUserInput | GlucoseReadingUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: GlucoseReadingCreateManyUserInputEnvelope
+    set?: GlucoseReadingWhereUniqueInput | GlucoseReadingWhereUniqueInput[]
+    disconnect?: GlucoseReadingWhereUniqueInput | GlucoseReadingWhereUniqueInput[]
+    delete?: GlucoseReadingWhereUniqueInput | GlucoseReadingWhereUniqueInput[]
+    connect?: GlucoseReadingWhereUniqueInput | GlucoseReadingWhereUniqueInput[]
+    update?: GlucoseReadingUpdateWithWhereUniqueWithoutUserInput | GlucoseReadingUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: GlucoseReadingUpdateManyWithWhereWithoutUserInput | GlucoseReadingUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: GlucoseReadingScalarWhereInput | GlucoseReadingScalarWhereInput[]
+  }
+
+  export type DataUploadUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<DataUploadCreateWithoutUserInput, DataUploadUncheckedCreateWithoutUserInput> | DataUploadCreateWithoutUserInput[] | DataUploadUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DataUploadCreateOrConnectWithoutUserInput | DataUploadCreateOrConnectWithoutUserInput[]
+    upsert?: DataUploadUpsertWithWhereUniqueWithoutUserInput | DataUploadUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: DataUploadCreateManyUserInputEnvelope
+    set?: DataUploadWhereUniqueInput | DataUploadWhereUniqueInput[]
+    disconnect?: DataUploadWhereUniqueInput | DataUploadWhereUniqueInput[]
+    delete?: DataUploadWhereUniqueInput | DataUploadWhereUniqueInput[]
+    connect?: DataUploadWhereUniqueInput | DataUploadWhereUniqueInput[]
+    update?: DataUploadUpdateWithWhereUniqueWithoutUserInput | DataUploadUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: DataUploadUpdateManyWithWhereWithoutUserInput | DataUploadUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: DataUploadScalarWhereInput | DataUploadScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutGlucoseReadingsInput = {
+    create?: XOR<UserCreateWithoutGlucoseReadingsInput, UserUncheckedCreateWithoutGlucoseReadingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGlucoseReadingsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type UserUpdateOneRequiredWithoutGlucoseReadingsNestedInput = {
+    create?: XOR<UserCreateWithoutGlucoseReadingsInput, UserUncheckedCreateWithoutGlucoseReadingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGlucoseReadingsInput
+    upsert?: UserUpsertWithoutGlucoseReadingsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutGlucoseReadingsInput, UserUpdateWithoutGlucoseReadingsInput>, UserUncheckedUpdateWithoutGlucoseReadingsInput>
+  }
+
+  export type UserCreateNestedOneWithoutDataUploadsInput = {
+    create?: XOR<UserCreateWithoutDataUploadsInput, UserUncheckedCreateWithoutDataUploadsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDataUploadsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type UserUpdateOneRequiredWithoutDataUploadsNestedInput = {
+    create?: XOR<UserCreateWithoutDataUploadsInput, UserUncheckedCreateWithoutDataUploadsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDataUploadsInput
+    upsert?: UserUpsertWithoutDataUploadsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDataUploadsInput, UserUpdateWithoutDataUploadsInput>, UserUncheckedUpdateWithoutDataUploadsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -2368,6 +5665,403 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type GlucoseReadingCreateWithoutUserInput = {
+    id?: string
+    timestamp: Date | string
+    glucoseValue: number
+    rateOfChange?: number | null
+    eventType: string
+    eventSubtype?: string | null
+    transmitterId?: string | null
+    transmitterTime?: string | null
+    sourceDeviceId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GlucoseReadingUncheckedCreateWithoutUserInput = {
+    id?: string
+    timestamp: Date | string
+    glucoseValue: number
+    rateOfChange?: number | null
+    eventType: string
+    eventSubtype?: string | null
+    transmitterId?: string | null
+    transmitterTime?: string | null
+    sourceDeviceId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GlucoseReadingCreateOrConnectWithoutUserInput = {
+    where: GlucoseReadingWhereUniqueInput
+    create: XOR<GlucoseReadingCreateWithoutUserInput, GlucoseReadingUncheckedCreateWithoutUserInput>
+  }
+
+  export type GlucoseReadingCreateManyUserInputEnvelope = {
+    data: GlucoseReadingCreateManyUserInput | GlucoseReadingCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DataUploadCreateWithoutUserInput = {
+    id?: string
+    fileName: string
+    fileSize: number
+    uploadedAt?: Date | string
+  }
+
+  export type DataUploadUncheckedCreateWithoutUserInput = {
+    id?: string
+    fileName: string
+    fileSize: number
+    uploadedAt?: Date | string
+  }
+
+  export type DataUploadCreateOrConnectWithoutUserInput = {
+    where: DataUploadWhereUniqueInput
+    create: XOR<DataUploadCreateWithoutUserInput, DataUploadUncheckedCreateWithoutUserInput>
+  }
+
+  export type DataUploadCreateManyUserInputEnvelope = {
+    data: DataUploadCreateManyUserInput | DataUploadCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GlucoseReadingUpsertWithWhereUniqueWithoutUserInput = {
+    where: GlucoseReadingWhereUniqueInput
+    update: XOR<GlucoseReadingUpdateWithoutUserInput, GlucoseReadingUncheckedUpdateWithoutUserInput>
+    create: XOR<GlucoseReadingCreateWithoutUserInput, GlucoseReadingUncheckedCreateWithoutUserInput>
+  }
+
+  export type GlucoseReadingUpdateWithWhereUniqueWithoutUserInput = {
+    where: GlucoseReadingWhereUniqueInput
+    data: XOR<GlucoseReadingUpdateWithoutUserInput, GlucoseReadingUncheckedUpdateWithoutUserInput>
+  }
+
+  export type GlucoseReadingUpdateManyWithWhereWithoutUserInput = {
+    where: GlucoseReadingScalarWhereInput
+    data: XOR<GlucoseReadingUpdateManyMutationInput, GlucoseReadingUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type GlucoseReadingScalarWhereInput = {
+    AND?: GlucoseReadingScalarWhereInput | GlucoseReadingScalarWhereInput[]
+    OR?: GlucoseReadingScalarWhereInput[]
+    NOT?: GlucoseReadingScalarWhereInput | GlucoseReadingScalarWhereInput[]
+    id?: StringFilter<"GlucoseReading"> | string
+    timestamp?: DateTimeFilter<"GlucoseReading"> | Date | string
+    glucoseValue?: FloatFilter<"GlucoseReading"> | number
+    rateOfChange?: FloatNullableFilter<"GlucoseReading"> | number | null
+    eventType?: StringFilter<"GlucoseReading"> | string
+    eventSubtype?: StringNullableFilter<"GlucoseReading"> | string | null
+    transmitterId?: StringNullableFilter<"GlucoseReading"> | string | null
+    transmitterTime?: StringNullableFilter<"GlucoseReading"> | string | null
+    sourceDeviceId?: StringNullableFilter<"GlucoseReading"> | string | null
+    userId?: StringFilter<"GlucoseReading"> | string
+    createdAt?: DateTimeFilter<"GlucoseReading"> | Date | string
+    updatedAt?: DateTimeFilter<"GlucoseReading"> | Date | string
+  }
+
+  export type DataUploadUpsertWithWhereUniqueWithoutUserInput = {
+    where: DataUploadWhereUniqueInput
+    update: XOR<DataUploadUpdateWithoutUserInput, DataUploadUncheckedUpdateWithoutUserInput>
+    create: XOR<DataUploadCreateWithoutUserInput, DataUploadUncheckedCreateWithoutUserInput>
+  }
+
+  export type DataUploadUpdateWithWhereUniqueWithoutUserInput = {
+    where: DataUploadWhereUniqueInput
+    data: XOR<DataUploadUpdateWithoutUserInput, DataUploadUncheckedUpdateWithoutUserInput>
+  }
+
+  export type DataUploadUpdateManyWithWhereWithoutUserInput = {
+    where: DataUploadScalarWhereInput
+    data: XOR<DataUploadUpdateManyMutationInput, DataUploadUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type DataUploadScalarWhereInput = {
+    AND?: DataUploadScalarWhereInput | DataUploadScalarWhereInput[]
+    OR?: DataUploadScalarWhereInput[]
+    NOT?: DataUploadScalarWhereInput | DataUploadScalarWhereInput[]
+    id?: StringFilter<"DataUpload"> | string
+    fileName?: StringFilter<"DataUpload"> | string
+    fileSize?: IntFilter<"DataUpload"> | number
+    uploadedAt?: DateTimeFilter<"DataUpload"> | Date | string
+    userId?: StringFilter<"DataUpload"> | string
+  }
+
+  export type UserCreateWithoutGlucoseReadingsInput = {
+    id?: string
+    clerkId: string
+    email?: string | null
+    name?: string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    dataUploads?: DataUploadCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutGlucoseReadingsInput = {
+    id?: string
+    clerkId: string
+    email?: string | null
+    name?: string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    dataUploads?: DataUploadUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutGlucoseReadingsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutGlucoseReadingsInput, UserUncheckedCreateWithoutGlucoseReadingsInput>
+  }
+
+  export type UserUpsertWithoutGlucoseReadingsInput = {
+    update: XOR<UserUpdateWithoutGlucoseReadingsInput, UserUncheckedUpdateWithoutGlucoseReadingsInput>
+    create: XOR<UserCreateWithoutGlucoseReadingsInput, UserUncheckedCreateWithoutGlucoseReadingsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutGlucoseReadingsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutGlucoseReadingsInput, UserUncheckedUpdateWithoutGlucoseReadingsInput>
+  }
+
+  export type UserUpdateWithoutGlucoseReadingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataUploads?: DataUploadUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutGlucoseReadingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataUploads?: DataUploadUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutDataUploadsInput = {
+    id?: string
+    clerkId: string
+    email?: string | null
+    name?: string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    glucoseReadings?: GlucoseReadingCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutDataUploadsInput = {
+    id?: string
+    clerkId: string
+    email?: string | null
+    name?: string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    glucoseReadings?: GlucoseReadingUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutDataUploadsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDataUploadsInput, UserUncheckedCreateWithoutDataUploadsInput>
+  }
+
+  export type UserUpsertWithoutDataUploadsInput = {
+    update: XOR<UserUpdateWithoutDataUploadsInput, UserUncheckedUpdateWithoutDataUploadsInput>
+    create: XOR<UserCreateWithoutDataUploadsInput, UserUncheckedCreateWithoutDataUploadsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDataUploadsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDataUploadsInput, UserUncheckedUpdateWithoutDataUploadsInput>
+  }
+
+  export type UserUpdateWithoutDataUploadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseReadings?: GlucoseReadingUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDataUploadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseReadings?: GlucoseReadingUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type GlucoseReadingCreateManyUserInput = {
+    id?: string
+    timestamp: Date | string
+    glucoseValue: number
+    rateOfChange?: number | null
+    eventType: string
+    eventSubtype?: string | null
+    transmitterId?: string | null
+    transmitterTime?: string | null
+    sourceDeviceId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DataUploadCreateManyUserInput = {
+    id?: string
+    fileName: string
+    fileSize: number
+    uploadedAt?: Date | string
+  }
+
+  export type GlucoseReadingUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseValue?: FloatFieldUpdateOperationsInput | number
+    rateOfChange?: NullableFloatFieldUpdateOperationsInput | number | null
+    eventType?: StringFieldUpdateOperationsInput | string
+    eventSubtype?: NullableStringFieldUpdateOperationsInput | string | null
+    transmitterId?: NullableStringFieldUpdateOperationsInput | string | null
+    transmitterTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceDeviceId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GlucoseReadingUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseValue?: FloatFieldUpdateOperationsInput | number
+    rateOfChange?: NullableFloatFieldUpdateOperationsInput | number | null
+    eventType?: StringFieldUpdateOperationsInput | string
+    eventSubtype?: NullableStringFieldUpdateOperationsInput | string | null
+    transmitterId?: NullableStringFieldUpdateOperationsInput | string | null
+    transmitterTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceDeviceId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GlucoseReadingUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseValue?: FloatFieldUpdateOperationsInput | number
+    rateOfChange?: NullableFloatFieldUpdateOperationsInput | number | null
+    eventType?: StringFieldUpdateOperationsInput | string
+    eventSubtype?: NullableStringFieldUpdateOperationsInput | string | null
+    transmitterId?: NullableStringFieldUpdateOperationsInput | string | null
+    transmitterTime?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceDeviceId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataUploadUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataUploadUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DataUploadUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
