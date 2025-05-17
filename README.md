@@ -1,3 +1,8 @@
+## GlycoNova
+
+GlycoNova is a diabetes management platform where users can upload their glucose and insulin data and manage their diabetes in a smart and efficient way. Users can see blood glucose history, insulin history, trends, and other useful stats. Users also get recommendations for hitting their diabetes management goals more easily. Manage diabetes the smart way. 
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
