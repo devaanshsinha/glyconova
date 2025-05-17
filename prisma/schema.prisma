@@ -26,6 +26,11 @@ model User {
   glucoseReadings GlucoseReading[]
   dataUploads     DataUpload[]
   glucoseStats    GlucoseStats? // One-to-one relation to stats
+  insulinStats    InsulinStats? // New: One-to-one relation to insulin stats
+  bolusRecords    BolusRecord[] // New: Relation to bolus records
+  basalRecords    BasalRecord[] // New: Relation to basal records
+  carbEntries     CarbEntry[] // New: Relation to carb entries
+  alarmEvents     AlarmEvent[] // New: Relation to alarm events
 }
 
 model GlucoseReading {
@@ -58,7 +63,7 @@ model DataUpload {
   @@index([userId])
 }
 
-// New model to store pre-calculated statistics
+// Model to store pre-calculated glucose statistics
 model GlucoseStats {
   id                String   @id @default(cuid())
   userId            String   @unique // One-to-one relation with User
@@ -77,4 +82,88 @@ model GlucoseStats {
   timeInRange       String
   lastCalculated    DateTime @default(now())
   updatedAt         DateTime @updatedAt
+}
+
+// New model to store insulin and carb statistics from Omnipod
+model InsulinStats {
+  id                String   @id @default(cuid())
+  userId            String   @unique // One-to-one relation with User
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  totalDays         Int // Number of days with data
+  avgTotalInsulin   Float // Average total daily insulin (basal + bolus)
+  avgDailyBolus     Float // Average daily bolus insulin
+  avgDailyBasal     Float // Average daily basal insulin
+  avgDailyCarbs     Float // Average daily carbs
+  bolusPercentage   Float // Percentage of total insulin as bolus
+  basalPercentage   Float // Percentage of total insulin as basal
+  insulinCarbRatio  Float? // Average insulin to carb ratio (if calculable)
+  totalBolusCount   Int // Total number of bolus records
+  totalBasalChanges Int // Total number of basal rate changes
+  avgBolusesPerDay  Float // Average number of boluses per day
+  lastCalculated    DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  dataStartDate     DateTime // First date with insulin data
+  dataEndDate       DateTime // Last date with insulin data
+}
+
+// New model for bolus insulin records from Omnipod
+model BolusRecord {
+  id        String   @id @default(cuid())
+  timestamp DateTime
+  amount    Float // Insulin amount in units
+  bolusType String // e.g., "Normal", "Extended", "Multiwave"
+  duration  Int? // Duration in minutes for extended boluses
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([timestamp])
+}
+
+// New model for basal insulin records from Omnipod
+model BasalRecord {
+  id         String   @id @default(cuid())
+  timestamp  DateTime
+  rate       Float // Basal rate in units per hour
+  duration   Int // Duration in minutes
+  changeType String? // e.g., "Scheduled", "Temp", "Suspend"
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([userId])
+  @@index([timestamp])
+}
+
+// New model for carb intake entries from Omnipod
+model CarbEntry {
+  id         String   @id @default(cuid())
+  timestamp  DateTime
+  carbAmount Float // Carbs in grams
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([userId])
+  @@index([timestamp])
+}
+
+// New model for alarm and system events from Omnipod
+model AlarmEvent {
+  id        String   @id @default(cuid())
+  timestamp DateTime
+  eventType String // The type of alarm or event
+  deviceId  String? // Device identifier if available
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([timestamp])
+  @@index([eventType])
 }

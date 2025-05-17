@@ -33,6 +33,31 @@ export type DataUpload = $Result.DefaultSelection<Prisma.$DataUploadPayload>
  * 
  */
 export type GlucoseStats = $Result.DefaultSelection<Prisma.$GlucoseStatsPayload>
+/**
+ * Model InsulinStats
+ * 
+ */
+export type InsulinStats = $Result.DefaultSelection<Prisma.$InsulinStatsPayload>
+/**
+ * Model BolusRecord
+ * 
+ */
+export type BolusRecord = $Result.DefaultSelection<Prisma.$BolusRecordPayload>
+/**
+ * Model BasalRecord
+ * 
+ */
+export type BasalRecord = $Result.DefaultSelection<Prisma.$BasalRecordPayload>
+/**
+ * Model CarbEntry
+ * 
+ */
+export type CarbEntry = $Result.DefaultSelection<Prisma.$CarbEntryPayload>
+/**
+ * Model AlarmEvent
+ * 
+ */
+export type AlarmEvent = $Result.DefaultSelection<Prisma.$AlarmEventPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -198,6 +223,56 @@ export class PrismaClient<
     * ```
     */
   get glucoseStats(): Prisma.GlucoseStatsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.insulinStats`: Exposes CRUD operations for the **InsulinStats** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more InsulinStats
+    * const insulinStats = await prisma.insulinStats.findMany()
+    * ```
+    */
+  get insulinStats(): Prisma.InsulinStatsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.bolusRecord`: Exposes CRUD operations for the **BolusRecord** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BolusRecords
+    * const bolusRecords = await prisma.bolusRecord.findMany()
+    * ```
+    */
+  get bolusRecord(): Prisma.BolusRecordDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.basalRecord`: Exposes CRUD operations for the **BasalRecord** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BasalRecords
+    * const basalRecords = await prisma.basalRecord.findMany()
+    * ```
+    */
+  get basalRecord(): Prisma.BasalRecordDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.carbEntry`: Exposes CRUD operations for the **CarbEntry** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CarbEntries
+    * const carbEntries = await prisma.carbEntry.findMany()
+    * ```
+    */
+  get carbEntry(): Prisma.CarbEntryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.alarmEvent`: Exposes CRUD operations for the **AlarmEvent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AlarmEvents
+    * const alarmEvents = await prisma.alarmEvent.findMany()
+    * ```
+    */
+  get alarmEvent(): Prisma.AlarmEventDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -641,7 +716,12 @@ export namespace Prisma {
     User: 'User',
     GlucoseReading: 'GlucoseReading',
     DataUpload: 'DataUpload',
-    GlucoseStats: 'GlucoseStats'
+    GlucoseStats: 'GlucoseStats',
+    InsulinStats: 'InsulinStats',
+    BolusRecord: 'BolusRecord',
+    BasalRecord: 'BasalRecord',
+    CarbEntry: 'CarbEntry',
+    AlarmEvent: 'AlarmEvent'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -660,7 +740,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "glucoseReading" | "dataUpload" | "glucoseStats"
+      modelProps: "user" | "glucoseReading" | "dataUpload" | "glucoseStats" | "insulinStats" | "bolusRecord" | "basalRecord" | "carbEntry" | "alarmEvent"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -960,6 +1040,376 @@ export namespace Prisma {
           }
         }
       }
+      InsulinStats: {
+        payload: Prisma.$InsulinStatsPayload<ExtArgs>
+        fields: Prisma.InsulinStatsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InsulinStatsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsulinStatsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InsulinStatsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsulinStatsPayload>
+          }
+          findFirst: {
+            args: Prisma.InsulinStatsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsulinStatsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InsulinStatsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsulinStatsPayload>
+          }
+          findMany: {
+            args: Prisma.InsulinStatsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsulinStatsPayload>[]
+          }
+          create: {
+            args: Prisma.InsulinStatsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsulinStatsPayload>
+          }
+          createMany: {
+            args: Prisma.InsulinStatsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InsulinStatsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsulinStatsPayload>[]
+          }
+          delete: {
+            args: Prisma.InsulinStatsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsulinStatsPayload>
+          }
+          update: {
+            args: Prisma.InsulinStatsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsulinStatsPayload>
+          }
+          deleteMany: {
+            args: Prisma.InsulinStatsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InsulinStatsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InsulinStatsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsulinStatsPayload>[]
+          }
+          upsert: {
+            args: Prisma.InsulinStatsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InsulinStatsPayload>
+          }
+          aggregate: {
+            args: Prisma.InsulinStatsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInsulinStats>
+          }
+          groupBy: {
+            args: Prisma.InsulinStatsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InsulinStatsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InsulinStatsCountArgs<ExtArgs>
+            result: $Utils.Optional<InsulinStatsCountAggregateOutputType> | number
+          }
+        }
+      }
+      BolusRecord: {
+        payload: Prisma.$BolusRecordPayload<ExtArgs>
+        fields: Prisma.BolusRecordFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BolusRecordFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BolusRecordPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BolusRecordFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BolusRecordPayload>
+          }
+          findFirst: {
+            args: Prisma.BolusRecordFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BolusRecordPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BolusRecordFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BolusRecordPayload>
+          }
+          findMany: {
+            args: Prisma.BolusRecordFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BolusRecordPayload>[]
+          }
+          create: {
+            args: Prisma.BolusRecordCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BolusRecordPayload>
+          }
+          createMany: {
+            args: Prisma.BolusRecordCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BolusRecordCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BolusRecordPayload>[]
+          }
+          delete: {
+            args: Prisma.BolusRecordDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BolusRecordPayload>
+          }
+          update: {
+            args: Prisma.BolusRecordUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BolusRecordPayload>
+          }
+          deleteMany: {
+            args: Prisma.BolusRecordDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BolusRecordUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BolusRecordUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BolusRecordPayload>[]
+          }
+          upsert: {
+            args: Prisma.BolusRecordUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BolusRecordPayload>
+          }
+          aggregate: {
+            args: Prisma.BolusRecordAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBolusRecord>
+          }
+          groupBy: {
+            args: Prisma.BolusRecordGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BolusRecordGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BolusRecordCountArgs<ExtArgs>
+            result: $Utils.Optional<BolusRecordCountAggregateOutputType> | number
+          }
+        }
+      }
+      BasalRecord: {
+        payload: Prisma.$BasalRecordPayload<ExtArgs>
+        fields: Prisma.BasalRecordFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BasalRecordFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BasalRecordPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BasalRecordFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BasalRecordPayload>
+          }
+          findFirst: {
+            args: Prisma.BasalRecordFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BasalRecordPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BasalRecordFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BasalRecordPayload>
+          }
+          findMany: {
+            args: Prisma.BasalRecordFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BasalRecordPayload>[]
+          }
+          create: {
+            args: Prisma.BasalRecordCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BasalRecordPayload>
+          }
+          createMany: {
+            args: Prisma.BasalRecordCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BasalRecordCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BasalRecordPayload>[]
+          }
+          delete: {
+            args: Prisma.BasalRecordDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BasalRecordPayload>
+          }
+          update: {
+            args: Prisma.BasalRecordUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BasalRecordPayload>
+          }
+          deleteMany: {
+            args: Prisma.BasalRecordDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BasalRecordUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BasalRecordUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BasalRecordPayload>[]
+          }
+          upsert: {
+            args: Prisma.BasalRecordUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BasalRecordPayload>
+          }
+          aggregate: {
+            args: Prisma.BasalRecordAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBasalRecord>
+          }
+          groupBy: {
+            args: Prisma.BasalRecordGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BasalRecordGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BasalRecordCountArgs<ExtArgs>
+            result: $Utils.Optional<BasalRecordCountAggregateOutputType> | number
+          }
+        }
+      }
+      CarbEntry: {
+        payload: Prisma.$CarbEntryPayload<ExtArgs>
+        fields: Prisma.CarbEntryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CarbEntryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CarbEntryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CarbEntryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CarbEntryPayload>
+          }
+          findFirst: {
+            args: Prisma.CarbEntryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CarbEntryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CarbEntryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CarbEntryPayload>
+          }
+          findMany: {
+            args: Prisma.CarbEntryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CarbEntryPayload>[]
+          }
+          create: {
+            args: Prisma.CarbEntryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CarbEntryPayload>
+          }
+          createMany: {
+            args: Prisma.CarbEntryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CarbEntryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CarbEntryPayload>[]
+          }
+          delete: {
+            args: Prisma.CarbEntryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CarbEntryPayload>
+          }
+          update: {
+            args: Prisma.CarbEntryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CarbEntryPayload>
+          }
+          deleteMany: {
+            args: Prisma.CarbEntryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CarbEntryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CarbEntryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CarbEntryPayload>[]
+          }
+          upsert: {
+            args: Prisma.CarbEntryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CarbEntryPayload>
+          }
+          aggregate: {
+            args: Prisma.CarbEntryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCarbEntry>
+          }
+          groupBy: {
+            args: Prisma.CarbEntryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CarbEntryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CarbEntryCountArgs<ExtArgs>
+            result: $Utils.Optional<CarbEntryCountAggregateOutputType> | number
+          }
+        }
+      }
+      AlarmEvent: {
+        payload: Prisma.$AlarmEventPayload<ExtArgs>
+        fields: Prisma.AlarmEventFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AlarmEventFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlarmEventPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AlarmEventFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlarmEventPayload>
+          }
+          findFirst: {
+            args: Prisma.AlarmEventFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlarmEventPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AlarmEventFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlarmEventPayload>
+          }
+          findMany: {
+            args: Prisma.AlarmEventFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlarmEventPayload>[]
+          }
+          create: {
+            args: Prisma.AlarmEventCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlarmEventPayload>
+          }
+          createMany: {
+            args: Prisma.AlarmEventCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AlarmEventCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlarmEventPayload>[]
+          }
+          delete: {
+            args: Prisma.AlarmEventDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlarmEventPayload>
+          }
+          update: {
+            args: Prisma.AlarmEventUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlarmEventPayload>
+          }
+          deleteMany: {
+            args: Prisma.AlarmEventDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AlarmEventUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AlarmEventUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlarmEventPayload>[]
+          }
+          upsert: {
+            args: Prisma.AlarmEventUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlarmEventPayload>
+          }
+          aggregate: {
+            args: Prisma.AlarmEventAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAlarmEvent>
+          }
+          groupBy: {
+            args: Prisma.AlarmEventGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AlarmEventGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AlarmEventCountArgs<ExtArgs>
+            result: $Utils.Optional<AlarmEventCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1048,6 +1498,11 @@ export namespace Prisma {
     glucoseReading?: GlucoseReadingOmit
     dataUpload?: DataUploadOmit
     glucoseStats?: GlucoseStatsOmit
+    insulinStats?: InsulinStatsOmit
+    bolusRecord?: BolusRecordOmit
+    basalRecord?: BasalRecordOmit
+    carbEntry?: CarbEntryOmit
+    alarmEvent?: AlarmEventOmit
   }
 
   /* Types for Logging */
@@ -1144,11 +1599,19 @@ export namespace Prisma {
   export type UserCountOutputType = {
     glucoseReadings: number
     dataUploads: number
+    bolusRecords: number
+    basalRecords: number
+    carbEntries: number
+    alarmEvents: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     glucoseReadings?: boolean | UserCountOutputTypeCountGlucoseReadingsArgs
     dataUploads?: boolean | UserCountOutputTypeCountDataUploadsArgs
+    bolusRecords?: boolean | UserCountOutputTypeCountBolusRecordsArgs
+    basalRecords?: boolean | UserCountOutputTypeCountBasalRecordsArgs
+    carbEntries?: boolean | UserCountOutputTypeCountCarbEntriesArgs
+    alarmEvents?: boolean | UserCountOutputTypeCountAlarmEventsArgs
   }
 
   // Custom InputTypes
@@ -1174,6 +1637,34 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountDataUploadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DataUploadWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBolusRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BolusRecordWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBasalRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BasalRecordWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCarbEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CarbEntryWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAlarmEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AlarmEventWhereInput
   }
 
 
@@ -1364,6 +1855,11 @@ export namespace Prisma {
     glucoseReadings?: boolean | User$glucoseReadingsArgs<ExtArgs>
     dataUploads?: boolean | User$dataUploadsArgs<ExtArgs>
     glucoseStats?: boolean | User$glucoseStatsArgs<ExtArgs>
+    insulinStats?: boolean | User$insulinStatsArgs<ExtArgs>
+    bolusRecords?: boolean | User$bolusRecordsArgs<ExtArgs>
+    basalRecords?: boolean | User$basalRecordsArgs<ExtArgs>
+    carbEntries?: boolean | User$carbEntriesArgs<ExtArgs>
+    alarmEvents?: boolean | User$alarmEventsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1402,6 +1898,11 @@ export namespace Prisma {
     glucoseReadings?: boolean | User$glucoseReadingsArgs<ExtArgs>
     dataUploads?: boolean | User$dataUploadsArgs<ExtArgs>
     glucoseStats?: boolean | User$glucoseStatsArgs<ExtArgs>
+    insulinStats?: boolean | User$insulinStatsArgs<ExtArgs>
+    bolusRecords?: boolean | User$bolusRecordsArgs<ExtArgs>
+    basalRecords?: boolean | User$basalRecordsArgs<ExtArgs>
+    carbEntries?: boolean | User$carbEntriesArgs<ExtArgs>
+    alarmEvents?: boolean | User$alarmEventsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1413,6 +1914,11 @@ export namespace Prisma {
       glucoseReadings: Prisma.$GlucoseReadingPayload<ExtArgs>[]
       dataUploads: Prisma.$DataUploadPayload<ExtArgs>[]
       glucoseStats: Prisma.$GlucoseStatsPayload<ExtArgs> | null
+      insulinStats: Prisma.$InsulinStatsPayload<ExtArgs> | null
+      bolusRecords: Prisma.$BolusRecordPayload<ExtArgs>[]
+      basalRecords: Prisma.$BasalRecordPayload<ExtArgs>[]
+      carbEntries: Prisma.$CarbEntryPayload<ExtArgs>[]
+      alarmEvents: Prisma.$AlarmEventPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1819,6 +2325,11 @@ export namespace Prisma {
     glucoseReadings<T extends User$glucoseReadingsArgs<ExtArgs> = {}>(args?: Subset<T, User$glucoseReadingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GlucoseReadingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     dataUploads<T extends User$dataUploadsArgs<ExtArgs> = {}>(args?: Subset<T, User$dataUploadsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DataUploadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     glucoseStats<T extends User$glucoseStatsArgs<ExtArgs> = {}>(args?: Subset<T, User$glucoseStatsArgs<ExtArgs>>): Prisma__GlucoseStatsClient<$Result.GetResult<Prisma.$GlucoseStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    insulinStats<T extends User$insulinStatsArgs<ExtArgs> = {}>(args?: Subset<T, User$insulinStatsArgs<ExtArgs>>): Prisma__InsulinStatsClient<$Result.GetResult<Prisma.$InsulinStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    bolusRecords<T extends User$bolusRecordsArgs<ExtArgs> = {}>(args?: Subset<T, User$bolusRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BolusRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    basalRecords<T extends User$basalRecordsArgs<ExtArgs> = {}>(args?: Subset<T, User$basalRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BasalRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    carbEntries<T extends User$carbEntriesArgs<ExtArgs> = {}>(args?: Subset<T, User$carbEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CarbEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    alarmEvents<T extends User$alarmEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$alarmEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AlarmEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2307,6 +2818,121 @@ export namespace Prisma {
      */
     include?: GlucoseStatsInclude<ExtArgs> | null
     where?: GlucoseStatsWhereInput
+  }
+
+  /**
+   * User.insulinStats
+   */
+  export type User$insulinStatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsulinStats
+     */
+    select?: InsulinStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsulinStats
+     */
+    omit?: InsulinStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsulinStatsInclude<ExtArgs> | null
+    where?: InsulinStatsWhereInput
+  }
+
+  /**
+   * User.bolusRecords
+   */
+  export type User$bolusRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BolusRecord
+     */
+    select?: BolusRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BolusRecord
+     */
+    omit?: BolusRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BolusRecordInclude<ExtArgs> | null
+    where?: BolusRecordWhereInput
+    orderBy?: BolusRecordOrderByWithRelationInput | BolusRecordOrderByWithRelationInput[]
+    cursor?: BolusRecordWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BolusRecordScalarFieldEnum | BolusRecordScalarFieldEnum[]
+  }
+
+  /**
+   * User.basalRecords
+   */
+  export type User$basalRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BasalRecord
+     */
+    select?: BasalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BasalRecord
+     */
+    omit?: BasalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BasalRecordInclude<ExtArgs> | null
+    where?: BasalRecordWhereInput
+    orderBy?: BasalRecordOrderByWithRelationInput | BasalRecordOrderByWithRelationInput[]
+    cursor?: BasalRecordWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BasalRecordScalarFieldEnum | BasalRecordScalarFieldEnum[]
+  }
+
+  /**
+   * User.carbEntries
+   */
+  export type User$carbEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CarbEntry
+     */
+    select?: CarbEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CarbEntry
+     */
+    omit?: CarbEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CarbEntryInclude<ExtArgs> | null
+    where?: CarbEntryWhereInput
+    orderBy?: CarbEntryOrderByWithRelationInput | CarbEntryOrderByWithRelationInput[]
+    cursor?: CarbEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CarbEntryScalarFieldEnum | CarbEntryScalarFieldEnum[]
+  }
+
+  /**
+   * User.alarmEvents
+   */
+  export type User$alarmEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AlarmEvent
+     */
+    select?: AlarmEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AlarmEvent
+     */
+    omit?: AlarmEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlarmEventInclude<ExtArgs> | null
+    where?: AlarmEventWhereInput
+    orderBy?: AlarmEventOrderByWithRelationInput | AlarmEventOrderByWithRelationInput[]
+    cursor?: AlarmEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AlarmEventScalarFieldEnum | AlarmEventScalarFieldEnum[]
   }
 
   /**
@@ -5883,6 +6509,5753 @@ export namespace Prisma {
 
 
   /**
+   * Model InsulinStats
+   */
+
+  export type AggregateInsulinStats = {
+    _count: InsulinStatsCountAggregateOutputType | null
+    _avg: InsulinStatsAvgAggregateOutputType | null
+    _sum: InsulinStatsSumAggregateOutputType | null
+    _min: InsulinStatsMinAggregateOutputType | null
+    _max: InsulinStatsMaxAggregateOutputType | null
+  }
+
+  export type InsulinStatsAvgAggregateOutputType = {
+    totalDays: number | null
+    avgTotalInsulin: number | null
+    avgDailyBolus: number | null
+    avgDailyBasal: number | null
+    avgDailyCarbs: number | null
+    bolusPercentage: number | null
+    basalPercentage: number | null
+    insulinCarbRatio: number | null
+    totalBolusCount: number | null
+    totalBasalChanges: number | null
+    avgBolusesPerDay: number | null
+  }
+
+  export type InsulinStatsSumAggregateOutputType = {
+    totalDays: number | null
+    avgTotalInsulin: number | null
+    avgDailyBolus: number | null
+    avgDailyBasal: number | null
+    avgDailyCarbs: number | null
+    bolusPercentage: number | null
+    basalPercentage: number | null
+    insulinCarbRatio: number | null
+    totalBolusCount: number | null
+    totalBasalChanges: number | null
+    avgBolusesPerDay: number | null
+  }
+
+  export type InsulinStatsMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    totalDays: number | null
+    avgTotalInsulin: number | null
+    avgDailyBolus: number | null
+    avgDailyBasal: number | null
+    avgDailyCarbs: number | null
+    bolusPercentage: number | null
+    basalPercentage: number | null
+    insulinCarbRatio: number | null
+    totalBolusCount: number | null
+    totalBasalChanges: number | null
+    avgBolusesPerDay: number | null
+    lastCalculated: Date | null
+    updatedAt: Date | null
+    dataStartDate: Date | null
+    dataEndDate: Date | null
+  }
+
+  export type InsulinStatsMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    totalDays: number | null
+    avgTotalInsulin: number | null
+    avgDailyBolus: number | null
+    avgDailyBasal: number | null
+    avgDailyCarbs: number | null
+    bolusPercentage: number | null
+    basalPercentage: number | null
+    insulinCarbRatio: number | null
+    totalBolusCount: number | null
+    totalBasalChanges: number | null
+    avgBolusesPerDay: number | null
+    lastCalculated: Date | null
+    updatedAt: Date | null
+    dataStartDate: Date | null
+    dataEndDate: Date | null
+  }
+
+  export type InsulinStatsCountAggregateOutputType = {
+    id: number
+    userId: number
+    totalDays: number
+    avgTotalInsulin: number
+    avgDailyBolus: number
+    avgDailyBasal: number
+    avgDailyCarbs: number
+    bolusPercentage: number
+    basalPercentage: number
+    insulinCarbRatio: number
+    totalBolusCount: number
+    totalBasalChanges: number
+    avgBolusesPerDay: number
+    lastCalculated: number
+    updatedAt: number
+    dataStartDate: number
+    dataEndDate: number
+    _all: number
+  }
+
+
+  export type InsulinStatsAvgAggregateInputType = {
+    totalDays?: true
+    avgTotalInsulin?: true
+    avgDailyBolus?: true
+    avgDailyBasal?: true
+    avgDailyCarbs?: true
+    bolusPercentage?: true
+    basalPercentage?: true
+    insulinCarbRatio?: true
+    totalBolusCount?: true
+    totalBasalChanges?: true
+    avgBolusesPerDay?: true
+  }
+
+  export type InsulinStatsSumAggregateInputType = {
+    totalDays?: true
+    avgTotalInsulin?: true
+    avgDailyBolus?: true
+    avgDailyBasal?: true
+    avgDailyCarbs?: true
+    bolusPercentage?: true
+    basalPercentage?: true
+    insulinCarbRatio?: true
+    totalBolusCount?: true
+    totalBasalChanges?: true
+    avgBolusesPerDay?: true
+  }
+
+  export type InsulinStatsMinAggregateInputType = {
+    id?: true
+    userId?: true
+    totalDays?: true
+    avgTotalInsulin?: true
+    avgDailyBolus?: true
+    avgDailyBasal?: true
+    avgDailyCarbs?: true
+    bolusPercentage?: true
+    basalPercentage?: true
+    insulinCarbRatio?: true
+    totalBolusCount?: true
+    totalBasalChanges?: true
+    avgBolusesPerDay?: true
+    lastCalculated?: true
+    updatedAt?: true
+    dataStartDate?: true
+    dataEndDate?: true
+  }
+
+  export type InsulinStatsMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    totalDays?: true
+    avgTotalInsulin?: true
+    avgDailyBolus?: true
+    avgDailyBasal?: true
+    avgDailyCarbs?: true
+    bolusPercentage?: true
+    basalPercentage?: true
+    insulinCarbRatio?: true
+    totalBolusCount?: true
+    totalBasalChanges?: true
+    avgBolusesPerDay?: true
+    lastCalculated?: true
+    updatedAt?: true
+    dataStartDate?: true
+    dataEndDate?: true
+  }
+
+  export type InsulinStatsCountAggregateInputType = {
+    id?: true
+    userId?: true
+    totalDays?: true
+    avgTotalInsulin?: true
+    avgDailyBolus?: true
+    avgDailyBasal?: true
+    avgDailyCarbs?: true
+    bolusPercentage?: true
+    basalPercentage?: true
+    insulinCarbRatio?: true
+    totalBolusCount?: true
+    totalBasalChanges?: true
+    avgBolusesPerDay?: true
+    lastCalculated?: true
+    updatedAt?: true
+    dataStartDate?: true
+    dataEndDate?: true
+    _all?: true
+  }
+
+  export type InsulinStatsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InsulinStats to aggregate.
+     */
+    where?: InsulinStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsulinStats to fetch.
+     */
+    orderBy?: InsulinStatsOrderByWithRelationInput | InsulinStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InsulinStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsulinStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsulinStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned InsulinStats
+    **/
+    _count?: true | InsulinStatsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: InsulinStatsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: InsulinStatsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InsulinStatsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InsulinStatsMaxAggregateInputType
+  }
+
+  export type GetInsulinStatsAggregateType<T extends InsulinStatsAggregateArgs> = {
+        [P in keyof T & keyof AggregateInsulinStats]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInsulinStats[P]>
+      : GetScalarType<T[P], AggregateInsulinStats[P]>
+  }
+
+
+
+
+  export type InsulinStatsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InsulinStatsWhereInput
+    orderBy?: InsulinStatsOrderByWithAggregationInput | InsulinStatsOrderByWithAggregationInput[]
+    by: InsulinStatsScalarFieldEnum[] | InsulinStatsScalarFieldEnum
+    having?: InsulinStatsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InsulinStatsCountAggregateInputType | true
+    _avg?: InsulinStatsAvgAggregateInputType
+    _sum?: InsulinStatsSumAggregateInputType
+    _min?: InsulinStatsMinAggregateInputType
+    _max?: InsulinStatsMaxAggregateInputType
+  }
+
+  export type InsulinStatsGroupByOutputType = {
+    id: string
+    userId: string
+    totalDays: number
+    avgTotalInsulin: number
+    avgDailyBolus: number
+    avgDailyBasal: number
+    avgDailyCarbs: number
+    bolusPercentage: number
+    basalPercentage: number
+    insulinCarbRatio: number | null
+    totalBolusCount: number
+    totalBasalChanges: number
+    avgBolusesPerDay: number
+    lastCalculated: Date
+    updatedAt: Date
+    dataStartDate: Date
+    dataEndDate: Date
+    _count: InsulinStatsCountAggregateOutputType | null
+    _avg: InsulinStatsAvgAggregateOutputType | null
+    _sum: InsulinStatsSumAggregateOutputType | null
+    _min: InsulinStatsMinAggregateOutputType | null
+    _max: InsulinStatsMaxAggregateOutputType | null
+  }
+
+  type GetInsulinStatsGroupByPayload<T extends InsulinStatsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InsulinStatsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InsulinStatsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InsulinStatsGroupByOutputType[P]>
+            : GetScalarType<T[P], InsulinStatsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InsulinStatsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalDays?: boolean
+    avgTotalInsulin?: boolean
+    avgDailyBolus?: boolean
+    avgDailyBasal?: boolean
+    avgDailyCarbs?: boolean
+    bolusPercentage?: boolean
+    basalPercentage?: boolean
+    insulinCarbRatio?: boolean
+    totalBolusCount?: boolean
+    totalBasalChanges?: boolean
+    avgBolusesPerDay?: boolean
+    lastCalculated?: boolean
+    updatedAt?: boolean
+    dataStartDate?: boolean
+    dataEndDate?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["insulinStats"]>
+
+  export type InsulinStatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalDays?: boolean
+    avgTotalInsulin?: boolean
+    avgDailyBolus?: boolean
+    avgDailyBasal?: boolean
+    avgDailyCarbs?: boolean
+    bolusPercentage?: boolean
+    basalPercentage?: boolean
+    insulinCarbRatio?: boolean
+    totalBolusCount?: boolean
+    totalBasalChanges?: boolean
+    avgBolusesPerDay?: boolean
+    lastCalculated?: boolean
+    updatedAt?: boolean
+    dataStartDate?: boolean
+    dataEndDate?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["insulinStats"]>
+
+  export type InsulinStatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalDays?: boolean
+    avgTotalInsulin?: boolean
+    avgDailyBolus?: boolean
+    avgDailyBasal?: boolean
+    avgDailyCarbs?: boolean
+    bolusPercentage?: boolean
+    basalPercentage?: boolean
+    insulinCarbRatio?: boolean
+    totalBolusCount?: boolean
+    totalBasalChanges?: boolean
+    avgBolusesPerDay?: boolean
+    lastCalculated?: boolean
+    updatedAt?: boolean
+    dataStartDate?: boolean
+    dataEndDate?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["insulinStats"]>
+
+  export type InsulinStatsSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    totalDays?: boolean
+    avgTotalInsulin?: boolean
+    avgDailyBolus?: boolean
+    avgDailyBasal?: boolean
+    avgDailyCarbs?: boolean
+    bolusPercentage?: boolean
+    basalPercentage?: boolean
+    insulinCarbRatio?: boolean
+    totalBolusCount?: boolean
+    totalBasalChanges?: boolean
+    avgBolusesPerDay?: boolean
+    lastCalculated?: boolean
+    updatedAt?: boolean
+    dataStartDate?: boolean
+    dataEndDate?: boolean
+  }
+
+  export type InsulinStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "totalDays" | "avgTotalInsulin" | "avgDailyBolus" | "avgDailyBasal" | "avgDailyCarbs" | "bolusPercentage" | "basalPercentage" | "insulinCarbRatio" | "totalBolusCount" | "totalBasalChanges" | "avgBolusesPerDay" | "lastCalculated" | "updatedAt" | "dataStartDate" | "dataEndDate", ExtArgs["result"]["insulinStats"]>
+  export type InsulinStatsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type InsulinStatsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type InsulinStatsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $InsulinStatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "InsulinStats"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      totalDays: number
+      avgTotalInsulin: number
+      avgDailyBolus: number
+      avgDailyBasal: number
+      avgDailyCarbs: number
+      bolusPercentage: number
+      basalPercentage: number
+      insulinCarbRatio: number | null
+      totalBolusCount: number
+      totalBasalChanges: number
+      avgBolusesPerDay: number
+      lastCalculated: Date
+      updatedAt: Date
+      dataStartDate: Date
+      dataEndDate: Date
+    }, ExtArgs["result"]["insulinStats"]>
+    composites: {}
+  }
+
+  type InsulinStatsGetPayload<S extends boolean | null | undefined | InsulinStatsDefaultArgs> = $Result.GetResult<Prisma.$InsulinStatsPayload, S>
+
+  type InsulinStatsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InsulinStatsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InsulinStatsCountAggregateInputType | true
+    }
+
+  export interface InsulinStatsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InsulinStats'], meta: { name: 'InsulinStats' } }
+    /**
+     * Find zero or one InsulinStats that matches the filter.
+     * @param {InsulinStatsFindUniqueArgs} args - Arguments to find a InsulinStats
+     * @example
+     * // Get one InsulinStats
+     * const insulinStats = await prisma.insulinStats.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InsulinStatsFindUniqueArgs>(args: SelectSubset<T, InsulinStatsFindUniqueArgs<ExtArgs>>): Prisma__InsulinStatsClient<$Result.GetResult<Prisma.$InsulinStatsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one InsulinStats that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InsulinStatsFindUniqueOrThrowArgs} args - Arguments to find a InsulinStats
+     * @example
+     * // Get one InsulinStats
+     * const insulinStats = await prisma.insulinStats.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InsulinStatsFindUniqueOrThrowArgs>(args: SelectSubset<T, InsulinStatsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InsulinStatsClient<$Result.GetResult<Prisma.$InsulinStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InsulinStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsulinStatsFindFirstArgs} args - Arguments to find a InsulinStats
+     * @example
+     * // Get one InsulinStats
+     * const insulinStats = await prisma.insulinStats.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InsulinStatsFindFirstArgs>(args?: SelectSubset<T, InsulinStatsFindFirstArgs<ExtArgs>>): Prisma__InsulinStatsClient<$Result.GetResult<Prisma.$InsulinStatsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InsulinStats that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsulinStatsFindFirstOrThrowArgs} args - Arguments to find a InsulinStats
+     * @example
+     * // Get one InsulinStats
+     * const insulinStats = await prisma.insulinStats.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InsulinStatsFindFirstOrThrowArgs>(args?: SelectSubset<T, InsulinStatsFindFirstOrThrowArgs<ExtArgs>>): Prisma__InsulinStatsClient<$Result.GetResult<Prisma.$InsulinStatsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more InsulinStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsulinStatsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all InsulinStats
+     * const insulinStats = await prisma.insulinStats.findMany()
+     * 
+     * // Get first 10 InsulinStats
+     * const insulinStats = await prisma.insulinStats.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const insulinStatsWithIdOnly = await prisma.insulinStats.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InsulinStatsFindManyArgs>(args?: SelectSubset<T, InsulinStatsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsulinStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a InsulinStats.
+     * @param {InsulinStatsCreateArgs} args - Arguments to create a InsulinStats.
+     * @example
+     * // Create one InsulinStats
+     * const InsulinStats = await prisma.insulinStats.create({
+     *   data: {
+     *     // ... data to create a InsulinStats
+     *   }
+     * })
+     * 
+     */
+    create<T extends InsulinStatsCreateArgs>(args: SelectSubset<T, InsulinStatsCreateArgs<ExtArgs>>): Prisma__InsulinStatsClient<$Result.GetResult<Prisma.$InsulinStatsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many InsulinStats.
+     * @param {InsulinStatsCreateManyArgs} args - Arguments to create many InsulinStats.
+     * @example
+     * // Create many InsulinStats
+     * const insulinStats = await prisma.insulinStats.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InsulinStatsCreateManyArgs>(args?: SelectSubset<T, InsulinStatsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many InsulinStats and returns the data saved in the database.
+     * @param {InsulinStatsCreateManyAndReturnArgs} args - Arguments to create many InsulinStats.
+     * @example
+     * // Create many InsulinStats
+     * const insulinStats = await prisma.insulinStats.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many InsulinStats and only return the `id`
+     * const insulinStatsWithIdOnly = await prisma.insulinStats.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InsulinStatsCreateManyAndReturnArgs>(args?: SelectSubset<T, InsulinStatsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsulinStatsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a InsulinStats.
+     * @param {InsulinStatsDeleteArgs} args - Arguments to delete one InsulinStats.
+     * @example
+     * // Delete one InsulinStats
+     * const InsulinStats = await prisma.insulinStats.delete({
+     *   where: {
+     *     // ... filter to delete one InsulinStats
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InsulinStatsDeleteArgs>(args: SelectSubset<T, InsulinStatsDeleteArgs<ExtArgs>>): Prisma__InsulinStatsClient<$Result.GetResult<Prisma.$InsulinStatsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one InsulinStats.
+     * @param {InsulinStatsUpdateArgs} args - Arguments to update one InsulinStats.
+     * @example
+     * // Update one InsulinStats
+     * const insulinStats = await prisma.insulinStats.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InsulinStatsUpdateArgs>(args: SelectSubset<T, InsulinStatsUpdateArgs<ExtArgs>>): Prisma__InsulinStatsClient<$Result.GetResult<Prisma.$InsulinStatsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more InsulinStats.
+     * @param {InsulinStatsDeleteManyArgs} args - Arguments to filter InsulinStats to delete.
+     * @example
+     * // Delete a few InsulinStats
+     * const { count } = await prisma.insulinStats.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InsulinStatsDeleteManyArgs>(args?: SelectSubset<T, InsulinStatsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InsulinStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsulinStatsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many InsulinStats
+     * const insulinStats = await prisma.insulinStats.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InsulinStatsUpdateManyArgs>(args: SelectSubset<T, InsulinStatsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InsulinStats and returns the data updated in the database.
+     * @param {InsulinStatsUpdateManyAndReturnArgs} args - Arguments to update many InsulinStats.
+     * @example
+     * // Update many InsulinStats
+     * const insulinStats = await prisma.insulinStats.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more InsulinStats and only return the `id`
+     * const insulinStatsWithIdOnly = await prisma.insulinStats.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InsulinStatsUpdateManyAndReturnArgs>(args: SelectSubset<T, InsulinStatsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InsulinStatsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one InsulinStats.
+     * @param {InsulinStatsUpsertArgs} args - Arguments to update or create a InsulinStats.
+     * @example
+     * // Update or create a InsulinStats
+     * const insulinStats = await prisma.insulinStats.upsert({
+     *   create: {
+     *     // ... data to create a InsulinStats
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the InsulinStats we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InsulinStatsUpsertArgs>(args: SelectSubset<T, InsulinStatsUpsertArgs<ExtArgs>>): Prisma__InsulinStatsClient<$Result.GetResult<Prisma.$InsulinStatsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of InsulinStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsulinStatsCountArgs} args - Arguments to filter InsulinStats to count.
+     * @example
+     * // Count the number of InsulinStats
+     * const count = await prisma.insulinStats.count({
+     *   where: {
+     *     // ... the filter for the InsulinStats we want to count
+     *   }
+     * })
+    **/
+    count<T extends InsulinStatsCountArgs>(
+      args?: Subset<T, InsulinStatsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InsulinStatsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a InsulinStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsulinStatsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InsulinStatsAggregateArgs>(args: Subset<T, InsulinStatsAggregateArgs>): Prisma.PrismaPromise<GetInsulinStatsAggregateType<T>>
+
+    /**
+     * Group by InsulinStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InsulinStatsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InsulinStatsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InsulinStatsGroupByArgs['orderBy'] }
+        : { orderBy?: InsulinStatsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InsulinStatsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInsulinStatsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the InsulinStats model
+   */
+  readonly fields: InsulinStatsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for InsulinStats.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InsulinStatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the InsulinStats model
+   */
+  interface InsulinStatsFieldRefs {
+    readonly id: FieldRef<"InsulinStats", 'String'>
+    readonly userId: FieldRef<"InsulinStats", 'String'>
+    readonly totalDays: FieldRef<"InsulinStats", 'Int'>
+    readonly avgTotalInsulin: FieldRef<"InsulinStats", 'Float'>
+    readonly avgDailyBolus: FieldRef<"InsulinStats", 'Float'>
+    readonly avgDailyBasal: FieldRef<"InsulinStats", 'Float'>
+    readonly avgDailyCarbs: FieldRef<"InsulinStats", 'Float'>
+    readonly bolusPercentage: FieldRef<"InsulinStats", 'Float'>
+    readonly basalPercentage: FieldRef<"InsulinStats", 'Float'>
+    readonly insulinCarbRatio: FieldRef<"InsulinStats", 'Float'>
+    readonly totalBolusCount: FieldRef<"InsulinStats", 'Int'>
+    readonly totalBasalChanges: FieldRef<"InsulinStats", 'Int'>
+    readonly avgBolusesPerDay: FieldRef<"InsulinStats", 'Float'>
+    readonly lastCalculated: FieldRef<"InsulinStats", 'DateTime'>
+    readonly updatedAt: FieldRef<"InsulinStats", 'DateTime'>
+    readonly dataStartDate: FieldRef<"InsulinStats", 'DateTime'>
+    readonly dataEndDate: FieldRef<"InsulinStats", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * InsulinStats findUnique
+   */
+  export type InsulinStatsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsulinStats
+     */
+    select?: InsulinStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsulinStats
+     */
+    omit?: InsulinStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsulinStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which InsulinStats to fetch.
+     */
+    where: InsulinStatsWhereUniqueInput
+  }
+
+  /**
+   * InsulinStats findUniqueOrThrow
+   */
+  export type InsulinStatsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsulinStats
+     */
+    select?: InsulinStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsulinStats
+     */
+    omit?: InsulinStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsulinStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which InsulinStats to fetch.
+     */
+    where: InsulinStatsWhereUniqueInput
+  }
+
+  /**
+   * InsulinStats findFirst
+   */
+  export type InsulinStatsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsulinStats
+     */
+    select?: InsulinStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsulinStats
+     */
+    omit?: InsulinStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsulinStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which InsulinStats to fetch.
+     */
+    where?: InsulinStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsulinStats to fetch.
+     */
+    orderBy?: InsulinStatsOrderByWithRelationInput | InsulinStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InsulinStats.
+     */
+    cursor?: InsulinStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsulinStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsulinStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InsulinStats.
+     */
+    distinct?: InsulinStatsScalarFieldEnum | InsulinStatsScalarFieldEnum[]
+  }
+
+  /**
+   * InsulinStats findFirstOrThrow
+   */
+  export type InsulinStatsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsulinStats
+     */
+    select?: InsulinStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsulinStats
+     */
+    omit?: InsulinStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsulinStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which InsulinStats to fetch.
+     */
+    where?: InsulinStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsulinStats to fetch.
+     */
+    orderBy?: InsulinStatsOrderByWithRelationInput | InsulinStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InsulinStats.
+     */
+    cursor?: InsulinStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsulinStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsulinStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InsulinStats.
+     */
+    distinct?: InsulinStatsScalarFieldEnum | InsulinStatsScalarFieldEnum[]
+  }
+
+  /**
+   * InsulinStats findMany
+   */
+  export type InsulinStatsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsulinStats
+     */
+    select?: InsulinStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsulinStats
+     */
+    omit?: InsulinStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsulinStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which InsulinStats to fetch.
+     */
+    where?: InsulinStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InsulinStats to fetch.
+     */
+    orderBy?: InsulinStatsOrderByWithRelationInput | InsulinStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing InsulinStats.
+     */
+    cursor?: InsulinStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InsulinStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InsulinStats.
+     */
+    skip?: number
+    distinct?: InsulinStatsScalarFieldEnum | InsulinStatsScalarFieldEnum[]
+  }
+
+  /**
+   * InsulinStats create
+   */
+  export type InsulinStatsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsulinStats
+     */
+    select?: InsulinStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsulinStats
+     */
+    omit?: InsulinStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsulinStatsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a InsulinStats.
+     */
+    data: XOR<InsulinStatsCreateInput, InsulinStatsUncheckedCreateInput>
+  }
+
+  /**
+   * InsulinStats createMany
+   */
+  export type InsulinStatsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many InsulinStats.
+     */
+    data: InsulinStatsCreateManyInput | InsulinStatsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * InsulinStats createManyAndReturn
+   */
+  export type InsulinStatsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsulinStats
+     */
+    select?: InsulinStatsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsulinStats
+     */
+    omit?: InsulinStatsOmit<ExtArgs> | null
+    /**
+     * The data used to create many InsulinStats.
+     */
+    data: InsulinStatsCreateManyInput | InsulinStatsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsulinStatsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InsulinStats update
+   */
+  export type InsulinStatsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsulinStats
+     */
+    select?: InsulinStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsulinStats
+     */
+    omit?: InsulinStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsulinStatsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a InsulinStats.
+     */
+    data: XOR<InsulinStatsUpdateInput, InsulinStatsUncheckedUpdateInput>
+    /**
+     * Choose, which InsulinStats to update.
+     */
+    where: InsulinStatsWhereUniqueInput
+  }
+
+  /**
+   * InsulinStats updateMany
+   */
+  export type InsulinStatsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update InsulinStats.
+     */
+    data: XOR<InsulinStatsUpdateManyMutationInput, InsulinStatsUncheckedUpdateManyInput>
+    /**
+     * Filter which InsulinStats to update
+     */
+    where?: InsulinStatsWhereInput
+    /**
+     * Limit how many InsulinStats to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * InsulinStats updateManyAndReturn
+   */
+  export type InsulinStatsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsulinStats
+     */
+    select?: InsulinStatsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsulinStats
+     */
+    omit?: InsulinStatsOmit<ExtArgs> | null
+    /**
+     * The data used to update InsulinStats.
+     */
+    data: XOR<InsulinStatsUpdateManyMutationInput, InsulinStatsUncheckedUpdateManyInput>
+    /**
+     * Filter which InsulinStats to update
+     */
+    where?: InsulinStatsWhereInput
+    /**
+     * Limit how many InsulinStats to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsulinStatsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InsulinStats upsert
+   */
+  export type InsulinStatsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsulinStats
+     */
+    select?: InsulinStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsulinStats
+     */
+    omit?: InsulinStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsulinStatsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the InsulinStats to update in case it exists.
+     */
+    where: InsulinStatsWhereUniqueInput
+    /**
+     * In case the InsulinStats found by the `where` argument doesn't exist, create a new InsulinStats with this data.
+     */
+    create: XOR<InsulinStatsCreateInput, InsulinStatsUncheckedCreateInput>
+    /**
+     * In case the InsulinStats was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InsulinStatsUpdateInput, InsulinStatsUncheckedUpdateInput>
+  }
+
+  /**
+   * InsulinStats delete
+   */
+  export type InsulinStatsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsulinStats
+     */
+    select?: InsulinStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsulinStats
+     */
+    omit?: InsulinStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsulinStatsInclude<ExtArgs> | null
+    /**
+     * Filter which InsulinStats to delete.
+     */
+    where: InsulinStatsWhereUniqueInput
+  }
+
+  /**
+   * InsulinStats deleteMany
+   */
+  export type InsulinStatsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InsulinStats to delete
+     */
+    where?: InsulinStatsWhereInput
+    /**
+     * Limit how many InsulinStats to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * InsulinStats without action
+   */
+  export type InsulinStatsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InsulinStats
+     */
+    select?: InsulinStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InsulinStats
+     */
+    omit?: InsulinStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InsulinStatsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BolusRecord
+   */
+
+  export type AggregateBolusRecord = {
+    _count: BolusRecordCountAggregateOutputType | null
+    _avg: BolusRecordAvgAggregateOutputType | null
+    _sum: BolusRecordSumAggregateOutputType | null
+    _min: BolusRecordMinAggregateOutputType | null
+    _max: BolusRecordMaxAggregateOutputType | null
+  }
+
+  export type BolusRecordAvgAggregateOutputType = {
+    amount: number | null
+    duration: number | null
+  }
+
+  export type BolusRecordSumAggregateOutputType = {
+    amount: number | null
+    duration: number | null
+  }
+
+  export type BolusRecordMinAggregateOutputType = {
+    id: string | null
+    timestamp: Date | null
+    amount: number | null
+    bolusType: string | null
+    duration: number | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BolusRecordMaxAggregateOutputType = {
+    id: string | null
+    timestamp: Date | null
+    amount: number | null
+    bolusType: string | null
+    duration: number | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BolusRecordCountAggregateOutputType = {
+    id: number
+    timestamp: number
+    amount: number
+    bolusType: number
+    duration: number
+    userId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BolusRecordAvgAggregateInputType = {
+    amount?: true
+    duration?: true
+  }
+
+  export type BolusRecordSumAggregateInputType = {
+    amount?: true
+    duration?: true
+  }
+
+  export type BolusRecordMinAggregateInputType = {
+    id?: true
+    timestamp?: true
+    amount?: true
+    bolusType?: true
+    duration?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BolusRecordMaxAggregateInputType = {
+    id?: true
+    timestamp?: true
+    amount?: true
+    bolusType?: true
+    duration?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BolusRecordCountAggregateInputType = {
+    id?: true
+    timestamp?: true
+    amount?: true
+    bolusType?: true
+    duration?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BolusRecordAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BolusRecord to aggregate.
+     */
+    where?: BolusRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BolusRecords to fetch.
+     */
+    orderBy?: BolusRecordOrderByWithRelationInput | BolusRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BolusRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BolusRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BolusRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BolusRecords
+    **/
+    _count?: true | BolusRecordCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BolusRecordAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BolusRecordSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BolusRecordMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BolusRecordMaxAggregateInputType
+  }
+
+  export type GetBolusRecordAggregateType<T extends BolusRecordAggregateArgs> = {
+        [P in keyof T & keyof AggregateBolusRecord]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBolusRecord[P]>
+      : GetScalarType<T[P], AggregateBolusRecord[P]>
+  }
+
+
+
+
+  export type BolusRecordGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BolusRecordWhereInput
+    orderBy?: BolusRecordOrderByWithAggregationInput | BolusRecordOrderByWithAggregationInput[]
+    by: BolusRecordScalarFieldEnum[] | BolusRecordScalarFieldEnum
+    having?: BolusRecordScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BolusRecordCountAggregateInputType | true
+    _avg?: BolusRecordAvgAggregateInputType
+    _sum?: BolusRecordSumAggregateInputType
+    _min?: BolusRecordMinAggregateInputType
+    _max?: BolusRecordMaxAggregateInputType
+  }
+
+  export type BolusRecordGroupByOutputType = {
+    id: string
+    timestamp: Date
+    amount: number
+    bolusType: string
+    duration: number | null
+    userId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: BolusRecordCountAggregateOutputType | null
+    _avg: BolusRecordAvgAggregateOutputType | null
+    _sum: BolusRecordSumAggregateOutputType | null
+    _min: BolusRecordMinAggregateOutputType | null
+    _max: BolusRecordMaxAggregateOutputType | null
+  }
+
+  type GetBolusRecordGroupByPayload<T extends BolusRecordGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BolusRecordGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BolusRecordGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BolusRecordGroupByOutputType[P]>
+            : GetScalarType<T[P], BolusRecordGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BolusRecordSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timestamp?: boolean
+    amount?: boolean
+    bolusType?: boolean
+    duration?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bolusRecord"]>
+
+  export type BolusRecordSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timestamp?: boolean
+    amount?: boolean
+    bolusType?: boolean
+    duration?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bolusRecord"]>
+
+  export type BolusRecordSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timestamp?: boolean
+    amount?: boolean
+    bolusType?: boolean
+    duration?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bolusRecord"]>
+
+  export type BolusRecordSelectScalar = {
+    id?: boolean
+    timestamp?: boolean
+    amount?: boolean
+    bolusType?: boolean
+    duration?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BolusRecordOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "timestamp" | "amount" | "bolusType" | "duration" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["bolusRecord"]>
+  export type BolusRecordInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BolusRecordIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BolusRecordIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $BolusRecordPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BolusRecord"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      timestamp: Date
+      amount: number
+      bolusType: string
+      duration: number | null
+      userId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["bolusRecord"]>
+    composites: {}
+  }
+
+  type BolusRecordGetPayload<S extends boolean | null | undefined | BolusRecordDefaultArgs> = $Result.GetResult<Prisma.$BolusRecordPayload, S>
+
+  type BolusRecordCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BolusRecordFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BolusRecordCountAggregateInputType | true
+    }
+
+  export interface BolusRecordDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BolusRecord'], meta: { name: 'BolusRecord' } }
+    /**
+     * Find zero or one BolusRecord that matches the filter.
+     * @param {BolusRecordFindUniqueArgs} args - Arguments to find a BolusRecord
+     * @example
+     * // Get one BolusRecord
+     * const bolusRecord = await prisma.bolusRecord.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BolusRecordFindUniqueArgs>(args: SelectSubset<T, BolusRecordFindUniqueArgs<ExtArgs>>): Prisma__BolusRecordClient<$Result.GetResult<Prisma.$BolusRecordPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BolusRecord that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BolusRecordFindUniqueOrThrowArgs} args - Arguments to find a BolusRecord
+     * @example
+     * // Get one BolusRecord
+     * const bolusRecord = await prisma.bolusRecord.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BolusRecordFindUniqueOrThrowArgs>(args: SelectSubset<T, BolusRecordFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BolusRecordClient<$Result.GetResult<Prisma.$BolusRecordPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BolusRecord that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BolusRecordFindFirstArgs} args - Arguments to find a BolusRecord
+     * @example
+     * // Get one BolusRecord
+     * const bolusRecord = await prisma.bolusRecord.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BolusRecordFindFirstArgs>(args?: SelectSubset<T, BolusRecordFindFirstArgs<ExtArgs>>): Prisma__BolusRecordClient<$Result.GetResult<Prisma.$BolusRecordPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BolusRecord that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BolusRecordFindFirstOrThrowArgs} args - Arguments to find a BolusRecord
+     * @example
+     * // Get one BolusRecord
+     * const bolusRecord = await prisma.bolusRecord.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BolusRecordFindFirstOrThrowArgs>(args?: SelectSubset<T, BolusRecordFindFirstOrThrowArgs<ExtArgs>>): Prisma__BolusRecordClient<$Result.GetResult<Prisma.$BolusRecordPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BolusRecords that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BolusRecordFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BolusRecords
+     * const bolusRecords = await prisma.bolusRecord.findMany()
+     * 
+     * // Get first 10 BolusRecords
+     * const bolusRecords = await prisma.bolusRecord.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bolusRecordWithIdOnly = await prisma.bolusRecord.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BolusRecordFindManyArgs>(args?: SelectSubset<T, BolusRecordFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BolusRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BolusRecord.
+     * @param {BolusRecordCreateArgs} args - Arguments to create a BolusRecord.
+     * @example
+     * // Create one BolusRecord
+     * const BolusRecord = await prisma.bolusRecord.create({
+     *   data: {
+     *     // ... data to create a BolusRecord
+     *   }
+     * })
+     * 
+     */
+    create<T extends BolusRecordCreateArgs>(args: SelectSubset<T, BolusRecordCreateArgs<ExtArgs>>): Prisma__BolusRecordClient<$Result.GetResult<Prisma.$BolusRecordPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BolusRecords.
+     * @param {BolusRecordCreateManyArgs} args - Arguments to create many BolusRecords.
+     * @example
+     * // Create many BolusRecords
+     * const bolusRecord = await prisma.bolusRecord.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BolusRecordCreateManyArgs>(args?: SelectSubset<T, BolusRecordCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BolusRecords and returns the data saved in the database.
+     * @param {BolusRecordCreateManyAndReturnArgs} args - Arguments to create many BolusRecords.
+     * @example
+     * // Create many BolusRecords
+     * const bolusRecord = await prisma.bolusRecord.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BolusRecords and only return the `id`
+     * const bolusRecordWithIdOnly = await prisma.bolusRecord.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BolusRecordCreateManyAndReturnArgs>(args?: SelectSubset<T, BolusRecordCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BolusRecordPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BolusRecord.
+     * @param {BolusRecordDeleteArgs} args - Arguments to delete one BolusRecord.
+     * @example
+     * // Delete one BolusRecord
+     * const BolusRecord = await prisma.bolusRecord.delete({
+     *   where: {
+     *     // ... filter to delete one BolusRecord
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BolusRecordDeleteArgs>(args: SelectSubset<T, BolusRecordDeleteArgs<ExtArgs>>): Prisma__BolusRecordClient<$Result.GetResult<Prisma.$BolusRecordPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BolusRecord.
+     * @param {BolusRecordUpdateArgs} args - Arguments to update one BolusRecord.
+     * @example
+     * // Update one BolusRecord
+     * const bolusRecord = await prisma.bolusRecord.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BolusRecordUpdateArgs>(args: SelectSubset<T, BolusRecordUpdateArgs<ExtArgs>>): Prisma__BolusRecordClient<$Result.GetResult<Prisma.$BolusRecordPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BolusRecords.
+     * @param {BolusRecordDeleteManyArgs} args - Arguments to filter BolusRecords to delete.
+     * @example
+     * // Delete a few BolusRecords
+     * const { count } = await prisma.bolusRecord.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BolusRecordDeleteManyArgs>(args?: SelectSubset<T, BolusRecordDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BolusRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BolusRecordUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BolusRecords
+     * const bolusRecord = await prisma.bolusRecord.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BolusRecordUpdateManyArgs>(args: SelectSubset<T, BolusRecordUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BolusRecords and returns the data updated in the database.
+     * @param {BolusRecordUpdateManyAndReturnArgs} args - Arguments to update many BolusRecords.
+     * @example
+     * // Update many BolusRecords
+     * const bolusRecord = await prisma.bolusRecord.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BolusRecords and only return the `id`
+     * const bolusRecordWithIdOnly = await prisma.bolusRecord.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BolusRecordUpdateManyAndReturnArgs>(args: SelectSubset<T, BolusRecordUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BolusRecordPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BolusRecord.
+     * @param {BolusRecordUpsertArgs} args - Arguments to update or create a BolusRecord.
+     * @example
+     * // Update or create a BolusRecord
+     * const bolusRecord = await prisma.bolusRecord.upsert({
+     *   create: {
+     *     // ... data to create a BolusRecord
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BolusRecord we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BolusRecordUpsertArgs>(args: SelectSubset<T, BolusRecordUpsertArgs<ExtArgs>>): Prisma__BolusRecordClient<$Result.GetResult<Prisma.$BolusRecordPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BolusRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BolusRecordCountArgs} args - Arguments to filter BolusRecords to count.
+     * @example
+     * // Count the number of BolusRecords
+     * const count = await prisma.bolusRecord.count({
+     *   where: {
+     *     // ... the filter for the BolusRecords we want to count
+     *   }
+     * })
+    **/
+    count<T extends BolusRecordCountArgs>(
+      args?: Subset<T, BolusRecordCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BolusRecordCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BolusRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BolusRecordAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BolusRecordAggregateArgs>(args: Subset<T, BolusRecordAggregateArgs>): Prisma.PrismaPromise<GetBolusRecordAggregateType<T>>
+
+    /**
+     * Group by BolusRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BolusRecordGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BolusRecordGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BolusRecordGroupByArgs['orderBy'] }
+        : { orderBy?: BolusRecordGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BolusRecordGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBolusRecordGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BolusRecord model
+   */
+  readonly fields: BolusRecordFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BolusRecord.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BolusRecordClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BolusRecord model
+   */
+  interface BolusRecordFieldRefs {
+    readonly id: FieldRef<"BolusRecord", 'String'>
+    readonly timestamp: FieldRef<"BolusRecord", 'DateTime'>
+    readonly amount: FieldRef<"BolusRecord", 'Float'>
+    readonly bolusType: FieldRef<"BolusRecord", 'String'>
+    readonly duration: FieldRef<"BolusRecord", 'Int'>
+    readonly userId: FieldRef<"BolusRecord", 'String'>
+    readonly createdAt: FieldRef<"BolusRecord", 'DateTime'>
+    readonly updatedAt: FieldRef<"BolusRecord", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BolusRecord findUnique
+   */
+  export type BolusRecordFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BolusRecord
+     */
+    select?: BolusRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BolusRecord
+     */
+    omit?: BolusRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BolusRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which BolusRecord to fetch.
+     */
+    where: BolusRecordWhereUniqueInput
+  }
+
+  /**
+   * BolusRecord findUniqueOrThrow
+   */
+  export type BolusRecordFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BolusRecord
+     */
+    select?: BolusRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BolusRecord
+     */
+    omit?: BolusRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BolusRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which BolusRecord to fetch.
+     */
+    where: BolusRecordWhereUniqueInput
+  }
+
+  /**
+   * BolusRecord findFirst
+   */
+  export type BolusRecordFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BolusRecord
+     */
+    select?: BolusRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BolusRecord
+     */
+    omit?: BolusRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BolusRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which BolusRecord to fetch.
+     */
+    where?: BolusRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BolusRecords to fetch.
+     */
+    orderBy?: BolusRecordOrderByWithRelationInput | BolusRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BolusRecords.
+     */
+    cursor?: BolusRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BolusRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BolusRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BolusRecords.
+     */
+    distinct?: BolusRecordScalarFieldEnum | BolusRecordScalarFieldEnum[]
+  }
+
+  /**
+   * BolusRecord findFirstOrThrow
+   */
+  export type BolusRecordFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BolusRecord
+     */
+    select?: BolusRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BolusRecord
+     */
+    omit?: BolusRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BolusRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which BolusRecord to fetch.
+     */
+    where?: BolusRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BolusRecords to fetch.
+     */
+    orderBy?: BolusRecordOrderByWithRelationInput | BolusRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BolusRecords.
+     */
+    cursor?: BolusRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BolusRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BolusRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BolusRecords.
+     */
+    distinct?: BolusRecordScalarFieldEnum | BolusRecordScalarFieldEnum[]
+  }
+
+  /**
+   * BolusRecord findMany
+   */
+  export type BolusRecordFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BolusRecord
+     */
+    select?: BolusRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BolusRecord
+     */
+    omit?: BolusRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BolusRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which BolusRecords to fetch.
+     */
+    where?: BolusRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BolusRecords to fetch.
+     */
+    orderBy?: BolusRecordOrderByWithRelationInput | BolusRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BolusRecords.
+     */
+    cursor?: BolusRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BolusRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BolusRecords.
+     */
+    skip?: number
+    distinct?: BolusRecordScalarFieldEnum | BolusRecordScalarFieldEnum[]
+  }
+
+  /**
+   * BolusRecord create
+   */
+  export type BolusRecordCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BolusRecord
+     */
+    select?: BolusRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BolusRecord
+     */
+    omit?: BolusRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BolusRecordInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BolusRecord.
+     */
+    data: XOR<BolusRecordCreateInput, BolusRecordUncheckedCreateInput>
+  }
+
+  /**
+   * BolusRecord createMany
+   */
+  export type BolusRecordCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BolusRecords.
+     */
+    data: BolusRecordCreateManyInput | BolusRecordCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BolusRecord createManyAndReturn
+   */
+  export type BolusRecordCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BolusRecord
+     */
+    select?: BolusRecordSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BolusRecord
+     */
+    omit?: BolusRecordOmit<ExtArgs> | null
+    /**
+     * The data used to create many BolusRecords.
+     */
+    data: BolusRecordCreateManyInput | BolusRecordCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BolusRecordIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BolusRecord update
+   */
+  export type BolusRecordUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BolusRecord
+     */
+    select?: BolusRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BolusRecord
+     */
+    omit?: BolusRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BolusRecordInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BolusRecord.
+     */
+    data: XOR<BolusRecordUpdateInput, BolusRecordUncheckedUpdateInput>
+    /**
+     * Choose, which BolusRecord to update.
+     */
+    where: BolusRecordWhereUniqueInput
+  }
+
+  /**
+   * BolusRecord updateMany
+   */
+  export type BolusRecordUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BolusRecords.
+     */
+    data: XOR<BolusRecordUpdateManyMutationInput, BolusRecordUncheckedUpdateManyInput>
+    /**
+     * Filter which BolusRecords to update
+     */
+    where?: BolusRecordWhereInput
+    /**
+     * Limit how many BolusRecords to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BolusRecord updateManyAndReturn
+   */
+  export type BolusRecordUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BolusRecord
+     */
+    select?: BolusRecordSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BolusRecord
+     */
+    omit?: BolusRecordOmit<ExtArgs> | null
+    /**
+     * The data used to update BolusRecords.
+     */
+    data: XOR<BolusRecordUpdateManyMutationInput, BolusRecordUncheckedUpdateManyInput>
+    /**
+     * Filter which BolusRecords to update
+     */
+    where?: BolusRecordWhereInput
+    /**
+     * Limit how many BolusRecords to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BolusRecordIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BolusRecord upsert
+   */
+  export type BolusRecordUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BolusRecord
+     */
+    select?: BolusRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BolusRecord
+     */
+    omit?: BolusRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BolusRecordInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BolusRecord to update in case it exists.
+     */
+    where: BolusRecordWhereUniqueInput
+    /**
+     * In case the BolusRecord found by the `where` argument doesn't exist, create a new BolusRecord with this data.
+     */
+    create: XOR<BolusRecordCreateInput, BolusRecordUncheckedCreateInput>
+    /**
+     * In case the BolusRecord was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BolusRecordUpdateInput, BolusRecordUncheckedUpdateInput>
+  }
+
+  /**
+   * BolusRecord delete
+   */
+  export type BolusRecordDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BolusRecord
+     */
+    select?: BolusRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BolusRecord
+     */
+    omit?: BolusRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BolusRecordInclude<ExtArgs> | null
+    /**
+     * Filter which BolusRecord to delete.
+     */
+    where: BolusRecordWhereUniqueInput
+  }
+
+  /**
+   * BolusRecord deleteMany
+   */
+  export type BolusRecordDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BolusRecords to delete
+     */
+    where?: BolusRecordWhereInput
+    /**
+     * Limit how many BolusRecords to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BolusRecord without action
+   */
+  export type BolusRecordDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BolusRecord
+     */
+    select?: BolusRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BolusRecord
+     */
+    omit?: BolusRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BolusRecordInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BasalRecord
+   */
+
+  export type AggregateBasalRecord = {
+    _count: BasalRecordCountAggregateOutputType | null
+    _avg: BasalRecordAvgAggregateOutputType | null
+    _sum: BasalRecordSumAggregateOutputType | null
+    _min: BasalRecordMinAggregateOutputType | null
+    _max: BasalRecordMaxAggregateOutputType | null
+  }
+
+  export type BasalRecordAvgAggregateOutputType = {
+    rate: number | null
+    duration: number | null
+  }
+
+  export type BasalRecordSumAggregateOutputType = {
+    rate: number | null
+    duration: number | null
+  }
+
+  export type BasalRecordMinAggregateOutputType = {
+    id: string | null
+    timestamp: Date | null
+    rate: number | null
+    duration: number | null
+    changeType: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BasalRecordMaxAggregateOutputType = {
+    id: string | null
+    timestamp: Date | null
+    rate: number | null
+    duration: number | null
+    changeType: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BasalRecordCountAggregateOutputType = {
+    id: number
+    timestamp: number
+    rate: number
+    duration: number
+    changeType: number
+    userId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BasalRecordAvgAggregateInputType = {
+    rate?: true
+    duration?: true
+  }
+
+  export type BasalRecordSumAggregateInputType = {
+    rate?: true
+    duration?: true
+  }
+
+  export type BasalRecordMinAggregateInputType = {
+    id?: true
+    timestamp?: true
+    rate?: true
+    duration?: true
+    changeType?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BasalRecordMaxAggregateInputType = {
+    id?: true
+    timestamp?: true
+    rate?: true
+    duration?: true
+    changeType?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BasalRecordCountAggregateInputType = {
+    id?: true
+    timestamp?: true
+    rate?: true
+    duration?: true
+    changeType?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BasalRecordAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BasalRecord to aggregate.
+     */
+    where?: BasalRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BasalRecords to fetch.
+     */
+    orderBy?: BasalRecordOrderByWithRelationInput | BasalRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BasalRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BasalRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BasalRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BasalRecords
+    **/
+    _count?: true | BasalRecordCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BasalRecordAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BasalRecordSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BasalRecordMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BasalRecordMaxAggregateInputType
+  }
+
+  export type GetBasalRecordAggregateType<T extends BasalRecordAggregateArgs> = {
+        [P in keyof T & keyof AggregateBasalRecord]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBasalRecord[P]>
+      : GetScalarType<T[P], AggregateBasalRecord[P]>
+  }
+
+
+
+
+  export type BasalRecordGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BasalRecordWhereInput
+    orderBy?: BasalRecordOrderByWithAggregationInput | BasalRecordOrderByWithAggregationInput[]
+    by: BasalRecordScalarFieldEnum[] | BasalRecordScalarFieldEnum
+    having?: BasalRecordScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BasalRecordCountAggregateInputType | true
+    _avg?: BasalRecordAvgAggregateInputType
+    _sum?: BasalRecordSumAggregateInputType
+    _min?: BasalRecordMinAggregateInputType
+    _max?: BasalRecordMaxAggregateInputType
+  }
+
+  export type BasalRecordGroupByOutputType = {
+    id: string
+    timestamp: Date
+    rate: number
+    duration: number
+    changeType: string | null
+    userId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: BasalRecordCountAggregateOutputType | null
+    _avg: BasalRecordAvgAggregateOutputType | null
+    _sum: BasalRecordSumAggregateOutputType | null
+    _min: BasalRecordMinAggregateOutputType | null
+    _max: BasalRecordMaxAggregateOutputType | null
+  }
+
+  type GetBasalRecordGroupByPayload<T extends BasalRecordGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BasalRecordGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BasalRecordGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BasalRecordGroupByOutputType[P]>
+            : GetScalarType<T[P], BasalRecordGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BasalRecordSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timestamp?: boolean
+    rate?: boolean
+    duration?: boolean
+    changeType?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["basalRecord"]>
+
+  export type BasalRecordSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timestamp?: boolean
+    rate?: boolean
+    duration?: boolean
+    changeType?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["basalRecord"]>
+
+  export type BasalRecordSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timestamp?: boolean
+    rate?: boolean
+    duration?: boolean
+    changeType?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["basalRecord"]>
+
+  export type BasalRecordSelectScalar = {
+    id?: boolean
+    timestamp?: boolean
+    rate?: boolean
+    duration?: boolean
+    changeType?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BasalRecordOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "timestamp" | "rate" | "duration" | "changeType" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["basalRecord"]>
+  export type BasalRecordInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BasalRecordIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BasalRecordIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $BasalRecordPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BasalRecord"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      timestamp: Date
+      rate: number
+      duration: number
+      changeType: string | null
+      userId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["basalRecord"]>
+    composites: {}
+  }
+
+  type BasalRecordGetPayload<S extends boolean | null | undefined | BasalRecordDefaultArgs> = $Result.GetResult<Prisma.$BasalRecordPayload, S>
+
+  type BasalRecordCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BasalRecordFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BasalRecordCountAggregateInputType | true
+    }
+
+  export interface BasalRecordDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BasalRecord'], meta: { name: 'BasalRecord' } }
+    /**
+     * Find zero or one BasalRecord that matches the filter.
+     * @param {BasalRecordFindUniqueArgs} args - Arguments to find a BasalRecord
+     * @example
+     * // Get one BasalRecord
+     * const basalRecord = await prisma.basalRecord.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BasalRecordFindUniqueArgs>(args: SelectSubset<T, BasalRecordFindUniqueArgs<ExtArgs>>): Prisma__BasalRecordClient<$Result.GetResult<Prisma.$BasalRecordPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BasalRecord that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BasalRecordFindUniqueOrThrowArgs} args - Arguments to find a BasalRecord
+     * @example
+     * // Get one BasalRecord
+     * const basalRecord = await prisma.basalRecord.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BasalRecordFindUniqueOrThrowArgs>(args: SelectSubset<T, BasalRecordFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BasalRecordClient<$Result.GetResult<Prisma.$BasalRecordPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BasalRecord that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BasalRecordFindFirstArgs} args - Arguments to find a BasalRecord
+     * @example
+     * // Get one BasalRecord
+     * const basalRecord = await prisma.basalRecord.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BasalRecordFindFirstArgs>(args?: SelectSubset<T, BasalRecordFindFirstArgs<ExtArgs>>): Prisma__BasalRecordClient<$Result.GetResult<Prisma.$BasalRecordPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BasalRecord that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BasalRecordFindFirstOrThrowArgs} args - Arguments to find a BasalRecord
+     * @example
+     * // Get one BasalRecord
+     * const basalRecord = await prisma.basalRecord.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BasalRecordFindFirstOrThrowArgs>(args?: SelectSubset<T, BasalRecordFindFirstOrThrowArgs<ExtArgs>>): Prisma__BasalRecordClient<$Result.GetResult<Prisma.$BasalRecordPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BasalRecords that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BasalRecordFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BasalRecords
+     * const basalRecords = await prisma.basalRecord.findMany()
+     * 
+     * // Get first 10 BasalRecords
+     * const basalRecords = await prisma.basalRecord.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const basalRecordWithIdOnly = await prisma.basalRecord.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BasalRecordFindManyArgs>(args?: SelectSubset<T, BasalRecordFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BasalRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BasalRecord.
+     * @param {BasalRecordCreateArgs} args - Arguments to create a BasalRecord.
+     * @example
+     * // Create one BasalRecord
+     * const BasalRecord = await prisma.basalRecord.create({
+     *   data: {
+     *     // ... data to create a BasalRecord
+     *   }
+     * })
+     * 
+     */
+    create<T extends BasalRecordCreateArgs>(args: SelectSubset<T, BasalRecordCreateArgs<ExtArgs>>): Prisma__BasalRecordClient<$Result.GetResult<Prisma.$BasalRecordPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BasalRecords.
+     * @param {BasalRecordCreateManyArgs} args - Arguments to create many BasalRecords.
+     * @example
+     * // Create many BasalRecords
+     * const basalRecord = await prisma.basalRecord.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BasalRecordCreateManyArgs>(args?: SelectSubset<T, BasalRecordCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BasalRecords and returns the data saved in the database.
+     * @param {BasalRecordCreateManyAndReturnArgs} args - Arguments to create many BasalRecords.
+     * @example
+     * // Create many BasalRecords
+     * const basalRecord = await prisma.basalRecord.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BasalRecords and only return the `id`
+     * const basalRecordWithIdOnly = await prisma.basalRecord.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BasalRecordCreateManyAndReturnArgs>(args?: SelectSubset<T, BasalRecordCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BasalRecordPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BasalRecord.
+     * @param {BasalRecordDeleteArgs} args - Arguments to delete one BasalRecord.
+     * @example
+     * // Delete one BasalRecord
+     * const BasalRecord = await prisma.basalRecord.delete({
+     *   where: {
+     *     // ... filter to delete one BasalRecord
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BasalRecordDeleteArgs>(args: SelectSubset<T, BasalRecordDeleteArgs<ExtArgs>>): Prisma__BasalRecordClient<$Result.GetResult<Prisma.$BasalRecordPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BasalRecord.
+     * @param {BasalRecordUpdateArgs} args - Arguments to update one BasalRecord.
+     * @example
+     * // Update one BasalRecord
+     * const basalRecord = await prisma.basalRecord.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BasalRecordUpdateArgs>(args: SelectSubset<T, BasalRecordUpdateArgs<ExtArgs>>): Prisma__BasalRecordClient<$Result.GetResult<Prisma.$BasalRecordPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BasalRecords.
+     * @param {BasalRecordDeleteManyArgs} args - Arguments to filter BasalRecords to delete.
+     * @example
+     * // Delete a few BasalRecords
+     * const { count } = await prisma.basalRecord.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BasalRecordDeleteManyArgs>(args?: SelectSubset<T, BasalRecordDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BasalRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BasalRecordUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BasalRecords
+     * const basalRecord = await prisma.basalRecord.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BasalRecordUpdateManyArgs>(args: SelectSubset<T, BasalRecordUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BasalRecords and returns the data updated in the database.
+     * @param {BasalRecordUpdateManyAndReturnArgs} args - Arguments to update many BasalRecords.
+     * @example
+     * // Update many BasalRecords
+     * const basalRecord = await prisma.basalRecord.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BasalRecords and only return the `id`
+     * const basalRecordWithIdOnly = await prisma.basalRecord.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BasalRecordUpdateManyAndReturnArgs>(args: SelectSubset<T, BasalRecordUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BasalRecordPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BasalRecord.
+     * @param {BasalRecordUpsertArgs} args - Arguments to update or create a BasalRecord.
+     * @example
+     * // Update or create a BasalRecord
+     * const basalRecord = await prisma.basalRecord.upsert({
+     *   create: {
+     *     // ... data to create a BasalRecord
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BasalRecord we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BasalRecordUpsertArgs>(args: SelectSubset<T, BasalRecordUpsertArgs<ExtArgs>>): Prisma__BasalRecordClient<$Result.GetResult<Prisma.$BasalRecordPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BasalRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BasalRecordCountArgs} args - Arguments to filter BasalRecords to count.
+     * @example
+     * // Count the number of BasalRecords
+     * const count = await prisma.basalRecord.count({
+     *   where: {
+     *     // ... the filter for the BasalRecords we want to count
+     *   }
+     * })
+    **/
+    count<T extends BasalRecordCountArgs>(
+      args?: Subset<T, BasalRecordCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BasalRecordCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BasalRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BasalRecordAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BasalRecordAggregateArgs>(args: Subset<T, BasalRecordAggregateArgs>): Prisma.PrismaPromise<GetBasalRecordAggregateType<T>>
+
+    /**
+     * Group by BasalRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BasalRecordGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BasalRecordGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BasalRecordGroupByArgs['orderBy'] }
+        : { orderBy?: BasalRecordGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BasalRecordGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBasalRecordGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BasalRecord model
+   */
+  readonly fields: BasalRecordFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BasalRecord.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BasalRecordClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BasalRecord model
+   */
+  interface BasalRecordFieldRefs {
+    readonly id: FieldRef<"BasalRecord", 'String'>
+    readonly timestamp: FieldRef<"BasalRecord", 'DateTime'>
+    readonly rate: FieldRef<"BasalRecord", 'Float'>
+    readonly duration: FieldRef<"BasalRecord", 'Int'>
+    readonly changeType: FieldRef<"BasalRecord", 'String'>
+    readonly userId: FieldRef<"BasalRecord", 'String'>
+    readonly createdAt: FieldRef<"BasalRecord", 'DateTime'>
+    readonly updatedAt: FieldRef<"BasalRecord", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BasalRecord findUnique
+   */
+  export type BasalRecordFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BasalRecord
+     */
+    select?: BasalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BasalRecord
+     */
+    omit?: BasalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BasalRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which BasalRecord to fetch.
+     */
+    where: BasalRecordWhereUniqueInput
+  }
+
+  /**
+   * BasalRecord findUniqueOrThrow
+   */
+  export type BasalRecordFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BasalRecord
+     */
+    select?: BasalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BasalRecord
+     */
+    omit?: BasalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BasalRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which BasalRecord to fetch.
+     */
+    where: BasalRecordWhereUniqueInput
+  }
+
+  /**
+   * BasalRecord findFirst
+   */
+  export type BasalRecordFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BasalRecord
+     */
+    select?: BasalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BasalRecord
+     */
+    omit?: BasalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BasalRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which BasalRecord to fetch.
+     */
+    where?: BasalRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BasalRecords to fetch.
+     */
+    orderBy?: BasalRecordOrderByWithRelationInput | BasalRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BasalRecords.
+     */
+    cursor?: BasalRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BasalRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BasalRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BasalRecords.
+     */
+    distinct?: BasalRecordScalarFieldEnum | BasalRecordScalarFieldEnum[]
+  }
+
+  /**
+   * BasalRecord findFirstOrThrow
+   */
+  export type BasalRecordFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BasalRecord
+     */
+    select?: BasalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BasalRecord
+     */
+    omit?: BasalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BasalRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which BasalRecord to fetch.
+     */
+    where?: BasalRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BasalRecords to fetch.
+     */
+    orderBy?: BasalRecordOrderByWithRelationInput | BasalRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BasalRecords.
+     */
+    cursor?: BasalRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BasalRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BasalRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BasalRecords.
+     */
+    distinct?: BasalRecordScalarFieldEnum | BasalRecordScalarFieldEnum[]
+  }
+
+  /**
+   * BasalRecord findMany
+   */
+  export type BasalRecordFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BasalRecord
+     */
+    select?: BasalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BasalRecord
+     */
+    omit?: BasalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BasalRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which BasalRecords to fetch.
+     */
+    where?: BasalRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BasalRecords to fetch.
+     */
+    orderBy?: BasalRecordOrderByWithRelationInput | BasalRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BasalRecords.
+     */
+    cursor?: BasalRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BasalRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BasalRecords.
+     */
+    skip?: number
+    distinct?: BasalRecordScalarFieldEnum | BasalRecordScalarFieldEnum[]
+  }
+
+  /**
+   * BasalRecord create
+   */
+  export type BasalRecordCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BasalRecord
+     */
+    select?: BasalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BasalRecord
+     */
+    omit?: BasalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BasalRecordInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BasalRecord.
+     */
+    data: XOR<BasalRecordCreateInput, BasalRecordUncheckedCreateInput>
+  }
+
+  /**
+   * BasalRecord createMany
+   */
+  export type BasalRecordCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BasalRecords.
+     */
+    data: BasalRecordCreateManyInput | BasalRecordCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BasalRecord createManyAndReturn
+   */
+  export type BasalRecordCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BasalRecord
+     */
+    select?: BasalRecordSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BasalRecord
+     */
+    omit?: BasalRecordOmit<ExtArgs> | null
+    /**
+     * The data used to create many BasalRecords.
+     */
+    data: BasalRecordCreateManyInput | BasalRecordCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BasalRecordIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BasalRecord update
+   */
+  export type BasalRecordUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BasalRecord
+     */
+    select?: BasalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BasalRecord
+     */
+    omit?: BasalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BasalRecordInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BasalRecord.
+     */
+    data: XOR<BasalRecordUpdateInput, BasalRecordUncheckedUpdateInput>
+    /**
+     * Choose, which BasalRecord to update.
+     */
+    where: BasalRecordWhereUniqueInput
+  }
+
+  /**
+   * BasalRecord updateMany
+   */
+  export type BasalRecordUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BasalRecords.
+     */
+    data: XOR<BasalRecordUpdateManyMutationInput, BasalRecordUncheckedUpdateManyInput>
+    /**
+     * Filter which BasalRecords to update
+     */
+    where?: BasalRecordWhereInput
+    /**
+     * Limit how many BasalRecords to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BasalRecord updateManyAndReturn
+   */
+  export type BasalRecordUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BasalRecord
+     */
+    select?: BasalRecordSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BasalRecord
+     */
+    omit?: BasalRecordOmit<ExtArgs> | null
+    /**
+     * The data used to update BasalRecords.
+     */
+    data: XOR<BasalRecordUpdateManyMutationInput, BasalRecordUncheckedUpdateManyInput>
+    /**
+     * Filter which BasalRecords to update
+     */
+    where?: BasalRecordWhereInput
+    /**
+     * Limit how many BasalRecords to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BasalRecordIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BasalRecord upsert
+   */
+  export type BasalRecordUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BasalRecord
+     */
+    select?: BasalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BasalRecord
+     */
+    omit?: BasalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BasalRecordInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BasalRecord to update in case it exists.
+     */
+    where: BasalRecordWhereUniqueInput
+    /**
+     * In case the BasalRecord found by the `where` argument doesn't exist, create a new BasalRecord with this data.
+     */
+    create: XOR<BasalRecordCreateInput, BasalRecordUncheckedCreateInput>
+    /**
+     * In case the BasalRecord was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BasalRecordUpdateInput, BasalRecordUncheckedUpdateInput>
+  }
+
+  /**
+   * BasalRecord delete
+   */
+  export type BasalRecordDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BasalRecord
+     */
+    select?: BasalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BasalRecord
+     */
+    omit?: BasalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BasalRecordInclude<ExtArgs> | null
+    /**
+     * Filter which BasalRecord to delete.
+     */
+    where: BasalRecordWhereUniqueInput
+  }
+
+  /**
+   * BasalRecord deleteMany
+   */
+  export type BasalRecordDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BasalRecords to delete
+     */
+    where?: BasalRecordWhereInput
+    /**
+     * Limit how many BasalRecords to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BasalRecord without action
+   */
+  export type BasalRecordDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BasalRecord
+     */
+    select?: BasalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BasalRecord
+     */
+    omit?: BasalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BasalRecordInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model CarbEntry
+   */
+
+  export type AggregateCarbEntry = {
+    _count: CarbEntryCountAggregateOutputType | null
+    _avg: CarbEntryAvgAggregateOutputType | null
+    _sum: CarbEntrySumAggregateOutputType | null
+    _min: CarbEntryMinAggregateOutputType | null
+    _max: CarbEntryMaxAggregateOutputType | null
+  }
+
+  export type CarbEntryAvgAggregateOutputType = {
+    carbAmount: number | null
+  }
+
+  export type CarbEntrySumAggregateOutputType = {
+    carbAmount: number | null
+  }
+
+  export type CarbEntryMinAggregateOutputType = {
+    id: string | null
+    timestamp: Date | null
+    carbAmount: number | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CarbEntryMaxAggregateOutputType = {
+    id: string | null
+    timestamp: Date | null
+    carbAmount: number | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CarbEntryCountAggregateOutputType = {
+    id: number
+    timestamp: number
+    carbAmount: number
+    userId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CarbEntryAvgAggregateInputType = {
+    carbAmount?: true
+  }
+
+  export type CarbEntrySumAggregateInputType = {
+    carbAmount?: true
+  }
+
+  export type CarbEntryMinAggregateInputType = {
+    id?: true
+    timestamp?: true
+    carbAmount?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CarbEntryMaxAggregateInputType = {
+    id?: true
+    timestamp?: true
+    carbAmount?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CarbEntryCountAggregateInputType = {
+    id?: true
+    timestamp?: true
+    carbAmount?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CarbEntryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CarbEntry to aggregate.
+     */
+    where?: CarbEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CarbEntries to fetch.
+     */
+    orderBy?: CarbEntryOrderByWithRelationInput | CarbEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CarbEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CarbEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CarbEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CarbEntries
+    **/
+    _count?: true | CarbEntryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CarbEntryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CarbEntrySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CarbEntryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CarbEntryMaxAggregateInputType
+  }
+
+  export type GetCarbEntryAggregateType<T extends CarbEntryAggregateArgs> = {
+        [P in keyof T & keyof AggregateCarbEntry]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCarbEntry[P]>
+      : GetScalarType<T[P], AggregateCarbEntry[P]>
+  }
+
+
+
+
+  export type CarbEntryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CarbEntryWhereInput
+    orderBy?: CarbEntryOrderByWithAggregationInput | CarbEntryOrderByWithAggregationInput[]
+    by: CarbEntryScalarFieldEnum[] | CarbEntryScalarFieldEnum
+    having?: CarbEntryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CarbEntryCountAggregateInputType | true
+    _avg?: CarbEntryAvgAggregateInputType
+    _sum?: CarbEntrySumAggregateInputType
+    _min?: CarbEntryMinAggregateInputType
+    _max?: CarbEntryMaxAggregateInputType
+  }
+
+  export type CarbEntryGroupByOutputType = {
+    id: string
+    timestamp: Date
+    carbAmount: number
+    userId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: CarbEntryCountAggregateOutputType | null
+    _avg: CarbEntryAvgAggregateOutputType | null
+    _sum: CarbEntrySumAggregateOutputType | null
+    _min: CarbEntryMinAggregateOutputType | null
+    _max: CarbEntryMaxAggregateOutputType | null
+  }
+
+  type GetCarbEntryGroupByPayload<T extends CarbEntryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CarbEntryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CarbEntryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CarbEntryGroupByOutputType[P]>
+            : GetScalarType<T[P], CarbEntryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CarbEntrySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timestamp?: boolean
+    carbAmount?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["carbEntry"]>
+
+  export type CarbEntrySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timestamp?: boolean
+    carbAmount?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["carbEntry"]>
+
+  export type CarbEntrySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timestamp?: boolean
+    carbAmount?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["carbEntry"]>
+
+  export type CarbEntrySelectScalar = {
+    id?: boolean
+    timestamp?: boolean
+    carbAmount?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CarbEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "timestamp" | "carbAmount" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["carbEntry"]>
+  export type CarbEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CarbEntryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CarbEntryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $CarbEntryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CarbEntry"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      timestamp: Date
+      carbAmount: number
+      userId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["carbEntry"]>
+    composites: {}
+  }
+
+  type CarbEntryGetPayload<S extends boolean | null | undefined | CarbEntryDefaultArgs> = $Result.GetResult<Prisma.$CarbEntryPayload, S>
+
+  type CarbEntryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CarbEntryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CarbEntryCountAggregateInputType | true
+    }
+
+  export interface CarbEntryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CarbEntry'], meta: { name: 'CarbEntry' } }
+    /**
+     * Find zero or one CarbEntry that matches the filter.
+     * @param {CarbEntryFindUniqueArgs} args - Arguments to find a CarbEntry
+     * @example
+     * // Get one CarbEntry
+     * const carbEntry = await prisma.carbEntry.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CarbEntryFindUniqueArgs>(args: SelectSubset<T, CarbEntryFindUniqueArgs<ExtArgs>>): Prisma__CarbEntryClient<$Result.GetResult<Prisma.$CarbEntryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CarbEntry that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CarbEntryFindUniqueOrThrowArgs} args - Arguments to find a CarbEntry
+     * @example
+     * // Get one CarbEntry
+     * const carbEntry = await prisma.carbEntry.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CarbEntryFindUniqueOrThrowArgs>(args: SelectSubset<T, CarbEntryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CarbEntryClient<$Result.GetResult<Prisma.$CarbEntryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CarbEntry that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CarbEntryFindFirstArgs} args - Arguments to find a CarbEntry
+     * @example
+     * // Get one CarbEntry
+     * const carbEntry = await prisma.carbEntry.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CarbEntryFindFirstArgs>(args?: SelectSubset<T, CarbEntryFindFirstArgs<ExtArgs>>): Prisma__CarbEntryClient<$Result.GetResult<Prisma.$CarbEntryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CarbEntry that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CarbEntryFindFirstOrThrowArgs} args - Arguments to find a CarbEntry
+     * @example
+     * // Get one CarbEntry
+     * const carbEntry = await prisma.carbEntry.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CarbEntryFindFirstOrThrowArgs>(args?: SelectSubset<T, CarbEntryFindFirstOrThrowArgs<ExtArgs>>): Prisma__CarbEntryClient<$Result.GetResult<Prisma.$CarbEntryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CarbEntries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CarbEntryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CarbEntries
+     * const carbEntries = await prisma.carbEntry.findMany()
+     * 
+     * // Get first 10 CarbEntries
+     * const carbEntries = await prisma.carbEntry.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const carbEntryWithIdOnly = await prisma.carbEntry.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CarbEntryFindManyArgs>(args?: SelectSubset<T, CarbEntryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CarbEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CarbEntry.
+     * @param {CarbEntryCreateArgs} args - Arguments to create a CarbEntry.
+     * @example
+     * // Create one CarbEntry
+     * const CarbEntry = await prisma.carbEntry.create({
+     *   data: {
+     *     // ... data to create a CarbEntry
+     *   }
+     * })
+     * 
+     */
+    create<T extends CarbEntryCreateArgs>(args: SelectSubset<T, CarbEntryCreateArgs<ExtArgs>>): Prisma__CarbEntryClient<$Result.GetResult<Prisma.$CarbEntryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CarbEntries.
+     * @param {CarbEntryCreateManyArgs} args - Arguments to create many CarbEntries.
+     * @example
+     * // Create many CarbEntries
+     * const carbEntry = await prisma.carbEntry.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CarbEntryCreateManyArgs>(args?: SelectSubset<T, CarbEntryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CarbEntries and returns the data saved in the database.
+     * @param {CarbEntryCreateManyAndReturnArgs} args - Arguments to create many CarbEntries.
+     * @example
+     * // Create many CarbEntries
+     * const carbEntry = await prisma.carbEntry.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CarbEntries and only return the `id`
+     * const carbEntryWithIdOnly = await prisma.carbEntry.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CarbEntryCreateManyAndReturnArgs>(args?: SelectSubset<T, CarbEntryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CarbEntryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a CarbEntry.
+     * @param {CarbEntryDeleteArgs} args - Arguments to delete one CarbEntry.
+     * @example
+     * // Delete one CarbEntry
+     * const CarbEntry = await prisma.carbEntry.delete({
+     *   where: {
+     *     // ... filter to delete one CarbEntry
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CarbEntryDeleteArgs>(args: SelectSubset<T, CarbEntryDeleteArgs<ExtArgs>>): Prisma__CarbEntryClient<$Result.GetResult<Prisma.$CarbEntryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CarbEntry.
+     * @param {CarbEntryUpdateArgs} args - Arguments to update one CarbEntry.
+     * @example
+     * // Update one CarbEntry
+     * const carbEntry = await prisma.carbEntry.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CarbEntryUpdateArgs>(args: SelectSubset<T, CarbEntryUpdateArgs<ExtArgs>>): Prisma__CarbEntryClient<$Result.GetResult<Prisma.$CarbEntryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CarbEntries.
+     * @param {CarbEntryDeleteManyArgs} args - Arguments to filter CarbEntries to delete.
+     * @example
+     * // Delete a few CarbEntries
+     * const { count } = await prisma.carbEntry.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CarbEntryDeleteManyArgs>(args?: SelectSubset<T, CarbEntryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CarbEntries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CarbEntryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CarbEntries
+     * const carbEntry = await prisma.carbEntry.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CarbEntryUpdateManyArgs>(args: SelectSubset<T, CarbEntryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CarbEntries and returns the data updated in the database.
+     * @param {CarbEntryUpdateManyAndReturnArgs} args - Arguments to update many CarbEntries.
+     * @example
+     * // Update many CarbEntries
+     * const carbEntry = await prisma.carbEntry.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CarbEntries and only return the `id`
+     * const carbEntryWithIdOnly = await prisma.carbEntry.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CarbEntryUpdateManyAndReturnArgs>(args: SelectSubset<T, CarbEntryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CarbEntryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one CarbEntry.
+     * @param {CarbEntryUpsertArgs} args - Arguments to update or create a CarbEntry.
+     * @example
+     * // Update or create a CarbEntry
+     * const carbEntry = await prisma.carbEntry.upsert({
+     *   create: {
+     *     // ... data to create a CarbEntry
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CarbEntry we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CarbEntryUpsertArgs>(args: SelectSubset<T, CarbEntryUpsertArgs<ExtArgs>>): Prisma__CarbEntryClient<$Result.GetResult<Prisma.$CarbEntryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CarbEntries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CarbEntryCountArgs} args - Arguments to filter CarbEntries to count.
+     * @example
+     * // Count the number of CarbEntries
+     * const count = await prisma.carbEntry.count({
+     *   where: {
+     *     // ... the filter for the CarbEntries we want to count
+     *   }
+     * })
+    **/
+    count<T extends CarbEntryCountArgs>(
+      args?: Subset<T, CarbEntryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CarbEntryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CarbEntry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CarbEntryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CarbEntryAggregateArgs>(args: Subset<T, CarbEntryAggregateArgs>): Prisma.PrismaPromise<GetCarbEntryAggregateType<T>>
+
+    /**
+     * Group by CarbEntry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CarbEntryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CarbEntryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CarbEntryGroupByArgs['orderBy'] }
+        : { orderBy?: CarbEntryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CarbEntryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCarbEntryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CarbEntry model
+   */
+  readonly fields: CarbEntryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CarbEntry.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CarbEntryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CarbEntry model
+   */
+  interface CarbEntryFieldRefs {
+    readonly id: FieldRef<"CarbEntry", 'String'>
+    readonly timestamp: FieldRef<"CarbEntry", 'DateTime'>
+    readonly carbAmount: FieldRef<"CarbEntry", 'Float'>
+    readonly userId: FieldRef<"CarbEntry", 'String'>
+    readonly createdAt: FieldRef<"CarbEntry", 'DateTime'>
+    readonly updatedAt: FieldRef<"CarbEntry", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CarbEntry findUnique
+   */
+  export type CarbEntryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CarbEntry
+     */
+    select?: CarbEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CarbEntry
+     */
+    omit?: CarbEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CarbEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which CarbEntry to fetch.
+     */
+    where: CarbEntryWhereUniqueInput
+  }
+
+  /**
+   * CarbEntry findUniqueOrThrow
+   */
+  export type CarbEntryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CarbEntry
+     */
+    select?: CarbEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CarbEntry
+     */
+    omit?: CarbEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CarbEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which CarbEntry to fetch.
+     */
+    where: CarbEntryWhereUniqueInput
+  }
+
+  /**
+   * CarbEntry findFirst
+   */
+  export type CarbEntryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CarbEntry
+     */
+    select?: CarbEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CarbEntry
+     */
+    omit?: CarbEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CarbEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which CarbEntry to fetch.
+     */
+    where?: CarbEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CarbEntries to fetch.
+     */
+    orderBy?: CarbEntryOrderByWithRelationInput | CarbEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CarbEntries.
+     */
+    cursor?: CarbEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CarbEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CarbEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CarbEntries.
+     */
+    distinct?: CarbEntryScalarFieldEnum | CarbEntryScalarFieldEnum[]
+  }
+
+  /**
+   * CarbEntry findFirstOrThrow
+   */
+  export type CarbEntryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CarbEntry
+     */
+    select?: CarbEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CarbEntry
+     */
+    omit?: CarbEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CarbEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which CarbEntry to fetch.
+     */
+    where?: CarbEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CarbEntries to fetch.
+     */
+    orderBy?: CarbEntryOrderByWithRelationInput | CarbEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CarbEntries.
+     */
+    cursor?: CarbEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CarbEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CarbEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CarbEntries.
+     */
+    distinct?: CarbEntryScalarFieldEnum | CarbEntryScalarFieldEnum[]
+  }
+
+  /**
+   * CarbEntry findMany
+   */
+  export type CarbEntryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CarbEntry
+     */
+    select?: CarbEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CarbEntry
+     */
+    omit?: CarbEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CarbEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which CarbEntries to fetch.
+     */
+    where?: CarbEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CarbEntries to fetch.
+     */
+    orderBy?: CarbEntryOrderByWithRelationInput | CarbEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CarbEntries.
+     */
+    cursor?: CarbEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CarbEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CarbEntries.
+     */
+    skip?: number
+    distinct?: CarbEntryScalarFieldEnum | CarbEntryScalarFieldEnum[]
+  }
+
+  /**
+   * CarbEntry create
+   */
+  export type CarbEntryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CarbEntry
+     */
+    select?: CarbEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CarbEntry
+     */
+    omit?: CarbEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CarbEntryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CarbEntry.
+     */
+    data: XOR<CarbEntryCreateInput, CarbEntryUncheckedCreateInput>
+  }
+
+  /**
+   * CarbEntry createMany
+   */
+  export type CarbEntryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CarbEntries.
+     */
+    data: CarbEntryCreateManyInput | CarbEntryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CarbEntry createManyAndReturn
+   */
+  export type CarbEntryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CarbEntry
+     */
+    select?: CarbEntrySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CarbEntry
+     */
+    omit?: CarbEntryOmit<ExtArgs> | null
+    /**
+     * The data used to create many CarbEntries.
+     */
+    data: CarbEntryCreateManyInput | CarbEntryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CarbEntryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CarbEntry update
+   */
+  export type CarbEntryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CarbEntry
+     */
+    select?: CarbEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CarbEntry
+     */
+    omit?: CarbEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CarbEntryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CarbEntry.
+     */
+    data: XOR<CarbEntryUpdateInput, CarbEntryUncheckedUpdateInput>
+    /**
+     * Choose, which CarbEntry to update.
+     */
+    where: CarbEntryWhereUniqueInput
+  }
+
+  /**
+   * CarbEntry updateMany
+   */
+  export type CarbEntryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CarbEntries.
+     */
+    data: XOR<CarbEntryUpdateManyMutationInput, CarbEntryUncheckedUpdateManyInput>
+    /**
+     * Filter which CarbEntries to update
+     */
+    where?: CarbEntryWhereInput
+    /**
+     * Limit how many CarbEntries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CarbEntry updateManyAndReturn
+   */
+  export type CarbEntryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CarbEntry
+     */
+    select?: CarbEntrySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CarbEntry
+     */
+    omit?: CarbEntryOmit<ExtArgs> | null
+    /**
+     * The data used to update CarbEntries.
+     */
+    data: XOR<CarbEntryUpdateManyMutationInput, CarbEntryUncheckedUpdateManyInput>
+    /**
+     * Filter which CarbEntries to update
+     */
+    where?: CarbEntryWhereInput
+    /**
+     * Limit how many CarbEntries to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CarbEntryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CarbEntry upsert
+   */
+  export type CarbEntryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CarbEntry
+     */
+    select?: CarbEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CarbEntry
+     */
+    omit?: CarbEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CarbEntryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CarbEntry to update in case it exists.
+     */
+    where: CarbEntryWhereUniqueInput
+    /**
+     * In case the CarbEntry found by the `where` argument doesn't exist, create a new CarbEntry with this data.
+     */
+    create: XOR<CarbEntryCreateInput, CarbEntryUncheckedCreateInput>
+    /**
+     * In case the CarbEntry was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CarbEntryUpdateInput, CarbEntryUncheckedUpdateInput>
+  }
+
+  /**
+   * CarbEntry delete
+   */
+  export type CarbEntryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CarbEntry
+     */
+    select?: CarbEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CarbEntry
+     */
+    omit?: CarbEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CarbEntryInclude<ExtArgs> | null
+    /**
+     * Filter which CarbEntry to delete.
+     */
+    where: CarbEntryWhereUniqueInput
+  }
+
+  /**
+   * CarbEntry deleteMany
+   */
+  export type CarbEntryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CarbEntries to delete
+     */
+    where?: CarbEntryWhereInput
+    /**
+     * Limit how many CarbEntries to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CarbEntry without action
+   */
+  export type CarbEntryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CarbEntry
+     */
+    select?: CarbEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CarbEntry
+     */
+    omit?: CarbEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CarbEntryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AlarmEvent
+   */
+
+  export type AggregateAlarmEvent = {
+    _count: AlarmEventCountAggregateOutputType | null
+    _min: AlarmEventMinAggregateOutputType | null
+    _max: AlarmEventMaxAggregateOutputType | null
+  }
+
+  export type AlarmEventMinAggregateOutputType = {
+    id: string | null
+    timestamp: Date | null
+    eventType: string | null
+    deviceId: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AlarmEventMaxAggregateOutputType = {
+    id: string | null
+    timestamp: Date | null
+    eventType: string | null
+    deviceId: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AlarmEventCountAggregateOutputType = {
+    id: number
+    timestamp: number
+    eventType: number
+    deviceId: number
+    userId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AlarmEventMinAggregateInputType = {
+    id?: true
+    timestamp?: true
+    eventType?: true
+    deviceId?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AlarmEventMaxAggregateInputType = {
+    id?: true
+    timestamp?: true
+    eventType?: true
+    deviceId?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AlarmEventCountAggregateInputType = {
+    id?: true
+    timestamp?: true
+    eventType?: true
+    deviceId?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AlarmEventAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AlarmEvent to aggregate.
+     */
+    where?: AlarmEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AlarmEvents to fetch.
+     */
+    orderBy?: AlarmEventOrderByWithRelationInput | AlarmEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AlarmEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AlarmEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AlarmEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AlarmEvents
+    **/
+    _count?: true | AlarmEventCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AlarmEventMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AlarmEventMaxAggregateInputType
+  }
+
+  export type GetAlarmEventAggregateType<T extends AlarmEventAggregateArgs> = {
+        [P in keyof T & keyof AggregateAlarmEvent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAlarmEvent[P]>
+      : GetScalarType<T[P], AggregateAlarmEvent[P]>
+  }
+
+
+
+
+  export type AlarmEventGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AlarmEventWhereInput
+    orderBy?: AlarmEventOrderByWithAggregationInput | AlarmEventOrderByWithAggregationInput[]
+    by: AlarmEventScalarFieldEnum[] | AlarmEventScalarFieldEnum
+    having?: AlarmEventScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AlarmEventCountAggregateInputType | true
+    _min?: AlarmEventMinAggregateInputType
+    _max?: AlarmEventMaxAggregateInputType
+  }
+
+  export type AlarmEventGroupByOutputType = {
+    id: string
+    timestamp: Date
+    eventType: string
+    deviceId: string | null
+    userId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: AlarmEventCountAggregateOutputType | null
+    _min: AlarmEventMinAggregateOutputType | null
+    _max: AlarmEventMaxAggregateOutputType | null
+  }
+
+  type GetAlarmEventGroupByPayload<T extends AlarmEventGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AlarmEventGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AlarmEventGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AlarmEventGroupByOutputType[P]>
+            : GetScalarType<T[P], AlarmEventGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AlarmEventSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timestamp?: boolean
+    eventType?: boolean
+    deviceId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["alarmEvent"]>
+
+  export type AlarmEventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timestamp?: boolean
+    eventType?: boolean
+    deviceId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["alarmEvent"]>
+
+  export type AlarmEventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    timestamp?: boolean
+    eventType?: boolean
+    deviceId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["alarmEvent"]>
+
+  export type AlarmEventSelectScalar = {
+    id?: boolean
+    timestamp?: boolean
+    eventType?: boolean
+    deviceId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AlarmEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "timestamp" | "eventType" | "deviceId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["alarmEvent"]>
+  export type AlarmEventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AlarmEventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AlarmEventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $AlarmEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AlarmEvent"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      timestamp: Date
+      eventType: string
+      deviceId: string | null
+      userId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["alarmEvent"]>
+    composites: {}
+  }
+
+  type AlarmEventGetPayload<S extends boolean | null | undefined | AlarmEventDefaultArgs> = $Result.GetResult<Prisma.$AlarmEventPayload, S>
+
+  type AlarmEventCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AlarmEventFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AlarmEventCountAggregateInputType | true
+    }
+
+  export interface AlarmEventDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AlarmEvent'], meta: { name: 'AlarmEvent' } }
+    /**
+     * Find zero or one AlarmEvent that matches the filter.
+     * @param {AlarmEventFindUniqueArgs} args - Arguments to find a AlarmEvent
+     * @example
+     * // Get one AlarmEvent
+     * const alarmEvent = await prisma.alarmEvent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AlarmEventFindUniqueArgs>(args: SelectSubset<T, AlarmEventFindUniqueArgs<ExtArgs>>): Prisma__AlarmEventClient<$Result.GetResult<Prisma.$AlarmEventPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AlarmEvent that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AlarmEventFindUniqueOrThrowArgs} args - Arguments to find a AlarmEvent
+     * @example
+     * // Get one AlarmEvent
+     * const alarmEvent = await prisma.alarmEvent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AlarmEventFindUniqueOrThrowArgs>(args: SelectSubset<T, AlarmEventFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AlarmEventClient<$Result.GetResult<Prisma.$AlarmEventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AlarmEvent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AlarmEventFindFirstArgs} args - Arguments to find a AlarmEvent
+     * @example
+     * // Get one AlarmEvent
+     * const alarmEvent = await prisma.alarmEvent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AlarmEventFindFirstArgs>(args?: SelectSubset<T, AlarmEventFindFirstArgs<ExtArgs>>): Prisma__AlarmEventClient<$Result.GetResult<Prisma.$AlarmEventPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AlarmEvent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AlarmEventFindFirstOrThrowArgs} args - Arguments to find a AlarmEvent
+     * @example
+     * // Get one AlarmEvent
+     * const alarmEvent = await prisma.alarmEvent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AlarmEventFindFirstOrThrowArgs>(args?: SelectSubset<T, AlarmEventFindFirstOrThrowArgs<ExtArgs>>): Prisma__AlarmEventClient<$Result.GetResult<Prisma.$AlarmEventPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AlarmEvents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AlarmEventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AlarmEvents
+     * const alarmEvents = await prisma.alarmEvent.findMany()
+     * 
+     * // Get first 10 AlarmEvents
+     * const alarmEvents = await prisma.alarmEvent.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const alarmEventWithIdOnly = await prisma.alarmEvent.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AlarmEventFindManyArgs>(args?: SelectSubset<T, AlarmEventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AlarmEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AlarmEvent.
+     * @param {AlarmEventCreateArgs} args - Arguments to create a AlarmEvent.
+     * @example
+     * // Create one AlarmEvent
+     * const AlarmEvent = await prisma.alarmEvent.create({
+     *   data: {
+     *     // ... data to create a AlarmEvent
+     *   }
+     * })
+     * 
+     */
+    create<T extends AlarmEventCreateArgs>(args: SelectSubset<T, AlarmEventCreateArgs<ExtArgs>>): Prisma__AlarmEventClient<$Result.GetResult<Prisma.$AlarmEventPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AlarmEvents.
+     * @param {AlarmEventCreateManyArgs} args - Arguments to create many AlarmEvents.
+     * @example
+     * // Create many AlarmEvents
+     * const alarmEvent = await prisma.alarmEvent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AlarmEventCreateManyArgs>(args?: SelectSubset<T, AlarmEventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AlarmEvents and returns the data saved in the database.
+     * @param {AlarmEventCreateManyAndReturnArgs} args - Arguments to create many AlarmEvents.
+     * @example
+     * // Create many AlarmEvents
+     * const alarmEvent = await prisma.alarmEvent.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AlarmEvents and only return the `id`
+     * const alarmEventWithIdOnly = await prisma.alarmEvent.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AlarmEventCreateManyAndReturnArgs>(args?: SelectSubset<T, AlarmEventCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AlarmEventPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AlarmEvent.
+     * @param {AlarmEventDeleteArgs} args - Arguments to delete one AlarmEvent.
+     * @example
+     * // Delete one AlarmEvent
+     * const AlarmEvent = await prisma.alarmEvent.delete({
+     *   where: {
+     *     // ... filter to delete one AlarmEvent
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AlarmEventDeleteArgs>(args: SelectSubset<T, AlarmEventDeleteArgs<ExtArgs>>): Prisma__AlarmEventClient<$Result.GetResult<Prisma.$AlarmEventPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AlarmEvent.
+     * @param {AlarmEventUpdateArgs} args - Arguments to update one AlarmEvent.
+     * @example
+     * // Update one AlarmEvent
+     * const alarmEvent = await prisma.alarmEvent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AlarmEventUpdateArgs>(args: SelectSubset<T, AlarmEventUpdateArgs<ExtArgs>>): Prisma__AlarmEventClient<$Result.GetResult<Prisma.$AlarmEventPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AlarmEvents.
+     * @param {AlarmEventDeleteManyArgs} args - Arguments to filter AlarmEvents to delete.
+     * @example
+     * // Delete a few AlarmEvents
+     * const { count } = await prisma.alarmEvent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AlarmEventDeleteManyArgs>(args?: SelectSubset<T, AlarmEventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AlarmEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AlarmEventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AlarmEvents
+     * const alarmEvent = await prisma.alarmEvent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AlarmEventUpdateManyArgs>(args: SelectSubset<T, AlarmEventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AlarmEvents and returns the data updated in the database.
+     * @param {AlarmEventUpdateManyAndReturnArgs} args - Arguments to update many AlarmEvents.
+     * @example
+     * // Update many AlarmEvents
+     * const alarmEvent = await prisma.alarmEvent.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AlarmEvents and only return the `id`
+     * const alarmEventWithIdOnly = await prisma.alarmEvent.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AlarmEventUpdateManyAndReturnArgs>(args: SelectSubset<T, AlarmEventUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AlarmEventPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AlarmEvent.
+     * @param {AlarmEventUpsertArgs} args - Arguments to update or create a AlarmEvent.
+     * @example
+     * // Update or create a AlarmEvent
+     * const alarmEvent = await prisma.alarmEvent.upsert({
+     *   create: {
+     *     // ... data to create a AlarmEvent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AlarmEvent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AlarmEventUpsertArgs>(args: SelectSubset<T, AlarmEventUpsertArgs<ExtArgs>>): Prisma__AlarmEventClient<$Result.GetResult<Prisma.$AlarmEventPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AlarmEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AlarmEventCountArgs} args - Arguments to filter AlarmEvents to count.
+     * @example
+     * // Count the number of AlarmEvents
+     * const count = await prisma.alarmEvent.count({
+     *   where: {
+     *     // ... the filter for the AlarmEvents we want to count
+     *   }
+     * })
+    **/
+    count<T extends AlarmEventCountArgs>(
+      args?: Subset<T, AlarmEventCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AlarmEventCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AlarmEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AlarmEventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AlarmEventAggregateArgs>(args: Subset<T, AlarmEventAggregateArgs>): Prisma.PrismaPromise<GetAlarmEventAggregateType<T>>
+
+    /**
+     * Group by AlarmEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AlarmEventGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AlarmEventGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AlarmEventGroupByArgs['orderBy'] }
+        : { orderBy?: AlarmEventGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AlarmEventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAlarmEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AlarmEvent model
+   */
+  readonly fields: AlarmEventFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AlarmEvent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AlarmEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AlarmEvent model
+   */
+  interface AlarmEventFieldRefs {
+    readonly id: FieldRef<"AlarmEvent", 'String'>
+    readonly timestamp: FieldRef<"AlarmEvent", 'DateTime'>
+    readonly eventType: FieldRef<"AlarmEvent", 'String'>
+    readonly deviceId: FieldRef<"AlarmEvent", 'String'>
+    readonly userId: FieldRef<"AlarmEvent", 'String'>
+    readonly createdAt: FieldRef<"AlarmEvent", 'DateTime'>
+    readonly updatedAt: FieldRef<"AlarmEvent", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AlarmEvent findUnique
+   */
+  export type AlarmEventFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AlarmEvent
+     */
+    select?: AlarmEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AlarmEvent
+     */
+    omit?: AlarmEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlarmEventInclude<ExtArgs> | null
+    /**
+     * Filter, which AlarmEvent to fetch.
+     */
+    where: AlarmEventWhereUniqueInput
+  }
+
+  /**
+   * AlarmEvent findUniqueOrThrow
+   */
+  export type AlarmEventFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AlarmEvent
+     */
+    select?: AlarmEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AlarmEvent
+     */
+    omit?: AlarmEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlarmEventInclude<ExtArgs> | null
+    /**
+     * Filter, which AlarmEvent to fetch.
+     */
+    where: AlarmEventWhereUniqueInput
+  }
+
+  /**
+   * AlarmEvent findFirst
+   */
+  export type AlarmEventFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AlarmEvent
+     */
+    select?: AlarmEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AlarmEvent
+     */
+    omit?: AlarmEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlarmEventInclude<ExtArgs> | null
+    /**
+     * Filter, which AlarmEvent to fetch.
+     */
+    where?: AlarmEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AlarmEvents to fetch.
+     */
+    orderBy?: AlarmEventOrderByWithRelationInput | AlarmEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AlarmEvents.
+     */
+    cursor?: AlarmEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AlarmEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AlarmEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AlarmEvents.
+     */
+    distinct?: AlarmEventScalarFieldEnum | AlarmEventScalarFieldEnum[]
+  }
+
+  /**
+   * AlarmEvent findFirstOrThrow
+   */
+  export type AlarmEventFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AlarmEvent
+     */
+    select?: AlarmEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AlarmEvent
+     */
+    omit?: AlarmEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlarmEventInclude<ExtArgs> | null
+    /**
+     * Filter, which AlarmEvent to fetch.
+     */
+    where?: AlarmEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AlarmEvents to fetch.
+     */
+    orderBy?: AlarmEventOrderByWithRelationInput | AlarmEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AlarmEvents.
+     */
+    cursor?: AlarmEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AlarmEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AlarmEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AlarmEvents.
+     */
+    distinct?: AlarmEventScalarFieldEnum | AlarmEventScalarFieldEnum[]
+  }
+
+  /**
+   * AlarmEvent findMany
+   */
+  export type AlarmEventFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AlarmEvent
+     */
+    select?: AlarmEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AlarmEvent
+     */
+    omit?: AlarmEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlarmEventInclude<ExtArgs> | null
+    /**
+     * Filter, which AlarmEvents to fetch.
+     */
+    where?: AlarmEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AlarmEvents to fetch.
+     */
+    orderBy?: AlarmEventOrderByWithRelationInput | AlarmEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AlarmEvents.
+     */
+    cursor?: AlarmEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AlarmEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AlarmEvents.
+     */
+    skip?: number
+    distinct?: AlarmEventScalarFieldEnum | AlarmEventScalarFieldEnum[]
+  }
+
+  /**
+   * AlarmEvent create
+   */
+  export type AlarmEventCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AlarmEvent
+     */
+    select?: AlarmEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AlarmEvent
+     */
+    omit?: AlarmEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlarmEventInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AlarmEvent.
+     */
+    data: XOR<AlarmEventCreateInput, AlarmEventUncheckedCreateInput>
+  }
+
+  /**
+   * AlarmEvent createMany
+   */
+  export type AlarmEventCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AlarmEvents.
+     */
+    data: AlarmEventCreateManyInput | AlarmEventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AlarmEvent createManyAndReturn
+   */
+  export type AlarmEventCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AlarmEvent
+     */
+    select?: AlarmEventSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AlarmEvent
+     */
+    omit?: AlarmEventOmit<ExtArgs> | null
+    /**
+     * The data used to create many AlarmEvents.
+     */
+    data: AlarmEventCreateManyInput | AlarmEventCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlarmEventIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AlarmEvent update
+   */
+  export type AlarmEventUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AlarmEvent
+     */
+    select?: AlarmEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AlarmEvent
+     */
+    omit?: AlarmEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlarmEventInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AlarmEvent.
+     */
+    data: XOR<AlarmEventUpdateInput, AlarmEventUncheckedUpdateInput>
+    /**
+     * Choose, which AlarmEvent to update.
+     */
+    where: AlarmEventWhereUniqueInput
+  }
+
+  /**
+   * AlarmEvent updateMany
+   */
+  export type AlarmEventUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AlarmEvents.
+     */
+    data: XOR<AlarmEventUpdateManyMutationInput, AlarmEventUncheckedUpdateManyInput>
+    /**
+     * Filter which AlarmEvents to update
+     */
+    where?: AlarmEventWhereInput
+    /**
+     * Limit how many AlarmEvents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AlarmEvent updateManyAndReturn
+   */
+  export type AlarmEventUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AlarmEvent
+     */
+    select?: AlarmEventSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AlarmEvent
+     */
+    omit?: AlarmEventOmit<ExtArgs> | null
+    /**
+     * The data used to update AlarmEvents.
+     */
+    data: XOR<AlarmEventUpdateManyMutationInput, AlarmEventUncheckedUpdateManyInput>
+    /**
+     * Filter which AlarmEvents to update
+     */
+    where?: AlarmEventWhereInput
+    /**
+     * Limit how many AlarmEvents to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlarmEventIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AlarmEvent upsert
+   */
+  export type AlarmEventUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AlarmEvent
+     */
+    select?: AlarmEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AlarmEvent
+     */
+    omit?: AlarmEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlarmEventInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AlarmEvent to update in case it exists.
+     */
+    where: AlarmEventWhereUniqueInput
+    /**
+     * In case the AlarmEvent found by the `where` argument doesn't exist, create a new AlarmEvent with this data.
+     */
+    create: XOR<AlarmEventCreateInput, AlarmEventUncheckedCreateInput>
+    /**
+     * In case the AlarmEvent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AlarmEventUpdateInput, AlarmEventUncheckedUpdateInput>
+  }
+
+  /**
+   * AlarmEvent delete
+   */
+  export type AlarmEventDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AlarmEvent
+     */
+    select?: AlarmEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AlarmEvent
+     */
+    omit?: AlarmEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlarmEventInclude<ExtArgs> | null
+    /**
+     * Filter which AlarmEvent to delete.
+     */
+    where: AlarmEventWhereUniqueInput
+  }
+
+  /**
+   * AlarmEvent deleteMany
+   */
+  export type AlarmEventDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AlarmEvents to delete
+     */
+    where?: AlarmEventWhereInput
+    /**
+     * Limit how many AlarmEvents to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AlarmEvent without action
+   */
+  export type AlarmEventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AlarmEvent
+     */
+    select?: AlarmEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AlarmEvent
+     */
+    omit?: AlarmEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlarmEventInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5958,6 +12331,82 @@ export namespace Prisma {
   };
 
   export type GlucoseStatsScalarFieldEnum = (typeof GlucoseStatsScalarFieldEnum)[keyof typeof GlucoseStatsScalarFieldEnum]
+
+
+  export const InsulinStatsScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    totalDays: 'totalDays',
+    avgTotalInsulin: 'avgTotalInsulin',
+    avgDailyBolus: 'avgDailyBolus',
+    avgDailyBasal: 'avgDailyBasal',
+    avgDailyCarbs: 'avgDailyCarbs',
+    bolusPercentage: 'bolusPercentage',
+    basalPercentage: 'basalPercentage',
+    insulinCarbRatio: 'insulinCarbRatio',
+    totalBolusCount: 'totalBolusCount',
+    totalBasalChanges: 'totalBasalChanges',
+    avgBolusesPerDay: 'avgBolusesPerDay',
+    lastCalculated: 'lastCalculated',
+    updatedAt: 'updatedAt',
+    dataStartDate: 'dataStartDate',
+    dataEndDate: 'dataEndDate'
+  };
+
+  export type InsulinStatsScalarFieldEnum = (typeof InsulinStatsScalarFieldEnum)[keyof typeof InsulinStatsScalarFieldEnum]
+
+
+  export const BolusRecordScalarFieldEnum: {
+    id: 'id',
+    timestamp: 'timestamp',
+    amount: 'amount',
+    bolusType: 'bolusType',
+    duration: 'duration',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BolusRecordScalarFieldEnum = (typeof BolusRecordScalarFieldEnum)[keyof typeof BolusRecordScalarFieldEnum]
+
+
+  export const BasalRecordScalarFieldEnum: {
+    id: 'id',
+    timestamp: 'timestamp',
+    rate: 'rate',
+    duration: 'duration',
+    changeType: 'changeType',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BasalRecordScalarFieldEnum = (typeof BasalRecordScalarFieldEnum)[keyof typeof BasalRecordScalarFieldEnum]
+
+
+  export const CarbEntryScalarFieldEnum: {
+    id: 'id',
+    timestamp: 'timestamp',
+    carbAmount: 'carbAmount',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CarbEntryScalarFieldEnum = (typeof CarbEntryScalarFieldEnum)[keyof typeof CarbEntryScalarFieldEnum]
+
+
+  export const AlarmEventScalarFieldEnum: {
+    id: 'id',
+    timestamp: 'timestamp',
+    eventType: 'eventType',
+    deviceId: 'deviceId',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AlarmEventScalarFieldEnum = (typeof AlarmEventScalarFieldEnum)[keyof typeof AlarmEventScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -6062,6 +12511,11 @@ export namespace Prisma {
     glucoseReadings?: GlucoseReadingListRelationFilter
     dataUploads?: DataUploadListRelationFilter
     glucoseStats?: XOR<GlucoseStatsNullableScalarRelationFilter, GlucoseStatsWhereInput> | null
+    insulinStats?: XOR<InsulinStatsNullableScalarRelationFilter, InsulinStatsWhereInput> | null
+    bolusRecords?: BolusRecordListRelationFilter
+    basalRecords?: BasalRecordListRelationFilter
+    carbEntries?: CarbEntryListRelationFilter
+    alarmEvents?: AlarmEventListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -6075,6 +12529,11 @@ export namespace Prisma {
     glucoseReadings?: GlucoseReadingOrderByRelationAggregateInput
     dataUploads?: DataUploadOrderByRelationAggregateInput
     glucoseStats?: GlucoseStatsOrderByWithRelationInput
+    insulinStats?: InsulinStatsOrderByWithRelationInput
+    bolusRecords?: BolusRecordOrderByRelationAggregateInput
+    basalRecords?: BasalRecordOrderByRelationAggregateInput
+    carbEntries?: CarbEntryOrderByRelationAggregateInput
+    alarmEvents?: AlarmEventOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -6091,6 +12550,11 @@ export namespace Prisma {
     glucoseReadings?: GlucoseReadingListRelationFilter
     dataUploads?: DataUploadListRelationFilter
     glucoseStats?: XOR<GlucoseStatsNullableScalarRelationFilter, GlucoseStatsWhereInput> | null
+    insulinStats?: XOR<InsulinStatsNullableScalarRelationFilter, InsulinStatsWhereInput> | null
+    bolusRecords?: BolusRecordListRelationFilter
+    basalRecords?: BasalRecordListRelationFilter
+    carbEntries?: CarbEntryListRelationFilter
+    alarmEvents?: AlarmEventListRelationFilter
   }, "id" | "clerkId">
 
   export type UserOrderByWithAggregationInput = {
@@ -6380,6 +12844,394 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"GlucoseStats"> | Date | string
   }
 
+  export type InsulinStatsWhereInput = {
+    AND?: InsulinStatsWhereInput | InsulinStatsWhereInput[]
+    OR?: InsulinStatsWhereInput[]
+    NOT?: InsulinStatsWhereInput | InsulinStatsWhereInput[]
+    id?: StringFilter<"InsulinStats"> | string
+    userId?: StringFilter<"InsulinStats"> | string
+    totalDays?: IntFilter<"InsulinStats"> | number
+    avgTotalInsulin?: FloatFilter<"InsulinStats"> | number
+    avgDailyBolus?: FloatFilter<"InsulinStats"> | number
+    avgDailyBasal?: FloatFilter<"InsulinStats"> | number
+    avgDailyCarbs?: FloatFilter<"InsulinStats"> | number
+    bolusPercentage?: FloatFilter<"InsulinStats"> | number
+    basalPercentage?: FloatFilter<"InsulinStats"> | number
+    insulinCarbRatio?: FloatNullableFilter<"InsulinStats"> | number | null
+    totalBolusCount?: IntFilter<"InsulinStats"> | number
+    totalBasalChanges?: IntFilter<"InsulinStats"> | number
+    avgBolusesPerDay?: FloatFilter<"InsulinStats"> | number
+    lastCalculated?: DateTimeFilter<"InsulinStats"> | Date | string
+    updatedAt?: DateTimeFilter<"InsulinStats"> | Date | string
+    dataStartDate?: DateTimeFilter<"InsulinStats"> | Date | string
+    dataEndDate?: DateTimeFilter<"InsulinStats"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type InsulinStatsOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalDays?: SortOrder
+    avgTotalInsulin?: SortOrder
+    avgDailyBolus?: SortOrder
+    avgDailyBasal?: SortOrder
+    avgDailyCarbs?: SortOrder
+    bolusPercentage?: SortOrder
+    basalPercentage?: SortOrder
+    insulinCarbRatio?: SortOrderInput | SortOrder
+    totalBolusCount?: SortOrder
+    totalBasalChanges?: SortOrder
+    avgBolusesPerDay?: SortOrder
+    lastCalculated?: SortOrder
+    updatedAt?: SortOrder
+    dataStartDate?: SortOrder
+    dataEndDate?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type InsulinStatsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    AND?: InsulinStatsWhereInput | InsulinStatsWhereInput[]
+    OR?: InsulinStatsWhereInput[]
+    NOT?: InsulinStatsWhereInput | InsulinStatsWhereInput[]
+    totalDays?: IntFilter<"InsulinStats"> | number
+    avgTotalInsulin?: FloatFilter<"InsulinStats"> | number
+    avgDailyBolus?: FloatFilter<"InsulinStats"> | number
+    avgDailyBasal?: FloatFilter<"InsulinStats"> | number
+    avgDailyCarbs?: FloatFilter<"InsulinStats"> | number
+    bolusPercentage?: FloatFilter<"InsulinStats"> | number
+    basalPercentage?: FloatFilter<"InsulinStats"> | number
+    insulinCarbRatio?: FloatNullableFilter<"InsulinStats"> | number | null
+    totalBolusCount?: IntFilter<"InsulinStats"> | number
+    totalBasalChanges?: IntFilter<"InsulinStats"> | number
+    avgBolusesPerDay?: FloatFilter<"InsulinStats"> | number
+    lastCalculated?: DateTimeFilter<"InsulinStats"> | Date | string
+    updatedAt?: DateTimeFilter<"InsulinStats"> | Date | string
+    dataStartDate?: DateTimeFilter<"InsulinStats"> | Date | string
+    dataEndDate?: DateTimeFilter<"InsulinStats"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId">
+
+  export type InsulinStatsOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalDays?: SortOrder
+    avgTotalInsulin?: SortOrder
+    avgDailyBolus?: SortOrder
+    avgDailyBasal?: SortOrder
+    avgDailyCarbs?: SortOrder
+    bolusPercentage?: SortOrder
+    basalPercentage?: SortOrder
+    insulinCarbRatio?: SortOrderInput | SortOrder
+    totalBolusCount?: SortOrder
+    totalBasalChanges?: SortOrder
+    avgBolusesPerDay?: SortOrder
+    lastCalculated?: SortOrder
+    updatedAt?: SortOrder
+    dataStartDate?: SortOrder
+    dataEndDate?: SortOrder
+    _count?: InsulinStatsCountOrderByAggregateInput
+    _avg?: InsulinStatsAvgOrderByAggregateInput
+    _max?: InsulinStatsMaxOrderByAggregateInput
+    _min?: InsulinStatsMinOrderByAggregateInput
+    _sum?: InsulinStatsSumOrderByAggregateInput
+  }
+
+  export type InsulinStatsScalarWhereWithAggregatesInput = {
+    AND?: InsulinStatsScalarWhereWithAggregatesInput | InsulinStatsScalarWhereWithAggregatesInput[]
+    OR?: InsulinStatsScalarWhereWithAggregatesInput[]
+    NOT?: InsulinStatsScalarWhereWithAggregatesInput | InsulinStatsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"InsulinStats"> | string
+    userId?: StringWithAggregatesFilter<"InsulinStats"> | string
+    totalDays?: IntWithAggregatesFilter<"InsulinStats"> | number
+    avgTotalInsulin?: FloatWithAggregatesFilter<"InsulinStats"> | number
+    avgDailyBolus?: FloatWithAggregatesFilter<"InsulinStats"> | number
+    avgDailyBasal?: FloatWithAggregatesFilter<"InsulinStats"> | number
+    avgDailyCarbs?: FloatWithAggregatesFilter<"InsulinStats"> | number
+    bolusPercentage?: FloatWithAggregatesFilter<"InsulinStats"> | number
+    basalPercentage?: FloatWithAggregatesFilter<"InsulinStats"> | number
+    insulinCarbRatio?: FloatNullableWithAggregatesFilter<"InsulinStats"> | number | null
+    totalBolusCount?: IntWithAggregatesFilter<"InsulinStats"> | number
+    totalBasalChanges?: IntWithAggregatesFilter<"InsulinStats"> | number
+    avgBolusesPerDay?: FloatWithAggregatesFilter<"InsulinStats"> | number
+    lastCalculated?: DateTimeWithAggregatesFilter<"InsulinStats"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"InsulinStats"> | Date | string
+    dataStartDate?: DateTimeWithAggregatesFilter<"InsulinStats"> | Date | string
+    dataEndDate?: DateTimeWithAggregatesFilter<"InsulinStats"> | Date | string
+  }
+
+  export type BolusRecordWhereInput = {
+    AND?: BolusRecordWhereInput | BolusRecordWhereInput[]
+    OR?: BolusRecordWhereInput[]
+    NOT?: BolusRecordWhereInput | BolusRecordWhereInput[]
+    id?: StringFilter<"BolusRecord"> | string
+    timestamp?: DateTimeFilter<"BolusRecord"> | Date | string
+    amount?: FloatFilter<"BolusRecord"> | number
+    bolusType?: StringFilter<"BolusRecord"> | string
+    duration?: IntNullableFilter<"BolusRecord"> | number | null
+    userId?: StringFilter<"BolusRecord"> | string
+    createdAt?: DateTimeFilter<"BolusRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"BolusRecord"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type BolusRecordOrderByWithRelationInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    amount?: SortOrder
+    bolusType?: SortOrder
+    duration?: SortOrderInput | SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type BolusRecordWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: BolusRecordWhereInput | BolusRecordWhereInput[]
+    OR?: BolusRecordWhereInput[]
+    NOT?: BolusRecordWhereInput | BolusRecordWhereInput[]
+    timestamp?: DateTimeFilter<"BolusRecord"> | Date | string
+    amount?: FloatFilter<"BolusRecord"> | number
+    bolusType?: StringFilter<"BolusRecord"> | string
+    duration?: IntNullableFilter<"BolusRecord"> | number | null
+    userId?: StringFilter<"BolusRecord"> | string
+    createdAt?: DateTimeFilter<"BolusRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"BolusRecord"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type BolusRecordOrderByWithAggregationInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    amount?: SortOrder
+    bolusType?: SortOrder
+    duration?: SortOrderInput | SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BolusRecordCountOrderByAggregateInput
+    _avg?: BolusRecordAvgOrderByAggregateInput
+    _max?: BolusRecordMaxOrderByAggregateInput
+    _min?: BolusRecordMinOrderByAggregateInput
+    _sum?: BolusRecordSumOrderByAggregateInput
+  }
+
+  export type BolusRecordScalarWhereWithAggregatesInput = {
+    AND?: BolusRecordScalarWhereWithAggregatesInput | BolusRecordScalarWhereWithAggregatesInput[]
+    OR?: BolusRecordScalarWhereWithAggregatesInput[]
+    NOT?: BolusRecordScalarWhereWithAggregatesInput | BolusRecordScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BolusRecord"> | string
+    timestamp?: DateTimeWithAggregatesFilter<"BolusRecord"> | Date | string
+    amount?: FloatWithAggregatesFilter<"BolusRecord"> | number
+    bolusType?: StringWithAggregatesFilter<"BolusRecord"> | string
+    duration?: IntNullableWithAggregatesFilter<"BolusRecord"> | number | null
+    userId?: StringWithAggregatesFilter<"BolusRecord"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"BolusRecord"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BolusRecord"> | Date | string
+  }
+
+  export type BasalRecordWhereInput = {
+    AND?: BasalRecordWhereInput | BasalRecordWhereInput[]
+    OR?: BasalRecordWhereInput[]
+    NOT?: BasalRecordWhereInput | BasalRecordWhereInput[]
+    id?: StringFilter<"BasalRecord"> | string
+    timestamp?: DateTimeFilter<"BasalRecord"> | Date | string
+    rate?: FloatFilter<"BasalRecord"> | number
+    duration?: IntFilter<"BasalRecord"> | number
+    changeType?: StringNullableFilter<"BasalRecord"> | string | null
+    userId?: StringFilter<"BasalRecord"> | string
+    createdAt?: DateTimeFilter<"BasalRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"BasalRecord"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type BasalRecordOrderByWithRelationInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    rate?: SortOrder
+    duration?: SortOrder
+    changeType?: SortOrderInput | SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type BasalRecordWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: BasalRecordWhereInput | BasalRecordWhereInput[]
+    OR?: BasalRecordWhereInput[]
+    NOT?: BasalRecordWhereInput | BasalRecordWhereInput[]
+    timestamp?: DateTimeFilter<"BasalRecord"> | Date | string
+    rate?: FloatFilter<"BasalRecord"> | number
+    duration?: IntFilter<"BasalRecord"> | number
+    changeType?: StringNullableFilter<"BasalRecord"> | string | null
+    userId?: StringFilter<"BasalRecord"> | string
+    createdAt?: DateTimeFilter<"BasalRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"BasalRecord"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type BasalRecordOrderByWithAggregationInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    rate?: SortOrder
+    duration?: SortOrder
+    changeType?: SortOrderInput | SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BasalRecordCountOrderByAggregateInput
+    _avg?: BasalRecordAvgOrderByAggregateInput
+    _max?: BasalRecordMaxOrderByAggregateInput
+    _min?: BasalRecordMinOrderByAggregateInput
+    _sum?: BasalRecordSumOrderByAggregateInput
+  }
+
+  export type BasalRecordScalarWhereWithAggregatesInput = {
+    AND?: BasalRecordScalarWhereWithAggregatesInput | BasalRecordScalarWhereWithAggregatesInput[]
+    OR?: BasalRecordScalarWhereWithAggregatesInput[]
+    NOT?: BasalRecordScalarWhereWithAggregatesInput | BasalRecordScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BasalRecord"> | string
+    timestamp?: DateTimeWithAggregatesFilter<"BasalRecord"> | Date | string
+    rate?: FloatWithAggregatesFilter<"BasalRecord"> | number
+    duration?: IntWithAggregatesFilter<"BasalRecord"> | number
+    changeType?: StringNullableWithAggregatesFilter<"BasalRecord"> | string | null
+    userId?: StringWithAggregatesFilter<"BasalRecord"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"BasalRecord"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BasalRecord"> | Date | string
+  }
+
+  export type CarbEntryWhereInput = {
+    AND?: CarbEntryWhereInput | CarbEntryWhereInput[]
+    OR?: CarbEntryWhereInput[]
+    NOT?: CarbEntryWhereInput | CarbEntryWhereInput[]
+    id?: StringFilter<"CarbEntry"> | string
+    timestamp?: DateTimeFilter<"CarbEntry"> | Date | string
+    carbAmount?: FloatFilter<"CarbEntry"> | number
+    userId?: StringFilter<"CarbEntry"> | string
+    createdAt?: DateTimeFilter<"CarbEntry"> | Date | string
+    updatedAt?: DateTimeFilter<"CarbEntry"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type CarbEntryOrderByWithRelationInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    carbAmount?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type CarbEntryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CarbEntryWhereInput | CarbEntryWhereInput[]
+    OR?: CarbEntryWhereInput[]
+    NOT?: CarbEntryWhereInput | CarbEntryWhereInput[]
+    timestamp?: DateTimeFilter<"CarbEntry"> | Date | string
+    carbAmount?: FloatFilter<"CarbEntry"> | number
+    userId?: StringFilter<"CarbEntry"> | string
+    createdAt?: DateTimeFilter<"CarbEntry"> | Date | string
+    updatedAt?: DateTimeFilter<"CarbEntry"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type CarbEntryOrderByWithAggregationInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    carbAmount?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CarbEntryCountOrderByAggregateInput
+    _avg?: CarbEntryAvgOrderByAggregateInput
+    _max?: CarbEntryMaxOrderByAggregateInput
+    _min?: CarbEntryMinOrderByAggregateInput
+    _sum?: CarbEntrySumOrderByAggregateInput
+  }
+
+  export type CarbEntryScalarWhereWithAggregatesInput = {
+    AND?: CarbEntryScalarWhereWithAggregatesInput | CarbEntryScalarWhereWithAggregatesInput[]
+    OR?: CarbEntryScalarWhereWithAggregatesInput[]
+    NOT?: CarbEntryScalarWhereWithAggregatesInput | CarbEntryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CarbEntry"> | string
+    timestamp?: DateTimeWithAggregatesFilter<"CarbEntry"> | Date | string
+    carbAmount?: FloatWithAggregatesFilter<"CarbEntry"> | number
+    userId?: StringWithAggregatesFilter<"CarbEntry"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"CarbEntry"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"CarbEntry"> | Date | string
+  }
+
+  export type AlarmEventWhereInput = {
+    AND?: AlarmEventWhereInput | AlarmEventWhereInput[]
+    OR?: AlarmEventWhereInput[]
+    NOT?: AlarmEventWhereInput | AlarmEventWhereInput[]
+    id?: StringFilter<"AlarmEvent"> | string
+    timestamp?: DateTimeFilter<"AlarmEvent"> | Date | string
+    eventType?: StringFilter<"AlarmEvent"> | string
+    deviceId?: StringNullableFilter<"AlarmEvent"> | string | null
+    userId?: StringFilter<"AlarmEvent"> | string
+    createdAt?: DateTimeFilter<"AlarmEvent"> | Date | string
+    updatedAt?: DateTimeFilter<"AlarmEvent"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type AlarmEventOrderByWithRelationInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    eventType?: SortOrder
+    deviceId?: SortOrderInput | SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type AlarmEventWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AlarmEventWhereInput | AlarmEventWhereInput[]
+    OR?: AlarmEventWhereInput[]
+    NOT?: AlarmEventWhereInput | AlarmEventWhereInput[]
+    timestamp?: DateTimeFilter<"AlarmEvent"> | Date | string
+    eventType?: StringFilter<"AlarmEvent"> | string
+    deviceId?: StringNullableFilter<"AlarmEvent"> | string | null
+    userId?: StringFilter<"AlarmEvent"> | string
+    createdAt?: DateTimeFilter<"AlarmEvent"> | Date | string
+    updatedAt?: DateTimeFilter<"AlarmEvent"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type AlarmEventOrderByWithAggregationInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    eventType?: SortOrder
+    deviceId?: SortOrderInput | SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AlarmEventCountOrderByAggregateInput
+    _max?: AlarmEventMaxOrderByAggregateInput
+    _min?: AlarmEventMinOrderByAggregateInput
+  }
+
+  export type AlarmEventScalarWhereWithAggregatesInput = {
+    AND?: AlarmEventScalarWhereWithAggregatesInput | AlarmEventScalarWhereWithAggregatesInput[]
+    OR?: AlarmEventScalarWhereWithAggregatesInput[]
+    NOT?: AlarmEventScalarWhereWithAggregatesInput | AlarmEventScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AlarmEvent"> | string
+    timestamp?: DateTimeWithAggregatesFilter<"AlarmEvent"> | Date | string
+    eventType?: StringWithAggregatesFilter<"AlarmEvent"> | string
+    deviceId?: StringNullableWithAggregatesFilter<"AlarmEvent"> | string | null
+    userId?: StringWithAggregatesFilter<"AlarmEvent"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"AlarmEvent"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AlarmEvent"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     clerkId: string
@@ -6391,6 +13243,11 @@ export namespace Prisma {
     glucoseReadings?: GlucoseReadingCreateNestedManyWithoutUserInput
     dataUploads?: DataUploadCreateNestedManyWithoutUserInput
     glucoseStats?: GlucoseStatsCreateNestedOneWithoutUserInput
+    insulinStats?: InsulinStatsCreateNestedOneWithoutUserInput
+    bolusRecords?: BolusRecordCreateNestedManyWithoutUserInput
+    basalRecords?: BasalRecordCreateNestedManyWithoutUserInput
+    carbEntries?: CarbEntryCreateNestedManyWithoutUserInput
+    alarmEvents?: AlarmEventCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -6404,6 +13261,11 @@ export namespace Prisma {
     glucoseReadings?: GlucoseReadingUncheckedCreateNestedManyWithoutUserInput
     dataUploads?: DataUploadUncheckedCreateNestedManyWithoutUserInput
     glucoseStats?: GlucoseStatsUncheckedCreateNestedOneWithoutUserInput
+    insulinStats?: InsulinStatsUncheckedCreateNestedOneWithoutUserInput
+    bolusRecords?: BolusRecordUncheckedCreateNestedManyWithoutUserInput
+    basalRecords?: BasalRecordUncheckedCreateNestedManyWithoutUserInput
+    carbEntries?: CarbEntryUncheckedCreateNestedManyWithoutUserInput
+    alarmEvents?: AlarmEventUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -6417,6 +13279,11 @@ export namespace Prisma {
     glucoseReadings?: GlucoseReadingUpdateManyWithoutUserNestedInput
     dataUploads?: DataUploadUpdateManyWithoutUserNestedInput
     glucoseStats?: GlucoseStatsUpdateOneWithoutUserNestedInput
+    insulinStats?: InsulinStatsUpdateOneWithoutUserNestedInput
+    bolusRecords?: BolusRecordUpdateManyWithoutUserNestedInput
+    basalRecords?: BasalRecordUpdateManyWithoutUserNestedInput
+    carbEntries?: CarbEntryUpdateManyWithoutUserNestedInput
+    alarmEvents?: AlarmEventUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -6430,6 +13297,11 @@ export namespace Prisma {
     glucoseReadings?: GlucoseReadingUncheckedUpdateManyWithoutUserNestedInput
     dataUploads?: DataUploadUncheckedUpdateManyWithoutUserNestedInput
     glucoseStats?: GlucoseStatsUncheckedUpdateOneWithoutUserNestedInput
+    insulinStats?: InsulinStatsUncheckedUpdateOneWithoutUserNestedInput
+    bolusRecords?: BolusRecordUncheckedUpdateManyWithoutUserNestedInput
+    basalRecords?: BasalRecordUncheckedUpdateManyWithoutUserNestedInput
+    carbEntries?: CarbEntryUncheckedUpdateManyWithoutUserNestedInput
+    alarmEvents?: AlarmEventUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -6753,6 +13625,428 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type InsulinStatsCreateInput = {
+    id?: string
+    totalDays: number
+    avgTotalInsulin: number
+    avgDailyBolus: number
+    avgDailyBasal: number
+    avgDailyCarbs: number
+    bolusPercentage: number
+    basalPercentage: number
+    insulinCarbRatio?: number | null
+    totalBolusCount: number
+    totalBasalChanges: number
+    avgBolusesPerDay: number
+    lastCalculated?: Date | string
+    updatedAt?: Date | string
+    dataStartDate: Date | string
+    dataEndDate: Date | string
+    user: UserCreateNestedOneWithoutInsulinStatsInput
+  }
+
+  export type InsulinStatsUncheckedCreateInput = {
+    id?: string
+    userId: string
+    totalDays: number
+    avgTotalInsulin: number
+    avgDailyBolus: number
+    avgDailyBasal: number
+    avgDailyCarbs: number
+    bolusPercentage: number
+    basalPercentage: number
+    insulinCarbRatio?: number | null
+    totalBolusCount: number
+    totalBasalChanges: number
+    avgBolusesPerDay: number
+    lastCalculated?: Date | string
+    updatedAt?: Date | string
+    dataStartDate: Date | string
+    dataEndDate: Date | string
+  }
+
+  export type InsulinStatsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalDays?: IntFieldUpdateOperationsInput | number
+    avgTotalInsulin?: FloatFieldUpdateOperationsInput | number
+    avgDailyBolus?: FloatFieldUpdateOperationsInput | number
+    avgDailyBasal?: FloatFieldUpdateOperationsInput | number
+    avgDailyCarbs?: FloatFieldUpdateOperationsInput | number
+    bolusPercentage?: FloatFieldUpdateOperationsInput | number
+    basalPercentage?: FloatFieldUpdateOperationsInput | number
+    insulinCarbRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    totalBolusCount?: IntFieldUpdateOperationsInput | number
+    totalBasalChanges?: IntFieldUpdateOperationsInput | number
+    avgBolusesPerDay?: FloatFieldUpdateOperationsInput | number
+    lastCalculated?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutInsulinStatsNestedInput
+  }
+
+  export type InsulinStatsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    totalDays?: IntFieldUpdateOperationsInput | number
+    avgTotalInsulin?: FloatFieldUpdateOperationsInput | number
+    avgDailyBolus?: FloatFieldUpdateOperationsInput | number
+    avgDailyBasal?: FloatFieldUpdateOperationsInput | number
+    avgDailyCarbs?: FloatFieldUpdateOperationsInput | number
+    bolusPercentage?: FloatFieldUpdateOperationsInput | number
+    basalPercentage?: FloatFieldUpdateOperationsInput | number
+    insulinCarbRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    totalBolusCount?: IntFieldUpdateOperationsInput | number
+    totalBasalChanges?: IntFieldUpdateOperationsInput | number
+    avgBolusesPerDay?: FloatFieldUpdateOperationsInput | number
+    lastCalculated?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InsulinStatsCreateManyInput = {
+    id?: string
+    userId: string
+    totalDays: number
+    avgTotalInsulin: number
+    avgDailyBolus: number
+    avgDailyBasal: number
+    avgDailyCarbs: number
+    bolusPercentage: number
+    basalPercentage: number
+    insulinCarbRatio?: number | null
+    totalBolusCount: number
+    totalBasalChanges: number
+    avgBolusesPerDay: number
+    lastCalculated?: Date | string
+    updatedAt?: Date | string
+    dataStartDate: Date | string
+    dataEndDate: Date | string
+  }
+
+  export type InsulinStatsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalDays?: IntFieldUpdateOperationsInput | number
+    avgTotalInsulin?: FloatFieldUpdateOperationsInput | number
+    avgDailyBolus?: FloatFieldUpdateOperationsInput | number
+    avgDailyBasal?: FloatFieldUpdateOperationsInput | number
+    avgDailyCarbs?: FloatFieldUpdateOperationsInput | number
+    bolusPercentage?: FloatFieldUpdateOperationsInput | number
+    basalPercentage?: FloatFieldUpdateOperationsInput | number
+    insulinCarbRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    totalBolusCount?: IntFieldUpdateOperationsInput | number
+    totalBasalChanges?: IntFieldUpdateOperationsInput | number
+    avgBolusesPerDay?: FloatFieldUpdateOperationsInput | number
+    lastCalculated?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InsulinStatsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    totalDays?: IntFieldUpdateOperationsInput | number
+    avgTotalInsulin?: FloatFieldUpdateOperationsInput | number
+    avgDailyBolus?: FloatFieldUpdateOperationsInput | number
+    avgDailyBasal?: FloatFieldUpdateOperationsInput | number
+    avgDailyCarbs?: FloatFieldUpdateOperationsInput | number
+    bolusPercentage?: FloatFieldUpdateOperationsInput | number
+    basalPercentage?: FloatFieldUpdateOperationsInput | number
+    insulinCarbRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    totalBolusCount?: IntFieldUpdateOperationsInput | number
+    totalBasalChanges?: IntFieldUpdateOperationsInput | number
+    avgBolusesPerDay?: FloatFieldUpdateOperationsInput | number
+    lastCalculated?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BolusRecordCreateInput = {
+    id?: string
+    timestamp: Date | string
+    amount: number
+    bolusType: string
+    duration?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutBolusRecordsInput
+  }
+
+  export type BolusRecordUncheckedCreateInput = {
+    id?: string
+    timestamp: Date | string
+    amount: number
+    bolusType: string
+    duration?: number | null
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BolusRecordUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    bolusType?: StringFieldUpdateOperationsInput | string
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBolusRecordsNestedInput
+  }
+
+  export type BolusRecordUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    bolusType?: StringFieldUpdateOperationsInput | string
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BolusRecordCreateManyInput = {
+    id?: string
+    timestamp: Date | string
+    amount: number
+    bolusType: string
+    duration?: number | null
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BolusRecordUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    bolusType?: StringFieldUpdateOperationsInput | string
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BolusRecordUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    bolusType?: StringFieldUpdateOperationsInput | string
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BasalRecordCreateInput = {
+    id?: string
+    timestamp: Date | string
+    rate: number
+    duration: number
+    changeType?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutBasalRecordsInput
+  }
+
+  export type BasalRecordUncheckedCreateInput = {
+    id?: string
+    timestamp: Date | string
+    rate: number
+    duration: number
+    changeType?: string | null
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BasalRecordUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    rate?: FloatFieldUpdateOperationsInput | number
+    duration?: IntFieldUpdateOperationsInput | number
+    changeType?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBasalRecordsNestedInput
+  }
+
+  export type BasalRecordUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    rate?: FloatFieldUpdateOperationsInput | number
+    duration?: IntFieldUpdateOperationsInput | number
+    changeType?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BasalRecordCreateManyInput = {
+    id?: string
+    timestamp: Date | string
+    rate: number
+    duration: number
+    changeType?: string | null
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BasalRecordUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    rate?: FloatFieldUpdateOperationsInput | number
+    duration?: IntFieldUpdateOperationsInput | number
+    changeType?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BasalRecordUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    rate?: FloatFieldUpdateOperationsInput | number
+    duration?: IntFieldUpdateOperationsInput | number
+    changeType?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CarbEntryCreateInput = {
+    id?: string
+    timestamp: Date | string
+    carbAmount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutCarbEntriesInput
+  }
+
+  export type CarbEntryUncheckedCreateInput = {
+    id?: string
+    timestamp: Date | string
+    carbAmount: number
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CarbEntryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    carbAmount?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCarbEntriesNestedInput
+  }
+
+  export type CarbEntryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    carbAmount?: FloatFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CarbEntryCreateManyInput = {
+    id?: string
+    timestamp: Date | string
+    carbAmount: number
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CarbEntryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    carbAmount?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CarbEntryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    carbAmount?: FloatFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AlarmEventCreateInput = {
+    id?: string
+    timestamp: Date | string
+    eventType: string
+    deviceId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAlarmEventsInput
+  }
+
+  export type AlarmEventUncheckedCreateInput = {
+    id?: string
+    timestamp: Date | string
+    eventType: string
+    deviceId?: string | null
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AlarmEventUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventType?: StringFieldUpdateOperationsInput | string
+    deviceId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAlarmEventsNestedInput
+  }
+
+  export type AlarmEventUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventType?: StringFieldUpdateOperationsInput | string
+    deviceId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AlarmEventCreateManyInput = {
+    id?: string
+    timestamp: Date | string
+    eventType: string
+    deviceId?: string | null
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AlarmEventUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventType?: StringFieldUpdateOperationsInput | string
+    deviceId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AlarmEventUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventType?: StringFieldUpdateOperationsInput | string
+    deviceId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -6811,6 +14105,35 @@ export namespace Prisma {
     isNot?: GlucoseStatsWhereInput | null
   }
 
+  export type InsulinStatsNullableScalarRelationFilter = {
+    is?: InsulinStatsWhereInput | null
+    isNot?: InsulinStatsWhereInput | null
+  }
+
+  export type BolusRecordListRelationFilter = {
+    every?: BolusRecordWhereInput
+    some?: BolusRecordWhereInput
+    none?: BolusRecordWhereInput
+  }
+
+  export type BasalRecordListRelationFilter = {
+    every?: BasalRecordWhereInput
+    some?: BasalRecordWhereInput
+    none?: BasalRecordWhereInput
+  }
+
+  export type CarbEntryListRelationFilter = {
+    every?: CarbEntryWhereInput
+    some?: CarbEntryWhereInput
+    none?: CarbEntryWhereInput
+  }
+
+  export type AlarmEventListRelationFilter = {
+    every?: AlarmEventWhereInput
+    some?: AlarmEventWhereInput
+    none?: AlarmEventWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -6821,6 +14144,22 @@ export namespace Prisma {
   }
 
   export type DataUploadOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BolusRecordOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BasalRecordOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CarbEntryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AlarmEventOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7162,6 +14501,272 @@ export namespace Prisma {
     maxGlucose?: SortOrder
   }
 
+  export type InsulinStatsCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalDays?: SortOrder
+    avgTotalInsulin?: SortOrder
+    avgDailyBolus?: SortOrder
+    avgDailyBasal?: SortOrder
+    avgDailyCarbs?: SortOrder
+    bolusPercentage?: SortOrder
+    basalPercentage?: SortOrder
+    insulinCarbRatio?: SortOrder
+    totalBolusCount?: SortOrder
+    totalBasalChanges?: SortOrder
+    avgBolusesPerDay?: SortOrder
+    lastCalculated?: SortOrder
+    updatedAt?: SortOrder
+    dataStartDate?: SortOrder
+    dataEndDate?: SortOrder
+  }
+
+  export type InsulinStatsAvgOrderByAggregateInput = {
+    totalDays?: SortOrder
+    avgTotalInsulin?: SortOrder
+    avgDailyBolus?: SortOrder
+    avgDailyBasal?: SortOrder
+    avgDailyCarbs?: SortOrder
+    bolusPercentage?: SortOrder
+    basalPercentage?: SortOrder
+    insulinCarbRatio?: SortOrder
+    totalBolusCount?: SortOrder
+    totalBasalChanges?: SortOrder
+    avgBolusesPerDay?: SortOrder
+  }
+
+  export type InsulinStatsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalDays?: SortOrder
+    avgTotalInsulin?: SortOrder
+    avgDailyBolus?: SortOrder
+    avgDailyBasal?: SortOrder
+    avgDailyCarbs?: SortOrder
+    bolusPercentage?: SortOrder
+    basalPercentage?: SortOrder
+    insulinCarbRatio?: SortOrder
+    totalBolusCount?: SortOrder
+    totalBasalChanges?: SortOrder
+    avgBolusesPerDay?: SortOrder
+    lastCalculated?: SortOrder
+    updatedAt?: SortOrder
+    dataStartDate?: SortOrder
+    dataEndDate?: SortOrder
+  }
+
+  export type InsulinStatsMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalDays?: SortOrder
+    avgTotalInsulin?: SortOrder
+    avgDailyBolus?: SortOrder
+    avgDailyBasal?: SortOrder
+    avgDailyCarbs?: SortOrder
+    bolusPercentage?: SortOrder
+    basalPercentage?: SortOrder
+    insulinCarbRatio?: SortOrder
+    totalBolusCount?: SortOrder
+    totalBasalChanges?: SortOrder
+    avgBolusesPerDay?: SortOrder
+    lastCalculated?: SortOrder
+    updatedAt?: SortOrder
+    dataStartDate?: SortOrder
+    dataEndDate?: SortOrder
+  }
+
+  export type InsulinStatsSumOrderByAggregateInput = {
+    totalDays?: SortOrder
+    avgTotalInsulin?: SortOrder
+    avgDailyBolus?: SortOrder
+    avgDailyBasal?: SortOrder
+    avgDailyCarbs?: SortOrder
+    bolusPercentage?: SortOrder
+    basalPercentage?: SortOrder
+    insulinCarbRatio?: SortOrder
+    totalBolusCount?: SortOrder
+    totalBasalChanges?: SortOrder
+    avgBolusesPerDay?: SortOrder
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type BolusRecordCountOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    amount?: SortOrder
+    bolusType?: SortOrder
+    duration?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BolusRecordAvgOrderByAggregateInput = {
+    amount?: SortOrder
+    duration?: SortOrder
+  }
+
+  export type BolusRecordMaxOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    amount?: SortOrder
+    bolusType?: SortOrder
+    duration?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BolusRecordMinOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    amount?: SortOrder
+    bolusType?: SortOrder
+    duration?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BolusRecordSumOrderByAggregateInput = {
+    amount?: SortOrder
+    duration?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type BasalRecordCountOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    rate?: SortOrder
+    duration?: SortOrder
+    changeType?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BasalRecordAvgOrderByAggregateInput = {
+    rate?: SortOrder
+    duration?: SortOrder
+  }
+
+  export type BasalRecordMaxOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    rate?: SortOrder
+    duration?: SortOrder
+    changeType?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BasalRecordMinOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    rate?: SortOrder
+    duration?: SortOrder
+    changeType?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BasalRecordSumOrderByAggregateInput = {
+    rate?: SortOrder
+    duration?: SortOrder
+  }
+
+  export type CarbEntryCountOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    carbAmount?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CarbEntryAvgOrderByAggregateInput = {
+    carbAmount?: SortOrder
+  }
+
+  export type CarbEntryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    carbAmount?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CarbEntryMinOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    carbAmount?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CarbEntrySumOrderByAggregateInput = {
+    carbAmount?: SortOrder
+  }
+
+  export type AlarmEventCountOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    eventType?: SortOrder
+    deviceId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AlarmEventMaxOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    eventType?: SortOrder
+    deviceId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AlarmEventMinOrderByAggregateInput = {
+    id?: SortOrder
+    timestamp?: SortOrder
+    eventType?: SortOrder
+    deviceId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type GlucoseReadingCreateNestedManyWithoutUserInput = {
     create?: XOR<GlucoseReadingCreateWithoutUserInput, GlucoseReadingUncheckedCreateWithoutUserInput> | GlucoseReadingCreateWithoutUserInput[] | GlucoseReadingUncheckedCreateWithoutUserInput[]
     connectOrCreate?: GlucoseReadingCreateOrConnectWithoutUserInput | GlucoseReadingCreateOrConnectWithoutUserInput[]
@@ -7182,6 +14787,40 @@ export namespace Prisma {
     connect?: GlucoseStatsWhereUniqueInput
   }
 
+  export type InsulinStatsCreateNestedOneWithoutUserInput = {
+    create?: XOR<InsulinStatsCreateWithoutUserInput, InsulinStatsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: InsulinStatsCreateOrConnectWithoutUserInput
+    connect?: InsulinStatsWhereUniqueInput
+  }
+
+  export type BolusRecordCreateNestedManyWithoutUserInput = {
+    create?: XOR<BolusRecordCreateWithoutUserInput, BolusRecordUncheckedCreateWithoutUserInput> | BolusRecordCreateWithoutUserInput[] | BolusRecordUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BolusRecordCreateOrConnectWithoutUserInput | BolusRecordCreateOrConnectWithoutUserInput[]
+    createMany?: BolusRecordCreateManyUserInputEnvelope
+    connect?: BolusRecordWhereUniqueInput | BolusRecordWhereUniqueInput[]
+  }
+
+  export type BasalRecordCreateNestedManyWithoutUserInput = {
+    create?: XOR<BasalRecordCreateWithoutUserInput, BasalRecordUncheckedCreateWithoutUserInput> | BasalRecordCreateWithoutUserInput[] | BasalRecordUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BasalRecordCreateOrConnectWithoutUserInput | BasalRecordCreateOrConnectWithoutUserInput[]
+    createMany?: BasalRecordCreateManyUserInputEnvelope
+    connect?: BasalRecordWhereUniqueInput | BasalRecordWhereUniqueInput[]
+  }
+
+  export type CarbEntryCreateNestedManyWithoutUserInput = {
+    create?: XOR<CarbEntryCreateWithoutUserInput, CarbEntryUncheckedCreateWithoutUserInput> | CarbEntryCreateWithoutUserInput[] | CarbEntryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CarbEntryCreateOrConnectWithoutUserInput | CarbEntryCreateOrConnectWithoutUserInput[]
+    createMany?: CarbEntryCreateManyUserInputEnvelope
+    connect?: CarbEntryWhereUniqueInput | CarbEntryWhereUniqueInput[]
+  }
+
+  export type AlarmEventCreateNestedManyWithoutUserInput = {
+    create?: XOR<AlarmEventCreateWithoutUserInput, AlarmEventUncheckedCreateWithoutUserInput> | AlarmEventCreateWithoutUserInput[] | AlarmEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AlarmEventCreateOrConnectWithoutUserInput | AlarmEventCreateOrConnectWithoutUserInput[]
+    createMany?: AlarmEventCreateManyUserInputEnvelope
+    connect?: AlarmEventWhereUniqueInput | AlarmEventWhereUniqueInput[]
+  }
+
   export type GlucoseReadingUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<GlucoseReadingCreateWithoutUserInput, GlucoseReadingUncheckedCreateWithoutUserInput> | GlucoseReadingCreateWithoutUserInput[] | GlucoseReadingUncheckedCreateWithoutUserInput[]
     connectOrCreate?: GlucoseReadingCreateOrConnectWithoutUserInput | GlucoseReadingCreateOrConnectWithoutUserInput[]
@@ -7200,6 +14839,40 @@ export namespace Prisma {
     create?: XOR<GlucoseStatsCreateWithoutUserInput, GlucoseStatsUncheckedCreateWithoutUserInput>
     connectOrCreate?: GlucoseStatsCreateOrConnectWithoutUserInput
     connect?: GlucoseStatsWhereUniqueInput
+  }
+
+  export type InsulinStatsUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<InsulinStatsCreateWithoutUserInput, InsulinStatsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: InsulinStatsCreateOrConnectWithoutUserInput
+    connect?: InsulinStatsWhereUniqueInput
+  }
+
+  export type BolusRecordUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<BolusRecordCreateWithoutUserInput, BolusRecordUncheckedCreateWithoutUserInput> | BolusRecordCreateWithoutUserInput[] | BolusRecordUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BolusRecordCreateOrConnectWithoutUserInput | BolusRecordCreateOrConnectWithoutUserInput[]
+    createMany?: BolusRecordCreateManyUserInputEnvelope
+    connect?: BolusRecordWhereUniqueInput | BolusRecordWhereUniqueInput[]
+  }
+
+  export type BasalRecordUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<BasalRecordCreateWithoutUserInput, BasalRecordUncheckedCreateWithoutUserInput> | BasalRecordCreateWithoutUserInput[] | BasalRecordUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BasalRecordCreateOrConnectWithoutUserInput | BasalRecordCreateOrConnectWithoutUserInput[]
+    createMany?: BasalRecordCreateManyUserInputEnvelope
+    connect?: BasalRecordWhereUniqueInput | BasalRecordWhereUniqueInput[]
+  }
+
+  export type CarbEntryUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CarbEntryCreateWithoutUserInput, CarbEntryUncheckedCreateWithoutUserInput> | CarbEntryCreateWithoutUserInput[] | CarbEntryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CarbEntryCreateOrConnectWithoutUserInput | CarbEntryCreateOrConnectWithoutUserInput[]
+    createMany?: CarbEntryCreateManyUserInputEnvelope
+    connect?: CarbEntryWhereUniqueInput | CarbEntryWhereUniqueInput[]
+  }
+
+  export type AlarmEventUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AlarmEventCreateWithoutUserInput, AlarmEventUncheckedCreateWithoutUserInput> | AlarmEventCreateWithoutUserInput[] | AlarmEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AlarmEventCreateOrConnectWithoutUserInput | AlarmEventCreateOrConnectWithoutUserInput[]
+    createMany?: AlarmEventCreateManyUserInputEnvelope
+    connect?: AlarmEventWhereUniqueInput | AlarmEventWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -7252,6 +14925,72 @@ export namespace Prisma {
     update?: XOR<XOR<GlucoseStatsUpdateToOneWithWhereWithoutUserInput, GlucoseStatsUpdateWithoutUserInput>, GlucoseStatsUncheckedUpdateWithoutUserInput>
   }
 
+  export type InsulinStatsUpdateOneWithoutUserNestedInput = {
+    create?: XOR<InsulinStatsCreateWithoutUserInput, InsulinStatsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: InsulinStatsCreateOrConnectWithoutUserInput
+    upsert?: InsulinStatsUpsertWithoutUserInput
+    disconnect?: InsulinStatsWhereInput | boolean
+    delete?: InsulinStatsWhereInput | boolean
+    connect?: InsulinStatsWhereUniqueInput
+    update?: XOR<XOR<InsulinStatsUpdateToOneWithWhereWithoutUserInput, InsulinStatsUpdateWithoutUserInput>, InsulinStatsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BolusRecordUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BolusRecordCreateWithoutUserInput, BolusRecordUncheckedCreateWithoutUserInput> | BolusRecordCreateWithoutUserInput[] | BolusRecordUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BolusRecordCreateOrConnectWithoutUserInput | BolusRecordCreateOrConnectWithoutUserInput[]
+    upsert?: BolusRecordUpsertWithWhereUniqueWithoutUserInput | BolusRecordUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BolusRecordCreateManyUserInputEnvelope
+    set?: BolusRecordWhereUniqueInput | BolusRecordWhereUniqueInput[]
+    disconnect?: BolusRecordWhereUniqueInput | BolusRecordWhereUniqueInput[]
+    delete?: BolusRecordWhereUniqueInput | BolusRecordWhereUniqueInput[]
+    connect?: BolusRecordWhereUniqueInput | BolusRecordWhereUniqueInput[]
+    update?: BolusRecordUpdateWithWhereUniqueWithoutUserInput | BolusRecordUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BolusRecordUpdateManyWithWhereWithoutUserInput | BolusRecordUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BolusRecordScalarWhereInput | BolusRecordScalarWhereInput[]
+  }
+
+  export type BasalRecordUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BasalRecordCreateWithoutUserInput, BasalRecordUncheckedCreateWithoutUserInput> | BasalRecordCreateWithoutUserInput[] | BasalRecordUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BasalRecordCreateOrConnectWithoutUserInput | BasalRecordCreateOrConnectWithoutUserInput[]
+    upsert?: BasalRecordUpsertWithWhereUniqueWithoutUserInput | BasalRecordUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BasalRecordCreateManyUserInputEnvelope
+    set?: BasalRecordWhereUniqueInput | BasalRecordWhereUniqueInput[]
+    disconnect?: BasalRecordWhereUniqueInput | BasalRecordWhereUniqueInput[]
+    delete?: BasalRecordWhereUniqueInput | BasalRecordWhereUniqueInput[]
+    connect?: BasalRecordWhereUniqueInput | BasalRecordWhereUniqueInput[]
+    update?: BasalRecordUpdateWithWhereUniqueWithoutUserInput | BasalRecordUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BasalRecordUpdateManyWithWhereWithoutUserInput | BasalRecordUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BasalRecordScalarWhereInput | BasalRecordScalarWhereInput[]
+  }
+
+  export type CarbEntryUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CarbEntryCreateWithoutUserInput, CarbEntryUncheckedCreateWithoutUserInput> | CarbEntryCreateWithoutUserInput[] | CarbEntryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CarbEntryCreateOrConnectWithoutUserInput | CarbEntryCreateOrConnectWithoutUserInput[]
+    upsert?: CarbEntryUpsertWithWhereUniqueWithoutUserInput | CarbEntryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CarbEntryCreateManyUserInputEnvelope
+    set?: CarbEntryWhereUniqueInput | CarbEntryWhereUniqueInput[]
+    disconnect?: CarbEntryWhereUniqueInput | CarbEntryWhereUniqueInput[]
+    delete?: CarbEntryWhereUniqueInput | CarbEntryWhereUniqueInput[]
+    connect?: CarbEntryWhereUniqueInput | CarbEntryWhereUniqueInput[]
+    update?: CarbEntryUpdateWithWhereUniqueWithoutUserInput | CarbEntryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CarbEntryUpdateManyWithWhereWithoutUserInput | CarbEntryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CarbEntryScalarWhereInput | CarbEntryScalarWhereInput[]
+  }
+
+  export type AlarmEventUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AlarmEventCreateWithoutUserInput, AlarmEventUncheckedCreateWithoutUserInput> | AlarmEventCreateWithoutUserInput[] | AlarmEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AlarmEventCreateOrConnectWithoutUserInput | AlarmEventCreateOrConnectWithoutUserInput[]
+    upsert?: AlarmEventUpsertWithWhereUniqueWithoutUserInput | AlarmEventUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AlarmEventCreateManyUserInputEnvelope
+    set?: AlarmEventWhereUniqueInput | AlarmEventWhereUniqueInput[]
+    disconnect?: AlarmEventWhereUniqueInput | AlarmEventWhereUniqueInput[]
+    delete?: AlarmEventWhereUniqueInput | AlarmEventWhereUniqueInput[]
+    connect?: AlarmEventWhereUniqueInput | AlarmEventWhereUniqueInput[]
+    update?: AlarmEventUpdateWithWhereUniqueWithoutUserInput | AlarmEventUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AlarmEventUpdateManyWithWhereWithoutUserInput | AlarmEventUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AlarmEventScalarWhereInput | AlarmEventScalarWhereInput[]
+  }
+
   export type GlucoseReadingUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<GlucoseReadingCreateWithoutUserInput, GlucoseReadingUncheckedCreateWithoutUserInput> | GlucoseReadingCreateWithoutUserInput[] | GlucoseReadingUncheckedCreateWithoutUserInput[]
     connectOrCreate?: GlucoseReadingCreateOrConnectWithoutUserInput | GlucoseReadingCreateOrConnectWithoutUserInput[]
@@ -7288,6 +15027,72 @@ export namespace Prisma {
     delete?: GlucoseStatsWhereInput | boolean
     connect?: GlucoseStatsWhereUniqueInput
     update?: XOR<XOR<GlucoseStatsUpdateToOneWithWhereWithoutUserInput, GlucoseStatsUpdateWithoutUserInput>, GlucoseStatsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type InsulinStatsUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<InsulinStatsCreateWithoutUserInput, InsulinStatsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: InsulinStatsCreateOrConnectWithoutUserInput
+    upsert?: InsulinStatsUpsertWithoutUserInput
+    disconnect?: InsulinStatsWhereInput | boolean
+    delete?: InsulinStatsWhereInput | boolean
+    connect?: InsulinStatsWhereUniqueInput
+    update?: XOR<XOR<InsulinStatsUpdateToOneWithWhereWithoutUserInput, InsulinStatsUpdateWithoutUserInput>, InsulinStatsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BolusRecordUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BolusRecordCreateWithoutUserInput, BolusRecordUncheckedCreateWithoutUserInput> | BolusRecordCreateWithoutUserInput[] | BolusRecordUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BolusRecordCreateOrConnectWithoutUserInput | BolusRecordCreateOrConnectWithoutUserInput[]
+    upsert?: BolusRecordUpsertWithWhereUniqueWithoutUserInput | BolusRecordUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BolusRecordCreateManyUserInputEnvelope
+    set?: BolusRecordWhereUniqueInput | BolusRecordWhereUniqueInput[]
+    disconnect?: BolusRecordWhereUniqueInput | BolusRecordWhereUniqueInput[]
+    delete?: BolusRecordWhereUniqueInput | BolusRecordWhereUniqueInput[]
+    connect?: BolusRecordWhereUniqueInput | BolusRecordWhereUniqueInput[]
+    update?: BolusRecordUpdateWithWhereUniqueWithoutUserInput | BolusRecordUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BolusRecordUpdateManyWithWhereWithoutUserInput | BolusRecordUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BolusRecordScalarWhereInput | BolusRecordScalarWhereInput[]
+  }
+
+  export type BasalRecordUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BasalRecordCreateWithoutUserInput, BasalRecordUncheckedCreateWithoutUserInput> | BasalRecordCreateWithoutUserInput[] | BasalRecordUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BasalRecordCreateOrConnectWithoutUserInput | BasalRecordCreateOrConnectWithoutUserInput[]
+    upsert?: BasalRecordUpsertWithWhereUniqueWithoutUserInput | BasalRecordUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BasalRecordCreateManyUserInputEnvelope
+    set?: BasalRecordWhereUniqueInput | BasalRecordWhereUniqueInput[]
+    disconnect?: BasalRecordWhereUniqueInput | BasalRecordWhereUniqueInput[]
+    delete?: BasalRecordWhereUniqueInput | BasalRecordWhereUniqueInput[]
+    connect?: BasalRecordWhereUniqueInput | BasalRecordWhereUniqueInput[]
+    update?: BasalRecordUpdateWithWhereUniqueWithoutUserInput | BasalRecordUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BasalRecordUpdateManyWithWhereWithoutUserInput | BasalRecordUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BasalRecordScalarWhereInput | BasalRecordScalarWhereInput[]
+  }
+
+  export type CarbEntryUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CarbEntryCreateWithoutUserInput, CarbEntryUncheckedCreateWithoutUserInput> | CarbEntryCreateWithoutUserInput[] | CarbEntryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CarbEntryCreateOrConnectWithoutUserInput | CarbEntryCreateOrConnectWithoutUserInput[]
+    upsert?: CarbEntryUpsertWithWhereUniqueWithoutUserInput | CarbEntryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CarbEntryCreateManyUserInputEnvelope
+    set?: CarbEntryWhereUniqueInput | CarbEntryWhereUniqueInput[]
+    disconnect?: CarbEntryWhereUniqueInput | CarbEntryWhereUniqueInput[]
+    delete?: CarbEntryWhereUniqueInput | CarbEntryWhereUniqueInput[]
+    connect?: CarbEntryWhereUniqueInput | CarbEntryWhereUniqueInput[]
+    update?: CarbEntryUpdateWithWhereUniqueWithoutUserInput | CarbEntryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CarbEntryUpdateManyWithWhereWithoutUserInput | CarbEntryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CarbEntryScalarWhereInput | CarbEntryScalarWhereInput[]
+  }
+
+  export type AlarmEventUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AlarmEventCreateWithoutUserInput, AlarmEventUncheckedCreateWithoutUserInput> | AlarmEventCreateWithoutUserInput[] | AlarmEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AlarmEventCreateOrConnectWithoutUserInput | AlarmEventCreateOrConnectWithoutUserInput[]
+    upsert?: AlarmEventUpsertWithWhereUniqueWithoutUserInput | AlarmEventUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AlarmEventCreateManyUserInputEnvelope
+    set?: AlarmEventWhereUniqueInput | AlarmEventWhereUniqueInput[]
+    disconnect?: AlarmEventWhereUniqueInput | AlarmEventWhereUniqueInput[]
+    delete?: AlarmEventWhereUniqueInput | AlarmEventWhereUniqueInput[]
+    connect?: AlarmEventWhereUniqueInput | AlarmEventWhereUniqueInput[]
+    update?: AlarmEventUpdateWithWhereUniqueWithoutUserInput | AlarmEventUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AlarmEventUpdateManyWithWhereWithoutUserInput | AlarmEventUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AlarmEventScalarWhereInput | AlarmEventScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutGlucoseReadingsInput = {
@@ -7354,6 +15159,84 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutGlucoseStatsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutGlucoseStatsInput, UserUpdateWithoutGlucoseStatsInput>, UserUncheckedUpdateWithoutGlucoseStatsInput>
+  }
+
+  export type UserCreateNestedOneWithoutInsulinStatsInput = {
+    create?: XOR<UserCreateWithoutInsulinStatsInput, UserUncheckedCreateWithoutInsulinStatsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutInsulinStatsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutInsulinStatsNestedInput = {
+    create?: XOR<UserCreateWithoutInsulinStatsInput, UserUncheckedCreateWithoutInsulinStatsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutInsulinStatsInput
+    upsert?: UserUpsertWithoutInsulinStatsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutInsulinStatsInput, UserUpdateWithoutInsulinStatsInput>, UserUncheckedUpdateWithoutInsulinStatsInput>
+  }
+
+  export type UserCreateNestedOneWithoutBolusRecordsInput = {
+    create?: XOR<UserCreateWithoutBolusRecordsInput, UserUncheckedCreateWithoutBolusRecordsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBolusRecordsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type UserUpdateOneRequiredWithoutBolusRecordsNestedInput = {
+    create?: XOR<UserCreateWithoutBolusRecordsInput, UserUncheckedCreateWithoutBolusRecordsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBolusRecordsInput
+    upsert?: UserUpsertWithoutBolusRecordsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBolusRecordsInput, UserUpdateWithoutBolusRecordsInput>, UserUncheckedUpdateWithoutBolusRecordsInput>
+  }
+
+  export type UserCreateNestedOneWithoutBasalRecordsInput = {
+    create?: XOR<UserCreateWithoutBasalRecordsInput, UserUncheckedCreateWithoutBasalRecordsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBasalRecordsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutBasalRecordsNestedInput = {
+    create?: XOR<UserCreateWithoutBasalRecordsInput, UserUncheckedCreateWithoutBasalRecordsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBasalRecordsInput
+    upsert?: UserUpsertWithoutBasalRecordsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBasalRecordsInput, UserUpdateWithoutBasalRecordsInput>, UserUncheckedUpdateWithoutBasalRecordsInput>
+  }
+
+  export type UserCreateNestedOneWithoutCarbEntriesInput = {
+    create?: XOR<UserCreateWithoutCarbEntriesInput, UserUncheckedCreateWithoutCarbEntriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCarbEntriesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutCarbEntriesNestedInput = {
+    create?: XOR<UserCreateWithoutCarbEntriesInput, UserUncheckedCreateWithoutCarbEntriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCarbEntriesInput
+    upsert?: UserUpsertWithoutCarbEntriesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCarbEntriesInput, UserUpdateWithoutCarbEntriesInput>, UserUncheckedUpdateWithoutCarbEntriesInput>
+  }
+
+  export type UserCreateNestedOneWithoutAlarmEventsInput = {
+    create?: XOR<UserCreateWithoutAlarmEventsInput, UserUncheckedCreateWithoutAlarmEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAlarmEventsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutAlarmEventsNestedInput = {
+    create?: XOR<UserCreateWithoutAlarmEventsInput, UserUncheckedCreateWithoutAlarmEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAlarmEventsInput
+    upsert?: UserUpsertWithoutAlarmEventsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAlarmEventsInput, UserUpdateWithoutAlarmEventsInput>, UserUncheckedUpdateWithoutAlarmEventsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -7535,6 +15418,22 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
   export type GlucoseReadingCreateWithoutUserInput = {
     id?: string
     timestamp: Date | string
@@ -7636,6 +15535,163 @@ export namespace Prisma {
   export type GlucoseStatsCreateOrConnectWithoutUserInput = {
     where: GlucoseStatsWhereUniqueInput
     create: XOR<GlucoseStatsCreateWithoutUserInput, GlucoseStatsUncheckedCreateWithoutUserInput>
+  }
+
+  export type InsulinStatsCreateWithoutUserInput = {
+    id?: string
+    totalDays: number
+    avgTotalInsulin: number
+    avgDailyBolus: number
+    avgDailyBasal: number
+    avgDailyCarbs: number
+    bolusPercentage: number
+    basalPercentage: number
+    insulinCarbRatio?: number | null
+    totalBolusCount: number
+    totalBasalChanges: number
+    avgBolusesPerDay: number
+    lastCalculated?: Date | string
+    updatedAt?: Date | string
+    dataStartDate: Date | string
+    dataEndDate: Date | string
+  }
+
+  export type InsulinStatsUncheckedCreateWithoutUserInput = {
+    id?: string
+    totalDays: number
+    avgTotalInsulin: number
+    avgDailyBolus: number
+    avgDailyBasal: number
+    avgDailyCarbs: number
+    bolusPercentage: number
+    basalPercentage: number
+    insulinCarbRatio?: number | null
+    totalBolusCount: number
+    totalBasalChanges: number
+    avgBolusesPerDay: number
+    lastCalculated?: Date | string
+    updatedAt?: Date | string
+    dataStartDate: Date | string
+    dataEndDate: Date | string
+  }
+
+  export type InsulinStatsCreateOrConnectWithoutUserInput = {
+    where: InsulinStatsWhereUniqueInput
+    create: XOR<InsulinStatsCreateWithoutUserInput, InsulinStatsUncheckedCreateWithoutUserInput>
+  }
+
+  export type BolusRecordCreateWithoutUserInput = {
+    id?: string
+    timestamp: Date | string
+    amount: number
+    bolusType: string
+    duration?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BolusRecordUncheckedCreateWithoutUserInput = {
+    id?: string
+    timestamp: Date | string
+    amount: number
+    bolusType: string
+    duration?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BolusRecordCreateOrConnectWithoutUserInput = {
+    where: BolusRecordWhereUniqueInput
+    create: XOR<BolusRecordCreateWithoutUserInput, BolusRecordUncheckedCreateWithoutUserInput>
+  }
+
+  export type BolusRecordCreateManyUserInputEnvelope = {
+    data: BolusRecordCreateManyUserInput | BolusRecordCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BasalRecordCreateWithoutUserInput = {
+    id?: string
+    timestamp: Date | string
+    rate: number
+    duration: number
+    changeType?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BasalRecordUncheckedCreateWithoutUserInput = {
+    id?: string
+    timestamp: Date | string
+    rate: number
+    duration: number
+    changeType?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BasalRecordCreateOrConnectWithoutUserInput = {
+    where: BasalRecordWhereUniqueInput
+    create: XOR<BasalRecordCreateWithoutUserInput, BasalRecordUncheckedCreateWithoutUserInput>
+  }
+
+  export type BasalRecordCreateManyUserInputEnvelope = {
+    data: BasalRecordCreateManyUserInput | BasalRecordCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CarbEntryCreateWithoutUserInput = {
+    id?: string
+    timestamp: Date | string
+    carbAmount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CarbEntryUncheckedCreateWithoutUserInput = {
+    id?: string
+    timestamp: Date | string
+    carbAmount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CarbEntryCreateOrConnectWithoutUserInput = {
+    where: CarbEntryWhereUniqueInput
+    create: XOR<CarbEntryCreateWithoutUserInput, CarbEntryUncheckedCreateWithoutUserInput>
+  }
+
+  export type CarbEntryCreateManyUserInputEnvelope = {
+    data: CarbEntryCreateManyUserInput | CarbEntryCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AlarmEventCreateWithoutUserInput = {
+    id?: string
+    timestamp: Date | string
+    eventType: string
+    deviceId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AlarmEventUncheckedCreateWithoutUserInput = {
+    id?: string
+    timestamp: Date | string
+    eventType: string
+    deviceId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AlarmEventCreateOrConnectWithoutUserInput = {
+    where: AlarmEventWhereUniqueInput
+    create: XOR<AlarmEventCreateWithoutUserInput, AlarmEventUncheckedCreateWithoutUserInput>
+  }
+
+  export type AlarmEventCreateManyUserInputEnvelope = {
+    data: AlarmEventCreateManyUserInput | AlarmEventCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type GlucoseReadingUpsertWithWhereUniqueWithoutUserInput = {
@@ -7746,6 +15802,172 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type InsulinStatsUpsertWithoutUserInput = {
+    update: XOR<InsulinStatsUpdateWithoutUserInput, InsulinStatsUncheckedUpdateWithoutUserInput>
+    create: XOR<InsulinStatsCreateWithoutUserInput, InsulinStatsUncheckedCreateWithoutUserInput>
+    where?: InsulinStatsWhereInput
+  }
+
+  export type InsulinStatsUpdateToOneWithWhereWithoutUserInput = {
+    where?: InsulinStatsWhereInput
+    data: XOR<InsulinStatsUpdateWithoutUserInput, InsulinStatsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type InsulinStatsUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalDays?: IntFieldUpdateOperationsInput | number
+    avgTotalInsulin?: FloatFieldUpdateOperationsInput | number
+    avgDailyBolus?: FloatFieldUpdateOperationsInput | number
+    avgDailyBasal?: FloatFieldUpdateOperationsInput | number
+    avgDailyCarbs?: FloatFieldUpdateOperationsInput | number
+    bolusPercentage?: FloatFieldUpdateOperationsInput | number
+    basalPercentage?: FloatFieldUpdateOperationsInput | number
+    insulinCarbRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    totalBolusCount?: IntFieldUpdateOperationsInput | number
+    totalBasalChanges?: IntFieldUpdateOperationsInput | number
+    avgBolusesPerDay?: FloatFieldUpdateOperationsInput | number
+    lastCalculated?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InsulinStatsUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalDays?: IntFieldUpdateOperationsInput | number
+    avgTotalInsulin?: FloatFieldUpdateOperationsInput | number
+    avgDailyBolus?: FloatFieldUpdateOperationsInput | number
+    avgDailyBasal?: FloatFieldUpdateOperationsInput | number
+    avgDailyCarbs?: FloatFieldUpdateOperationsInput | number
+    bolusPercentage?: FloatFieldUpdateOperationsInput | number
+    basalPercentage?: FloatFieldUpdateOperationsInput | number
+    insulinCarbRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    totalBolusCount?: IntFieldUpdateOperationsInput | number
+    totalBasalChanges?: IntFieldUpdateOperationsInput | number
+    avgBolusesPerDay?: FloatFieldUpdateOperationsInput | number
+    lastCalculated?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BolusRecordUpsertWithWhereUniqueWithoutUserInput = {
+    where: BolusRecordWhereUniqueInput
+    update: XOR<BolusRecordUpdateWithoutUserInput, BolusRecordUncheckedUpdateWithoutUserInput>
+    create: XOR<BolusRecordCreateWithoutUserInput, BolusRecordUncheckedCreateWithoutUserInput>
+  }
+
+  export type BolusRecordUpdateWithWhereUniqueWithoutUserInput = {
+    where: BolusRecordWhereUniqueInput
+    data: XOR<BolusRecordUpdateWithoutUserInput, BolusRecordUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BolusRecordUpdateManyWithWhereWithoutUserInput = {
+    where: BolusRecordScalarWhereInput
+    data: XOR<BolusRecordUpdateManyMutationInput, BolusRecordUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type BolusRecordScalarWhereInput = {
+    AND?: BolusRecordScalarWhereInput | BolusRecordScalarWhereInput[]
+    OR?: BolusRecordScalarWhereInput[]
+    NOT?: BolusRecordScalarWhereInput | BolusRecordScalarWhereInput[]
+    id?: StringFilter<"BolusRecord"> | string
+    timestamp?: DateTimeFilter<"BolusRecord"> | Date | string
+    amount?: FloatFilter<"BolusRecord"> | number
+    bolusType?: StringFilter<"BolusRecord"> | string
+    duration?: IntNullableFilter<"BolusRecord"> | number | null
+    userId?: StringFilter<"BolusRecord"> | string
+    createdAt?: DateTimeFilter<"BolusRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"BolusRecord"> | Date | string
+  }
+
+  export type BasalRecordUpsertWithWhereUniqueWithoutUserInput = {
+    where: BasalRecordWhereUniqueInput
+    update: XOR<BasalRecordUpdateWithoutUserInput, BasalRecordUncheckedUpdateWithoutUserInput>
+    create: XOR<BasalRecordCreateWithoutUserInput, BasalRecordUncheckedCreateWithoutUserInput>
+  }
+
+  export type BasalRecordUpdateWithWhereUniqueWithoutUserInput = {
+    where: BasalRecordWhereUniqueInput
+    data: XOR<BasalRecordUpdateWithoutUserInput, BasalRecordUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BasalRecordUpdateManyWithWhereWithoutUserInput = {
+    where: BasalRecordScalarWhereInput
+    data: XOR<BasalRecordUpdateManyMutationInput, BasalRecordUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type BasalRecordScalarWhereInput = {
+    AND?: BasalRecordScalarWhereInput | BasalRecordScalarWhereInput[]
+    OR?: BasalRecordScalarWhereInput[]
+    NOT?: BasalRecordScalarWhereInput | BasalRecordScalarWhereInput[]
+    id?: StringFilter<"BasalRecord"> | string
+    timestamp?: DateTimeFilter<"BasalRecord"> | Date | string
+    rate?: FloatFilter<"BasalRecord"> | number
+    duration?: IntFilter<"BasalRecord"> | number
+    changeType?: StringNullableFilter<"BasalRecord"> | string | null
+    userId?: StringFilter<"BasalRecord"> | string
+    createdAt?: DateTimeFilter<"BasalRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"BasalRecord"> | Date | string
+  }
+
+  export type CarbEntryUpsertWithWhereUniqueWithoutUserInput = {
+    where: CarbEntryWhereUniqueInput
+    update: XOR<CarbEntryUpdateWithoutUserInput, CarbEntryUncheckedUpdateWithoutUserInput>
+    create: XOR<CarbEntryCreateWithoutUserInput, CarbEntryUncheckedCreateWithoutUserInput>
+  }
+
+  export type CarbEntryUpdateWithWhereUniqueWithoutUserInput = {
+    where: CarbEntryWhereUniqueInput
+    data: XOR<CarbEntryUpdateWithoutUserInput, CarbEntryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CarbEntryUpdateManyWithWhereWithoutUserInput = {
+    where: CarbEntryScalarWhereInput
+    data: XOR<CarbEntryUpdateManyMutationInput, CarbEntryUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type CarbEntryScalarWhereInput = {
+    AND?: CarbEntryScalarWhereInput | CarbEntryScalarWhereInput[]
+    OR?: CarbEntryScalarWhereInput[]
+    NOT?: CarbEntryScalarWhereInput | CarbEntryScalarWhereInput[]
+    id?: StringFilter<"CarbEntry"> | string
+    timestamp?: DateTimeFilter<"CarbEntry"> | Date | string
+    carbAmount?: FloatFilter<"CarbEntry"> | number
+    userId?: StringFilter<"CarbEntry"> | string
+    createdAt?: DateTimeFilter<"CarbEntry"> | Date | string
+    updatedAt?: DateTimeFilter<"CarbEntry"> | Date | string
+  }
+
+  export type AlarmEventUpsertWithWhereUniqueWithoutUserInput = {
+    where: AlarmEventWhereUniqueInput
+    update: XOR<AlarmEventUpdateWithoutUserInput, AlarmEventUncheckedUpdateWithoutUserInput>
+    create: XOR<AlarmEventCreateWithoutUserInput, AlarmEventUncheckedCreateWithoutUserInput>
+  }
+
+  export type AlarmEventUpdateWithWhereUniqueWithoutUserInput = {
+    where: AlarmEventWhereUniqueInput
+    data: XOR<AlarmEventUpdateWithoutUserInput, AlarmEventUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AlarmEventUpdateManyWithWhereWithoutUserInput = {
+    where: AlarmEventScalarWhereInput
+    data: XOR<AlarmEventUpdateManyMutationInput, AlarmEventUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type AlarmEventScalarWhereInput = {
+    AND?: AlarmEventScalarWhereInput | AlarmEventScalarWhereInput[]
+    OR?: AlarmEventScalarWhereInput[]
+    NOT?: AlarmEventScalarWhereInput | AlarmEventScalarWhereInput[]
+    id?: StringFilter<"AlarmEvent"> | string
+    timestamp?: DateTimeFilter<"AlarmEvent"> | Date | string
+    eventType?: StringFilter<"AlarmEvent"> | string
+    deviceId?: StringNullableFilter<"AlarmEvent"> | string | null
+    userId?: StringFilter<"AlarmEvent"> | string
+    createdAt?: DateTimeFilter<"AlarmEvent"> | Date | string
+    updatedAt?: DateTimeFilter<"AlarmEvent"> | Date | string
+  }
+
   export type UserCreateWithoutGlucoseReadingsInput = {
     id?: string
     clerkId: string
@@ -7756,6 +15978,11 @@ export namespace Prisma {
     updatedAt?: Date | string
     dataUploads?: DataUploadCreateNestedManyWithoutUserInput
     glucoseStats?: GlucoseStatsCreateNestedOneWithoutUserInput
+    insulinStats?: InsulinStatsCreateNestedOneWithoutUserInput
+    bolusRecords?: BolusRecordCreateNestedManyWithoutUserInput
+    basalRecords?: BasalRecordCreateNestedManyWithoutUserInput
+    carbEntries?: CarbEntryCreateNestedManyWithoutUserInput
+    alarmEvents?: AlarmEventCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGlucoseReadingsInput = {
@@ -7768,6 +15995,11 @@ export namespace Prisma {
     updatedAt?: Date | string
     dataUploads?: DataUploadUncheckedCreateNestedManyWithoutUserInput
     glucoseStats?: GlucoseStatsUncheckedCreateNestedOneWithoutUserInput
+    insulinStats?: InsulinStatsUncheckedCreateNestedOneWithoutUserInput
+    bolusRecords?: BolusRecordUncheckedCreateNestedManyWithoutUserInput
+    basalRecords?: BasalRecordUncheckedCreateNestedManyWithoutUserInput
+    carbEntries?: CarbEntryUncheckedCreateNestedManyWithoutUserInput
+    alarmEvents?: AlarmEventUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGlucoseReadingsInput = {
@@ -7796,6 +16028,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dataUploads?: DataUploadUpdateManyWithoutUserNestedInput
     glucoseStats?: GlucoseStatsUpdateOneWithoutUserNestedInput
+    insulinStats?: InsulinStatsUpdateOneWithoutUserNestedInput
+    bolusRecords?: BolusRecordUpdateManyWithoutUserNestedInput
+    basalRecords?: BasalRecordUpdateManyWithoutUserNestedInput
+    carbEntries?: CarbEntryUpdateManyWithoutUserNestedInput
+    alarmEvents?: AlarmEventUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGlucoseReadingsInput = {
@@ -7808,6 +16045,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dataUploads?: DataUploadUncheckedUpdateManyWithoutUserNestedInput
     glucoseStats?: GlucoseStatsUncheckedUpdateOneWithoutUserNestedInput
+    insulinStats?: InsulinStatsUncheckedUpdateOneWithoutUserNestedInput
+    bolusRecords?: BolusRecordUncheckedUpdateManyWithoutUserNestedInput
+    basalRecords?: BasalRecordUncheckedUpdateManyWithoutUserNestedInput
+    carbEntries?: CarbEntryUncheckedUpdateManyWithoutUserNestedInput
+    alarmEvents?: AlarmEventUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutDataUploadsInput = {
@@ -7820,6 +16062,11 @@ export namespace Prisma {
     updatedAt?: Date | string
     glucoseReadings?: GlucoseReadingCreateNestedManyWithoutUserInput
     glucoseStats?: GlucoseStatsCreateNestedOneWithoutUserInput
+    insulinStats?: InsulinStatsCreateNestedOneWithoutUserInput
+    bolusRecords?: BolusRecordCreateNestedManyWithoutUserInput
+    basalRecords?: BasalRecordCreateNestedManyWithoutUserInput
+    carbEntries?: CarbEntryCreateNestedManyWithoutUserInput
+    alarmEvents?: AlarmEventCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutDataUploadsInput = {
@@ -7832,6 +16079,11 @@ export namespace Prisma {
     updatedAt?: Date | string
     glucoseReadings?: GlucoseReadingUncheckedCreateNestedManyWithoutUserInput
     glucoseStats?: GlucoseStatsUncheckedCreateNestedOneWithoutUserInput
+    insulinStats?: InsulinStatsUncheckedCreateNestedOneWithoutUserInput
+    bolusRecords?: BolusRecordUncheckedCreateNestedManyWithoutUserInput
+    basalRecords?: BasalRecordUncheckedCreateNestedManyWithoutUserInput
+    carbEntries?: CarbEntryUncheckedCreateNestedManyWithoutUserInput
+    alarmEvents?: AlarmEventUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutDataUploadsInput = {
@@ -7860,6 +16112,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     glucoseReadings?: GlucoseReadingUpdateManyWithoutUserNestedInput
     glucoseStats?: GlucoseStatsUpdateOneWithoutUserNestedInput
+    insulinStats?: InsulinStatsUpdateOneWithoutUserNestedInput
+    bolusRecords?: BolusRecordUpdateManyWithoutUserNestedInput
+    basalRecords?: BasalRecordUpdateManyWithoutUserNestedInput
+    carbEntries?: CarbEntryUpdateManyWithoutUserNestedInput
+    alarmEvents?: AlarmEventUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDataUploadsInput = {
@@ -7872,6 +16129,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     glucoseReadings?: GlucoseReadingUncheckedUpdateManyWithoutUserNestedInput
     glucoseStats?: GlucoseStatsUncheckedUpdateOneWithoutUserNestedInput
+    insulinStats?: InsulinStatsUncheckedUpdateOneWithoutUserNestedInput
+    bolusRecords?: BolusRecordUncheckedUpdateManyWithoutUserNestedInput
+    basalRecords?: BasalRecordUncheckedUpdateManyWithoutUserNestedInput
+    carbEntries?: CarbEntryUncheckedUpdateManyWithoutUserNestedInput
+    alarmEvents?: AlarmEventUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutGlucoseStatsInput = {
@@ -7884,6 +16146,11 @@ export namespace Prisma {
     updatedAt?: Date | string
     glucoseReadings?: GlucoseReadingCreateNestedManyWithoutUserInput
     dataUploads?: DataUploadCreateNestedManyWithoutUserInput
+    insulinStats?: InsulinStatsCreateNestedOneWithoutUserInput
+    bolusRecords?: BolusRecordCreateNestedManyWithoutUserInput
+    basalRecords?: BasalRecordCreateNestedManyWithoutUserInput
+    carbEntries?: CarbEntryCreateNestedManyWithoutUserInput
+    alarmEvents?: AlarmEventCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGlucoseStatsInput = {
@@ -7896,6 +16163,11 @@ export namespace Prisma {
     updatedAt?: Date | string
     glucoseReadings?: GlucoseReadingUncheckedCreateNestedManyWithoutUserInput
     dataUploads?: DataUploadUncheckedCreateNestedManyWithoutUserInput
+    insulinStats?: InsulinStatsUncheckedCreateNestedOneWithoutUserInput
+    bolusRecords?: BolusRecordUncheckedCreateNestedManyWithoutUserInput
+    basalRecords?: BasalRecordUncheckedCreateNestedManyWithoutUserInput
+    carbEntries?: CarbEntryUncheckedCreateNestedManyWithoutUserInput
+    alarmEvents?: AlarmEventUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGlucoseStatsInput = {
@@ -7924,6 +16196,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     glucoseReadings?: GlucoseReadingUpdateManyWithoutUserNestedInput
     dataUploads?: DataUploadUpdateManyWithoutUserNestedInput
+    insulinStats?: InsulinStatsUpdateOneWithoutUserNestedInput
+    bolusRecords?: BolusRecordUpdateManyWithoutUserNestedInput
+    basalRecords?: BasalRecordUpdateManyWithoutUserNestedInput
+    carbEntries?: CarbEntryUpdateManyWithoutUserNestedInput
+    alarmEvents?: AlarmEventUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGlucoseStatsInput = {
@@ -7936,6 +16213,431 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     glucoseReadings?: GlucoseReadingUncheckedUpdateManyWithoutUserNestedInput
     dataUploads?: DataUploadUncheckedUpdateManyWithoutUserNestedInput
+    insulinStats?: InsulinStatsUncheckedUpdateOneWithoutUserNestedInput
+    bolusRecords?: BolusRecordUncheckedUpdateManyWithoutUserNestedInput
+    basalRecords?: BasalRecordUncheckedUpdateManyWithoutUserNestedInput
+    carbEntries?: CarbEntryUncheckedUpdateManyWithoutUserNestedInput
+    alarmEvents?: AlarmEventUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutInsulinStatsInput = {
+    id?: string
+    clerkId: string
+    email?: string | null
+    name?: string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    glucoseReadings?: GlucoseReadingCreateNestedManyWithoutUserInput
+    dataUploads?: DataUploadCreateNestedManyWithoutUserInput
+    glucoseStats?: GlucoseStatsCreateNestedOneWithoutUserInput
+    bolusRecords?: BolusRecordCreateNestedManyWithoutUserInput
+    basalRecords?: BasalRecordCreateNestedManyWithoutUserInput
+    carbEntries?: CarbEntryCreateNestedManyWithoutUserInput
+    alarmEvents?: AlarmEventCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutInsulinStatsInput = {
+    id?: string
+    clerkId: string
+    email?: string | null
+    name?: string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    glucoseReadings?: GlucoseReadingUncheckedCreateNestedManyWithoutUserInput
+    dataUploads?: DataUploadUncheckedCreateNestedManyWithoutUserInput
+    glucoseStats?: GlucoseStatsUncheckedCreateNestedOneWithoutUserInput
+    bolusRecords?: BolusRecordUncheckedCreateNestedManyWithoutUserInput
+    basalRecords?: BasalRecordUncheckedCreateNestedManyWithoutUserInput
+    carbEntries?: CarbEntryUncheckedCreateNestedManyWithoutUserInput
+    alarmEvents?: AlarmEventUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutInsulinStatsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutInsulinStatsInput, UserUncheckedCreateWithoutInsulinStatsInput>
+  }
+
+  export type UserUpsertWithoutInsulinStatsInput = {
+    update: XOR<UserUpdateWithoutInsulinStatsInput, UserUncheckedUpdateWithoutInsulinStatsInput>
+    create: XOR<UserCreateWithoutInsulinStatsInput, UserUncheckedCreateWithoutInsulinStatsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutInsulinStatsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutInsulinStatsInput, UserUncheckedUpdateWithoutInsulinStatsInput>
+  }
+
+  export type UserUpdateWithoutInsulinStatsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseReadings?: GlucoseReadingUpdateManyWithoutUserNestedInput
+    dataUploads?: DataUploadUpdateManyWithoutUserNestedInput
+    glucoseStats?: GlucoseStatsUpdateOneWithoutUserNestedInput
+    bolusRecords?: BolusRecordUpdateManyWithoutUserNestedInput
+    basalRecords?: BasalRecordUpdateManyWithoutUserNestedInput
+    carbEntries?: CarbEntryUpdateManyWithoutUserNestedInput
+    alarmEvents?: AlarmEventUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutInsulinStatsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseReadings?: GlucoseReadingUncheckedUpdateManyWithoutUserNestedInput
+    dataUploads?: DataUploadUncheckedUpdateManyWithoutUserNestedInput
+    glucoseStats?: GlucoseStatsUncheckedUpdateOneWithoutUserNestedInput
+    bolusRecords?: BolusRecordUncheckedUpdateManyWithoutUserNestedInput
+    basalRecords?: BasalRecordUncheckedUpdateManyWithoutUserNestedInput
+    carbEntries?: CarbEntryUncheckedUpdateManyWithoutUserNestedInput
+    alarmEvents?: AlarmEventUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutBolusRecordsInput = {
+    id?: string
+    clerkId: string
+    email?: string | null
+    name?: string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    glucoseReadings?: GlucoseReadingCreateNestedManyWithoutUserInput
+    dataUploads?: DataUploadCreateNestedManyWithoutUserInput
+    glucoseStats?: GlucoseStatsCreateNestedOneWithoutUserInput
+    insulinStats?: InsulinStatsCreateNestedOneWithoutUserInput
+    basalRecords?: BasalRecordCreateNestedManyWithoutUserInput
+    carbEntries?: CarbEntryCreateNestedManyWithoutUserInput
+    alarmEvents?: AlarmEventCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutBolusRecordsInput = {
+    id?: string
+    clerkId: string
+    email?: string | null
+    name?: string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    glucoseReadings?: GlucoseReadingUncheckedCreateNestedManyWithoutUserInput
+    dataUploads?: DataUploadUncheckedCreateNestedManyWithoutUserInput
+    glucoseStats?: GlucoseStatsUncheckedCreateNestedOneWithoutUserInput
+    insulinStats?: InsulinStatsUncheckedCreateNestedOneWithoutUserInput
+    basalRecords?: BasalRecordUncheckedCreateNestedManyWithoutUserInput
+    carbEntries?: CarbEntryUncheckedCreateNestedManyWithoutUserInput
+    alarmEvents?: AlarmEventUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutBolusRecordsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBolusRecordsInput, UserUncheckedCreateWithoutBolusRecordsInput>
+  }
+
+  export type UserUpsertWithoutBolusRecordsInput = {
+    update: XOR<UserUpdateWithoutBolusRecordsInput, UserUncheckedUpdateWithoutBolusRecordsInput>
+    create: XOR<UserCreateWithoutBolusRecordsInput, UserUncheckedCreateWithoutBolusRecordsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBolusRecordsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBolusRecordsInput, UserUncheckedUpdateWithoutBolusRecordsInput>
+  }
+
+  export type UserUpdateWithoutBolusRecordsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseReadings?: GlucoseReadingUpdateManyWithoutUserNestedInput
+    dataUploads?: DataUploadUpdateManyWithoutUserNestedInput
+    glucoseStats?: GlucoseStatsUpdateOneWithoutUserNestedInput
+    insulinStats?: InsulinStatsUpdateOneWithoutUserNestedInput
+    basalRecords?: BasalRecordUpdateManyWithoutUserNestedInput
+    carbEntries?: CarbEntryUpdateManyWithoutUserNestedInput
+    alarmEvents?: AlarmEventUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBolusRecordsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseReadings?: GlucoseReadingUncheckedUpdateManyWithoutUserNestedInput
+    dataUploads?: DataUploadUncheckedUpdateManyWithoutUserNestedInput
+    glucoseStats?: GlucoseStatsUncheckedUpdateOneWithoutUserNestedInput
+    insulinStats?: InsulinStatsUncheckedUpdateOneWithoutUserNestedInput
+    basalRecords?: BasalRecordUncheckedUpdateManyWithoutUserNestedInput
+    carbEntries?: CarbEntryUncheckedUpdateManyWithoutUserNestedInput
+    alarmEvents?: AlarmEventUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutBasalRecordsInput = {
+    id?: string
+    clerkId: string
+    email?: string | null
+    name?: string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    glucoseReadings?: GlucoseReadingCreateNestedManyWithoutUserInput
+    dataUploads?: DataUploadCreateNestedManyWithoutUserInput
+    glucoseStats?: GlucoseStatsCreateNestedOneWithoutUserInput
+    insulinStats?: InsulinStatsCreateNestedOneWithoutUserInput
+    bolusRecords?: BolusRecordCreateNestedManyWithoutUserInput
+    carbEntries?: CarbEntryCreateNestedManyWithoutUserInput
+    alarmEvents?: AlarmEventCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutBasalRecordsInput = {
+    id?: string
+    clerkId: string
+    email?: string | null
+    name?: string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    glucoseReadings?: GlucoseReadingUncheckedCreateNestedManyWithoutUserInput
+    dataUploads?: DataUploadUncheckedCreateNestedManyWithoutUserInput
+    glucoseStats?: GlucoseStatsUncheckedCreateNestedOneWithoutUserInput
+    insulinStats?: InsulinStatsUncheckedCreateNestedOneWithoutUserInput
+    bolusRecords?: BolusRecordUncheckedCreateNestedManyWithoutUserInput
+    carbEntries?: CarbEntryUncheckedCreateNestedManyWithoutUserInput
+    alarmEvents?: AlarmEventUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutBasalRecordsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBasalRecordsInput, UserUncheckedCreateWithoutBasalRecordsInput>
+  }
+
+  export type UserUpsertWithoutBasalRecordsInput = {
+    update: XOR<UserUpdateWithoutBasalRecordsInput, UserUncheckedUpdateWithoutBasalRecordsInput>
+    create: XOR<UserCreateWithoutBasalRecordsInput, UserUncheckedCreateWithoutBasalRecordsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBasalRecordsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBasalRecordsInput, UserUncheckedUpdateWithoutBasalRecordsInput>
+  }
+
+  export type UserUpdateWithoutBasalRecordsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseReadings?: GlucoseReadingUpdateManyWithoutUserNestedInput
+    dataUploads?: DataUploadUpdateManyWithoutUserNestedInput
+    glucoseStats?: GlucoseStatsUpdateOneWithoutUserNestedInput
+    insulinStats?: InsulinStatsUpdateOneWithoutUserNestedInput
+    bolusRecords?: BolusRecordUpdateManyWithoutUserNestedInput
+    carbEntries?: CarbEntryUpdateManyWithoutUserNestedInput
+    alarmEvents?: AlarmEventUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBasalRecordsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseReadings?: GlucoseReadingUncheckedUpdateManyWithoutUserNestedInput
+    dataUploads?: DataUploadUncheckedUpdateManyWithoutUserNestedInput
+    glucoseStats?: GlucoseStatsUncheckedUpdateOneWithoutUserNestedInput
+    insulinStats?: InsulinStatsUncheckedUpdateOneWithoutUserNestedInput
+    bolusRecords?: BolusRecordUncheckedUpdateManyWithoutUserNestedInput
+    carbEntries?: CarbEntryUncheckedUpdateManyWithoutUserNestedInput
+    alarmEvents?: AlarmEventUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutCarbEntriesInput = {
+    id?: string
+    clerkId: string
+    email?: string | null
+    name?: string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    glucoseReadings?: GlucoseReadingCreateNestedManyWithoutUserInput
+    dataUploads?: DataUploadCreateNestedManyWithoutUserInput
+    glucoseStats?: GlucoseStatsCreateNestedOneWithoutUserInput
+    insulinStats?: InsulinStatsCreateNestedOneWithoutUserInput
+    bolusRecords?: BolusRecordCreateNestedManyWithoutUserInput
+    basalRecords?: BasalRecordCreateNestedManyWithoutUserInput
+    alarmEvents?: AlarmEventCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCarbEntriesInput = {
+    id?: string
+    clerkId: string
+    email?: string | null
+    name?: string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    glucoseReadings?: GlucoseReadingUncheckedCreateNestedManyWithoutUserInput
+    dataUploads?: DataUploadUncheckedCreateNestedManyWithoutUserInput
+    glucoseStats?: GlucoseStatsUncheckedCreateNestedOneWithoutUserInput
+    insulinStats?: InsulinStatsUncheckedCreateNestedOneWithoutUserInput
+    bolusRecords?: BolusRecordUncheckedCreateNestedManyWithoutUserInput
+    basalRecords?: BasalRecordUncheckedCreateNestedManyWithoutUserInput
+    alarmEvents?: AlarmEventUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCarbEntriesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCarbEntriesInput, UserUncheckedCreateWithoutCarbEntriesInput>
+  }
+
+  export type UserUpsertWithoutCarbEntriesInput = {
+    update: XOR<UserUpdateWithoutCarbEntriesInput, UserUncheckedUpdateWithoutCarbEntriesInput>
+    create: XOR<UserCreateWithoutCarbEntriesInput, UserUncheckedCreateWithoutCarbEntriesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCarbEntriesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCarbEntriesInput, UserUncheckedUpdateWithoutCarbEntriesInput>
+  }
+
+  export type UserUpdateWithoutCarbEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseReadings?: GlucoseReadingUpdateManyWithoutUserNestedInput
+    dataUploads?: DataUploadUpdateManyWithoutUserNestedInput
+    glucoseStats?: GlucoseStatsUpdateOneWithoutUserNestedInput
+    insulinStats?: InsulinStatsUpdateOneWithoutUserNestedInput
+    bolusRecords?: BolusRecordUpdateManyWithoutUserNestedInput
+    basalRecords?: BasalRecordUpdateManyWithoutUserNestedInput
+    alarmEvents?: AlarmEventUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCarbEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseReadings?: GlucoseReadingUncheckedUpdateManyWithoutUserNestedInput
+    dataUploads?: DataUploadUncheckedUpdateManyWithoutUserNestedInput
+    glucoseStats?: GlucoseStatsUncheckedUpdateOneWithoutUserNestedInput
+    insulinStats?: InsulinStatsUncheckedUpdateOneWithoutUserNestedInput
+    bolusRecords?: BolusRecordUncheckedUpdateManyWithoutUserNestedInput
+    basalRecords?: BasalRecordUncheckedUpdateManyWithoutUserNestedInput
+    alarmEvents?: AlarmEventUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutAlarmEventsInput = {
+    id?: string
+    clerkId: string
+    email?: string | null
+    name?: string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    glucoseReadings?: GlucoseReadingCreateNestedManyWithoutUserInput
+    dataUploads?: DataUploadCreateNestedManyWithoutUserInput
+    glucoseStats?: GlucoseStatsCreateNestedOneWithoutUserInput
+    insulinStats?: InsulinStatsCreateNestedOneWithoutUserInput
+    bolusRecords?: BolusRecordCreateNestedManyWithoutUserInput
+    basalRecords?: BasalRecordCreateNestedManyWithoutUserInput
+    carbEntries?: CarbEntryCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAlarmEventsInput = {
+    id?: string
+    clerkId: string
+    email?: string | null
+    name?: string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    glucoseReadings?: GlucoseReadingUncheckedCreateNestedManyWithoutUserInput
+    dataUploads?: DataUploadUncheckedCreateNestedManyWithoutUserInput
+    glucoseStats?: GlucoseStatsUncheckedCreateNestedOneWithoutUserInput
+    insulinStats?: InsulinStatsUncheckedCreateNestedOneWithoutUserInput
+    bolusRecords?: BolusRecordUncheckedCreateNestedManyWithoutUserInput
+    basalRecords?: BasalRecordUncheckedCreateNestedManyWithoutUserInput
+    carbEntries?: CarbEntryUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAlarmEventsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAlarmEventsInput, UserUncheckedCreateWithoutAlarmEventsInput>
+  }
+
+  export type UserUpsertWithoutAlarmEventsInput = {
+    update: XOR<UserUpdateWithoutAlarmEventsInput, UserUncheckedUpdateWithoutAlarmEventsInput>
+    create: XOR<UserCreateWithoutAlarmEventsInput, UserUncheckedCreateWithoutAlarmEventsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAlarmEventsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAlarmEventsInput, UserUncheckedUpdateWithoutAlarmEventsInput>
+  }
+
+  export type UserUpdateWithoutAlarmEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseReadings?: GlucoseReadingUpdateManyWithoutUserNestedInput
+    dataUploads?: DataUploadUpdateManyWithoutUserNestedInput
+    glucoseStats?: GlucoseStatsUpdateOneWithoutUserNestedInput
+    insulinStats?: InsulinStatsUpdateOneWithoutUserNestedInput
+    bolusRecords?: BolusRecordUpdateManyWithoutUserNestedInput
+    basalRecords?: BasalRecordUpdateManyWithoutUserNestedInput
+    carbEntries?: CarbEntryUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAlarmEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkId?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    glucoseReadings?: GlucoseReadingUncheckedUpdateManyWithoutUserNestedInput
+    dataUploads?: DataUploadUncheckedUpdateManyWithoutUserNestedInput
+    glucoseStats?: GlucoseStatsUncheckedUpdateOneWithoutUserNestedInput
+    insulinStats?: InsulinStatsUncheckedUpdateOneWithoutUserNestedInput
+    bolusRecords?: BolusRecordUncheckedUpdateManyWithoutUserNestedInput
+    basalRecords?: BasalRecordUncheckedUpdateManyWithoutUserNestedInput
+    carbEntries?: CarbEntryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type GlucoseReadingCreateManyUserInput = {
@@ -7957,6 +16659,43 @@ export namespace Prisma {
     fileName: string
     fileSize: number
     uploadedAt?: Date | string
+  }
+
+  export type BolusRecordCreateManyUserInput = {
+    id?: string
+    timestamp: Date | string
+    amount: number
+    bolusType: string
+    duration?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BasalRecordCreateManyUserInput = {
+    id?: string
+    timestamp: Date | string
+    rate: number
+    duration: number
+    changeType?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CarbEntryCreateManyUserInput = {
+    id?: string
+    timestamp: Date | string
+    carbAmount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AlarmEventCreateManyUserInput = {
+    id?: string
+    timestamp: Date | string
+    eventType: string
+    deviceId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GlucoseReadingUpdateWithoutUserInput = {
@@ -8020,6 +16759,117 @@ export namespace Prisma {
     fileName?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BolusRecordUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    bolusType?: StringFieldUpdateOperationsInput | string
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BolusRecordUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    bolusType?: StringFieldUpdateOperationsInput | string
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BolusRecordUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    bolusType?: StringFieldUpdateOperationsInput | string
+    duration?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BasalRecordUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    rate?: FloatFieldUpdateOperationsInput | number
+    duration?: IntFieldUpdateOperationsInput | number
+    changeType?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BasalRecordUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    rate?: FloatFieldUpdateOperationsInput | number
+    duration?: IntFieldUpdateOperationsInput | number
+    changeType?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BasalRecordUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    rate?: FloatFieldUpdateOperationsInput | number
+    duration?: IntFieldUpdateOperationsInput | number
+    changeType?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CarbEntryUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    carbAmount?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CarbEntryUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    carbAmount?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CarbEntryUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    carbAmount?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AlarmEventUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventType?: StringFieldUpdateOperationsInput | string
+    deviceId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AlarmEventUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventType?: StringFieldUpdateOperationsInput | string
+    deviceId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AlarmEventUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventType?: StringFieldUpdateOperationsInput | string
+    deviceId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

@@ -36,9 +36,11 @@ const TIME_SLOTS = [
   '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
 ];
 
-// Thresholds for pattern significance
-const PATTERN_SIGNIFICANCE_THRESHOLD = 30; // Percentage
-const MINIMUM_READINGS_THRESHOLD = 3; // Minimum readings to consider a pattern
+// Configuration parameters
+const MAX_RISK_TIMES = 5; // Maximum number of time slots to show as risk times
+const MINIMUM_READINGS_THRESHOLD = 2; // Minimum readings to consider a pattern
+const MINIMUM_NONZERO_REQUIRED = 1; // Must have at least this many high/low readings
+const MINIMUM_PERCENTAGE = 5; // Must have at least this percentage to be included
 
 /**
  * Analyzes glucose readings to identify patterns of high and low blood sugar
@@ -109,13 +111,13 @@ export function analyzeGlucosePatterns(readings: any[]): PatternAnalysisResult {
     const sum = data.values.reduce((acc, val) => acc + val, 0);
     const averageValue = sum / totalReadings;
     
-    // Determine significance based on percentages and thresholds
+    // Determine significance based on which is highest
     let significance: 'high' | 'low' | 'normal' = 'normal';
     
     if (totalReadings >= MINIMUM_READINGS_THRESHOLD) {
-      if (highPercentage >= PATTERN_SIGNIFICANCE_THRESHOLD) {
+      if (highPercentage > lowPercentage && highPercentage > normalPercentage) {
         significance = 'high';
-      } else if (lowPercentage >= PATTERN_SIGNIFICANCE_THRESHOLD) {
+      } else if (lowPercentage > highPercentage && lowPercentage > normalPercentage) {
         significance = 'low';
       }
     }
@@ -134,14 +136,44 @@ export function analyzeGlucosePatterns(readings: any[]): PatternAnalysisResult {
     };
   });
 
-  // Filter for high and low risk times
-  const highRiskTimes = patterns.filter(pattern => 
-    pattern.significance === 'high' && pattern.totalReadings >= MINIMUM_READINGS_THRESHOLD
-  );
+  // Filter out slots with no readings
+  const nonEmptyPatterns = patterns.filter(pattern => pattern.totalReadings >= MINIMUM_READINGS_THRESHOLD);
   
-  const lowRiskTimes = patterns.filter(pattern => 
-    pattern.significance === 'low' && pattern.totalReadings >= MINIMUM_READINGS_THRESHOLD
-  );
+  // Find high risk times based on relative percentages
+  let highRiskTimes: GlucosePattern[] = [];
+  if (nonEmptyPatterns.length > 0) {
+    // Get patterns with high readings that meet minimum percentage
+    const patternsWithHigh = nonEmptyPatterns.filter(p => 
+      p.highFrequency >= MINIMUM_NONZERO_REQUIRED && 
+      p.highPercentage >= MINIMUM_PERCENTAGE
+    );
+    
+    if (patternsWithHigh.length > 0) {
+      // Sort by high percentage (descending)
+      const sortedByHigh = [...patternsWithHigh].sort((a, b) => b.highPercentage - a.highPercentage);
+      
+      // Take top N times or all if less than N
+      highRiskTimes = sortedByHigh.slice(0, MAX_RISK_TIMES);
+    }
+  }
+  
+  // Find low risk times based on relative percentages
+  let lowRiskTimes: GlucosePattern[] = [];
+  if (nonEmptyPatterns.length > 0) {
+    // Get patterns with low readings that meet minimum percentage
+    const patternsWithLow = nonEmptyPatterns.filter(p => 
+      p.lowFrequency >= MINIMUM_NONZERO_REQUIRED && 
+      p.lowPercentage >= MINIMUM_PERCENTAGE
+    );
+    
+    if (patternsWithLow.length > 0) {
+      // Sort by low percentage (descending)
+      const sortedByLow = [...patternsWithLow].sort((a, b) => b.lowPercentage - a.lowPercentage);
+      
+      // Take top N times or all if less than N
+      lowRiskTimes = sortedByLow.slice(0, MAX_RISK_TIMES);
+    }
+  }
 
   // Create summary of daily patterns
   const summary = {
@@ -235,7 +267,8 @@ export function getPatternInsights(result: PatternAnalysisResult): string[] {
   
   // High glucose patterns
   if (result.highRiskTimes.length > 0) {
-    insights.push(`You tend to have high glucose readings at: ${result.highRiskTimes.map(t => formatTimeDisplay(t.time)).join(', ')}.`);
+    insights.push(`Your highest risk times for elevated glucose are: ${result.highRiskTimes.map(t => 
+      `${formatTimeDisplay(t.time)} (${t.highPercentage.toFixed(0)}%)`).join(', ')}.`);
     
     if (result.summary.morningHighs) {
       insights.push('Morning hyperglycemia may be due to dawn phenomenon or insufficient overnight insulin.');
@@ -252,7 +285,8 @@ export function getPatternInsights(result: PatternAnalysisResult): string[] {
   
   // Low glucose patterns
   if (result.lowRiskTimes.length > 0) {
-    insights.push(`You tend to have low glucose readings at: ${result.lowRiskTimes.map(t => formatTimeDisplay(t.time)).join(', ')}.`);
+    insights.push(`Your highest risk times for low glucose are: ${result.lowRiskTimes.map(t => 
+      `${formatTimeDisplay(t.time)} (${t.lowPercentage.toFixed(0)}%)`).join(', ')}.`);
     
     if (result.summary.nightLows) {
       insights.push('Overnight lows may indicate too much basal insulin or insufficient evening snack.');

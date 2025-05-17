@@ -172,6 +172,67 @@ exports.Prisma.GlucoseStatsScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.InsulinStatsScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  totalDays: 'totalDays',
+  avgTotalInsulin: 'avgTotalInsulin',
+  avgDailyBolus: 'avgDailyBolus',
+  avgDailyBasal: 'avgDailyBasal',
+  avgDailyCarbs: 'avgDailyCarbs',
+  bolusPercentage: 'bolusPercentage',
+  basalPercentage: 'basalPercentage',
+  insulinCarbRatio: 'insulinCarbRatio',
+  totalBolusCount: 'totalBolusCount',
+  totalBasalChanges: 'totalBasalChanges',
+  avgBolusesPerDay: 'avgBolusesPerDay',
+  lastCalculated: 'lastCalculated',
+  updatedAt: 'updatedAt',
+  dataStartDate: 'dataStartDate',
+  dataEndDate: 'dataEndDate'
+};
+
+exports.Prisma.BolusRecordScalarFieldEnum = {
+  id: 'id',
+  timestamp: 'timestamp',
+  amount: 'amount',
+  bolusType: 'bolusType',
+  duration: 'duration',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BasalRecordScalarFieldEnum = {
+  id: 'id',
+  timestamp: 'timestamp',
+  rate: 'rate',
+  duration: 'duration',
+  changeType: 'changeType',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CarbEntryScalarFieldEnum = {
+  id: 'id',
+  timestamp: 'timestamp',
+  carbAmount: 'carbAmount',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AlarmEventScalarFieldEnum = {
+  id: 'id',
+  timestamp: 'timestamp',
+  eventType: 'eventType',
+  deviceId: 'deviceId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -192,7 +253,12 @@ exports.Prisma.ModelName = {
   User: 'User',
   GlucoseReading: 'GlucoseReading',
   DataUpload: 'DataUpload',
-  GlucoseStats: 'GlucoseStats'
+  GlucoseStats: 'GlucoseStats',
+  InsulinStats: 'InsulinStats',
+  BolusRecord: 'BolusRecord',
+  BasalRecord: 'BasalRecord',
+  CarbEntry: 'CarbEntry',
+  AlarmEvent: 'AlarmEvent'
 };
 
 /**

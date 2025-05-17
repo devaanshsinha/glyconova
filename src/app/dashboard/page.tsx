@@ -41,9 +41,11 @@ export default function DashboardPage() {
                     Upload Dexcom Data
                   </button>
                 </Link>
-                <button className="w-full py-2 px-4 border border-blue-500 text-blue-500 rounded-lg hover:bg-blue-50 transition">
-                  Connect Omnipod
-                </button>
+                <Link href="/upload-omnipod">
+                  <button className="w-full py-2 px-4 border border-blue-500 text-blue-500 rounded-lg hover:bg-blue-50 transition">
+                    Upload Omnipod Data
+                  </button>
+                </Link>
               </div>
             </section>
 
