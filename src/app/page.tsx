@@ -53,19 +53,19 @@ export default function HomePage() {
       <SignedOut>
         <div className="space-y-16">
           {/* Animated Hero Section */}
-          <section className="relative overflow-hidden min-h-screen w-full flex flex-col items-center justify-center p-0">
+          <section className="relative overflow-hidden py-24 flex flex-col items-center justify-center bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100">
             {/* Floating shapes */}
             <div className="absolute inset-0 pointer-events-none z-0">
               <div className="absolute top-10 left-10 w-32 h-32 bg-blue-300 opacity-30 rounded-full animate-pulse-slow" />
               <div className="absolute bottom-10 right-20 w-24 h-24 bg-pink-300 opacity-20 rounded-full animate-bounce-slow" />
               <div className="absolute top-1/2 left-1/2 w-16 h-16 bg-purple-300 opacity-20 rounded-full animate-float" />
             </div>
-            <div className="relative z-10 flex flex-col items-center w-full">
+            <div className="relative z-10 flex flex-col items-center">
               <div className="animate-fade-in-up">
                 <Image src="/globe.svg" alt="Glyconova Logo" width={80} height={80} className="drop-shadow-xl animate-spin-slow" />
               </div>
-              <h1 className="mt-6 text-5xl md:text-6xl font-extrabold text-gray-900 animate-fade-in-up text-center">Welcome to Glyconova</h1>
-              <p className="mt-4 max-w-xl mx-auto text-lg text-gray-700 animate-fade-in-up delay-100 text-center">
+              <h1 className="mt-6 text-5xl md:text-6xl font-extrabold text-gray-900 animate-fade-in-up">Welcome to Glyconova</h1>
+              <p className="mt-4 max-w-xl mx-auto text-lg text-gray-700 animate-fade-in-up delay-100">
                 Your all-in-one diabetes data analytics hub. Connect your Dexcom CGM and Omnipod insulin pump to visualize trends, uncover patterns, and get personalized suggestions.
               </p>
               <SignInButton>
@@ -79,17 +79,10 @@ export default function HomePage() {
                 <span className="inline-block bg-white/70 px-6 py-2 rounded-full text-blue-700 font-medium shadow-lg backdrop-blur">“Empowering you to live boldly with diabetes.”</span>
               </div>
             </div>
-            {/* Down Arrow Indicator */}
-            <a href="#how-glyconova-works" className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center group cursor-pointer">
-              <div className="w-12 h-12 bg-white/80 rounded-full flex items-center justify-center shadow-lg border border-gray-200 animate-bounce">
-                <svg width="28" height="28" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" stroke="#6366F1" strokeWidth="2"/><path d="M8 11l4 4 4-4" stroke="#6366F1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </div>
-              <span className="mt-1 text-xs text-blue-500 opacity-80 group-hover:opacity-100 transition">Scroll</span>
-            </a>
           </section>
 
           {/* How It Works Timeline */}
-          <section id="how-glyconova-works" className="relative z-10 container mx-auto px-4 bg-white rounded-t-3xl shadow-xl -mt-8 pt-16">
+          <section className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center text-gray-900 mb-12 animate-fade-in-up">How Glyconova Works</h2>
             <ol className="relative border-l-4 border-blue-200 max-w-2xl mx-auto animate-fade-in-up">
               <li className="mb-10 ml-6 group hover:bg-blue-50 rounded-xl transition p-4">
@@ -131,7 +124,7 @@ export default function HomePage() {
           </section>
 
           {/* Testimonials Carousel */}
-          <section className="bg-white py-12 animate-fade-in-up">
+          <section className="bg-white pt-12 pb-4 animate-fade-in-up">
             <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">What Our Users Say</h2>
             <div className="max-w-xl mx-auto flex flex-col items-center">
               <div className={`w-full ${testimonials[currentTestimonial].color} rounded-xl shadow p-6 flex flex-col items-center transition-all duration-500`}>
@@ -175,7 +168,7 @@ export default function HomePage() {
           </section>
 
           {/* What You Can Do */}
-          <section className="bg-gray-50 pt-8 pb-12 animate-fade-in-up">
+          <section className="bg-gray-50 py-12 animate-fade-in-up">
             <div className="container mx-auto px-4 max-w-2xl">
               <h2 className="text-3xl font-semibold text-center text-gray-900">
                 What You Can Do with Glyconova
