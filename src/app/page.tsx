@@ -53,7 +53,7 @@ export default function HomePage() {
       <SignedOut>
         <div className="space-y-16">
           {/* Animated Hero Section */}
-          <section className="relative overflow-hidden min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 p-0">
+          <section className="relative overflow-hidden min-h-screen w-full flex flex-col items-center justify-center p-0">
             {/* Floating shapes */}
             <div className="absolute inset-0 pointer-events-none z-0">
               <div className="absolute top-10 left-10 w-32 h-32 bg-blue-300 opacity-30 rounded-full animate-pulse-slow" />
@@ -89,7 +89,7 @@ export default function HomePage() {
           </section>
 
           {/* How It Works Timeline */}
-          <section id="how-glyconova-works" className="relative z-10 container mx-auto px-4 bg-white">
+          <section id="how-glyconova-works" className="relative z-10 container mx-auto px-4 bg-white rounded-t-3xl shadow-xl -mt-8 pt-16">
             <h2 className="text-3xl font-bold text-center text-gray-900 mb-12 animate-fade-in-up">How Glyconova Works</h2>
             <ol className="relative border-l-4 border-blue-200 max-w-2xl mx-auto animate-fade-in-up">
               <li className="mb-10 ml-6 group hover:bg-blue-50 rounded-xl transition p-4">
