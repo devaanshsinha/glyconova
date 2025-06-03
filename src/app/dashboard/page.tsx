@@ -9,7 +9,6 @@ export default function DashboardPage() {
   return (
     <>
       <SignedIn>
-        {/* Profile Card */}
         <div className="flex justify-end mb-4">
           <div className="flex items-center bg-white rounded-xl shadow px-4 py-2 gap-3 border border-gray-100">
             <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center font-bold text-blue-600">N</div>
@@ -19,7 +18,6 @@ export default function DashboardPage() {
             </div>
           </div>
         </div>
-        {/* Hero Banner */}
         <section className="relative overflow-hidden rounded-xl shadow mb-8 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 p-8 flex items-center gap-8">
           <div className="flex-1">
             <h1 className="text-4xl md:text-5xl font-extrabold text-white drop-shadow mb-2">Welcome to Your Dashboard</h1>
@@ -32,7 +30,6 @@ export default function DashboardPage() {
             <Image src="/globe.svg" alt="Dashboard" width={96} height={96} className="drop-shadow-xl" />
           </div>
         </section>
-        {/* Quick Actions Bar */}
         <div className="flex gap-4 mb-8">
           <Link href="/upload-dexcom" className="flex items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-700 font-medium px-4 py-2 rounded-lg shadow transition">
             <Image src="/globe.svg" alt="Dexcom" width={24} height={24} /> Upload Dexcom
@@ -44,9 +41,7 @@ export default function DashboardPage() {
             <Image src="/window.svg" alt="Reports" width={24} height={24} /> View Reports
           </Link>
         </div>
-        {/* Main Grid */}
         <div className="grid gap-6 md:grid-cols-2">
-          {/* Glucose Trends */}
           <section className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition duration-200 border-t-4 border-blue-400">
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center gap-2">
@@ -59,7 +54,7 @@ export default function DashboardPage() {
             </div>
             <GlucoseStatsDisplay />
           </section>
-          {/* Insulin Delivery */}
+
           <section className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition duration-200 border-t-4 border-purple-400">
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center gap-2">
@@ -72,7 +67,7 @@ export default function DashboardPage() {
             </div>
             <InsulinStatsDisplay />
           </section>
-          {/* Connect Devices */}
+
           <section className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition duration-200 border-t-4 border-green-400">
             <div className="flex items-center gap-2 mb-4">
               <Image src="/window.svg" alt="Devices" width={28} height={28} />
@@ -91,7 +86,7 @@ export default function DashboardPage() {
               </Link>
             </div>
           </section>
-          {/* Recent Insights */}
+
           <section className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition duration-200 border-t-4 border-pink-400">
             <div className="flex items-center gap-2 mb-4">
               <Image src="/vercel.svg" alt="Insights" width={28} height={28} />
