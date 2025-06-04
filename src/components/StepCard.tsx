@@ -12,9 +12,6 @@ interface StepCardProps {
 export function StepCard({ step, title, description, index }: StepCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.5 }}
       transition={{ delay: index * 0.2 }}
       whileHover={{ scale: 1.02 }}
       className="group relative p-8 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-all duration-300"

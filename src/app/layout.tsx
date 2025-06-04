@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <ClerkProvider>
           {/* fixed navbar */}
           <header className="fixed inset-x-0 top-0 bg-white shadow z-50">
-            <nav className="container mx-auto p-4 flex justify-between items-center">
+            <nav className="p-4 flex justify-between items-center">
               {/* Logo → Home or Dashboard based on auth status */}
               <div className="text-2xl font-bold text-gray-900">
                 <SignedIn>
@@ -51,7 +51,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </header>
 
           {/* Push content below navbar */}
-          <main className="container mx-auto p-6 pt-24">{children}</main>
+          <main className="p-6 pt-24">{children}</main>
         </ClerkProvider>
       </body>
     </html>

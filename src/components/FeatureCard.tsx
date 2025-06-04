@@ -13,9 +13,6 @@ interface FeatureCardProps {
 export function FeatureCard({ icon: Icon, title, description, index }: FeatureCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.5 }}
       transition={{ delay: index * 0.1 }}
       whileHover={{ scale: 1.02 }}
       className="group relative p-6 rounded-2xl bg-gradient-to-br from-white to-blue-50 shadow-lg hover:shadow-xl transition-all duration-300"

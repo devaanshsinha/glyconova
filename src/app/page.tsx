@@ -42,8 +42,11 @@ const staggerContainer = {
 export default function HomePage() {
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.5 })
   const [benefitsRef, benefitsInView] = useInView({ triggerOnce: true, threshold: 0.5 })
-  const [featuresRef, featuresInView] = useInView({ triggerOnce: true, threshold: 0.5 })
+  const [howItWorksRef, howItWorksInView] = useInView({ triggerOnce: true, threshold: 0.5 })
+  const [featureHighlightsRef, featureHighlightsInView] = useInView({ triggerOnce: true, threshold: 0.2 })
+  const [privacyRef, privacyInView] = useInView({ triggerOnce: true, threshold: 0.2 })
   const [faqRef, faqInView] = useInView({ triggerOnce: true, threshold: 0.5 })
+  const [ctaRef, ctaInView] = useInView({ triggerOnce: true, threshold: 0.5 })
 
   return (
     <>
@@ -150,9 +153,9 @@ export default function HomePage() {
 
           {/* How It Works Section */}
           <motion.section 
-            ref={featuresRef}
+            ref={howItWorksRef}
             initial="hidden"
-            animate={featuresInView ? "visible" : "hidden"}
+            animate={howItWorksInView ? "visible" : "hidden"}
             variants={staggerContainer}
             className="py-20 bg-gradient-to-b from-white to-blue-50"
           >
@@ -193,9 +196,9 @@ export default function HomePage() {
 
           {/* Feature Highlights */}
           <motion.section 
-            ref={featuresRef}
+            ref={featureHighlightsRef}
             initial="hidden"
-            animate={featuresInView ? "visible" : "hidden"}
+            animate={featureHighlightsInView ? "visible" : "hidden"}
             variants={staggerContainer}
             className="py-20 bg-white"
           >
@@ -242,9 +245,9 @@ export default function HomePage() {
 
           {/* Privacy & Security */}
           <motion.section 
-            ref={featuresRef}
+            ref={privacyRef}
             initial="hidden"
-            animate={featuresInView ? "visible" : "hidden"}
+            animate={privacyInView ? "visible" : "hidden"}
             variants={staggerContainer}
             className="py-20 bg-gradient-to-b from-white to-blue-50"
           >
@@ -328,9 +331,9 @@ export default function HomePage() {
 
           {/* Final CTA */}
           <motion.section 
-            ref={featuresRef}
+            ref={ctaRef}
             initial="hidden"
-            animate={featuresInView ? "visible" : "hidden"}
+            animate={ctaInView ? "visible" : "hidden"}
             variants={staggerContainer}
             className="py-20 bg-gradient-to-b from-blue-50 to-white"
           >
@@ -358,8 +361,8 @@ export default function HomePage() {
 
           {/* Footer */}
           <footer className="bg-gray-900 text-white py-12">
-            <div className="container mx-auto px-4">
-              <div className="grid md:grid-cols-4 gap-8">
+            <div className="px-4">
+              <div className="grid md:grid-cols-4 gap-8 w-full">
                 <div>
                   <h3 className="text-2xl font-bold mb-4">GlycoNova</h3>
                   <p className="text-gray-400">
