@@ -1,44 +1,46 @@
-'use client';
 // src/app/page.tsx
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
 import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs'
-import { redirect } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
+import * as Accordion from '@radix-ui/react-accordion'
+import { ChevronDown, Shield, Lock, Upload, Sparkles, Heart, ArrowRight } from 'lucide-react'
+import { ReactNode } from 'react'
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5 }
+}
+
+interface SectionProps {
+  children: ReactNode;
+  className?: string;
+}
+
+const Section = ({ children, className = "" }: SectionProps) => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1
+  })
+
+  return (
+    <motion.div
+      ref={ref}
+      initial="initial"
+      animate={inView ? "animate" : "initial"}
+      variants={fadeInUp}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  )
+}
 
 export default function HomePage() {
-  // Carousel logic
-  const testimonials = [
-    {
-      icon: '/globe.svg',
-      text: '“Glyconova made it so easy to see my glucose patterns. I feel more in control than ever!”',
-      user: '— Alex, T1D',
-      color: 'bg-blue-50',
-      textColor: 'text-blue-700',
-    },
-    {
-      icon: '/file.svg',
-      text: '“The insights and tips are spot on. My A1C has improved since using Glyconova!”',
-      user: '— Jamie, T1D',
-      color: 'bg-purple-50',
-      textColor: 'text-purple-700',
-    },
-    {
-      icon: '/window.svg',
-      text: '“I love the design and how easy it is to use. Highly recommend!”',
-      user: '— Morgan, Parent',
-      color: 'bg-pink-50',
-      textColor: 'text-pink-700',
-    },
-  ]
-  const [currentTestimonial, setCurrentTestimonial] = useState(0)
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [])
-
   return (
     <>
       <SignedIn>
@@ -51,138 +53,277 @@ export default function HomePage() {
       </SignedIn>
       
       <SignedOut>
-        <div className="space-y-16">
-          {/* Animated Hero Section */}
-          <section className="relative overflow-hidden py-24 flex flex-col items-center justify-center bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100">
-            {/* Floating shapes */}
-            <div className="absolute inset-0 pointer-events-none z-0">
-              <div className="absolute top-10 left-10 w-32 h-32 bg-blue-300 opacity-30 rounded-full animate-pulse-slow" />
-              <div className="absolute bottom-10 right-20 w-24 h-24 bg-pink-300 opacity-20 rounded-full animate-bounce-slow" />
-              <div className="absolute top-1/2 left-1/2 w-16 h-16 bg-purple-300 opacity-20 rounded-full animate-float" />
+        <div className="min-h-screen bg-gradient-to-b from-white to-blue-50">
+          {/* Hero Section */}
+          <Section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+            <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+            <div className="container mx-auto px-4 text-center relative z-10">
+              <motion.h1 
+                className="text-6xl md:text-7xl font-extrabold text-gray-900 mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                GlycoNova
+              </motion.h1>
+              <motion.p 
+                className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                Empower Your Type 1 Diabetes Journey
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <SignInButton>
+                  <button className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 bg-blue-600 rounded-xl hover:bg-blue-700">
+                    Get Started
+                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  </button>
+                </SignInButton>
+              </motion.div>
             </div>
-            <div className="relative z-10 flex flex-col items-center">
-              <div className="animate-fade-in-up">
-                <Image src="/globe.svg" alt="Glyconova Logo" width={80} height={80} className="drop-shadow-xl animate-spin-slow" />
-              </div>
-              <h1 className="mt-6 text-5xl md:text-6xl font-extrabold text-gray-900 animate-fade-in-up">Welcome to Glyconova</h1>
-              <p className="mt-4 max-w-xl mx-auto text-lg text-gray-700 animate-fade-in-up delay-100">
-                Your all-in-one diabetes data analytics hub. Connect your Dexcom CGM and Omnipod insulin pump to visualize trends, uncover patterns, and get personalized suggestions.
-              </p>
-              <SignInButton>
-                <button
-                  className="mt-8 px-10 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xl font-bold rounded-full shadow-lg hover:scale-105 hover:from-pink-500 hover:to-blue-500 transition-all duration-300 animate-fade-in-up delay-200"
-                >
-                  Get Started
-                </button>
-              </SignInButton>
-              <div className="mt-8 animate-fade-in-up delay-300">
-                <span className="inline-block bg-white/70 px-6 py-2 rounded-full text-blue-700 font-medium shadow-lg backdrop-blur">“Empowering you to live boldly with diabetes.”</span>
-              </div>
-            </div>
-          </section>
+          </Section>
 
-          {/* How It Works Timeline */}
-          <section className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center text-gray-900 mb-12 animate-fade-in-up">How Glyconova Works</h2>
-            <ol className="relative border-l-4 border-blue-200 max-w-2xl mx-auto animate-fade-in-up">
-              <li className="mb-10 ml-6 group hover:bg-blue-50 rounded-xl transition p-4">
-                <span className="absolute -left-5 flex items-center justify-center w-10 h-10 bg-blue-500 rounded-full ring-4 ring-white animate-bounce">
-                  <Image src="/globe.svg" alt="Account" width={28} height={28} />
-                </span>
-                <h3 className="font-semibold text-lg text-blue-700">Create Your Account</h3>
-                <p className="text-gray-600">Sign up for Glyconova to get started.</p>
-              </li>
-              <li className="mb-10 ml-6 group hover:bg-purple-50 rounded-xl transition p-4">
-                <span className="absolute -left-5 flex items-center justify-center w-10 h-10 bg-purple-500 rounded-full ring-4 ring-white animate-bounce delay-100">
-                  <Image src="/file.svg" alt="Export" width={28} height={28} />
-                </span>
-                <h3 className="font-semibold text-lg text-purple-700">Export Your Data</h3>
-                <p className="text-gray-600">Export your Dexcom/Omnipod data using their official apps or websites.</p>
-              </li>
-              <li className="mb-10 ml-6 group hover:bg-pink-50 rounded-xl transition p-4">
-                <span className="absolute -left-5 flex items-center justify-center w-10 h-10 bg-pink-500 rounded-full ring-4 ring-white animate-bounce delay-200">
-                  <Image src="/window.svg" alt="Upload" width={28} height={28} />
-                </span>
-                <h3 className="font-semibold text-lg text-pink-700">Upload to Glyconova</h3>
-                <p className="text-gray-600">Upload your exported data files to Glyconova securely.</p>
-              </li>
-              <li className="mb-10 ml-6 group hover:bg-green-50 rounded-xl transition p-4">
-                <span className="absolute -left-5 flex items-center justify-center w-10 h-10 bg-green-500 rounded-full ring-4 ring-white animate-bounce delay-300">
-                  <svg width="28" height="28" fill="none" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </span>
-                <h3 className="font-semibold text-lg text-green-700">View Your Statistics</h3>
-                <p className="text-gray-600">See your glucose and insulin trends in beautiful charts.</p>
-              </li>
-              <li className="ml-6 group hover:bg-yellow-50 rounded-xl transition p-4">
-                <span className="absolute -left-5 flex items-center justify-center w-10 h-10 bg-yellow-500 rounded-full ring-4 ring-white animate-bounce delay-400">
-                  <svg width="28" height="28" fill="none" viewBox="0 0 24 24"><path d="M12 20v-6m0 0l-3 3m3-3l3 3M4 4h16v16H4V4z" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </span>
-                <h3 className="font-semibold text-lg text-yellow-700">Analyze & Adjust</h3>
-                <p className="text-gray-600">Use insights to make adjustments and improve your diabetes management.</p>
-              </li>
-            </ol>
-          </section>
-
-          {/* Testimonials Carousel */}
-          <section className="bg-white pt-12 pb-4 animate-fade-in-up">
-            <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">What Our Users Say</h2>
-            <div className="max-w-xl mx-auto flex flex-col items-center">
-              <div className={`w-full ${testimonials[currentTestimonial].color} rounded-xl shadow p-6 flex flex-col items-center transition-all duration-500`}>
-                <Image src={testimonials[currentTestimonial].icon} alt="User" width={40} height={40} className="mb-2" />
-                <p className="text-gray-700 italic">{testimonials[currentTestimonial].text}</p>
-                <span className={`mt-4 font-semibold ${testimonials[currentTestimonial].textColor}`}>{testimonials[currentTestimonial].user}</span>
-              </div>
-              <div className="flex gap-2 mt-4">
-                {testimonials.map((_, idx) => (
-                  <button
-                    key={idx}
-                    className={`w-3 h-3 rounded-full ${idx === currentTestimonial ? 'bg-blue-500' : 'bg-gray-300'} transition`}
-                    onClick={() => setCurrentTestimonial(idx)}
-                    aria-label={`Show testimonial ${idx + 1}`}
-                  />
+          {/* Why GlycoNova Section */}
+          <Section className="py-20 bg-white">
+            <div className="container mx-auto px-4">
+              <h2 className="text-4xl font-bold text-center mb-16">Why GlycoNova?</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {[
+                  {
+                    icon: <Heart className="h-8 w-8 text-blue-600" />,
+                    title: "Created by a Type 1 Veteran",
+                    description: "Built by someone with 16 years of daily T1D experience, in collaboration with endocrinologists."
+                  },
+                  {
+                    icon: <Upload className="h-8 w-8 text-blue-600" />,
+                    title: "Easy Data Import",
+                    description: "Drag and drop your Dexcom Clarity or Omnipod 5 CSV—no formatting needed."
+                  },
+                  {
+                    icon: <Shield className="h-8 w-8 text-blue-600" />,
+                    title: "Secure & Private",
+                    description: "All data is encrypted; we never share or sell your information."
+                  },
+                  {
+                    icon: <Sparkles className="h-8 w-8 text-blue-600" />,
+                    title: "100% Free",
+                    description: "No subscription, no hidden fees—always free for everyone."
+                  }
+                ].map((feature, index) => (
+                  <motion.div
+                    key={index}
+                    className="p-6 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-shadow"
+                    whileHover={{ y: -5 }}
+                  >
+                    <div className="mb-4">{feature.icon}</div>
+                    <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                    <p className="text-gray-600">{feature.description}</p>
+                  </motion.div>
                 ))}
               </div>
             </div>
-          </section>
+          </Section>
 
-          {/* Meet the Team */}
-          <section className="container mx-auto px-4 pt-4 pb-12 animate-fade-in-up">
-            <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">Meet the Team</h2>
-            <div className="flex flex-wrap justify-center gap-10">
-              <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition">
-                <div className="w-20 h-20 bg-blue-200 rounded-full flex items-center justify-center text-3xl font-bold text-blue-700 mb-2">D</div>
-                <div className="font-semibold text-lg text-gray-900">Devaansh Sinha</div>
-                <div className="text-gray-500 text-sm">Founder & Engineer</div>
-              </div>
-              <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition">
-                <div className="w-20 h-20 bg-purple-200 rounded-full flex items-center justify-center text-3xl font-bold text-purple-700 mb-2">A</div>
-                <div className="font-semibold text-lg text-gray-900">Alex Doe</div>
-                <div className="text-gray-500 text-sm">Product Designer</div>
-              </div>
-              <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition">
-                <div className="w-20 h-20 bg-pink-200 rounded-full flex items-center justify-center text-3xl font-bold text-pink-700 mb-2">J</div>
-                <div className="font-semibold text-lg text-gray-900">Jamie Lee</div>
-                <div className="text-gray-500 text-sm">Medical Advisor</div>
+          {/* How It Works Section */}
+          <Section className="py-20 bg-blue-50">
+            <div className="container mx-auto px-4">
+              <h2 className="text-4xl font-bold text-center mb-16">How It Works</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {[
+                  {
+                    step: "1",
+                    title: "Create Your Account",
+                    description: "Sign up in under 30 seconds—no credit card required."
+                  },
+                  {
+                    step: "2",
+                    title: "Upload Your CSV",
+                    description: "Import your Dexcom Clarity or Omnipod 5 data in just a few clicks."
+                  },
+                  {
+                    step: "3",
+                    title: "Explore Your Dashboard",
+                    description: "See glucose trends, insulin usage, and get tailored suggestions."
+                  }
+                ].map((step, index) => (
+                  <motion.div
+                    key={index}
+                    className="relative p-8 rounded-2xl bg-white shadow-lg"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <div className="absolute -top-4 -left-4 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                      {step.step}
+                    </div>
+                    <h3 className="text-2xl font-semibold mb-4 mt-4">{step.title}</h3>
+                    <p className="text-gray-600">{step.description}</p>
+                  </motion.div>
+                ))}
               </div>
             </div>
-          </section>
+          </Section>
 
-          {/* What You Can Do */}
-          <section className="bg-gray-50 py-12 animate-fade-in-up">
-            <div className="container mx-auto px-4 max-w-2xl">
-              <h2 className="text-3xl font-semibold text-center text-gray-900">
-                What You Can Do with Glyconova
-              </h2>
-              <ul className="mt-6 space-y-4 list-disc list-inside text-gray-700">
-                <li>Visualize glucose trends over days, weeks, or months.</li>
-                <li>Detect patterns like "morning highs" or "overnight lows."</li>
-                <li>Compare your insulin delivery and carb intake side-by-side.</li>
-                <li>Receive personalized basal/bolus adjustment suggestions.</li>
-                <li>Export your data for sharing with your care team.</li>
-                <li>Enjoy a beautiful, animated, and easy-to-use experience!</li>
-              </ul>
+          {/* Feature Highlights */}
+          <Section className="py-20 bg-white">
+            <div className="container mx-auto px-4">
+              <h2 className="text-4xl font-bold text-center mb-16">Feature Highlights</h2>
+              <div className="space-y-20">
+                {[
+                  {
+                    title: "Visualize Glucose Patterns",
+                    description: "Automatically parse your Dexcom Clarity history into clear trend charts. Spot highs, lows, and time-in-range without manual effort."
+                  },
+                  {
+                    title: "Track Insulin Usage",
+                    description: "Upload Omnipod 5 CSVs and compare your basal/bolus breakdowns alongside glucose readings to see what's working."
+                  },
+                  {
+                    title: "Set Targets & Get Recommendations",
+                    description: "Choose a target A1C or average glucose. GlycoNova shows exactly how much you need to improve, down to basal rate tweaks and carb ratios."
+                  },
+                  {
+                    title: "Encrypted & Never Shared",
+                    description: "Your data is encrypted in transit and at rest. We do not sell or share your health data—ever."
+                  }
+                ].map((feature, index) => (
+                  <motion.div
+                    key={index}
+                    className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12`}
+                    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <div className="flex-1">
+                      <h3 className="text-3xl font-bold mb-4">{feature.title}</h3>
+                      <p className="text-gray-600 text-lg">{feature.description}</p>
+                    </div>
+                    <div className="flex-1 bg-gray-100 rounded-2xl h-64 w-full"></div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
-          </section>
+          </Section>
+
+          {/* Privacy & Security */}
+          <Section className="py-20 bg-blue-50">
+            <div className="container mx-auto px-4 text-center">
+              <h2 className="text-4xl font-bold mb-16">Your Data, Your Control</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                {[
+                  {
+                    icon: <Lock className="h-8 w-8 text-blue-600" />,
+                    title: "Encrypted End-to-End",
+                    description: "Your data is protected with industry-standard encryption"
+                  },
+                  {
+                    icon: <Shield className="h-8 w-8 text-blue-600" />,
+                    title: "Never Shared",
+                    description: "We never share your data with third parties"
+                  },
+                  {
+                    icon: <Lock className="h-8 w-8 text-blue-600" />,
+                    title: "HIPAA-Friendly",
+                    description: "Built with healthcare privacy standards in mind"
+                  }
+                ].map((item, index) => (
+                  <motion.div
+                    key={index}
+                    className="p-6 rounded-2xl bg-white shadow-lg"
+                    whileHover={{ y: -5 }}
+                  >
+                    <div className="mb-4 flex justify-center">{item.icon}</div>
+                    <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                    <p className="text-gray-600">{item.description}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </Section>
+
+          {/* FAQ Section */}
+          <Section className="py-20 bg-white">
+            <div className="container mx-auto px-4 max-w-3xl">
+              <h2 className="text-4xl font-bold text-center mb-16">Frequently Asked Questions</h2>
+              <Accordion.Root type="single" collapsible className="space-y-4">
+                {[
+                  {
+                    question: "Which devices are supported?",
+                    answer: "Dexcom Clarity (G6, G7, etc.) and Omnipod 5 via Glooko CSV exports."
+                  },
+                  {
+                    question: "Is GlycoNova really free?",
+                    answer: "Yes—100% free, no hidden fees, no credit card required."
+                  },
+                  {
+                    question: "How do I delete my data?",
+                    answer: "Go to Account Settings and choose 'Delete My Account & Data.'"
+                  },
+                  {
+                    question: "How secure is my data?",
+                    answer: "Encrypted in transit and at rest; we never share with third parties."
+                  }
+                ].map((faq, index) => (
+                  <Accordion.Item
+                    key={index}
+                    value={`item-${index}`}
+                    className="border border-gray-200 rounded-lg overflow-hidden"
+                  >
+                    <Accordion.Trigger className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50">
+                      <span className="font-medium">{faq.question}</span>
+                      <ChevronDown className="h-5 w-5 text-gray-500 transition-transform duration-200" />
+                    </Accordion.Trigger>
+                    <Accordion.Content className="px-6 py-4 bg-gray-50">
+                      {faq.answer}
+                    </Accordion.Content>
+                  </Accordion.Item>
+                ))}
+              </Accordion.Root>
+            </div>
+          </Section>
+
+          {/* Final CTA */}
+          <Section className="py-20 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+            <div className="container mx-auto px-4 text-center">
+              <h2 className="text-4xl font-bold mb-8">Ready to Master Your Diabetes Data?</h2>
+              <p className="text-xl mb-8 opacity-90">
+                Sign up now to see your trends, set targets, and get recommendations—entirely free.
+              </p>
+              <SignInButton>
+                <button className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-blue-600 transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white bg-white rounded-xl hover:bg-gray-100">
+                  Sign Up for Free
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </button>
+              </SignInButton>
+            </div>
+          </Section>
+
+          {/* Footer */}
+          <footer className="py-12 bg-gray-900 text-white">
+            <div className="container mx-auto px-4">
+              <div className="flex flex-col md:flex-row justify-between items-center">
+                <div className="mb-8 md:mb-0">
+                  <h3 className="text-2xl font-bold">GlycoNova</h3>
+                  <p className="text-gray-400 mt-2">© 2025. All rights reserved.</p>
+                </div>
+                <div className="flex space-x-8">
+                  <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors">
+                    Privacy Policy
+                  </Link>
+                  <Link href="/terms" className="text-gray-400 hover:text-white transition-colors">
+                    Terms of Service
+                  </Link>
+                  <a href="mailto:support@glyconova.com" className="text-gray-400 hover:text-white transition-colors">
+                    Contact Us
+                  </a>
+                </div>
+              </div>
+            </div>
+          </footer>
         </div>
       </SignedOut>
     </>
