@@ -51,7 +51,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </header>
 
           {/* Push content below navbar */}
-          <main className="p-6 pt-24">{children}</main>
+          <main className="pt-14">{children}</main>
         </ClerkProvider>
       </body>
     </html>
