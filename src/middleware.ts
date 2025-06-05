@@ -6,8 +6,11 @@ export default clerkMiddleware();
 export const config = {
   matcher: [
     // protect all your app routes (except Next.js internals & static files)
-    '/((?!_next|.*\\..*).*)',
+    '/((?!_next|.*\..*).*)',
+    // explicitly protect the dashboard route
+    '/dashboard',
     // protect API routes under /api
     '/api/:path*',
   ],
 };
+ 
