@@ -21,11 +21,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           {/* fixed navbar */}
           <header className="fixed inset-x-0 top-0 bg-white shadow z-50">
             <nav className="p-4 flex justify-between items-center">
-              {/* Logo → Always Home */}
+              {/* Logo → Home or Dashboard based on auth status */}
               <div className="text-2xl font-bold text-gray-900">
-                <Link href="/">
-                  Glyconova
-                </Link>
+                <SignedIn>
+                  <Link href="/dashboard">
+                    Glyconova
+                  </Link>
+                </SignedIn>
+                <SignedOut>
+                  <Link href="/">
+                    Glyconova
+                  </Link>
+                </SignedOut>
               </div>
               <div className="flex items-center space-x-4">
                 {/* Auth buttons */}

@@ -77,13 +77,19 @@ export default function HomePage() {
                     Sign Up for Free
                   </button>
                 </SignInButton>
-                {/* Changed Log In link to use SignInButton for consistent Clerk flow */}
                 <SignInButton mode="modal" fallbackRedirectUrl="/dashboard">
                   <button className="text-gray-600 hover:text-blue-600 transition-colors">
                     Already have an account? Log In
                   </button>
                 </SignInButton>
               </SignedOut>
+              <SignedIn>
+                <Link href="/dashboard">
+                  <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-medium rounded-full hover:opacity-90 transition-all transform hover:scale-105 shadow-lg">
+                    Go to Dashboard
+                  </button>
+                </Link>
+              </SignedIn>
             </div>
           </motion.div>
 
@@ -348,13 +354,19 @@ export default function HomePage() {
                     Sign Up for Free
                   </button>
                 </SignInButton>
-                 {/* Changed Log In link to use SignInButton for consistent Clerk flow */}
                 <SignInButton mode="modal" fallbackRedirectUrl="/dashboard">
                   <button className="text-gray-600 hover:text-blue-600 transition-colors">
-                     Already have an account? Log In
+                    Already have an account? Log In
                   </button>
                 </SignInButton>
               </SignedOut>
+              <SignedIn>
+                <Link href="/dashboard">
+                  <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-medium rounded-full hover:opacity-90 transition-all transform hover:scale-105 shadow-lg">
+                    Go to Dashboard
+                  </button>
+                </Link>
+              </SignedIn>
             </div>
           </motion.div>
         </div>
