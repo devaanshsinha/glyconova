@@ -63,6 +63,38 @@ const generateHourlyChartData = (rawGlucoseData: GlucoseDataPoint[], selectedDat
   return fullDayData;
 };
 
+// Helper to generate a full 24-hour data set for average profiles
+const generateHourlyAverageChartData = (averageData: GlucoseDataPoint[], selectedDate: string): GlucoseDataPoint[] => {
+  const fullDayAverageData: GlucoseDataPoint[] = [];
+  const startOfSelectedDay = startOfDay(parseISO(selectedDate));
+
+  const averageMap = new Map<string, GlucoseDataPoint>();
+  averageData.forEach(point => {
+    // Use the HH:mm as the key for average data
+    averageMap.set(point.time, point);
+  });
+
+  for (let hour = 0; hour < 24; hour++) {
+    for (let minute = 0; minute < 60; minute += 30) { // 30-minute intervals
+      const currentHourDate = addHours(startOfSelectedDay, hour);
+      const currentIntervalDate = addMinutes(currentHourDate, minute);
+      const timeKey = format(currentIntervalDate, 'HH:mm');
+
+      const existingPoint = averageMap.get(timeKey);
+
+      fullDayAverageData.push({
+        timestamp: currentIntervalDate.toISOString(),
+        time: timeKey,
+        value: existingPoint ? existingPoint.value : undefined,
+        status: existingPoint ? existingPoint.status : 'normal',
+        unix: currentIntervalDate.getTime(),
+      });
+    }
+  }
+
+  return fullDayAverageData;
+};
+
 export function GlucoseChart({ className = '' }: GlucoseChartProps) {
   const [startDate, setStartDate] = useState<string>('');
   const [endDate, setEndDate] = useState<string>('');
@@ -128,7 +160,15 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
         }));
         
         setData(dataPointsWithIds);
-        setAverageData(averageDataWithIds);
+
+        // Process average data to fill in gaps for weekly/monthly views
+        if (interval !== 'day') {
+          // For weekly/monthly, generate a full 24-hour profile based on the first day of the range
+          const baseDateForAverageProfile = parseISO(startDate); // Use start date for consistent 24-hour axis
+          setAverageData(generateHourlyAverageChartData(averageDataWithIds, formatDateForAPI(baseDateForAverageProfile)));
+        } else {
+          setAverageData(averageDataWithIds); // For daily, averageData is still processed by hour, but not necessarily a full 24h
+        }
 
         // Process raw data for daily view to fill in gaps
         if (interval === 'day') {
@@ -375,9 +415,15 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
                 />
               ) : (
                 <XAxis
-                  dataKey="time" // Use HH:mm for average profile views
-                  interval="preserveStartEnd"
-                  tickFormatter={(tick) => format(new Date('2000-01-01T' + tick), 'HH:mm')} // Assuming time is 'HH:mm'
+                  dataKey="unix" // Use unix timestamp for average profile views
+                  type="number"
+                  domain={[
+                    startOfDay(parseISO(startDate)).getTime(), // Start of the day for consistency
+                    addDays(startOfDay(parseISO(startDate)), 1).getTime() // End of the day
+                  ]}
+                  tickFormatter={(unixTime) => format(new Date(unixTime), 'HH:mm')}
+                  ticks={Array.from({ length: 13 }, (_, i) => addHours(startOfDay(parseISO(startDate)), i * 2).getTime())} // Every 2 hours
+                  minTickGap={10}
                 />
               )}
               <YAxis 

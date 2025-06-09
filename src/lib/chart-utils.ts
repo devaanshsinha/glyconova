@@ -1,5 +1,5 @@
 import { HIGH_THRESHOLD, LOW_THRESHOLD } from './glucose-stats';
-import { subDays, subMonths, format, startOfDay } from 'date-fns'; // Import date-fns utilities
+import { subDays, subMonths, format, startOfDay, addDays, addMonths } from 'date-fns'; // Import date-fns utilities
 
 export interface GlucoseDataPoint {
   timestamp: string;
@@ -151,14 +151,14 @@ export function calculateIntervalDates(interval: string, baseDate: Date = new Da
       end = startOfDay(baseDate);
       break;
     case 'week':
-      // For weekly, start is 7 days before baseDate, end is baseDate
-      start = subDays(baseDate, 7);
-      end = baseDate;
+      // For weekly, start is baseDate, end is 7 days after baseDate
+      start = baseDate;
+      end = addDays(baseDate, 7); // Add 7 days to baseDate
       break;
     case 'month':
-      // For monthly, start is 1 month before baseDate, end is baseDate
-      start = subMonths(baseDate, 1);
-      end = baseDate;
+      // For monthly, start is baseDate, end is 1 month after baseDate
+      start = baseDate;
+      end = addMonths(baseDate, 1); // Add 1 month to baseDate
       break;
     case 'custom':
       // For custom, return baseDate for both if no other logic is applied
@@ -166,8 +166,8 @@ export function calculateIntervalDates(interval: string, baseDate: Date = new Da
       break;
     default:
       // Default to weekly if interval is unrecognized
-      start = subDays(baseDate, 7);
-      end = baseDate;
+      start = baseDate;
+      end = addDays(baseDate, 7);
   }
   
   return {
