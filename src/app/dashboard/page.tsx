@@ -109,11 +109,8 @@ export default function DashboardPage() {
                     View Details <ArrowRight className="ml-2 w-4 h-4" />
                   </Link>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                  <StatCard title="Average Glucose" value="131" unit="mg/dL" label="Avg" bgColor="bg-blue-50" labelColor="text-blue-700 bg-blue-200" icon={<BarChart2 className="w-10 h-10" />} />
-                  <StatCard title="Estimated A1C" value="6.2" unit="%" label="A1C" bgColor="bg-purple-50" labelColor="text-purple-700 bg-purple-200" icon={<Droplet className="w-10 h-10" />} />
-                </div>
-                {/* GlucoseStatsDisplay (assuming it's a chart or more detailed view) */}
+                
+                {/* GlucoseStatsDisplay now displays all glucose-related stats */}
                 <div className="bg-gray-50 p-4 rounded-xl">
                   <GlucoseStatsDisplay />
                 </div>
@@ -133,11 +130,8 @@ export default function DashboardPage() {
                     View Details <ArrowRight className="ml-2 w-4 h-4" />
                   </Link>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                  <StatCard title="Avg. Daily Insulin" value="63.0" unit="U" label="Total" bgColor="bg-green-50" labelColor="text-green-700 bg-green-200" icon={<Syringe className="w-10 h-10" />} />
-                  <StatCard title="Avg. Daily Bolus" value="39.2" unit="U" label="Bolus" bgColor="bg-pink-50" labelColor="text-pink-700 bg-pink-200" icon={<Syringe className="w-10 h-10" />} />
-                </div>
-                {/* InsulinStatsDisplay (assuming it's a chart or more detailed view) */}
+                
+                {/* InsulinStatsDisplay now displays all insulin-related stats */}
                 <div className="bg-gray-50 p-4 rounded-xl">
                   <InsulinStatsDisplay />
                 </div>

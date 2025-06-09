@@ -8,21 +8,67 @@ import {
 import { 
   processGlucoseData, 
   formatDateForAPI, 
-  getDateRangeForInterval,
+  calculateIntervalDates,
   getDefaultDateRange,
   GlucoseDataPoint 
 } from '@/lib/chart-utils';
 import { HIGH_THRESHOLD, LOW_THRESHOLD } from '@/lib/glucose-stats';
+import { addDays, addMonths, parseISO, isSameDay, startOfDay, addHours, format, addMinutes } from 'date-fns';
 
 interface GlucoseChartProps {
   className?: string;
 }
+
+// Helper to generate a full 24-hour data set with nulls for missing values
+const generateHourlyChartData = (rawGlucoseData: GlucoseDataPoint[], selectedDate: string): GlucoseDataPoint[] => {
+  const fullDayData: GlucoseDataPoint[] = [];
+  const startOfSelectedDay = startOfDay(parseISO(selectedDate));
+  const endOfSelectedDay = addDays(startOfSelectedDay, 1);
+
+  // Create a map for quick lookup of glucose data by rounded 5-minute interval timestamp
+  const glucoseMap = new Map<number, GlucoseDataPoint>();
+  rawGlucoseData.forEach(point => {
+    // Round down to the nearest 5-minute interval
+    const pointDate = new Date(point.unix);
+    const roundedMinutes = Math.floor(pointDate.getMinutes() / 5) * 5;
+    pointDate.setMinutes(roundedMinutes, 0, 0); // Set seconds/ms to 0 as well for consistent key
+    const minuteKey = pointDate.getTime();
+
+    // If multiple readings fall into the same 5-minute bucket, keep the latest one
+    if (!glucoseMap.has(minuteKey) || point.unix > (glucoseMap.get(minuteKey)?.unix || 0)) {
+      glucoseMap.set(minuteKey, point);
+    }
+  });
+
+  let currentTime = startOfSelectedDay.getTime();
+
+  while (currentTime < endOfSelectedDay.getTime()) {
+    const date = new Date(currentTime);
+    // The currentTime is already aligned to 5-minute intervals, so its timestamp is the minuteKey
+    const minuteKey = currentTime; 
+
+    const existingPoint = glucoseMap.get(minuteKey);
+
+    fullDayData.push({
+      timestamp: date.toISOString(),
+      time: format(date, 'HH:mm'),
+      value: existingPoint ? existingPoint.value : undefined,
+      status: existingPoint ? existingPoint.status : 'normal',
+      unix: currentTime,
+    });
+
+    currentTime = addMinutes(date, 5).getTime(); // Generate points every 5 minutes
+  }
+
+  return fullDayData;
+};
 
 export function GlucoseChart({ className = '' }: GlucoseChartProps) {
   const [startDate, setStartDate] = useState<string>('');
   const [endDate, setEndDate] = useState<string>('');
   const [interval, setInterval] = useState<string>('week');
   const [data, setData] = useState<GlucoseDataPoint[]>([]);
+  const [processedDailyData, setProcessedDailyData] = useState<GlucoseDataPoint[]>([]);
   const [averageData, setAverageData] = useState<GlucoseDataPoint[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -45,7 +91,11 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
 
         const url = new URL('/api/glucose-data', window.location.origin);
         url.searchParams.append('startDate', startDate);
-        if (endDate) url.searchParams.append('endDate', endDate);
+        
+        // Only append endDate if it's not a 'day' interval or if it's custom and endDate is different from startDate
+        if (interval !== 'day' || startDate !== endDate) {
+          url.searchParams.append('endDate', endDate);
+        }
         url.searchParams.append('interval', interval);
 
         const response = await fetch(url.toString());
@@ -59,6 +109,7 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
         if (responseData.readings.length === 0) {
           setError('No data available for the selected date range');
           setData([]);
+          setProcessedDailyData([]);
           setAverageData([]);
           return;
         }
@@ -78,6 +129,12 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
         
         setData(dataPointsWithIds);
         setAverageData(averageDataWithIds);
+
+        // Process raw data for daily view to fill in gaps
+        if (interval === 'day') {
+          setProcessedDailyData(generateHourlyChartData(dataPointsWithIds, startDate));
+        }
+
       } catch (err) {
         console.error('Error fetching glucose data:', err);
         setError('Could not load glucose data. Please try again later.');
@@ -92,31 +149,57 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
   // Handle interval button click
   const handleIntervalChange = (newInterval: string) => {
     setInterval(newInterval);
-    const dates = getDateRangeForInterval(newInterval);
+    const today = new Date();
+    let dates;
+
+    if (newInterval === 'custom') {
+      // For custom, keep current dates or set a default range if none exist
+      dates = { startDate: startDate || formatDateForAPI(today), endDate: endDate || formatDateForAPI(today) };
+    } else {
+      // For other intervals, calculate new dates based on today
+      dates = calculateIntervalDates(newInterval, today);
+    }
+    
     setStartDate(dates.startDate);
     setEndDate(dates.endDate);
   };
 
-  // Handle date input changes
+  // Handle start date input changes
   const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setStartDate(e.target.value);
+    const newStartDate = e.target.value;
+    setStartDate(newStartDate);
+
+    // If interval is not custom, recalculate endDate based on newStartDate
+    if (interval !== 'custom') {
+      const parsedStartDate = parseISO(newStartDate);
+      const calculatedDates = calculateIntervalDates(interval, parsedStartDate); // Use parsedStartDate as base
+      setEndDate(calculatedDates.endDate);
+    }
   };
 
+  // Handle end date input changes (only relevant for custom range)
   const handleEndDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEndDate(e.target.value);
   };
 
   // Format date range for display
   const formatDateRange = () => {
-    if (!startDate || !endDate) return '';
+    if (!startDate) return '';
     
-    const start = new Date(startDate);
-    const end = new Date(endDate);
+    const start = parseISO(startDate);
+    const end = parseISO(endDate);
     
-    if (isNaN(start.getTime()) || isNaN(end.getTime())) return '';
-    
+    if (isNaN(start.getTime())) return '';
+
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
-    return `${start.toLocaleDateString(undefined, options)} - ${end.toLocaleDateString(undefined, options)}`;
+
+    if (interval === 'day') {
+      return start.toLocaleDateString(undefined, options);
+    } else if (isSameDay(start, end)) {
+      return start.toLocaleDateString(undefined, options);
+    } else {
+      return `${start.toLocaleDateString(undefined, options)} - ${end.toLocaleDateString(undefined, options)}`;
+    }
   };
 
   // Custom tooltip formatter
@@ -140,9 +223,9 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
           {formattedDate && <p className="text-sm font-medium text-gray-700">{formattedDate}</p>}
           <p className="text-sm text-gray-500">{formattedTime}</p>
           <p className="text-lg font-bold">
-            {dataPoint.value} mg/dL
-            {dataPoint.status === 'high' && <span className="text-yellow-500 ml-2">High</span>}
-            {dataPoint.status === 'low' && <span className="text-red-500 ml-2">Low</span>}
+            {dataPoint.value !== undefined ? `${dataPoint.value} mg/dL` : 'No reading'}
+            {dataPoint.status === 'high' && dataPoint.value !== undefined && <span className="text-yellow-500 ml-2">High</span>}
+            {dataPoint.status === 'low' && dataPoint.value !== undefined && <span className="text-red-500 ml-2">Low</span>}
           </p>
         </div>
       );
@@ -152,7 +235,8 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
 
   // Determine y-axis domain
   const calculateYDomain = () => {
-    const activeData = interval === 'day' ? data : averageData;
+    // Use processedDailyData for 'day' interval, otherwise averageData or raw data if no average
+    const activeData = interval === 'day' ? processedDailyData.filter(d => d.value !== undefined) : averageData.length > 0 ? averageData : data;
     if (activeData.length === 0) return [0, 200];
     
     const values = activeData.map(d => d.value);
@@ -186,7 +270,7 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
   const getChartTitle = () => {
     switch (interval) {
       case 'day':
-        return `Daily Glucose Readings (${new Date(startDate).toLocaleDateString()})`;
+        return `Daily Glucose Readings (${formatDateRange()})`;
       case 'week':
         return `Weekly Average Profile (${formatDateRange()})`;
       case 'month':
@@ -232,32 +316,28 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
           />
         </div>
         
-        <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
-          <label htmlFor="endDate" className="text-sm font-medium text-gray-700">
-            To:
-          </label>
-          <input
-            type="date"
-            id="endDate"
-            value={endDate}
-            onChange={handleEndDateChange}
-            className="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
+        {(interval === 'custom' || interval === 'week' || interval === 'month') && (
+          <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
+            <label htmlFor="endDate" className="text-sm font-medium text-gray-700">
+              To:
+            </label>
+            <input
+              type="date"
+              id="endDate"
+              value={endDate}
+              onChange={handleEndDateChange}
+              disabled={interval !== 'custom'} // Disable for non-custom intervals
+              className={`px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none ${
+                interval === 'custom' ? 'focus:ring-blue-500 focus:border-blue-500' : 'cursor-not-allowed bg-gray-100'
+              }`}
+            />
+          </div>
+        )}
       </div>
 
       {/* Chart title */}
       {!loading && !error && (
-        <div className="text-center mb-2">
-          <h3 className="text-lg font-medium text-gray-700">
-            {getChartTitle()}
-          </h3>
-          <p className="text-sm text-gray-500">
-            {interval !== 'day' ? 
-              'Showing the average 24-hour pattern' : 
-              'Showing detailed glucose readings for the day'}
-          </p>
-        </div>
+        <h3 className="text-lg font-semibold text-gray-800 mt-4">{getChartTitle()}</h3>
       )}
 
       {/* Chart container */}
@@ -270,108 +350,65 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
           <div className="h-80 flex items-center justify-center">
             <p className="text-gray-500">{error}</p>
           </div>
-        ) : interval === 'day' ? (
-          // Daily detailed view
+        ) : processedDailyData.length === 0 && interval === 'day' || (data.length === 0 && interval !== 'day') ? (
+          <div className="h-80 flex items-center justify-center">
+            <p className="text-gray-500">No data available for the selected date range</p>
+          </div>
+        ) : (
           <ResponsiveContainer width="100%" height={400}>
             <LineChart
-              data={data}
+              data={interval === 'day' ? processedDailyData : averageData}
               margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis 
-                dataKey="time" 
-                label={{ value: 'Time', position: 'insideBottomRight', offset: -10 }} 
-              />
+              {interval === 'day' ? (
+                <XAxis
+                  dataKey="unix" // Use unix timestamp for daily view
+                  type="number"
+                  domain={[
+                    startOfDay(parseISO(startDate)).getTime(),
+                    addDays(startOfDay(parseISO(startDate)), 1).getTime() // Full 24 hours
+                  ]}
+                  tickFormatter={(unixTime) => format(new Date(unixTime), 'HH:mm')}
+                  ticks={Array.from({ length: 25 }, (_, i) => addHours(startOfDay(parseISO(startDate)), i).getTime())} // Hourly ticks
+                  minTickGap={10}
+                />
+              ) : (
+                <XAxis
+                  dataKey="time" // Use HH:mm for average profile views
+                  interval="preserveStartEnd"
+                  tickFormatter={(tick) => format(new Date('2000-01-01T' + tick), 'HH:mm')} // Assuming time is 'HH:mm'
+                />
+              )}
               <YAxis 
                 domain={yDomain}
-                label={{ value: 'Glucose (mg/dL)', angle: -90, position: 'insideLeft' }} 
+                tickFormatter={(value) => `${value} mg/dL`}
               />
               <Tooltip content={<CustomTooltip />} />
-              <Legend />
+              <Legend layout="horizontal" verticalAlign="top" align="right" />
               
-              {/* Reference lines for thresholds */}
-              <ReferenceLine y={HIGH_THRESHOLD} stroke="#F59E0B" strokeDasharray="3 3" label={{value: 'High', position: 'right'}} />
-              <ReferenceLine y={LOW_THRESHOLD} stroke="#EF4444" strokeDasharray="3 3" label={{value: 'Low', position: 'right'}} />
-              
-              <Line
-                type="monotone"
-                dataKey="value"
+              {/* Reference lines for high and low thresholds */}
+              <ReferenceLine 
+                y={HIGH_THRESHOLD} 
+                stroke="#F59E0B" 
+                strokeDasharray="3 3" 
+                label={{ value: 'High', position: 'right', fill: '#F59E0B' }}
+              />
+              <ReferenceLine 
+                y={LOW_THRESHOLD} 
+                stroke="#EF4444" 
+                strokeDasharray="3 3" 
+                label={{ value: 'Low', position: 'right', fill: '#EF4444' }}
+              />
+
+              <Line 
+                type="monotone" 
+                dataKey="value" // This is always glucose value
                 name="Glucose"
                 stroke="#3B82F6"
-                strokeWidth={2}
-                dot={(props) => {
-                  const { cx, cy, payload } = props;
-                  const { status, id } = payload as GlucoseDataPoint & { id: string };
-                  
-                  return (
-                    <circle
-                      key={id || `dot-${cx}-${cy}`}
-                      cx={cx}
-                      cy={cy}
-                      r={4}
-                      fill={
-                        status === 'high' ? '#F59E0B' : 
-                        status === 'low' ? '#EF4444' : 
-                        '#3B82F6'
-                      }
-                      stroke="none"
-                    />
-                  );
-                }}
-                activeDot={{ r: 6, stroke: '#2563EB', strokeWidth: 2 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        ) : (
-          // Average 24-hour Profile for weekly, monthly, custom
-          <ResponsiveContainer width="100%" height={400}>
-            <LineChart
-              data={averageData}
-              margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis 
-                dataKey="time" 
-                label={{ value: 'Time of Day', position: 'insideBottomRight', offset: -10 }} 
-              />
-              <YAxis 
-                domain={yDomain}
-                label={{ value: 'Glucose (mg/dL)', angle: -90, position: 'insideLeft' }} 
-              />
-              <Tooltip content={<CustomTooltip />} />
-              <Legend />
-              
-              {/* Reference lines for thresholds */}
-              <ReferenceLine y={HIGH_THRESHOLD} stroke="#F59E0B" strokeDasharray="3 3" label={{value: 'High', position: 'right'}} />
-              <ReferenceLine y={LOW_THRESHOLD} stroke="#EF4444" strokeDasharray="3 3" label={{value: 'Low', position: 'right'}} />
-              
-              <Line
-                type="monotone"
-                dataKey="value"
-                name="Average Glucose"
-                stroke="#3B82F6"
-                strokeWidth={2.5}
-                connectNulls={true}
-                dot={(props) => {
-                  const { cx, cy, payload } = props;
-                  const { status, id } = payload as GlucoseDataPoint & { id: string };
-                  
-                  return (
-                    <circle
-                      key={id || `dot-${cx}-${cy}`}
-                      cx={cx}
-                      cy={cy}
-                      r={4}
-                      fill={
-                        status === 'high' ? '#F59E0B' : 
-                        status === 'low' ? '#EF4444' : 
-                        '#3B82F6'
-                      }
-                      stroke="none"
-                    />
-                  );
-                }}
-                activeDot={{ r: 6, stroke: '#2563EB', strokeWidth: 2 }}
+                activeDot={{ r: 8 }}
+                connectNulls={true} // Connect line through null values
+                dot={false} 
               />
             </LineChart>
           </ResponsiveContainer>

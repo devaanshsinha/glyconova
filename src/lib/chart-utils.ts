@@ -1,4 +1,5 @@
 import { HIGH_THRESHOLD, LOW_THRESHOLD } from './glucose-stats';
+import { subDays, subMonths, format, startOfDay } from 'date-fns'; // Import date-fns utilities
 
 export interface GlucoseDataPoint {
   timestamp: string;
@@ -6,6 +7,7 @@ export interface GlucoseDataPoint {
   value: number;
   status: 'normal' | 'high' | 'low';
   id?: string; // Optional ID for React keys
+  unix: number; // Add unix timestamp
 }
 
 interface ProcessedGlucoseData {
@@ -30,7 +32,8 @@ export function processGlucoseData(readings: any[], interval: string = 'day'): P
       timestamp: timestamp.toISOString(),
       time: formatTimeForDisplay(timestamp),
       value,
-      status: getGlucoseStatus(value)
+      status: getGlucoseStatus(value),
+      unix: timestamp.getTime()
     };
   });
   
@@ -73,11 +76,17 @@ export function processGlucoseData(readings: any[], interval: string = 'day'): P
       
       const average = values.reduce((sum, value) => sum + value, 0) / values.length;
       
+      // Create a date object for the timeKey using a base date (e.g., today) to get a valid timestamp
+      const [hours, minutes] = timeKey.split(':').map(Number);
+      const baseDateForTime = new Date();
+      baseDateForTime.setHours(hours, minutes, 0, 0);
+
       return {
-        timestamp: timeKey,
+        timestamp: baseDateForTime.toISOString(),
         time: timeKey,
         value: parseFloat(average.toFixed(1)),
-        status: getGlucoseStatus(average)
+        status: getGlucoseStatus(average),
+        unix: baseDateForTime.getTime()
       };
     })
     .filter(point => point !== null) as GlucoseDataPoint[];
@@ -128,30 +137,37 @@ export function getDefaultDateRange() {
 }
 
 /**
- * Gets a date range based on the interval
+ * Calculates a date range based on the interval and an optional base date.
+ * If no baseDate is provided, it defaults to the current date.
  */
-export function getDateRangeForInterval(interval: string): { startDate: string, endDate: string } {
-  const end = new Date();
-  const start = new Date();
+export function calculateIntervalDates(interval: string, baseDate: Date = new Date()): { startDate: string, endDate: string } {
+  let start = new Date(baseDate);
+  let end = new Date(baseDate);
   
   switch (interval) {
     case 'day':
-      // Just today
+      // For daily, start and end are the same day
+      start = startOfDay(baseDate);
+      end = startOfDay(baseDate);
       break;
     case 'week':
-      start.setDate(start.getDate() - 7);
+      // For weekly, start is 7 days before baseDate, end is baseDate
+      start = subDays(baseDate, 7);
+      end = baseDate;
       break;
     case 'month':
-      start.setMonth(start.getMonth() - 1);
+      // For monthly, start is 1 month before baseDate, end is baseDate
+      start = subMonths(baseDate, 1);
+      end = baseDate;
       break;
     case 'custom':
-      // No change, use existing date range
-      return {
-        startDate: formatDateForAPI(start),
-        endDate: formatDateForAPI(end)
-      };
+      // For custom, return baseDate for both if no other logic is applied
+      // The component will handle custom range input directly
+      break;
     default:
-      start.setDate(start.getDate() - 7);
+      // Default to weekly if interval is unrecognized
+      start = subDays(baseDate, 7);
+      end = baseDate;
   }
   
   return {
