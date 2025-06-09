@@ -9,8 +9,10 @@ export const config = {
     '/((?!_next|.*\..*).*)',
     // explicitly protect the dashboard route
     '/dashboard',
+    // explicitly protect glucose and insulin detail routes
+    '/glucose-details',
+    '/insulin-details',
     // protect API routes under /api
     '/api/:path*',
   ],
 };
- 
