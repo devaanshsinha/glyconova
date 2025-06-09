@@ -12,6 +12,9 @@ export const config = {
     // explicitly protect glucose and insulin detail routes
     '/glucose-details',
     '/insulin-details',
+    // explicitly protect upload routes
+    '/upload-dexcom',
+    '/upload-omnipod',
     // protect API routes under /api
     '/api/:path*',
   ],

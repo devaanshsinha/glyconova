@@ -156,7 +156,7 @@ export default function DashboardPage() {
               >
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Connect Devices</h2>
                 <div className="flex flex-col gap-6">
-                  <div className="mb-4">
+                  <div className="mb-0">
                     <Link href="/upload-dexcom" className="block">
                       <motion.button
                         variants={fadeInUp}
@@ -179,7 +179,7 @@ export default function DashboardPage() {
                     </Link>
                   </div>
                 </div>
-                <div className="mt-8 text-gray-600 text-sm flex items-center space-x-2">
+                <div className="mt-4 text-gray-600 text-sm flex items-center space-x-2">
                   <Lightbulb className="w-4 h-4 text-gray-400" />
                   <span>Data can be exported from Dexcom Clarity (G6/G7) or Glooko for Omnipod 5.</span>
                 </div>
