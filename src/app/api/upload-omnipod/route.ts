@@ -1,12 +1,22 @@
-import { auth } from '@clerk/nextjs/server';
+import { getAuth } from '@clerk/nextjs/server';
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/db';
+import { pipeline } from 'stream/promises';
+import { PrismaClient } from '@prisma/client';
+import csv from 'csv-parser';
+import { 
+  parseOmnipodCSV, 
+  BolusRecord, 
+  BasalRecord, 
+  InsulinRecord, 
+  AlarmEvent
+} from '@/lib/omnipod-parser';
 import * as JSZip from 'jszip';
-import { parseOmnipodCSV } from '@/lib/omnipod-parser';
+
+const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
   try {
-    const { userId } = await auth();
+    const { userId } = await getAuth();
     
     if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -99,11 +109,13 @@ export async function POST(request: NextRequest) {
     }
 
     // Arrays to store the parsed data
-    let bolusRecords = [];
-    let basalRecords = [];
-    let insulinRecords = [];
-    let alarmEvents = [];
+    let bolusRecords: BolusRecord[] = [];
+    let basalRecords: BasalRecord[] = [];
+    let insulinRecords: InsulinRecord[] = [];
+    let alarmEvents: AlarmEvent[] = [];
     
+    const clerkUserId = userId; // Store clerk userId for later use
+
     // Process each file in the ZIP
     try {
       // Print all files in the ZIP for troubleshooting
