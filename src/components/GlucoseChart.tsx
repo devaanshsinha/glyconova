@@ -275,13 +275,35 @@ export function GlucoseChart({ className = '' }: GlucoseChartProps) {
 
   // Determine y-axis domain
   const calculateYDomain = () => {
-    // Use processedDailyData for 'day' interval, otherwise averageData or raw data if no average
-    const activeData = interval === 'day' ? processedDailyData.filter(d => d.value !== undefined) : averageData.length > 0 ? averageData : data;
+    let baseData: GlucoseDataPoint[];
+    if (interval === 'day') {
+      baseData = processedDailyData;
+    } else if (averageData.length > 0) {
+      baseData = averageData;
+    } else {
+      baseData = data;
+    }
+
+    const activeData = baseData.filter((d): d is GlucoseDataPoint & { value: number } => d.value !== undefined);
+
     if (activeData.length === 0) return [0, 200];
-    
-    const values = activeData.map(d => d.value);
-    const minValue = Math.min(...values, LOW_THRESHOLD - 10);
-    const maxValue = Math.max(...values, HIGH_THRESHOLD + 10);
+
+    // Initialize with a known number from the data
+    let minValue = activeData[0].value;
+    let maxValue = activeData[0].value;
+
+    for (const point of activeData) {
+      if (point.value < minValue) {
+        minValue = point.value;
+      }
+      if (point.value > maxValue) {
+        maxValue = point.value;
+      }
+    }
+
+    // Include thresholds
+    minValue = Math.min(minValue, LOW_THRESHOLD - 10);
+    maxValue = Math.max(maxValue, HIGH_THRESHOLD + 10);
     
     return [
       Math.max(0, Math.floor(minValue / 10) * 10 - 10), 
