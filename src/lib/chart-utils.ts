@@ -4,7 +4,7 @@ import { subDays, subMonths, format, startOfDay, addDays, addMonths } from 'date
 export interface GlucoseDataPoint {
   timestamp: string;
   time: string;
-  value: number;
+  value: number | undefined;
   status: 'normal' | 'high' | 'low';
   id?: string; // Optional ID for React keys
   unix: number; // Add unix timestamp
