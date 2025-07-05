@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { GlucoseStats, formatGlucose, calculateA1C, formatA1C } from '@/lib/glucose-stats';
-import { GlucoseReading } from '@/lib/data-parsers';
 import { RecalculateStatsButton } from '@/components/RecalculateStatsButton';
 
 interface StatsCardProps {
