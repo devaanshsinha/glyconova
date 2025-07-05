@@ -1,7 +1,7 @@
 import { auth } from '@clerk/nextjs/server';
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
-import { parseDexcomCSV } from '@/lib/csv-parser';
+import { parseDexcomCSV } from '@/lib/data-parsers';
 import { calculateGlucoseStats, HIGH_THRESHOLD, LOW_THRESHOLD } from '@/lib/glucose-stats';
 
 export async function POST(request: NextRequest) {

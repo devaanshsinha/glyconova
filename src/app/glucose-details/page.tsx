@@ -7,8 +7,6 @@ import { useInView } from 'react-intersection-observer';
 import { ArrowLeft, BarChart, Droplet, Table } from 'lucide-react';
 
 import { EnhancedGlucoseStats } from '@/components/EnhancedGlucoseStats';
-import { GlucoseChart } from '@/components/GlucoseChart';
-import { DailyPatterns } from '@/components/DailyPatterns';
 
 // Animation variants
 const fadeInUp = {
@@ -80,7 +78,7 @@ export default function GlucoseDetailsPage() {
               <EnhancedGlucoseStats />
             </motion.section>
             
-            {/* Glucose Chart */}
+            {/* Glucose Chart Placeholder */}
             <motion.section
               ref={chartRef}
               initial="hidden"
@@ -92,13 +90,14 @@ export default function GlucoseDetailsPage() {
                 <BarChart className="w-6 h-6 text-purple-600" />
                 <span>Glucose Trends</span>
               </h2>
-              <p className="mb-6 text-gray-600">
-                Select a date range and view your glucose patterns over time. Points are colored to indicate high (yellow) and low (red) values.
-              </p>
-              <GlucoseChart />
+              <div className="min-h-96 h-auto bg-gray-50 rounded-xl flex items-center justify-center p-8 border border-dashed border-gray-200">
+                <p className="text-gray-500 text-lg">
+                  Glucose chart will be implemented here.
+                </p>
+              </div>
             </motion.section>
             
-            {/* Daily Patterns section */}
+            {/* Daily Patterns Placeholder */}
             <motion.section
               ref={patternsRef}
               initial="hidden"
@@ -110,10 +109,11 @@ export default function GlucoseDetailsPage() {
                 <BarChart className="w-6 h-6 text-green-600" />
                 <span>Daily Patterns</span>
               </h2>
-              <p className="mb-6 text-gray-600">
-                Analysis of your typical daily glucose patterns, highlighting times when you commonly experience high or low blood sugar.
-              </p>
-              <DailyPatterns />
+              <div className="min-h-64 h-auto bg-gray-50 rounded-xl flex items-center justify-center p-8 border border-dashed border-gray-200">
+                <p className="text-gray-500 text-lg">
+                  Daily patterns analysis will be implemented here.
+                </p>
+              </div>
             </motion.section>
             
             {/* Placeholder for data table */}

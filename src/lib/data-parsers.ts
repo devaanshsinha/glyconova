@@ -1,5 +1,18 @@
 import { parse } from 'papaparse';
 
+// Glucose data interfaces and parsing (from Dexcom)
+export interface GlucoseReading {
+  timestamp: Date;
+  glucoseValue: number;
+  rateOfChange?: number;
+  eventType: string;
+  eventSubtype?: string;
+  transmitterId?: string;
+  transmitterTime?: string;
+  sourceDeviceId?: string;
+}
+
+// Insulin data interfaces and parsing (from Omnipod)
 export interface BolusRecord {
   timestamp: Date;
   insulinType: string;
@@ -36,26 +49,126 @@ export interface AlarmEvent {
   serialNumber?: string;
 }
 
+// Helper functions
+function parseDate(dateString: string): Date | null {
+  if (!dateString) return null;
+  
+  try {
+    const parsedDate = new Date(dateString);
+    
+    if (isNaN(parsedDate.getTime())) {
+      console.warn(`Invalid date format: ${dateString}`);
+      return null;
+    }
+    
+    return parsedDate;
+  } catch (error) {
+    console.warn(`Error parsing date "${dateString}":`, error);
+    return null;
+  }
+}
+
+function parseNumber(value: any): number | undefined {
+  if (value === undefined || value === null || value === '') return undefined;
+  
+  const num = parseFloat(value);
+  return isNaN(num) ? undefined : num;
+}
+
+// Dexcom CSV Parser
+export function parseDexcomCSV(csvText: string): GlucoseReading[] {
+  if (!csvText || csvText.trim() === '') {
+    throw new Error('Empty CSV content');
+  }
+
+  try {
+    const result = parse(csvText, {
+      header: true,
+      skipEmptyLines: true,
+      error: (error) => {
+        console.error('CSV parsing error:', error);
+        throw new Error(`CSV parsing error: ${error.message}`);
+      }
+    });
+
+    if (!result.data || !Array.isArray(result.data) || result.data.length === 0) {
+      throw new Error('No data rows found in CSV');
+    }
+
+    console.log(`Parsed ${result.data.length} rows from CSV`);
+
+    const readings: GlucoseReading[] = [];
+    let validRowCount = 0;
+    let invalidRowCount = 0;
+
+    for (const row of result.data) {
+      if (!row['Event Type'] && !row['Timestamp (YYYY-MM-DDThh:mm:ss)']) {
+        invalidRowCount++;
+        continue;
+      }
+
+      if (
+        row['Event Type'] === 'EGV' && 
+        row['Timestamp (YYYY-MM-DDThh:mm:ss)'] && 
+        row['Glucose Value (mg/dL)']
+      ) {
+        try {
+          const timestamp = new Date(row['Timestamp (YYYY-MM-DDThh:mm:ss)']);
+          const glucoseValue = parseFloat(row['Glucose Value (mg/dL)']);
+          
+          if (!isNaN(timestamp.getTime()) && !isNaN(glucoseValue)) {
+            const reading: GlucoseReading = {
+              timestamp,
+              glucoseValue,
+              eventType: row['Event Type'],
+              eventSubtype: row['Event Subtype'] || undefined,
+              rateOfChange: row['Glucose Rate of Change (mg/dL/min)'] 
+                ? parseFloat(row['Glucose Rate of Change (mg/dL/min)']) 
+                : undefined,
+              transmitterId: row['Transmitter ID'] || undefined,
+              transmitterTime: row['Transmitter Time (Long Integer)'] || undefined,
+              sourceDeviceId: row['Source Device ID'] || undefined,
+            };
+            readings.push(reading);
+            validRowCount++;
+          } else {
+            invalidRowCount++;
+          }
+        } catch (error) {
+          console.error('Error parsing row:', row, error);
+          invalidRowCount++;
+        }
+      }
+    }
+
+    console.log(`Found ${validRowCount} valid glucose readings and ${invalidRowCount} invalid/skipped rows`);
+
+    if (readings.length === 0 && result.data.length > 0) {
+      console.error('CSV file looks invalid for Dexcom data, available columns:', Object.keys(result.data[0]).join(', '));
+      throw new Error('CSV format does not match expected Dexcom Clarity format. Make sure you are uploading a Dexcom Clarity CSV export.');
+    }
+
+    return readings;
+  } catch (error) {
+    console.error('Failed to parse CSV:', error);
+    throw error;
+  }
+}
+
+// Omnipod CSV Parser
 export function parseOmnipodCSV(fileContent: string, fileType: string): any[] {
   if (!fileContent || fileContent.trim() === '') {
     throw new Error('Empty CSV content');
   }
 
   try {
-    // Split the content into lines
     const lines = fileContent.split('\n');
-    
-    // Extract user name and date range from the first line
     const firstLine = lines[0];
     console.log(`First line of ${fileType} CSV: "${firstLine}"`);
     
-    // Skip the first line (which has user info) and get the actual CSV content
-    // The second line has the headers, and subsequent lines have data
     const csvContent = lines.slice(1).join('\n');
-    
     console.log(`Processing ${fileType} CSV file...`);
     
-    // Parse CSV starting from the header line (which is now the first line after removing the name/date line)
     const result = parse(csvContent, {
       header: true,
       skipEmptyLines: true,
@@ -71,7 +184,6 @@ export function parseOmnipodCSV(fileContent: string, fileType: string): any[] {
       return [];
     }
 
-    // Print debugging info
     console.log(`CSV Headers for ${fileType}:`, result.meta.fields);
     if (result.data.length > 0) {
       console.log(`First row sample from ${fileType} CSV:`, JSON.stringify(result.data[0], null, 2));
@@ -98,53 +210,22 @@ export function parseOmnipodCSV(fileContent: string, fileType: string): any[] {
   }
 }
 
-// Helper function to safely parse a date
-function parseDate(dateString: string): Date | null {
-  if (!dateString) return null;
-  
-  try {
-    const parsedDate = new Date(dateString);
-    
-    // Check if the date is valid
-    if (isNaN(parsedDate.getTime())) {
-      console.warn(`Invalid date format: ${dateString}`);
-      return null;
-    }
-    
-    return parsedDate;
-  } catch (error) {
-    console.warn(`Error parsing date "${dateString}":`, error);
-    return null;
-  }
-}
-
-// Helper function to safely parse a number
-function parseNumber(value: any): number | undefined {
-  if (value === undefined || value === null || value === '') return undefined;
-  
-  const num = parseFloat(value);
-  return isNaN(num) ? undefined : num;
-}
-
 function parseBolusData(data: any[]): BolusRecord[] {
   const bolusRecords: BolusRecord[] = [];
   
   for (const row of data) {
     try {
-      // Find the timestamp field - try different possible column names
       const timestampValue = 
         row['Timestamp'] || 
         row['DateTime'] || 
         row['Date Time'] || 
         row['Date'];
       
-      // Skip rows without timestamp or insulin delivered
       if (!timestampValue) {
         console.warn('Skipping bolus row - missing timestamp:', row);
         continue;
       }
       
-      // Find insulin delivered field - try different possible column names
       const insulinDeliveredValue = 
         row['Insulin Delivered (U)'] || 
         row['Insulin Delivered'] || 
@@ -196,20 +277,17 @@ function parseBasalData(data: any[]): BasalRecord[] {
   
   for (const row of data) {
     try {
-      // Find the timestamp field - try different possible column names
       const timestampValue = 
         row['Timestamp'] || 
         row['DateTime'] || 
         row['Date Time'] || 
         row['Date'];
       
-      // Find duration field - try different possible column names
       const durationValue = 
         row['Duration (minutes)'] || 
         row['Duration'] ||
         row['Duration (mins)'];
       
-      // Skip rows without timestamp or duration
       if (!timestampValue || !durationValue) {
         console.warn('Skipping basal row - missing timestamp or duration:', row);
         continue;
@@ -226,7 +304,6 @@ function parseBasalData(data: any[]): BasalRecord[] {
         continue;
       }
       
-      // Find rate field - try different possible column names
       const rateValue = 
         row['Rate'] || 
         row['Basal Rate'] || 
@@ -258,20 +335,17 @@ function parseInsulinData(data: any[]): InsulinRecord[] {
   
   for (const row of data) {
     try {
-      // Find the timestamp field - try different possible column names
       const timestampValue = 
         row['Timestamp'] || 
         row['DateTime'] || 
         row['Date Time'] || 
         row['Date'];
       
-      // Find total insulin field - try different possible column names
       const totalInsulinValue = 
         row['Total Insulin (U)'] || 
         row['Total Insulin'] || 
         row['Daily Total'];
       
-      // Skip rows without timestamp or total insulin
       if (!timestampValue || !totalInsulinValue) {
         console.warn('Skipping insulin row - missing timestamp or total insulin:', row);
         continue;
@@ -288,7 +362,6 @@ function parseInsulinData(data: any[]): InsulinRecord[] {
         continue;
       }
       
-      // Find bolus and basal fields - try different possible column names
       const totalBolusValue = 
         row['Total Bolus (U)'] || 
         row['Total Bolus'] || 
@@ -322,21 +395,18 @@ function parseAlarmData(data: any[]): AlarmEvent[] {
   
   for (const row of data) {
     try {
-      // Find the timestamp field - try different possible column names
       const timestampValue = 
         row['Timestamp'] || 
         row['DateTime'] || 
         row['Date Time'] || 
         row['Date'];
       
-      // Find event type field - try different possible column names
       const eventTypeValue = 
         row['Alarm/Event'] || 
         row['Alarm'] || 
         row['Event'] ||
         row['Alert'];
       
-      // Skip rows without timestamp or event type
       if (!timestampValue || !eventTypeValue) {
         console.warn('Skipping alarm row - missing timestamp or event type:', row);
         continue;
@@ -365,4 +435,4 @@ function parseAlarmData(data: any[]): AlarmEvent[] {
   
   console.log(`Successfully parsed ${alarmEvents.length} alarm events`);
   return alarmEvents;
-} 
+}

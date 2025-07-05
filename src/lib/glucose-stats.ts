@@ -1,4 +1,4 @@
-import { GlucoseReading } from "@/lib/csv-parser";
+import { GlucoseReading } from "@/lib/data-parsers";
 import { prisma } from "@/lib/db";
 
 export interface GlucoseStats {
@@ -136,7 +136,7 @@ export async function updateUserGlucoseStats(userId: string): Promise<boolean> {
 
     // Calculate statistics
     const stats = calculateGlucoseStats(
-      glucoseReadings.map(reading => ({
+      glucoseReadings.map((reading: any) => ({
         timestamp: reading.timestamp,
         glucoseValue: reading.glucoseValue,
         eventType: reading.eventType,

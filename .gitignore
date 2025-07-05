@@ -45,5 +45,9 @@ next-env.d.ts
 # clerk configuration (can include secrets)
 /.clerk/
 
-export_Devaansh Sinha
-export_Devaansh Sinha.zip
+# Generated Prisma client
+src/generated/
+
+# Export files
+export_*
+*.zip

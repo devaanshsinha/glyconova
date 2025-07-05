@@ -1,22 +1,19 @@
-import { getAuth } from '@clerk/nextjs/server';
+import { auth } from '@clerk/nextjs/server';
 import { NextRequest, NextResponse } from 'next/server';
 import { pipeline } from 'stream/promises';
-import { PrismaClient } from '@prisma/client';
-import csv from 'csv-parser';
+import { prisma } from '@/lib/db';
 import { 
   parseOmnipodCSV, 
   BolusRecord, 
   BasalRecord, 
   InsulinRecord, 
   AlarmEvent
-} from '@/lib/omnipod-parser';
+} from '@/lib/data-parsers';
 import * as JSZip from 'jszip';
-
-const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
   try {
-    const { userId } = await getAuth(request);
+    const { userId } = await auth();
     
     if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

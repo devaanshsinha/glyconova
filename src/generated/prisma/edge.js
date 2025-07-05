@@ -243,7 +243,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/devaanshsinha/glyconova/src/generated/prisma",
+      "value": "/Users/devaansh/personal/glyconova/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -257,11 +257,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/devaanshsinha/glyconova/prisma/schema.prisma",
+    "sourceFilePath": "/Users/devaansh/personal/glyconova/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
+    "rootEnvPath": "../../../.env",
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../../../prisma",
@@ -271,6 +271,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {

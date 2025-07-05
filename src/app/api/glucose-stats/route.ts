@@ -14,19 +14,15 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Find the user in the database
-    const user = await prisma.user.findUnique({
+    // Find or create the user in the database
+    let user = await prisma.user.findUnique({
       where: { clerkId: userId },
     });
 
     if (!user) {
-      return NextResponse.json(
-        { 
-          error: 'User not found',
-          stats: null
-        }, 
-        { status: 404 }
-      );
+      user = await prisma.user.create({
+        data: { clerkId: userId },
+      });
     }
 
     // Only get pre-calculated stats from the database - no on-the-fly calculations

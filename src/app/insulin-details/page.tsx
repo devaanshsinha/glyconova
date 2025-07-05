@@ -6,7 +6,6 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { ArrowLeft, BarChart, Syringe, Activity } from 'lucide-react'
 import { EnhancedInsulinStats } from '@/components/EnhancedInsulinStats'
-import { InsulinChart } from '@/components/InsulinChart'
 
 // Animation variants
 const fadeInUp = {
@@ -75,7 +74,7 @@ export default function InsulinDetailsPage() {
             <EnhancedInsulinStats />
           </motion.section>
           
-          {/* Insulin + Glucose Chart */}
+          {/* Insulin + Glucose Chart Placeholder */}
           <motion.section
             ref={chartRef}
             initial="hidden"
@@ -87,10 +86,11 @@ export default function InsulinDetailsPage() {
               <Activity className="w-6 h-6 text-pink-600" />
               <span>Glucose & Insulin Correlation</span>
             </h2>
-            <p className="mb-6 text-gray-600">
-              Select a date to view your blood glucose levels for that day, with markers showing when and how much insulin (bolus) was taken. This visualization helps you understand the relationship between your insulin doses and glucose responses.
-            </p>
-            <InsulinChart />
+            <div className="min-h-96 h-auto bg-gray-50 rounded-xl flex items-center justify-center p-8 border border-dashed border-gray-200">
+              <p className="text-gray-500 text-lg">
+                Glucose & insulin correlation chart will be implemented here.
+              </p>
+            </div>
           </motion.section>
         </div>
       </div>

@@ -5,7 +5,8 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ArrowRight, CloudUpload, BarChart2, Droplet, Lightbulb, Wifi, Syringe } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ArrowRight, CloudUpload, BarChart2, Droplet, Lightbulb, Wifi, Syringe, AlertTriangle, CheckCircle, Info, TrendingUp } from 'lucide-react';
 import { GlucoseStatsDisplay } from '@/components/GlucoseStats';
 import { InsulinStatsDisplay } from '@/components/InsulinStats';
 
@@ -51,21 +52,81 @@ const StatCard: React.FC<StatCardProps> = ({ title, value, unit, label, bgColor,
   </motion.div>
 );
 
-interface InsightCardProps {
+interface Insight {
+  id: string;
+  type: 'positive' | 'warning' | 'suggestion' | 'neutral';
+  category: 'glucose' | 'insulin' | 'patterns' | 'timing';
   title: string;
   description: string;
-  icon: React.ReactNode;
+  actionable?: string;
+  priority: 'high' | 'medium' | 'low';
+  confidence: number;
+  dataPoints?: number;
 }
 
-const InsightCard: React.FC<InsightCardProps> = ({ title, description, icon }) => (
-  <motion.div variants={fadeInUp} className="bg-white p-6 rounded-2xl shadow-md flex items-start space-x-4 hover:shadow-lg transition-shadow">
-    <div className="flex-shrink-0 text-blue-600 mt-1">{icon}</div>
-    <div>
-      <h3 className="text-lg font-semibold text-gray-900 mb-1">{title}</h3>
-      <p className="text-gray-600 text-sm">{description}</p>
-    </div>
-  </motion.div>
-);
+interface InsightCardProps {
+  insight: Insight;
+}
+
+const InsightCard: React.FC<InsightCardProps> = ({ insight }) => {
+  const getInsightIcon = (type: string) => {
+    switch (type) {
+      case 'positive':
+        return <CheckCircle className="w-6 h-6" />;
+      case 'warning':
+        return <AlertTriangle className="w-6 h-6" />;
+      case 'suggestion':
+        return <Lightbulb className="w-6 h-6" />;
+      default:
+        return <Info className="w-6 h-6" />;
+    }
+  };
+
+  const getInsightColors = (type: string) => {
+    switch (type) {
+      case 'positive':
+        return 'text-green-600 border-green-200 bg-green-50';
+      case 'warning':
+        return 'text-red-600 border-red-200 bg-red-50';
+      case 'suggestion':
+        return 'text-blue-600 border-blue-200 bg-blue-50';
+      default:
+        return 'text-gray-600 border-gray-200 bg-gray-50';
+    }
+  };
+
+  return (
+    <motion.div 
+      variants={fadeInUp} 
+      className={`p-4 rounded-xl border-2 ${getInsightColors(insight.type)} hover:shadow-md transition-all`}
+    >
+      <div className="flex items-start space-x-3">
+        <div className="flex-shrink-0 mt-0.5">
+          {getInsightIcon(insight.type)}
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center justify-between mb-1">
+            <h3 className="text-sm font-semibold text-gray-900">{insight.title}</h3>
+            <span className="text-xs font-medium opacity-60">
+              {insight.priority.toUpperCase()}
+            </span>
+          </div>
+          <p className="text-sm text-gray-700 mb-2">{insight.description}</p>
+          {insight.actionable && (
+            <p className="text-xs text-gray-600 italic border-l-2 border-gray-300 pl-2">
+              💡 {insight.actionable}
+            </p>
+          )}
+          {insight.dataPoints && (
+            <div className="mt-2 text-xs text-gray-500">
+              Based on {insight.dataPoints} data points
+            </div>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 export default function DashboardPage() {
   const [welcomeRef, welcomeInView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -73,6 +134,32 @@ export default function DashboardPage() {
   const [insulinRef, insulinInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [connectRef, connectInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [insightsRef, insightsInView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  
+  const [insights, setInsights] = useState<Insight[]>([]);
+  const [insightsLoading, setInsightsLoading] = useState(true);
+  const [dataQuality, setDataQuality] = useState<any>(null);
+
+  useEffect(() => {
+    async function fetchInsights() {
+      try {
+        setInsightsLoading(true);
+        const response = await fetch('/api/insights');
+        if (response.ok) {
+          const data = await response.json();
+          setInsights(data.insights || []);
+          setDataQuality(data.dataQuality);
+        } else {
+          console.error('Failed to fetch insights');
+        }
+      } catch (error) {
+        console.error('Error fetching insights:', error);
+      } finally {
+        setInsightsLoading(false);
+      }
+    }
+
+    fetchInsights();
+  }, []);
 
   return (
     <>
@@ -179,7 +266,7 @@ export default function DashboardPage() {
                 </div>
               </motion.section>
 
-              {/* Recent Insights Section - NEW FEATURE */}
+              {/* Recent Insights Section */}
               <motion.section
                 ref={insightsRef}
                 initial="hidden"
@@ -187,27 +274,45 @@ export default function DashboardPage() {
                 variants={staggerContainer}
                 className="bg-white p-8 rounded-2xl shadow-lg"
               >
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Recent Insights</h2>
-                <div className="space-y-4">
-                  <InsightCard 
-                    title="Morning Glucose Stability Improved" 
-                    description="Your average fasting glucose has been more stable this week. Keep up the good work!" 
-                    icon={<Lightbulb className="w-6 h-6" />}
-                  />
-                  <InsightCard 
-                    title="Bolus Timing Suggestion" 
-                    description="Consider pre-bolusing 15-20 minutes before meals to prevent post-meal spikes." 
-                    icon={<Lightbulb className="w-6 h-6" />}
-                  />
-                  <InsightCard 
-                    title="Nighttime Basal Adjustment" 
-                    description="You're experiencing mild lows between 2 AM - 4 AM. A slight basal reduction might help." 
-                    icon={<Lightbulb className="w-6 h-6" />}
-                  />
-                  {/* More insights can be added dynamically here */}
-                  <div className="p-3 bg-gray-50 rounded-xl text-center text-gray-600">
-                    <p>No new personalized insights available today.</p>
-                  </div>
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-bold text-gray-900">Recent Insights</h2>
+                  {dataQuality && (
+                    <div className="text-xs text-gray-500 flex items-center space-x-2">
+                      <TrendingUp className="w-4 h-4" />
+                      <span>
+                        {dataQuality.glucoseDataDays} days glucose, {dataQuality.insulinDataDays} days insulin
+                      </span>
+                    </div>
+                  )}
+                </div>
+                
+                <div className="space-y-3">
+                  {insightsLoading ? (
+                    <div className="p-6 bg-gray-50 rounded-xl text-center">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-3"></div>
+                      <p className="text-gray-600">Analyzing your data...</p>
+                    </div>
+                  ) : insights.length > 0 ? (
+                    insights.map((insight) => (
+                      <InsightCard key={insight.id} insight={insight} />
+                    ))
+                  ) : (
+                    <div className="p-6 bg-gray-50 rounded-xl text-center text-gray-600">
+                      <Lightbulb className="w-8 h-8 mx-auto mb-3 text-gray-400" />
+                      <p className="text-lg font-medium mb-2">No insights available yet</p>
+                      <p className="text-sm">
+                        {dataQuality?.hasGlucoseData || dataQuality?.hasInsulinData
+                          ? "We need more data to generate meaningful insights. Upload more historical data for better analysis."
+                          : "Upload your glucose and insulin data to get personalized insights and recommendations."
+                        }
+                      </p>
+                      {dataQuality && !dataQuality.hasGlucoseData && (
+                        <p className="text-xs text-blue-600 mt-2">
+                          💡 Start by uploading Dexcom data for glucose insights
+                        </p>
+                      )}
+                    </div>
+                  )}
                 </div>
               </motion.section>
             </div>
