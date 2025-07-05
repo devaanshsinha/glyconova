@@ -17,5 +17,9 @@ export const config = {
     '/upload-omnipod',
     // protect API routes under /api
     '/api/:path*',
+    '/privacy',
+    '/contact',
+    '/about'
+
   ],
 };
