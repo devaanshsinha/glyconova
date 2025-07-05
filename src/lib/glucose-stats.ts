@@ -1,5 +1,15 @@
-import { GlucoseReading } from "@/lib/data-parsers";
 import { prisma } from "@/lib/db";
+
+export interface GlucoseReading {
+  timestamp: Date;
+  glucoseValue: number;
+  rateOfChange?: number;
+  eventType: string;
+  eventSubtype?: string;
+  transmitterId?: string;
+  transmitterTime?: string;
+  sourceDeviceId?: string;
+}
 
 export interface GlucoseStats {
   average: number;

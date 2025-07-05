@@ -1,12 +1,10 @@
 'use client'
 
 import { SignedIn, SignedOut } from '@clerk/nextjs';
-import { redirect } from 'next/navigation';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useState, useEffect } from 'react';
-import { ArrowRight, CloudUpload, BarChart2, Droplet, Lightbulb, Wifi, Syringe, AlertTriangle, CheckCircle, Info, TrendingUp } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Info, Lightbulb, TrendingUp } from 'lucide-react';
 import { GlucoseStatsDisplay } from '@/components/GlucoseStats';
 import { InsulinStatsDisplay } from '@/components/InsulinStats';
 
@@ -132,7 +130,6 @@ export default function DashboardPage() {
   const [welcomeRef, welcomeInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [glucoseRef, glucoseInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [insulinRef, insulinInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-  const [connectRef, connectInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [insightsRef, insightsInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   
   const [insights, setInsights] = useState<Insight[]>([]);
@@ -192,9 +189,6 @@ export default function DashboardPage() {
               >
                 <div className="flex justify-between items-center mb-6">
                   <h2 className="text-2xl font-bold text-gray-900">Glucose Overview</h2>
-                  <Link href="/glucose-details" className="flex items-center text-blue-600 hover:text-blue-800 transition-colors font-medium cursor-pointer hover:scale-105 transform">
-                    View Details <ArrowRight className="ml-2 w-4 h-4" />
-                  </Link>
                 </div>
                 
                 {/* GlucoseStatsDisplay now displays all glucose-related stats */}
@@ -213,9 +207,6 @@ export default function DashboardPage() {
               >
                 <div className="flex justify-between items-center mb-6">
                   <h2 className="text-2xl font-bold text-gray-900">Insulin Delivery</h2>
-                  <Link href="/insulin-details" className="flex items-center text-blue-600 hover:text-blue-800 transition-colors font-medium cursor-pointer hover:scale-105 transform">
-                    View Details <ArrowRight className="ml-2 w-4 h-4" />
-                  </Link>
                 </div>
                 
                 {/* InsulinStatsDisplay now displays all insulin-related stats */}
@@ -225,47 +216,8 @@ export default function DashboardPage() {
               </motion.section>
             </div>
 
-            {/* Connect Devices & Recent Insights Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Connect Devices Section */}
-              <motion.section
-                ref={connectRef}
-                initial="hidden"
-                animate={connectInView ? "visible" : "hidden"}
-                variants={staggerContainer}
-                className="bg-white p-8 rounded-2xl shadow-lg"
-              >
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Connect Devices</h2>
-                <div className="flex flex-col gap-6">
-                  <div className="mb-0">
-                    <Link href="/upload-dexcom" className="block">
-                      <motion.button
-                        variants={fadeInUp}
-                        className="w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center space-x-2 cursor-pointer hover:scale-105 transform"
-                      >
-                        <CloudUpload className="w-5 h-5" />
-                        <span>Upload Dexcom Data</span>
-                      </motion.button>
-                    </Link>
-                  </div>
-                  <div>
-                    <Link href="/upload-omnipod" className="block">
-                      <motion.button
-                        variants={fadeInUp}
-                        className="w-full py-3 px-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center space-x-2 cursor-pointer hover:scale-105 transform"
-                      >
-                        <CloudUpload className="w-5 h-5" />
-                        <span>Upload Omnipod Data</span>
-                      </motion.button>
-                    </Link>
-                  </div>
-                </div>
-                <div className="mt-4 text-gray-600 text-sm flex items-center space-x-2">
-                  <Lightbulb className="w-4 h-4 text-gray-400" />
-                  <span>Data can be exported from Dexcom Clarity (G6/G7) or Glooko for Omnipod 5.</span>
-                </div>
-              </motion.section>
-
+            {/* Recent Insights Section */}
+            <div className="max-w-4xl mx-auto">
               {/* Recent Insights Section */}
               <motion.section
                 ref={insightsRef}
@@ -301,16 +253,8 @@ export default function DashboardPage() {
                       <Lightbulb className="w-8 h-8 mx-auto mb-3 text-gray-400" />
                       <p className="text-lg font-medium mb-2">No insights available yet</p>
                       <p className="text-sm">
-                        {dataQuality?.hasGlucoseData || dataQuality?.hasInsulinData
-                          ? "We need more data to generate meaningful insights. Upload more historical data for better analysis."
-                          : "Upload your glucose and insulin data to get personalized insights and recommendations."
-                        }
+"Connect your diabetes devices to get personalized insights and recommendations."
                       </p>
-                      {dataQuality && !dataQuality.hasGlucoseData && (
-                        <p className="text-xs text-blue-600 mt-2">
-                          💡 Start by uploading Dexcom data for glucose insights
-                        </p>
-                      )}
                     </div>
                   )}
                 </div>
