@@ -4,7 +4,8 @@ import { SignedIn, SignedOut } from '@clerk/nextjs';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useState, useEffect } from 'react';
-import { AlertTriangle, CheckCircle, Info, Lightbulb, TrendingUp } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Info, Lightbulb, TrendingUp, CloudUpload } from 'lucide-react';
+import Link from 'next/link';
 import { GlucoseStatsDisplay } from '@/components/GlucoseStats';
 import { InsulinStatsDisplay } from '@/components/InsulinStats';
 
@@ -216,8 +217,46 @@ export default function DashboardPage() {
               </motion.section>
             </div>
 
-            {/* Recent Insights Section */}
-            <div className="max-w-4xl mx-auto">
+            {/* Connect Devices & Recent Insights Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Connect Devices Section */}
+              <motion.section
+                initial="hidden"
+                animate="visible"
+                variants={staggerContainer}
+                className="bg-white p-8 rounded-2xl shadow-lg"
+              >
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Connect Devices</h2>
+                <div className="flex flex-col gap-6">
+                  <div className="mb-0">
+                    <Link href="/upload-dexcom" className="block">
+                      <motion.button
+                        variants={fadeInUp}
+                        className="w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center space-x-2 cursor-pointer hover:scale-105 transform"
+                      >
+                        <CloudUpload className="w-5 h-5" />
+                        <span>Upload Dexcom Data</span>
+                      </motion.button>
+                    </Link>
+                  </div>
+                  <div>
+                    <Link href="/upload-omnipod" className="block">
+                      <motion.button
+                        variants={fadeInUp}
+                        className="w-full py-3 px-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center space-x-2 cursor-pointer hover:scale-105 transform"
+                      >
+                        <CloudUpload className="w-5 h-5" />
+                        <span>Upload Omnipod Data</span>
+                      </motion.button>
+                    </Link>
+                  </div>
+                </div>
+                <div className="mt-4 text-gray-600 text-sm flex items-center space-x-2">
+                  <Lightbulb className="w-4 h-4 text-gray-400" />
+                  <span>Data can be exported from Dexcom Clarity (G6/G7) or Glooko for Omnipod 5.</span>
+                </div>
+              </motion.section>
+
               {/* Recent Insights Section */}
               <motion.section
                 ref={insightsRef}
