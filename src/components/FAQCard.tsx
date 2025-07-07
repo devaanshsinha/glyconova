@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 
@@ -10,43 +9,28 @@ interface FAQCardProps {
   index: number
 }
 
-export function FAQCard({ question, answer, index }: FAQCardProps) {
+export function FAQCard({ question, answer }: FAQCardProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.5 }}
-      transition={{ delay: index * 0.1 }}
-      className="rounded-2xl bg-gradient-to-br from-white to-blue-50 shadow-lg overflow-hidden"
-    >
+    <div className="rounded-2xl bg-white shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-200">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full p-6 text-left flex items-center justify-between group"
+        className="w-full p-6 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
       >
-        <h3 className="text-xl font-semibold group-hover:text-blue-600 transition-colors duration-300">
+        <h3 className="text-xl font-semibold text-gray-900">
           {question}
         </h3>
-        <motion.div
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
-          className="text-gray-400 group-hover:text-blue-600 transition-colors duration-300"
-        >
+        <div className={`text-gray-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
           <ChevronDown className="w-6 h-6" />
-        </motion.div>
+        </div>
       </button>
 
-      <motion.div
-        initial={false}
-        animate={{ height: isOpen ? 'auto' : 0 }}
-        transition={{ duration: 0.3 }}
-        className="overflow-hidden"
-      >
+      <div className={`overflow-hidden transition-all duration-200 ${isOpen ? 'max-h-96' : 'max-h-0'}`}>
         <div className="p-6 pt-0 text-gray-600">
           {answer}
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   )
 } 

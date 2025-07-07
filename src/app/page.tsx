@@ -25,20 +25,10 @@ import { FAQCard } from '@/components/FAQCard'
 import { FeatureHighlight } from '@/components/FeatureHighlight'
 import { PrivacyCard } from '@/components/PrivacyCard'
 
-// Animation variants
+// Animation variants (simplified)
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 }
-}
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
 }
 
 export default function HomePage() {
@@ -57,15 +47,15 @@ export default function HomePage() {
       {/* Hero Section */}
       <motion.section 
         ref={heroRef}
-        initial="hidden"
-        animate={heroInView ? "visible" : "hidden"}
-        variants={staggerContainer}
+        initial={{ opacity: 0, y: 30 }}
+        animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 0.8, once: true }}
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
         <AnimatedBackground />
 
         <div className="container mx-auto px-4 py-20 relative z-10">
-          <motion.div variants={fadeInUp} className="text-center max-w-4xl mx-auto">
+          <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-6xl md:text-7xl font-extrabold text-gray-900 mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
               GlycoNova: Empower Your Type 1 Diabetes Journey
             </h1>
@@ -93,32 +83,27 @@ export default function HomePage() {
                 </Link>
               </SignedIn>
             </div>
-          </motion.div>
+          </div>
 
           {/* Scroll Indicator */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1 }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          >
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
             <ChevronDown className="w-8 h-8 text-gray-400 animate-bounce" />
-          </motion.div>
+          </div>
         </div>
       </motion.section>
 
       {/* Why GlycoNova Section */}
       <motion.section 
         ref={benefitsRef}
-        initial="hidden"
-        animate={benefitsInView ? "visible" : "hidden"}
-        variants={staggerContainer}
+        initial={{ opacity: 0, y: 30 }}
+        animate={benefitsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 0.6, once: true }}
         className="py-20 bg-white"
       >
         <div className="container mx-auto px-4">
-          <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-center mb-16">
+          <h2 className="text-4xl font-bold text-center mb-16">
             Why GlycoNova?
-          </motion.h2>
+          </h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
@@ -158,15 +143,15 @@ export default function HomePage() {
       {/* How It Works Section */}
       <motion.section 
         ref={howItWorksRef}
-        initial="hidden"
-        animate={howItWorksInView ? "visible" : "hidden"}
-        variants={staggerContainer}
+        initial={{ opacity: 0, y: 30 }}
+        animate={howItWorksInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 0.6, once: true }}
         className="py-20 bg-gradient-to-b from-white to-blue-50"
       >
         <div className="container mx-auto px-4">
-          <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-center mb-16">
+          <h2 className="text-4xl font-bold text-center mb-16">
             How It Works
-          </motion.h2>
+          </h2>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
@@ -201,15 +186,15 @@ export default function HomePage() {
       {/* Feature Highlights */}
       <motion.section 
         ref={featureHighlightsRef}
-        initial="hidden"
-        animate={featureHighlightsInView ? "visible" : "hidden"}
-        variants={staggerContainer}
+        initial={{ opacity: 0, y: 30 }}
+        animate={featureHighlightsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 0.6, once: true }}
         className="py-20 bg-white"
       >
         <div className="container mx-auto px-4">
-          <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-center mb-16">
+          <h2 className="text-4xl font-bold text-center mb-16">
             Feature Highlights
-          </motion.h2>
+          </h2>
 
           <div className="space-y-20">
             {[
@@ -250,15 +235,15 @@ export default function HomePage() {
       {/* Privacy & Security */}
       <motion.section 
         ref={privacyRef}
-        initial="hidden"
-        animate={privacyInView ? "visible" : "hidden"}
-        variants={staggerContainer}
+        initial={{ opacity: 0, y: 30 }}
+        animate={privacyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 0.6, once: true }}
         className="py-20 bg-gradient-to-b from-white to-blue-50"
       >
         <div className="container mx-auto px-4">
-          <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-center mb-16">
+          <h2 className="text-4xl font-bold text-center mb-16">
             Your Data, Your Control
-          </motion.h2>
+          </h2>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
@@ -293,15 +278,15 @@ export default function HomePage() {
       {/* FAQ Section */}
       <motion.section 
         ref={faqRef}
-        initial="hidden"
-        animate={faqInView ? "visible" : "hidden"}
-        variants={staggerContainer}
+        initial={{ opacity: 0, y: 30 }}
+        animate={faqInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 0.6, once: true }}
         className="py-20 bg-white"
       >
         <div className="container mx-auto px-4">
-          <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-center mb-16">
+          <h2 className="text-4xl font-bold text-center mb-16">
             Frequently Asked Questions
-          </motion.h2>
+          </h2>
 
           <div className="max-w-3xl mx-auto space-y-6">
             {[
@@ -336,13 +321,13 @@ export default function HomePage() {
       {/* Final CTA */}
       <motion.section 
         ref={ctaRef}
-        initial="hidden"
-        animate={ctaInView ? "visible" : "hidden"}
-        variants={staggerContainer}
+        initial={{ opacity: 0, y: 30 }}
+        animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 0.6, once: true }}
         className="py-20 bg-gradient-to-b from-blue-50 to-white"
       >
         <div className="container mx-auto px-4 text-center">
-          <motion.div variants={fadeInUp} className="max-w-3xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             <h2 className="text-4xl font-bold mb-6">
               Ready to Master Your Diabetes Data?
             </h2>
@@ -370,7 +355,7 @@ export default function HomePage() {
                 </Link>
               </SignedIn>
             </div>
-          </motion.div>
+          </div>
         </div>
       </motion.section>
 
