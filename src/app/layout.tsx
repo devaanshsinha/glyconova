@@ -9,6 +9,7 @@ import {
   SignInButton,
   UserButton,
 } from '@clerk/nextjs'
+import { NavigationDropdown } from '@/components/NavigationDropdown'
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   </SignInButton>
                 </SignedOut>
                 <SignedIn>
+                  <NavigationDropdown />
                   <UserButton afterSignOutUrl="/" />
                 </SignedIn>
               </div>
