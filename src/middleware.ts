@@ -19,7 +19,12 @@ export const config = {
     '/api/:path*',
     '/privacy',
     '/contact',
-    '/about'
+    '/about',
+    // info pages for feature highlights
+    '/info-glucose',
+    '/info-insulin',
+    '/info-targets',
+    '/info-security'
 
   ],
 };

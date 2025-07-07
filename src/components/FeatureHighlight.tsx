@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
 interface FeatureHighlightProps {
   title: string
@@ -9,9 +10,10 @@ interface FeatureHighlightProps {
   image: string
   index: number
   isReversed?: boolean
+  learnMoreLink?: string
 }
 
-export function FeatureHighlight({ title, description, image, index, isReversed = false }: FeatureHighlightProps) {
+export function FeatureHighlight({ title, description, image, index, isReversed = false, learnMoreLink }: FeatureHighlightProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -28,10 +30,19 @@ export function FeatureHighlight({ title, description, image, index, isReversed 
         <p className="text-gray-600 text-lg mb-6">
           {description}
         </p>
-        <div className="flex items-center text-blue-600 hover:text-blue-700 transition-colors cursor-pointer group">
-          <span className="font-medium">Learn more</span>
-          <ArrowRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
-        </div>
+        {learnMoreLink ? (
+          <Link href={learnMoreLink}>
+            <div className="flex items-center text-blue-600 hover:text-blue-700 transition-colors cursor-pointer group">
+              <span className="font-medium">Learn more</span>
+              <ArrowRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
+            </div>
+          </Link>
+        ) : (
+          <div className="flex items-center text-blue-600 hover:text-blue-700 transition-colors cursor-pointer group">
+            <span className="font-medium">Learn more</span>
+            <ArrowRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
+          </div>
+        )}
       </div>
 
       {/* Image/Preview */}

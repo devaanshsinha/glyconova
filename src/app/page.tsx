@@ -201,22 +201,26 @@ export default function HomePage() {
               {
                 title: "Visualize Glucose Patterns",
                 description: "Automatically parse your Dexcom Clarity history into clear trend charts. Spot highs, lows, and time-in-range without manual effort.",
-                image: "/glucose-patterns.png"
+                image: "/glucose-patterns.png",
+                learnMoreLink: "/info-glucose"
               },
               {
                 title: "Track Insulin Usage",
                 description: "Upload Omnipod 5 CSVs and compare your basal/bolus breakdowns alongside glucose readings to see what's working.",
-                image: "/insulin-tracking.png"
+                image: "/insulin-tracking.png",
+                learnMoreLink: "/info-insulin"
               },
               {
                 title: "Set Targets & Get Recommendations",
                 description: "Choose a target A1C or average glucose. GlycoNova shows exactly how much you need to improve, down to basal rate tweaks and carb ratios.",
-                image: "/targets.png"
+                image: "/targets.png",
+                learnMoreLink: "/info-targets"
               },
               {
                 title: "Encrypted & Never Shared",
                 description: "Your data is encrypted in transit and at rest. We do not sell or share your health data—ever.",
-                image: "/security.png"
+                image: "/security.png",
+                learnMoreLink: "/info-security"
               }
             ].map((feature, index) => (
               <FeatureHighlight
@@ -226,6 +230,7 @@ export default function HomePage() {
                 image={feature.image}
                 index={index}
                 isReversed={index % 2 === 1}
+                learnMoreLink={feature.learnMoreLink}
               />
             ))}
           </div>
