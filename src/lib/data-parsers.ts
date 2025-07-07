@@ -381,21 +381,30 @@ export function parseOmnipodCSV(csvContent: string, fileName: string): OmnipodUp
       
     } else if (fileName.includes('bolus_data') || csvContent.includes('Insulin Delivered')) {
       const { data } = parseOmnipodCSVContent(csvContent, (values, headers) => {
-        const record: OmnipodBolusRecord | null = {
-          timestamp: parseTimestamp(values[0]),
+        const timestamp = parseTimestamp(values[0]);
+        const insulinDelivered = safeParseFloat(values[5]);
+        
+        // Only create record if we have valid timestamp and insulin delivery
+        if (!timestamp || !insulinDelivered || insulinDelivered <= 0) {
+          return null;
+        }
+        
+        const record: OmnipodBolusRecord = {
+          timestamp,
           insulinType: values[1] || undefined,
           bloodGlucoseInput: safeParseFloat(values[2]),
           carbsInput: safeParseFloat(values[3]),
           carbsRatio: safeParseFloat(values[4]),
-          insulinDelivered: safeParseFloat(values[5]),
+          insulinDelivered,
           initialDelivery: safeParseFloat(values[6]),
           extendedDelivery: safeParseFloat(values[7]),
           serialNumber: values[8] || undefined
-        } as OmnipodBolusRecord;
+        };
         
-        return record.timestamp ? record : null;
+        return record;
       });
       result.bolusRecords = data;
+      console.log(`Parsed ${data.length} bolus records from ${fileName}`);
       
     } else if (fileName.includes('basal_data') || csvContent.includes('Duration (minutes)')) {
       const { data } = parseOmnipodCSVContent(csvContent, (values, headers) => {

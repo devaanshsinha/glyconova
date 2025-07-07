@@ -186,6 +186,7 @@ export async function POST(request: NextRequest) {
         }
 
         if (parsedData.bolusRecords.length > 0) {
+          console.log(`Inserting ${parsedData.bolusRecords.length} bolus records...`);
           const bolusData = parsedData.bolusRecords.map(record => ({
             uploadId: omnipodUpload.id,
             timestamp: record.timestamp,
@@ -204,6 +205,7 @@ export async function POST(request: NextRequest) {
             skipDuplicates: false
           });
           results.bolusRecords += result.count;
+          console.log(`Successfully inserted ${result.count} bolus records`);
         }
 
         if (parsedData.basalRecords.length > 0) {

@@ -146,8 +146,8 @@ export async function calculateInsulinStatistics(userId: string): Promise<void> 
       upload: {
         userId: userId
       },
-      timestamp: {
-        not: null
+      insulinDelivered: {
+        gt: 0
       }
     },
     select: {
@@ -167,8 +167,8 @@ export async function calculateInsulinStatistics(userId: string): Promise<void> 
       upload: {
         userId: userId
       },
-      timestamp: {
-        not: null
+      insulinDelivered: {
+        gt: 0
       }
     },
     select: {
@@ -181,6 +181,8 @@ export async function calculateInsulinStatistics(userId: string): Promise<void> 
     }
   });
 
+  console.log(`Found ${bolusRecords.length} bolus records and ${basalRecords.length} basal records`);
+  
   if (bolusRecords.length === 0 && basalRecords.length === 0) {
     console.log('No insulin records found for statistics calculation');
     return;
