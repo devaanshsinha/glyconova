@@ -50,48 +50,76 @@ export async function generateInsights(userId: string): Promise<InsightAnalysis>
   const sevenDaysAgo = subDays(now, 7);
 
   // Get recent glucose data
-  const recentGlucoseReadings = await prisma.glucoseReading.findMany({
+  const recentGlucoseReadings = await prisma.dexcomReading.findMany({
     where: {
-      userId: user.id,
+      upload: {
+        userId: user.id
+      },
       timestamp: {
         gte: thirtyDaysAgo,
       },
+      glucoseValue: {
+        not: null
+      }
+    },
+    select: {
+      timestamp: true,
+      glucoseValue: true
     },
     orderBy: { timestamp: 'desc' },
   });
 
   // Get recent insulin data
-  const recentBolusRecords = await prisma.bolusRecord.findMany({
+  const recentBolusRecords = await prisma.omnipodBolusRecord.findMany({
     where: {
-      userId: user.id,
+      upload: {
+        userId: user.id
+      },
       timestamp: {
         gte: thirtyDaysAgo,
       },
+      insulinDelivered: {
+        gt: 0
+      }
+    },
+    select: {
+      timestamp: true,
+      insulinDelivered: true,
+      carbsInput: true
     },
     orderBy: { timestamp: 'desc' },
   });
 
-  const recentBasalRecords = await prisma.basalRecord.findMany({
+  const recentBasalRecords = await prisma.omnipodBasalRecord.findMany({
     where: {
-      userId: user.id,
+      upload: {
+        userId: user.id
+      },
       timestamp: {
         gte: thirtyDaysAgo,
       },
+      insulinDelivered: {
+        gt: 0
+      }
+    },
+    select: {
+      timestamp: true,
+      insulinDelivered: true
     },
     orderBy: { timestamp: 'desc' },
   });
 
   // Calculate data quality metrics
-  const glucoseDataDays = getUniqueDays(recentGlucoseReadings.map(r => r.timestamp));
-  const insulinDataDays = getUniqueDays(recentBolusRecords.map(r => r.timestamp));
+  const glucoseDataDays = getUniqueDays(recentGlucoseReadings.map(r => r.timestamp).filter(Boolean) as Date[]);
+  const insulinDataDays = getUniqueDays(recentBolusRecords.map(r => r.timestamp).filter(Boolean) as Date[]);
   
   const dataQuality = {
     hasGlucoseData: recentGlucoseReadings.length > 0,
     hasInsulinData: recentBolusRecords.length > 0,
     glucoseDataDays,
     insulinDataDays,
-    lastGlucoseReading: recentGlucoseReadings[0]?.timestamp,
-    lastInsulinRecord: recentBolusRecords[0]?.timestamp,
+    lastGlucoseReading: recentGlucoseReadings[0]?.timestamp || undefined,
+    lastInsulinRecord: recentBolusRecords[0]?.timestamp || undefined,
   };
 
   // Only generate insights if we have sufficient data
@@ -308,7 +336,7 @@ function analyzeInsulinPatterns(bolusRecords: any[], glucoseReadings: any[]): In
   }
 
   // Analyze bolus amounts
-  const bolusAmounts = bolusRecords.map(r => r.amount);
+  const bolusAmounts = bolusRecords.map(r => r.insulinDelivered || 0);
   const avgBolus = bolusAmounts.reduce((sum, amt) => sum + amt, 0) / bolusAmounts.length;
   const largeBoluses = bolusAmounts.filter(amt => amt > avgBolus * 2).length;
 
