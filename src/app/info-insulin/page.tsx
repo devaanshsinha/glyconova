@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Activity, PieChart, Calendar, Zap, ArrowLeft, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
+import { Footer } from '@/components/Footer';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -185,6 +186,8 @@ export default function InfoInsulinPage() {
           </Link>
         </div>
       </motion.section>
+
+      <Footer />
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Target, TrendingUp, Calculator, Lightbulb, ArrowLeft, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
+import { Footer } from '@/components/Footer';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -224,6 +225,8 @@ export default function InfoTargetsPage() {
           </Link>
         </div>
       </motion.section>
+
+      <Footer />
     </div>
   );
 }
