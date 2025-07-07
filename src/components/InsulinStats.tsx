@@ -9,10 +9,12 @@ interface InsulinStatsData {
   avgDailyCarbs: number;
   bolusPercentage: number;
   basalPercentage: number;
-  insulinCarbRatio: number | null;
+  avgInsulinCarbRatio?: number | null;
+  avgCorrectionFactor?: number | null;
   totalBolusCount: number;
   totalBasalChanges: number;
   avgBolusesPerDay: number;
+  totalDays: number;
   lastCalculated: string;
   dataStartDate: string;
   dataEndDate: string;
