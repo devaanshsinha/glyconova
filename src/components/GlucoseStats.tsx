@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { GlucoseStats, formatGlucose, calculateA1C, formatA1C } from '@/lib/glucose-stats';
-import { RecalculateStatsButton } from '@/components/RecalculateStatsButton';
 
 interface StatsCardProps {
   title: string;
@@ -43,13 +42,11 @@ export function GlucoseStatsDisplay({ userId }: { userId?: string }) {
   const [stats, setStats] = useState<GlucoseStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [needsCalculation, setNeedsCalculation] = useState(false);
 
   const fetchGlucoseData = async () => {
     try {
       setLoading(true);
       setError(null);
-      setNeedsCalculation(false);
       
       const response = await fetch('/api/glucose-stats');
       if (!response.ok) {
@@ -58,11 +55,6 @@ export function GlucoseStatsDisplay({ userId }: { userId?: string }) {
       
       const data = await response.json();
       setStats(data.stats);
-      
-      // Check if stats need calculation
-      if (data.needsCalculation) {
-        setNeedsCalculation(true);
-      }
     } catch (err) {
       console.error('Error fetching glucose data:', err);
       setError('Could not load glucose statistics');
@@ -75,11 +67,6 @@ export function GlucoseStatsDisplay({ userId }: { userId?: string }) {
     fetchGlucoseData();
   }, [userId]);
 
-  // Handler for when stats are recalculated
-  const handleStatsRecalculated = () => {
-    fetchGlucoseData();
-  };
-
   if (loading) {
     return (
       <div className="h-64 flex items-center justify-center bg-gray-100 rounded animate-pulse">
@@ -88,19 +75,7 @@ export function GlucoseStatsDisplay({ userId }: { userId?: string }) {
     );
   }
 
-  if (needsCalculation) {
-    return (
-      <div className="h-64 flex flex-col items-center justify-center bg-gray-100 rounded">
-        <p className="text-gray-500">Statistics need to be calculated</p>
-        <p className="text-sm text-gray-400 mt-2 mb-4">
-          Please recalculate statistics to see your glucose data
-        </p>
-        <RecalculateStatsButton onComplete={handleStatsRecalculated} />
-      </div>
-    );
-  }
-
-  if (error || !stats) {
+  if (error || !stats || stats.totalReadings === 0) {
     return (
       <div className="h-64 flex flex-col items-center justify-center bg-gray-100 rounded">
         <p className="text-gray-500">No glucose data available yet</p>

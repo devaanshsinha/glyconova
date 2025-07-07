@@ -1,7 +1,8 @@
 import { auth } from '@clerk/nextjs/server';
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
-import { parseDexcomCSV } from '@/lib/data-parsers';
+import { parseDexcomCSV, validateDexcomCSV } from '@/lib/data-parsers';
+import { calculateGlucoseStatistics } from '@/lib/statistics-calculator';
 
 export async function POST(request: NextRequest) {
   try {
@@ -51,11 +52,25 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Validate Dexcom CSV format
+    if (!validateDexcomCSV(csvText)) {
+      return NextResponse.json(
+        { error: 'CSV file does not appear to be a Dexcom Clarity export' },
+        { status: 400 }
+      );
+    }
+
     console.log(`Processing Dexcom CSV upload for user ${userId}, file size: ${csvText.length} characters`);
 
-    let glucoseReadings;
+    // Delete all existing Dexcom data for this user first
+    console.log('Deleting existing Dexcom data...');
+    await prisma.dexcomUpload.deleteMany({
+      where: { userId: user.id }
+    });
+
+    let dexcomUploadData;
     try {
-      glucoseReadings = parseDexcomCSV(csvText);
+      dexcomUploadData = parseDexcomCSV(csvText);
     } catch (parseError) {
       console.error('Error parsing Dexcom CSV:', parseError);
       return NextResponse.json(
@@ -64,54 +79,74 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (glucoseReadings.length === 0) {
+    if (dexcomUploadData.readings.length === 0) {
       return NextResponse.json(
-        { error: 'No valid glucose readings found in CSV file' },
+        { error: 'No valid readings found in CSV file' },
         { status: 400 }
       );
     }
 
-    console.log(`Found ${glucoseReadings.length} glucose readings, inserting into database...`);
+    console.log(`Found ${dexcomUploadData.readings.length} readings, creating upload record...`);
 
-    // Insert glucose readings into database
-    let insertedCount = 0;
-    let skippedCount = 0;
-    
-    for (const reading of glucoseReadings) {
-      try {
-        await prisma.glucoseReading.create({
-          data: {
-            userId: user.id,
-            timestamp: reading.timestamp,
-            glucoseValue: reading.glucoseValue,
-            eventType: reading.eventType,
-            eventSubtype: reading.eventSubtype,
-            rateOfChange: reading.rateOfChange,
-            transmitterId: reading.transmitterId,
-            transmitterTime: reading.transmitterTime,
-            sourceDeviceId: reading.sourceDeviceId,
-          }
-        });
-        insertedCount++;
-      } catch (dbError: any) {
-        // Skip duplicate entries (based on unique constraints)
-        if (dbError.code === 'P2002') {
-          skippedCount++;
-        } else {
-          console.error('Database error inserting glucose reading:', dbError);
-          throw dbError;
-        }
+    // Create the main upload record
+    const dexcomUpload = await prisma.dexcomUpload.create({
+      data: {
+        userId: user.id,
+        patientFirstName: dexcomUploadData.patientFirstName,
+        patientLastName: dexcomUploadData.patientLastName,
+        deviceInfo: dexcomUploadData.deviceInfo,
+        sourceDeviceId: dexcomUploadData.sourceDeviceId
       }
-    }
+    });
 
-    console.log(`Successfully inserted ${insertedCount} glucose readings, skipped ${skippedCount} duplicates`);
+    // Prepare data for batch insert
+    const readingsData = dexcomUploadData.readings.map(reading => ({
+      uploadId: dexcomUpload.id,
+      index: reading.index,
+      timestamp: reading.timestamp,
+      eventType: reading.eventType,
+      eventSubtype: reading.eventSubtype,
+      patientInfo: reading.patientInfo,
+      deviceInfo: reading.deviceInfo,
+      sourceDeviceId: reading.sourceDeviceId,
+      glucoseValue: reading.glucoseValue,
+      insulinValue: reading.insulinValue,
+      carbValue: reading.carbValue,
+      duration: reading.duration,
+      glucoseRateOfChange: reading.glucoseRateOfChange,
+      transmitterTime: reading.transmitterTime,
+      transmitterId: reading.transmitterId
+    }));
+
+    // Insert all readings in a single batch operation
+    console.log('Inserting new Dexcom readings...');
+    const result = await prisma.dexcomReading.createMany({
+      data: readingsData,
+      skipDuplicates: false // Since we deleted all old data, there should be no duplicates
+    });
+
+    const insertedCount = result.count;
+    console.log(`Successfully inserted ${insertedCount} Dexcom readings`);
+
+    // Calculate and save glucose statistics
+    console.log('Calculating glucose statistics...');
+    try {
+      await calculateGlucoseStatistics(user.id);
+      console.log('Glucose statistics calculated successfully');
+    } catch (statsError) {
+      console.error('Error calculating glucose statistics:', statsError);
+      // Don't fail the upload if stats calculation fails
+    }
 
     return NextResponse.json({
       success: true,
-      message: `Successfully processed ${insertedCount} glucose readings`,
-      totalReadings: glucoseReadings.length,
+      message: `Successfully processed ${insertedCount} Dexcom readings`,
+      totalReadings: dexcomUploadData.readings.length,
       insertedCount,
-      skippedCount
+      uploadId: dexcomUpload.id,
+      patientName: dexcomUploadData.patientFirstName && dexcomUploadData.patientLastName 
+        ? `${dexcomUploadData.patientFirstName} ${dexcomUploadData.patientLastName}`
+        : undefined
     });
 
   } catch (error) {

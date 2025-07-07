@@ -1,438 +1,439 @@
-const Papa = require('papaparse');
-
-// Glucose data interfaces and parsing (from Dexcom)
-export interface GlucoseReading {
-  timestamp: Date;
-  glucoseValue: number;
-  rateOfChange?: number;
-  eventType: string;
-  eventSubtype?: string;
-  transmitterId?: string;
-  transmitterTime?: string;
+// Types for Dexcom data
+export interface DexcomUploadData {
+  patientFirstName?: string;
+  patientLastName?: string;
+  deviceInfo?: string;
   sourceDeviceId?: string;
+  readings: DexcomReadingData[];
 }
 
-// Insulin data interfaces and parsing (from Omnipod)
-export interface BolusRecord {
+export interface DexcomReadingData {
+  index?: string;
+  timestamp?: Date;
+  eventType?: string;
+  eventSubtype?: string;
+  patientInfo?: string;
+  deviceInfo?: string;
+  sourceDeviceId?: string;
+  glucoseValue?: number;
+  insulinValue?: number;
+  carbValue?: number;
+  duration?: string;
+  glucoseRateOfChange?: number;
+  transmitterTime?: string;
+  transmitterId?: string;
+}
+
+// Types for Omnipod data
+export interface OmnipodUploadData {
+  fileName: string;
+  dateRange?: string;
+  bgReadings: OmnipodBgReading[];
+  cgmReadings: OmnipodCgmReading[];
+  bolusRecords: OmnipodBolusRecord[];
+  basalRecords: OmnipodBasalRecord[];
+  insulinRecords: OmnipodInsulinRecord[];
+  carbRecords: OmnipodCarbRecord[];
+  alarmRecords: OmnipodAlarmRecord[];
+  exerciseRecords: OmnipodExerciseRecord[];
+  foodRecords: OmnipodFoodRecord[];
+  manualInsulinRecords: OmnipodManualInsulinRecord[];
+  medicationRecords: OmnipodMedicationRecord[];
+  notesRecords: OmnipodNotesRecord[];
+}
+
+export interface OmnipodBgReading {
   timestamp: Date;
-  insulinType: string;
+  glucoseValue: number;
+  manualReading?: string;
+  serialNumber?: string;
+}
+
+export interface OmnipodCgmReading {
+  timestamp: Date;
+  cgmGlucoseValue: number;
+  serialNumber?: string;
+}
+
+export interface OmnipodBolusRecord {
+  timestamp: Date;
+  insulinType?: string;
   bloodGlucoseInput?: number;
   carbsInput?: number;
   carbsRatio?: number;
-  insulinDelivered: number;
+  insulinDelivered?: number;
   initialDelivery?: number;
   extendedDelivery?: number;
   serialNumber?: string;
 }
 
-export interface BasalRecord {
+export interface OmnipodBasalRecord {
   timestamp: Date;
-  insulinType: string;
-  duration: number;
+  insulinType?: string;
+  duration?: number;
   percentage?: number;
-  rate: number;
+  rate?: number;
   insulinDelivered?: number;
   serialNumber?: string;
 }
 
-export interface InsulinRecord {
+export interface OmnipodInsulinRecord {
   timestamp: Date;
-  totalBolus: number;
-  totalInsulin: number;
-  totalBasal: number;
+  insulinType?: string;
+  amount?: number;
   serialNumber?: string;
 }
 
-export interface AlarmEvent {
+export interface OmnipodCarbRecord {
   timestamp: Date;
-  eventType: string;
+  carbAmount?: number;
   serialNumber?: string;
 }
 
-// Helper functions
-function parseDate(dateString: string): Date | null {
-  if (!dateString) return null;
+export interface OmnipodAlarmRecord {
+  timestamp: Date;
+  alarmType?: string;
+  description?: string;
+  serialNumber?: string;
+}
+
+export interface OmnipodExerciseRecord {
+  timestamp: Date;
+  exerciseType?: string;
+  duration?: number;
+  intensity?: string;
+  notes?: string;
+}
+
+export interface OmnipodFoodRecord {
+  timestamp: Date;
+  name?: string;
+  carbs?: number;
+  fat?: number;
+  protein?: number;
+  calories?: number;
+  servingQuantity?: number;
+  numberOfServings?: number;
+}
+
+export interface OmnipodManualInsulinRecord {
+  timestamp: Date;
+  insulinType?: string;
+  amount?: number;
+  notes?: string;
+}
+
+export interface OmnipodMedicationRecord {
+  timestamp: Date;
+  medicationName?: string;
+  dosage?: string;
+  notes?: string;
+}
+
+export interface OmnipodNotesRecord {
+  timestamp: Date;
+  note?: string;
+  category?: string;
+}
+
+// Helper function to safely parse float values
+function safeParseFloat(value: string | undefined): number | undefined {
+  if (!value || value.trim() === '') return undefined;
+  const parsed = parseFloat(value);
+  return isNaN(parsed) ? undefined : parsed;
+}
+
+// Helper function to safely parse int values
+function safeParseInt(value: string | undefined): number | undefined {
+  if (!value || value.trim() === '') return undefined;
+  const parsed = parseInt(value);
+  return isNaN(parsed) ? undefined : parsed;
+}
+
+// Helper function to parse timestamp
+function parseTimestamp(timestamp: string): Date | undefined {
+  if (!timestamp || timestamp.trim() === '') return undefined;
   
   try {
-    const parsedDate = new Date(dateString);
-    
-    if (isNaN(parsedDate.getTime())) {
-      console.warn(`Invalid date format: ${dateString}`);
-      return null;
+    // Handle both ISO format and Omnipod format (YYYY-MM-DD HH:mm)
+    if (timestamp.includes('T')) {
+      return new Date(timestamp);
+    } else {
+      // Convert "YYYY-MM-DD HH:mm" to ISO format
+      const isoTimestamp = timestamp.replace(' ', 'T') + ':00';
+      return new Date(isoTimestamp);
     }
-    
-    return parsedDate;
   } catch (error) {
-    console.warn(`Error parsing date "${dateString}":`, error);
-    return null;
+    console.warn('Failed to parse timestamp:', timestamp);
+    return undefined;
   }
 }
 
-function parseNumber(value: any): number | undefined {
-  if (value === undefined || value === null || value === '') return undefined;
-  
-  const num = parseFloat(value);
-  return isNaN(num) ? undefined : num;
-}
+// Dexcom CSV parser
+export function parseDexcomCSV(csvContent: string): DexcomUploadData {
+  const lines = csvContent.split('\n');
+  const readings: DexcomReadingData[] = [];
+  let patientFirstName: string | undefined;
+  let patientLastName: string | undefined;
+  let deviceInfo: string | undefined;
+  let sourceDeviceId: string | undefined;
 
-// Dexcom CSV Parser
-export function parseDexcomCSV(csvText: string): GlucoseReading[] {
-  if (!csvText || csvText.trim() === '') {
-    throw new Error('Empty CSV content');
+  // Find header row
+  const headerRowIndex = lines.findIndex(line => 
+    line.includes('Index') && line.includes('Timestamp')
+  );
+
+  if (headerRowIndex === -1) {
+    throw new Error('Invalid Dexcom CSV format: Could not find header row');
   }
 
-  try {
-    const result = Papa.parse(csvText, {
-      header: true,
-      skipEmptyLines: true,
-      error: (error: any) => {
-        console.error('CSV parsing error:', error);
-        throw new Error(`CSV parsing error: ${error.message}`);
+  const headers = lines[headerRowIndex].split(',').map(h => h.replace(/"/g, '').trim());
+
+  // Parse metadata from header rows (rows before the header)
+  for (let i = 0; i < headerRowIndex; i++) {
+    const line = lines[i];
+    if (line.includes('FirstName')) {
+      const parts = line.split(',');
+      if (parts.length > 4) patientFirstName = parts[4].replace(/"/g, '').trim();
+    } else if (line.includes('LastName')) {
+      const parts = line.split(',');
+      if (parts.length > 4) patientLastName = parts[4].replace(/"/g, '').trim();
+    } else if (line.includes('Device')) {
+      const parts = line.split(',');
+      if (parts.length > 5) deviceInfo = parts[5].replace(/"/g, '').trim();
+      if (parts.length > 6) sourceDeviceId = parts[6].replace(/"/g, '').trim();
+    }
+  }
+
+  // Parse data rows
+  for (let i = headerRowIndex + 1; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line) continue;
+
+    const values = line.split(',').map(v => v.replace(/"/g, '').trim());
+    
+    if (values.length < headers.length) continue;
+
+    const reading: DexcomReadingData = {};
+
+    headers.forEach((header, index) => {
+      const value = values[index];
+      
+      switch (header) {
+        case 'Index':
+          reading.index = value || undefined;
+          break;
+        case 'Timestamp (YYYY-MM-DDThh:mm:ss)':
+          reading.timestamp = parseTimestamp(value);
+          break;
+        case 'Event Type':
+          reading.eventType = value || undefined;
+          break;
+        case 'Event Subtype':
+          reading.eventSubtype = value || undefined;
+          break;
+        case 'Patient Info':
+          reading.patientInfo = value || undefined;
+          break;
+        case 'Device Info':
+          reading.deviceInfo = value || undefined;
+          break;
+        case 'Source Device ID':
+          reading.sourceDeviceId = value || undefined;
+          break;
+        case 'Glucose Value (mg/dL)':
+          reading.glucoseValue = safeParseFloat(value);
+          break;
+        case 'Insulin Value (u)':
+          reading.insulinValue = safeParseFloat(value);
+          break;
+        case 'Carb Value (grams)':
+          reading.carbValue = safeParseFloat(value);
+          break;
+        case 'Duration (hh:mm:ss)':
+          reading.duration = value || undefined;
+          break;
+        case 'Glucose Rate of Change (mg/dL/min)':
+          reading.glucoseRateOfChange = safeParseFloat(value);
+          break;
+        case 'Transmitter Time (Long Integer)':
+          reading.transmitterTime = value || undefined;
+          break;
+        case 'Transmitter ID':
+          reading.transmitterId = value || undefined;
+          break;
       }
     });
 
-    if (!result.data || !Array.isArray(result.data) || result.data.length === 0) {
-      throw new Error('No data rows found in CSV');
-    }
-
-    console.log(`Parsed ${result.data.length} rows from CSV`);
-
-    const readings: GlucoseReading[] = [];
-    let validRowCount = 0;
-    let invalidRowCount = 0;
-
-    for (const row of result.data) {
-      if (!row['Event Type'] && !row['Timestamp (YYYY-MM-DDThh:mm:ss)']) {
-        invalidRowCount++;
-        continue;
-      }
-
-      if (
-        row['Event Type'] === 'EGV' && 
-        row['Timestamp (YYYY-MM-DDThh:mm:ss)'] && 
-        row['Glucose Value (mg/dL)']
-      ) {
-        try {
-          const timestamp = new Date(row['Timestamp (YYYY-MM-DDThh:mm:ss)']);
-          const glucoseValue = parseFloat(row['Glucose Value (mg/dL)']);
-          
-          if (!isNaN(timestamp.getTime()) && !isNaN(glucoseValue)) {
-            const reading: GlucoseReading = {
-              timestamp,
-              glucoseValue,
-              eventType: row['Event Type'],
-              eventSubtype: row['Event Subtype'] || undefined,
-              rateOfChange: row['Glucose Rate of Change (mg/dL/min)'] 
-                ? parseFloat(row['Glucose Rate of Change (mg/dL/min)']) 
-                : undefined,
-              transmitterId: row['Transmitter ID'] || undefined,
-              transmitterTime: row['Transmitter Time (Long Integer)'] || undefined,
-              sourceDeviceId: row['Source Device ID'] || undefined,
-            };
-            readings.push(reading);
-            validRowCount++;
-          } else {
-            invalidRowCount++;
-          }
-        } catch (error) {
-          console.error('Error parsing row:', row, error);
-          invalidRowCount++;
-        }
-      }
-    }
-
-    console.log(`Found ${validRowCount} valid glucose readings and ${invalidRowCount} invalid/skipped rows`);
-
-    if (readings.length === 0 && result.data.length > 0) {
-      console.error('CSV file looks invalid for Dexcom data, available columns:', Object.keys(result.data[0]).join(', '));
-      throw new Error('CSV format does not match expected Dexcom Clarity format. Make sure you are uploading a Dexcom Clarity CSV export.');
-    }
-
-    return readings;
-  } catch (error) {
-    console.error('Failed to parse CSV:', error);
-    throw error;
+    readings.push(reading);
   }
+
+  return {
+    patientFirstName,
+    patientLastName,
+    deviceInfo,
+    sourceDeviceId,
+    readings
+  };
 }
 
-// Omnipod CSV Parser
-export function parseOmnipodCSV(fileContent: string, fileType: string): any[] {
-  if (!fileContent || fileContent.trim() === '') {
-    throw new Error('Empty CSV content');
+// Helper function to parse Omnipod CSV with common format
+function parseOmnipodCSVContent<T>(
+  csvContent: string,
+  parseRow: (values: string[], headers: string[]) => T | null
+): { data: T[], dateRange?: string } {
+  const lines = csvContent.split('\n');
+  const data: T[] = [];
+  let dateRange: string | undefined;
+
+  // First line often contains metadata
+  if (lines.length > 0 && lines[0].includes('Date Range:')) {
+    const match = lines[0].match(/Date Range:([^,]+)/);
+    if (match) {
+      dateRange = match[1].trim();
+    }
   }
+
+  // Find header row (usually second line)
+  let headerRowIndex = 1;
+  if (lines.length <= 1) return { data, dateRange };
+
+  const headers = lines[headerRowIndex].split(',').map(h => h.replace(/"/g, '').trim());
+
+  // Parse data rows
+  for (let i = headerRowIndex + 1; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line) continue;
+
+    const values = line.split(',').map(v => v.replace(/"/g, '').trim());
+    if (values.length < headers.length) continue;
+
+    const parsedRow = parseRow(values, headers);
+    if (parsedRow) {
+      data.push(parsedRow);
+    }
+  }
+
+  return { data, dateRange };
+}
+
+// Validate file type by checking content
+export function validateDexcomCSV(content: string): boolean {
+  return content.includes('Index') && 
+         content.includes('Timestamp (YYYY-MM-DDThh:mm:ss)') && 
+         content.includes('Event Type');
+}
+
+export function validateOmnipodFile(fileName: string): boolean {
+  const omnipodFileTypes = [
+    'bg_data', 'cgm_data', 'bolus_data', 'basal_data', 'insulin_data',
+    'carbs_data', 'alarms_data', 'exercise_data', 'food_data',
+    'manual_insulin_data', 'medication_data', 'notes_data'
+  ];
+  
+  return omnipodFileTypes.some(type => fileName.includes(type));
+}
+
+// Omnipod CSV parser (for individual CSV files)
+export function parseOmnipodCSV(csvContent: string, fileName: string): OmnipodUploadData {
+  const result: OmnipodUploadData = {
+    fileName,
+    bgReadings: [],
+    cgmReadings: [],
+    bolusRecords: [],
+    basalRecords: [],
+    insulinRecords: [],
+    carbRecords: [],
+    alarmRecords: [],
+    exerciseRecords: [],
+    foodRecords: [],
+    manualInsulinRecords: [],
+    medicationRecords: [],
+    notesRecords: []
+  };
 
   try {
-    const lines = fileContent.split('\n');
-    const firstLine = lines[0];
-    console.log(`First line of ${fileType} CSV: "${firstLine}"`);
-    
-    const csvContent = lines.slice(1).join('\n');
-    console.log(`Processing ${fileType} CSV file...`);
-    
-    const result = Papa.parse(csvContent, {
-      header: true,
-      skipEmptyLines: true,
-      transformHeader: (h: string) => h.trim(),
-      error: (error: any) => {
-        console.error('CSV parsing error:', error);
-        throw new Error(`CSV parsing error: ${error.message}`);
-      }
-    });
-
-    if (!result.data || !Array.isArray(result.data) || result.data.length === 0) {
-      console.log(`No data rows found in ${fileType} CSV`);
-      return [];
-    }
-
-    console.log(`CSV Headers for ${fileType}:`, result.meta.fields);
-    if (result.data.length > 0) {
-      console.log(`First row sample from ${fileType} CSV:`, JSON.stringify(result.data[0], null, 2));
-    }
-    
-    console.log(`Parsed ${result.data.length} rows from ${fileType} CSV`);
-    
-    switch (fileType) {
-      case 'bolus':
-        return parseBolusData(result.data);
-      case 'basal':
-        return parseBasalData(result.data);
-      case 'insulin':
-        return parseInsulinData(result.data);
-      case 'alarms':
-        return parseAlarmData(result.data);
-      default:
-        console.log(`Unknown file type: ${fileType}`);
-        return [];
-    }
-  } catch (error) {
-    console.error(`Failed to parse ${fileType} CSV:`, error);
-    throw error;
-  }
-}
-
-function parseBolusData(data: any[]): BolusRecord[] {
-  const bolusRecords: BolusRecord[] = [];
-  
-  for (const row of data) {
-    try {
-      const timestampValue = 
-        row['Timestamp'] || 
-        row['DateTime'] || 
-        row['Date Time'] || 
-        row['Date'];
-      
-      if (!timestampValue) {
-        console.warn('Skipping bolus row - missing timestamp:', row);
-        continue;
-      }
-      
-      const insulinDeliveredValue = 
-        row['Insulin Delivered (U)'] || 
-        row['Insulin Delivered'] || 
-        row['Bolus Amount (U)'] || 
-        row['Bolus Amount'];
-      
-      if (!insulinDeliveredValue) {
-        console.warn('Skipping bolus row - missing insulin delivered:', row);
-        continue;
-      }
-      
-      const timestamp = parseDate(timestampValue);
-      const insulinDelivered = parseNumber(insulinDeliveredValue);
-      
-      if (!timestamp || insulinDelivered === undefined) {
-        console.warn('Skipping bolus row - invalid timestamp or insulin value:', {
-          timestamp: timestampValue,
-          insulinDelivered: insulinDeliveredValue
-        });
-        continue;
-      }
-      
-      const insulinType = row['Insulin Type'] || row['Bolus Type'] || 'Normal';
-      
-      const record: BolusRecord = {
-        timestamp,
-        insulinType,
-        insulinDelivered,
-        bloodGlucoseInput: parseNumber(row['Blood Glucose Input (mg/dl)'] || row['BG']),
-        carbsInput: parseNumber(row['Carbs Input (g)'] || row['Carbs']),
-        carbsRatio: parseNumber(row['Carbs Ratio'] || row['IC Ratio']),
-        initialDelivery: parseNumber(row['Initial Delivery (U)']),
-        extendedDelivery: parseNumber(row['Extended Delivery (U)']),
-        serialNumber: row['Serial Number'] || row['Device ID']
-      };
-      
-      bolusRecords.push(record);
-    } catch (error) {
-      console.error('Error parsing bolus row:', row, error);
-    }
-  }
-  
-  console.log(`Successfully parsed ${bolusRecords.length} bolus records`);
-  return bolusRecords;
-}
-
-function parseBasalData(data: any[]): BasalRecord[] {
-  const basalRecords: BasalRecord[] = [];
-  
-  for (const row of data) {
-    try {
-      const timestampValue = 
-        row['Timestamp'] || 
-        row['DateTime'] || 
-        row['Date Time'] || 
-        row['Date'];
-      
-      const durationValue = 
-        row['Duration (minutes)'] || 
-        row['Duration'] ||
-        row['Duration (mins)'];
-      
-      if (!timestampValue || !durationValue) {
-        console.warn('Skipping basal row - missing timestamp or duration:', row);
-        continue;
-      }
-      
-      const timestamp = parseDate(timestampValue);
-      const duration = parseInt(durationValue, 10);
-      
-      if (!timestamp || isNaN(duration)) {
-        console.warn('Skipping basal row - invalid timestamp or duration:', {
-          timestamp: timestampValue,
-          duration: durationValue
-        });
-        continue;
-      }
-      
-      const rateValue = 
-        row['Rate'] || 
-        row['Basal Rate'] || 
-        row['Rate (U/hr)'] ||
-        '0';
-      
-      const record: BasalRecord = {
-        timestamp,
-        insulinType: row['Insulin Type'] || row['Basal Type'] || '',
-        duration,
-        percentage: parseNumber(row['Percentage (%)'] || row['Percentage']),
-        rate: parseNumber(rateValue) || 0,
-        insulinDelivered: parseNumber(row['Insulin Delivered (U)'] || row['Insulin Delivered']),
-        serialNumber: row['Serial Number'] || row['Device ID']
-      };
-      
-      basalRecords.push(record);
-    } catch (error) {
-      console.error('Error parsing basal row:', row, error);
-    }
-  }
-  
-  console.log(`Successfully parsed ${basalRecords.length} basal records`);
-  return basalRecords;
-}
-
-function parseInsulinData(data: any[]): InsulinRecord[] {
-  const insulinRecords: InsulinRecord[] = [];
-  
-  for (const row of data) {
-    try {
-      const timestampValue = 
-        row['Timestamp'] || 
-        row['DateTime'] || 
-        row['Date Time'] || 
-        row['Date'];
-      
-      const totalInsulinValue = 
-        row['Total Insulin (U)'] || 
-        row['Total Insulin'] || 
-        row['Daily Total'];
-      
-      if (!timestampValue || !totalInsulinValue) {
-        console.warn('Skipping insulin row - missing timestamp or total insulin:', row);
-        continue;
-      }
-      
-      const timestamp = parseDate(timestampValue);
-      const totalInsulin = parseNumber(totalInsulinValue);
-      
-      if (!timestamp || totalInsulin === undefined) {
-        console.warn('Skipping insulin row - invalid timestamp or total insulin:', {
-          timestamp: timestampValue, 
-          totalInsulin: totalInsulinValue
-        });
-        continue;
-      }
-      
-      const totalBolusValue = 
-        row['Total Bolus (U)'] || 
-        row['Total Bolus'] || 
-        row['Bolus Total'];
+    if (fileName.includes('bg_data') || csvContent.includes('Glucose Value (mg/dl)')) {
+      const { data, dateRange } = parseOmnipodCSVContent(csvContent, (values, headers) => {
+        const reading: OmnipodBgReading | null = {
+          timestamp: parseTimestamp(values[0]),
+          glucoseValue: safeParseFloat(values[1]) || 0,
+          manualReading: values[2] || undefined,
+          serialNumber: values[3] || undefined
+        } as OmnipodBgReading;
         
-      const totalBasalValue = 
-        row['Total Basal (U)'] || 
-        row['Total Basal'] || 
-        row['Basal Total'];
+        return reading.timestamp ? reading : null;
+      });
+      result.bgReadings = data;
+      if (dateRange) result.dateRange = dateRange;
       
-      const record: InsulinRecord = {
-        timestamp,
-        totalBolus: parseNumber(totalBolusValue) || 0,
-        totalInsulin,
-        totalBasal: parseNumber(totalBasalValue) || 0,
-        serialNumber: row['Serial Number'] || row['Device ID']
-      };
+    } else if (fileName.includes('cgm_data') || csvContent.includes('CGM Glucose Value')) {
+      const { data } = parseOmnipodCSVContent(csvContent, (values, headers) => {
+        const reading: OmnipodCgmReading | null = {
+          timestamp: parseTimestamp(values[0]),
+          cgmGlucoseValue: safeParseFloat(values[1]) || 0,
+          serialNumber: values[2] || undefined
+        } as OmnipodCgmReading;
+        
+        return reading.timestamp ? reading : null;
+      });
+      result.cgmReadings = data;
       
-      insulinRecords.push(record);
-    } catch (error) {
-      console.error('Error parsing insulin row:', row, error);
+    } else if (fileName.includes('bolus_data') || csvContent.includes('Insulin Delivered')) {
+      const { data } = parseOmnipodCSVContent(csvContent, (values, headers) => {
+        const record: OmnipodBolusRecord | null = {
+          timestamp: parseTimestamp(values[0]),
+          insulinType: values[1] || undefined,
+          bloodGlucoseInput: safeParseFloat(values[2]),
+          carbsInput: safeParseFloat(values[3]),
+          carbsRatio: safeParseFloat(values[4]),
+          insulinDelivered: safeParseFloat(values[5]),
+          initialDelivery: safeParseFloat(values[6]),
+          extendedDelivery: safeParseFloat(values[7]),
+          serialNumber: values[8] || undefined
+        } as OmnipodBolusRecord;
+        
+        return record.timestamp ? record : null;
+      });
+      result.bolusRecords = data;
+      
+    } else if (fileName.includes('basal_data') || csvContent.includes('Duration (minutes)')) {
+      const { data } = parseOmnipodCSVContent(csvContent, (values, headers) => {
+        const record: OmnipodBasalRecord | null = {
+          timestamp: parseTimestamp(values[0]),
+          insulinType: values[1] || undefined,
+          duration: safeParseInt(values[2]),
+          percentage: safeParseFloat(values[3]),
+          rate: safeParseFloat(values[4]),
+          insulinDelivered: safeParseFloat(values[5]),
+          serialNumber: values[6] || undefined
+        } as OmnipodBasalRecord;
+        
+        return record.timestamp ? record : null;
+      });
+      result.basalRecords = data;
+      
+    } else if (fileName.includes('food_data')) {
+      const { data } = parseOmnipodCSVContent(csvContent, (values, headers) => {
+        const record: OmnipodFoodRecord | null = {
+          timestamp: parseTimestamp(values[0]),
+          name: values[1] || undefined,
+          carbs: safeParseFloat(values[2]),
+          fat: safeParseFloat(values[3]),
+          protein: safeParseFloat(values[4]),
+          calories: safeParseFloat(values[5]),
+          servingQuantity: safeParseFloat(values[6]),
+          numberOfServings: safeParseFloat(values[7])
+        } as OmnipodFoodRecord;
+        
+        return record.timestamp ? record : null;
+      });
+      result.foodRecords = data;
     }
+    
+  } catch (error) {
+    console.warn(`Failed to parse ${fileName}:`, error);
   }
-  
-  console.log(`Successfully parsed ${insulinRecords.length} insulin records`);
-  return insulinRecords;
-}
 
-function parseAlarmData(data: any[]): AlarmEvent[] {
-  const alarmEvents: AlarmEvent[] = [];
-  
-  for (const row of data) {
-    try {
-      const timestampValue = 
-        row['Timestamp'] || 
-        row['DateTime'] || 
-        row['Date Time'] || 
-        row['Date'];
-      
-      const eventTypeValue = 
-        row['Alarm/Event'] || 
-        row['Alarm'] || 
-        row['Event'] ||
-        row['Alert'];
-      
-      if (!timestampValue || !eventTypeValue) {
-        console.warn('Skipping alarm row - missing timestamp or event type:', row);
-        continue;
-      }
-      
-      const timestamp = parseDate(timestampValue);
-      
-      if (!timestamp) {
-        console.warn('Skipping alarm row - invalid timestamp:', {
-          timestamp: timestampValue
-        });
-        continue;
-      }
-      
-      const event: AlarmEvent = {
-        timestamp,
-        eventType: eventTypeValue,
-        serialNumber: row['Serial Number'] || row['Device ID']
-      };
-      
-      alarmEvents.push(event);
-    } catch (error) {
-      console.error('Error parsing alarm row:', row, error);
-    }
-  }
-  
-  console.log(`Successfully parsed ${alarmEvents.length} alarm events`);
-  return alarmEvents;
+  return result;
 }

@@ -1,7 +1,8 @@
 import { auth } from '@clerk/nextjs/server';
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
-import { parseOmnipodCSV } from '@/lib/data-parsers';
+import { parseOmnipodCSV, validateOmnipodFile } from '@/lib/data-parsers';
+import { calculateInsulinStatistics } from '@/lib/statistics-calculator';
 import JSZip from 'jszip';
 
 export async function POST(request: NextRequest) {
@@ -36,11 +37,29 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Validate file type
+    const isZip = file.name.toLowerCase().endsWith('.zip');
+    const isCsv = file.name.toLowerCase().endsWith('.csv');
+    
+    if (!isZip && !isCsv) {
+      return NextResponse.json(
+        { error: 'File must be a CSV or ZIP file' },
+        { status: 400 }
+      );
+    }
+
     console.log(`Processing Omnipod file upload for user ${userId}, file: ${file.name}`);
 
-    let fileContents: { [filename: string]: string } = {};
+    // Delete all existing Omnipod data for this user first
+    console.log('Deleting existing Omnipod data...');
+    await prisma.omnipodUpload.deleteMany({
+      where: { userId: user.id }
+    });
 
-    if (file.name.toLowerCase().endsWith('.zip')) {
+    let fileContents: { [filename: string]: string } = {};
+    let dateRange: string | undefined;
+
+    if (isZip) {
       // Handle ZIP file
       try {
         const arrayBuffer = await file.arrayBuffer();
@@ -51,7 +70,13 @@ export async function POST(request: NextRequest) {
           const zipFile = zipContents.files[filename];
           if (!zipFile.dir && filename.toLowerCase().endsWith('.csv')) {
             const content = await zipFile.async('text');
-            fileContents[filename] = content;
+            
+            // Validate Omnipod file
+            if (validateOmnipodFile(filename)) {
+              fileContents[filename] = content;
+            } else {
+              console.warn(`Skipping non-Omnipod file: ${filename}`);
+            }
           }
         }
       } catch (error) {
@@ -61,30 +86,50 @@ export async function POST(request: NextRequest) {
           { status: 400 }
         );
       }
-    } else if (file.name.toLowerCase().endsWith('.csv')) {
+    } else {
       // Handle single CSV file
+      if (!validateOmnipodFile(file.name)) {
+        return NextResponse.json(
+          { error: 'CSV file does not appear to be an Omnipod export' },
+          { status: 400 }
+        );
+      }
+      
       const content = await file.text();
       fileContents[file.name] = content;
-    } else {
-      return NextResponse.json(
-        { error: 'File must be a CSV or ZIP file containing CSV files' },
-        { status: 400 }
-      );
     }
 
     if (Object.keys(fileContents).length === 0) {
       return NextResponse.json(
-        { error: 'No CSV files found' },
+        { error: 'No valid Omnipod CSV files found' },
         { status: 400 }
       );
     }
 
-    console.log(`Found ${Object.keys(fileContents).length} CSV files to process`);
+    console.log(`Found ${Object.keys(fileContents).length} valid CSV files to process`);
+
+    // Create the main upload record
+    const omnipodUpload = await prisma.omnipodUpload.create({
+      data: {
+        userId: user.id,
+        fileName: file.name,
+        dateRange: dateRange
+      }
+    });
 
     const results = {
-      bolus: { inserted: 0, skipped: 0 },
-      basal: { inserted: 0, skipped: 0 },
-      alarms: { inserted: 0, skipped: 0 }
+      bgReadings: 0,
+      cgmReadings: 0,
+      bolusRecords: 0,
+      basalRecords: 0,
+      insulinRecords: 0,
+      carbRecords: 0,
+      alarmRecords: 0,
+      exerciseRecords: 0,
+      foodRecords: 0,
+      manualInsulinRecords: 0,
+      medicationRecords: 0,
+      notesRecords: 0
     };
 
     // Process each CSV file
@@ -96,118 +141,113 @@ export async function POST(request: NextRequest) {
         continue;
       }
 
-      // Determine file type based on filename or content
-      let fileType = '';
-      const lowerFilename = filename.toLowerCase();
-      
-      if (lowerFilename.includes('bolus')) {
-        fileType = 'bolus';
-      } else if (lowerFilename.includes('basal')) {
-        fileType = 'basal';
-      } else if (lowerFilename.includes('insulin') || lowerFilename.includes('daily')) {
-        fileType = 'insulin';
-      } else if (lowerFilename.includes('alarm') || lowerFilename.includes('event')) {
-        fileType = 'alarms';
-      } else {
-        // Try to guess from content
-        const firstFewLines = content.split('\n').slice(0, 3).join('\n').toLowerCase();
-        if (firstFewLines.includes('bolus')) {
-          fileType = 'bolus';
-        } else if (firstFewLines.includes('basal')) {
-          fileType = 'basal';
-        } else if (firstFewLines.includes('insulin') || firstFewLines.includes('daily')) {
-          fileType = 'insulin';
-        } else if (firstFewLines.includes('alarm') || firstFewLines.includes('event')) {
-          fileType = 'alarms';
-        } else {
-          console.warn(`Could not determine file type for: ${filename}`);
-          continue;
-        }
-      }
-
       try {
-        const parsedData = parseOmnipodCSV(content, fileType);
+        const parsedData = parseOmnipodCSV(content, filename);
         
-        if (parsedData.length === 0) {
-          console.warn(`No data found in ${filename}`);
-          continue;
+        if (!dateRange && parsedData.dateRange) {
+          dateRange = parsedData.dateRange;
+          // Update the upload record with date range
+          await prisma.omnipodUpload.update({
+            where: { id: omnipodUpload.id },
+            data: { dateRange }
+          });
         }
 
-        console.log(`Parsed ${parsedData.length} records from ${filename} (type: ${fileType})`);
-
-        // Insert data based on file type
-        switch (fileType) {
-          case 'bolus':
-            for (const record of parsedData) {
-              try {
-                await prisma.bolusRecord.create({
-                  data: {
-                    userId: user.id,
-                    timestamp: record.timestamp,
-                    amount: record.insulinDelivered,
-                    bolusType: record.insulinType || 'Normal',
-                    duration: record.extendedDelivery ? 30 : undefined, // Assume 30 min for extended boluses
-                  }
-                });
-                results.bolus.inserted++;
-              } catch (dbError: any) {
-                if (dbError.code === 'P2002') {
-                  results.bolus.skipped++;
-                } else {
-                  console.error('Database error inserting bolus record:', dbError);
-                  throw dbError;
-                }
-              }
-            }
-            break;
-
-          case 'basal':
-            for (const record of parsedData) {
-              try {
-                await prisma.basalRecord.create({
-                  data: {
-                    userId: user.id,
-                    timestamp: record.timestamp,
-                    rate: record.rate,
-                    duration: record.duration,
-                    changeType: record.insulinType || 'Scheduled',
-                  }
-                });
-                results.basal.inserted++;
-              } catch (dbError: any) {
-                if (dbError.code === 'P2002') {
-                  results.basal.skipped++;
-                } else {
-                  console.error('Database error inserting basal record:', dbError);
-                  throw dbError;
-                }
-              }
-            }
-            break;
-
-          case 'alarms':
-            for (const record of parsedData) {
-              try {
-                await prisma.alarmEvent.create({
-                  data: {
-                    userId: user.id,
-                    timestamp: record.timestamp,
-                    eventType: record.eventType,
-                    deviceId: record.serialNumber,
-                  }
-                });
-                results.alarms.inserted++;
-              } catch (dbError: any) {
-                if (dbError.code === 'P2002') {
-                  results.alarms.skipped++;
-                } else {
-                  console.error('Database error inserting alarm event:', dbError);
-                  throw dbError;
-                }
-              }
-            }
-            break;
+        // Insert data in batches based on type
+        if (parsedData.bgReadings.length > 0) {
+          const bgData = parsedData.bgReadings.map(reading => ({
+            uploadId: omnipodUpload.id,
+            timestamp: reading.timestamp,
+            glucoseValue: reading.glucoseValue,
+            manualReading: reading.manualReading,
+            serialNumber: reading.serialNumber
+          }));
+          
+          const result = await prisma.omnipodBgReading.createMany({
+            data: bgData,
+            skipDuplicates: false
+          });
+          results.bgReadings += result.count;
         }
+
+        if (parsedData.cgmReadings.length > 0) {
+          const cgmData = parsedData.cgmReadings.map(reading => ({
+            uploadId: omnipodUpload.id,
+            timestamp: reading.timestamp,
+            cgmGlucoseValue: reading.cgmGlucoseValue,
+            serialNumber: reading.serialNumber
+          }));
+          
+          const result = await prisma.omnipodCgmReading.createMany({
+            data: cgmData,
+            skipDuplicates: false
+          });
+          results.cgmReadings += result.count;
+        }
+
+        if (parsedData.bolusRecords.length > 0) {
+          const bolusData = parsedData.bolusRecords.map(record => ({
+            uploadId: omnipodUpload.id,
+            timestamp: record.timestamp,
+            insulinType: record.insulinType,
+            bloodGlucoseInput: record.bloodGlucoseInput,
+            carbsInput: record.carbsInput,
+            carbsRatio: record.carbsRatio,
+            insulinDelivered: record.insulinDelivered,
+            initialDelivery: record.initialDelivery,
+            extendedDelivery: record.extendedDelivery,
+            serialNumber: record.serialNumber
+          }));
+          
+          const result = await prisma.omnipodBolusRecord.createMany({
+            data: bolusData,
+            skipDuplicates: false
+          });
+          results.bolusRecords += result.count;
+        }
+
+        if (parsedData.basalRecords.length > 0) {
+          const basalData = parsedData.basalRecords.map(record => ({
+            uploadId: omnipodUpload.id,
+            timestamp: record.timestamp,
+            insulinType: record.insulinType,
+            duration: record.duration,
+            percentage: record.percentage,
+            rate: record.rate,
+            insulinDelivered: record.insulinDelivered,
+            serialNumber: record.serialNumber
+          }));
+          
+          const result = await prisma.omnipodBasalRecord.createMany({
+            data: basalData,
+            skipDuplicates: false
+          });
+          results.basalRecords += result.count;
+        }
+
+        if (parsedData.foodRecords.length > 0) {
+          const foodData = parsedData.foodRecords.map(record => ({
+            uploadId: omnipodUpload.id,
+            timestamp: record.timestamp,
+            name: record.name,
+            carbs: record.carbs,
+            fat: record.fat,
+            protein: record.protein,
+            calories: record.calories,
+            servingQuantity: record.servingQuantity,
+            numberOfServings: record.numberOfServings
+          }));
+          
+          const result = await prisma.omnipodFoodRecord.createMany({
+            data: foodData,
+            skipDuplicates: false
+          });
+          results.foodRecords += result.count;
+        }
+
+        // Add other record types as needed...
+
+        console.log(`Successfully processed ${filename}`);
 
       } catch (parseError) {
         console.error(`Error parsing ${filename}:`, parseError);
@@ -217,15 +257,24 @@ export async function POST(request: NextRequest) {
 
     console.log('Upload results:', results);
 
-    const totalInserted = Object.values(results).reduce((sum, r) => sum + r.inserted, 0);
-    const totalSkipped = Object.values(results).reduce((sum, r) => sum + r.skipped, 0);
+    const totalInserted = Object.values(results).reduce((sum, count) => sum + count, 0);
+
+    // Calculate and save insulin statistics
+    console.log('Calculating insulin statistics...');
+    try {
+      await calculateInsulinStatistics(user.id);
+      console.log('Insulin statistics calculated successfully');
+    } catch (statsError) {
+      console.error('Error calculating insulin statistics:', statsError);
+      // Don't fail the upload if stats calculation fails
+    }
 
     return NextResponse.json({
       success: true,
-      message: `Successfully processed ${totalInserted} records`,
+      message: `Successfully processed ${totalInserted} records from ${Object.keys(fileContents).length} files`,
       results,
       totalInserted,
-      totalSkipped
+      uploadId: omnipodUpload.id
     });
 
   } catch (error) {

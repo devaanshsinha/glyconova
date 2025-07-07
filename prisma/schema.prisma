@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
@@ -15,155 +12,391 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+// Basic user model
 model User {
-  id              String           @id @default(cuid())
-  clerkId         String           @unique
-  email           String?
-  name            String?
-  image           String?
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
-  glucoseReadings GlucoseReading[]
-  dataUploads     DataUpload[]
-  glucoseStats    GlucoseStats? // One-to-one relation to stats
-  insulinStats    InsulinStats? // New: One-to-one relation to insulin stats
-  bolusRecords    BolusRecord[] // New: Relation to bolus records
-  basalRecords    BasalRecord[] // New: Relation to basal records
-  carbEntries     CarbEntry[] // New: Relation to carb entries
-  alarmEvents     AlarmEvent[] // New: Relation to alarm events
+  id        String   @id @default(cuid())
+  clerkId   String   @unique
+  email     String?
+  name      String?
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations to upload data
+  dexcomUploads  DexcomUpload[]
+  omnipodUploads OmnipodUpload[]
+  
+  // Relations to calculated statistics
+  glucoseStats GlucoseStats?
+  insulinStats InsulinStats?
 }
 
-model GlucoseReading {
-  id              String   @id @default(cuid())
-  timestamp       DateTime
-  glucoseValue    Float
-  rateOfChange    Float?
-  eventType       String
-  eventSubtype    String?
-  transmitterId   String?
-  transmitterTime String?
-  sourceDeviceId  String?
-  userId          String
-  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-
+// Dexcom upload model - stores all data from Dexcom CSV
+model DexcomUpload {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  uploadedAt DateTime @default(now())
+  
+  // CSV Metadata (from header rows)
+  patientFirstName String?
+  patientLastName  String?
+  deviceInfo       String?
+  sourceDeviceId   String?
+  
+  // Individual readings
+  dexcomReadings DexcomReading[]
+  
   @@index([userId])
+}
+
+// Individual Dexcom reading from CSV
+model DexcomReading {
+  id           String       @id @default(cuid())
+  uploadId     String
+  upload       DexcomUpload @relation(fields: [uploadId], references: [id], onDelete: Cascade)
+  
+  // All fields from Dexcom CSV
+  index                String?  // Index column
+  timestamp            DateTime? // Timestamp (YYYY-MM-DDThh:mm:ss)
+  eventType            String?  // Event Type
+  eventSubtype         String?  // Event Subtype
+  patientInfo          String?  // Patient Info
+  deviceInfo           String?  // Device Info
+  sourceDeviceId       String?  // Source Device ID
+  glucoseValue         Float?   // Glucose Value (mg/dL)
+  insulinValue         Float?   // Insulin Value (u)
+  carbValue            Float?   // Carb Value (grams)
+  duration             String?  // Duration (hh:mm:ss)
+  glucoseRateOfChange  Float?   // Glucose Rate of Change (mg/dL/min)
+  transmitterTime      String?  // Transmitter Time (Long Integer)
+  transmitterId        String?  // Transmitter ID
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([uploadId])
+  @@index([timestamp])
+  @@index([eventType])
+}
+
+// Omnipod upload model - represents one zip file upload
+model OmnipodUpload {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  uploadedAt DateTime @default(now())
+  
+  // Metadata from upload
+  fileName   String
+  dateRange  String? // e.g., "2025-04-08 - 2025-07-06"
+  
+  // Relations to different CSV data types
+  bgReadings            OmnipodBgReading[]
+  cgmReadings           OmnipodCgmReading[]
+  bolusRecords          OmnipodBolusRecord[]
+  basalRecords          OmnipodBasalRecord[]
+  insulinRecords        OmnipodInsulinRecord[]
+  carbRecords           OmnipodCarbRecord[]
+  alarmRecords          OmnipodAlarmRecord[]
+  exerciseRecords       OmnipodExerciseRecord[]
+  foodRecords           OmnipodFoodRecord[]
+  manualInsulinRecords  OmnipodManualInsulinRecord[]
+  medicationRecords     OmnipodMedicationRecord[]
+  notesRecords          OmnipodNotesRecord[]
+  
+  @@index([userId])
+}
+
+// bg_data_1.csv
+model OmnipodBgReading {
+  id            String        @id @default(cuid())
+  uploadId      String
+  upload        OmnipodUpload @relation(fields: [uploadId], references: [id], onDelete: Cascade)
+  
+  timestamp     DateTime
+  glucoseValue  Float       // Glucose Value (mg/dl)
+  manualReading String?     // Manual Reading flag
+  serialNumber  String?     // Serial Number
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([uploadId])
   @@index([timestamp])
 }
 
-model DataUpload {
-  id         String   @id @default(cuid())
-  fileName   String
-  fileSize   Int
-  uploadedAt DateTime @default(now())
-  userId     String
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
+// cgm_data_1.csv and cgm_data_2.csv
+model OmnipodCgmReading {
+  id               String        @id @default(cuid())
+  uploadId         String
+  upload           OmnipodUpload @relation(fields: [uploadId], references: [id], onDelete: Cascade)
+  
+  timestamp        DateTime
+  cgmGlucoseValue  Float       // CGM Glucose Value (mg/dl)
+  serialNumber     String?     // Serial Number
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([uploadId])
+  @@index([timestamp])
 }
 
-// Model to store pre-calculated glucose statistics
+// bolus_data_1.csv
+model OmnipodBolusRecord {
+  id                 String        @id @default(cuid())
+  uploadId           String
+  upload             OmnipodUpload @relation(fields: [uploadId], references: [id], onDelete: Cascade)
+  
+  timestamp          DateTime
+  insulinType        String?     // Insulin Type
+  bloodGlucoseInput  Float?      // Blood Glucose Input (mg/dl)
+  carbsInput         Float?      // Carbs Input (g)
+  carbsRatio         Float?      // Carbs Ratio
+  insulinDelivered   Float?      // Insulin Delivered (U)
+  initialDelivery    Float?      // Initial Delivery (U)
+  extendedDelivery   Float?      // Extended Delivery (U)
+  serialNumber       String?     // Serial Number
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([uploadId])
+  @@index([timestamp])
+}
+
+// basal_data_1.csv
+model OmnipodBasalRecord {
+  id               String        @id @default(cuid())
+  uploadId         String
+  upload           OmnipodUpload @relation(fields: [uploadId], references: [id], onDelete: Cascade)
+  
+  timestamp        DateTime
+  insulinType      String?     // Insulin Type
+  duration         Int?        // Duration (minutes)
+  percentage       Float?      // Percentage (%)
+  rate             Float?      // Rate
+  insulinDelivered Float?      // Insulin Delivered (U)
+  serialNumber     String?     // Serial Number
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([uploadId])
+  @@index([timestamp])
+}
+
+// insulin_data_1.csv
+model OmnipodInsulinRecord {
+  id           String        @id @default(cuid())
+  uploadId     String
+  upload       OmnipodUpload @relation(fields: [uploadId], references: [id], onDelete: Cascade)
+  
+  timestamp    DateTime
+  insulinType  String?     // Insulin Type (if exists)
+  amount       Float?      // Amount or other insulin-related data
+  serialNumber String?     // Serial Number
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([uploadId])
+  @@index([timestamp])
+}
+
+// carbs_data_1.csv
+model OmnipodCarbRecord {
+  id           String        @id @default(cuid())
+  uploadId     String
+  upload       OmnipodUpload @relation(fields: [uploadId], references: [id], onDelete: Cascade)
+  
+  timestamp    DateTime
+  carbAmount   Float?      // Carb amount
+  serialNumber String?     // Serial Number
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([uploadId])
+  @@index([timestamp])
+}
+
+// alarms_data_1.csv
+model OmnipodAlarmRecord {
+  id           String        @id @default(cuid())
+  uploadId     String
+  upload       OmnipodUpload @relation(fields: [uploadId], references: [id], onDelete: Cascade)
+  
+  timestamp    DateTime
+  alarmType    String?     // Type of alarm
+  description  String?     // Alarm description
+  serialNumber String?     // Serial Number
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([uploadId])
+  @@index([timestamp])
+}
+
+// Manual data/exercise_data_1.csv
+model OmnipodExerciseRecord {
+  id           String        @id @default(cuid())
+  uploadId     String
+  upload       OmnipodUpload @relation(fields: [uploadId], references: [id], onDelete: Cascade)
+  
+  timestamp    DateTime
+  exerciseType String?     // Type of exercise
+  duration     Int?        // Duration in minutes
+  intensity    String?     // Exercise intensity
+  notes        String?     // Additional notes
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([uploadId])
+  @@index([timestamp])
+}
+
+// Manual data/food_data_1.csv
+model OmnipodFoodRecord {
+  id               String        @id @default(cuid())
+  uploadId         String
+  upload           OmnipodUpload @relation(fields: [uploadId], references: [id], onDelete: Cascade)
+  
+  timestamp        DateTime
+  name             String?     // Food name
+  carbs            Float?      // Carbs (g)
+  fat              Float?      // Fat
+  protein          Float?      // Protein
+  calories         Float?      // Calories
+  servingQuantity  Float?      // Serving Quantity
+  numberOfServings Float?      // Number of Servings
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([uploadId])
+  @@index([timestamp])
+}
+
+// Manual data/manual_insulin_data_1.csv
+model OmnipodManualInsulinRecord {
+  id           String        @id @default(cuid())
+  uploadId     String
+  upload       OmnipodUpload @relation(fields: [uploadId], references: [id], onDelete: Cascade)
+  
+  timestamp    DateTime
+  insulinType  String?     // Type of insulin
+  amount       Float?      // Amount of insulin
+  notes        String?     // Additional notes
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([uploadId])
+  @@index([timestamp])
+}
+
+// Manual data/medication_data_1.csv
+model OmnipodMedicationRecord {
+  id            String        @id @default(cuid())
+  uploadId      String
+  upload        OmnipodUpload @relation(fields: [uploadId], references: [id], onDelete: Cascade)
+  
+  timestamp     DateTime
+  medicationName String?     // Name of medication
+  dosage        String?     // Dosage
+  notes         String?     // Additional notes
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([uploadId])
+  @@index([timestamp])
+}
+
+// Manual data/notes_data_1.csv
+model OmnipodNotesRecord {
+  id        String        @id @default(cuid())
+  uploadId  String
+  upload    OmnipodUpload @relation(fields: [uploadId], references: [id], onDelete: Cascade)
+  
+  timestamp DateTime
+  note      String?     // The note content
+  category  String?     // Note category if available
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([uploadId])
+  @@index([timestamp])
+}
+
+// Statistics models
 model GlucoseStats {
   id                String   @id @default(cuid())
-  userId            String   @unique // One-to-one relation with User
+  userId            String   @unique
   user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Basic statistics
   average           Float
   standardDeviation Float
+  minGlucose        Float
+  maxGlucose        Float
+  totalReadings     Int
+  
+  // Time in range statistics
+  timeInRange       String   // Formatted percentage
   highCount         Int
   lowCount          Int
   inRangeCount      Int
-  totalReadings     Int
   highPercentage    Float
   lowPercentage     Float
   inRangePercentage Float
-  minGlucose        Float
-  maxGlucose        Float
-  timeInRange       String
+  
+  // A1C estimation
+  estimatedA1C      Float
+  
+  // Data period
+  dataStartDate     DateTime
+  dataEndDate       DateTime
+  totalDays         Int
+  
   lastCalculated    DateTime @default(now())
   updatedAt         DateTime @updatedAt
 }
 
-// New model to store insulin and carb statistics from Omnipod
 model InsulinStats {
   id                String   @id @default(cuid())
-  userId            String   @unique // One-to-one relation with User
+  userId            String   @unique
   user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  totalDays         Int // Number of days with data
-  avgTotalInsulin   Float // Average total daily insulin (basal + bolus)
-  avgDailyBolus     Float // Average daily bolus insulin
-  avgDailyBasal     Float // Average daily basal insulin
-  avgDailyCarbs     Float // Average daily carbs
-  bolusPercentage   Float // Percentage of total insulin as bolus
-  basalPercentage   Float // Percentage of total insulin as basal
-  insulinCarbRatio  Float? // Average insulin to carb ratio (if calculable)
-  totalBolusCount   Int // Total number of bolus records
-  totalBasalChanges Int // Total number of basal rate changes
-  avgBolusesPerDay  Float // Average number of boluses per day
+  
+  // Daily averages
+  avgTotalInsulin   Float    // Average total daily insulin
+  avgDailyBolus     Float    // Average daily bolus insulin
+  avgDailyBasal     Float    // Average daily basal insulin
+  avgDailyCarbs     Float    // Average daily carbs
+  
+  // Insulin distribution
+  bolusPercentage   Float    // Percentage of total insulin as bolus
+  basalPercentage   Float    // Percentage of total insulin as basal
+  
+  // Usage patterns
+  avgBolusesPerDay  Float    // Average number of boluses per day
+  totalBolusCount   Int      // Total number of bolus records
+  totalBasalChanges Int      // Total number of basal rate changes
+  
+  // Ratios and settings
+  avgInsulinCarbRatio Float? // Average insulin to carb ratio
+  avgCorrectionFactor Float? // Average correction factor
+  
+  // Data period
+  dataStartDate     DateTime
+  dataEndDate       DateTime
+  totalDays         Int
+  
   lastCalculated    DateTime @default(now())
   updatedAt         DateTime @updatedAt
-  dataStartDate     DateTime // First date with insulin data
-  dataEndDate       DateTime // Last date with insulin data
-}
-
-// New model for bolus insulin records from Omnipod
-model BolusRecord {
-  id        String   @id @default(cuid())
-  timestamp DateTime
-  amount    Float // Insulin amount in units
-  bolusType String // e.g., "Normal", "Extended", "Multiwave"
-  duration  Int? // Duration in minutes for extended boluses
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([userId])
-  @@index([timestamp])
-}
-
-// New model for basal insulin records from Omnipod
-model BasalRecord {
-  id         String   @id @default(cuid())
-  timestamp  DateTime
-  rate       Float // Basal rate in units per hour
-  duration   Int // Duration in minutes
-  changeType String? // e.g., "Scheduled", "Temp", "Suspend"
-  userId     String
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  @@index([userId])
-  @@index([timestamp])
-}
-
-// New model for carb intake entries from Omnipod
-model CarbEntry {
-  id         String   @id @default(cuid())
-  timestamp  DateTime
-  carbAmount Float // Carbs in grams
-  userId     String
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  @@index([userId])
-  @@index([timestamp])
-}
-
-// New model for alarm and system events from Omnipod
-model AlarmEvent {
-  id        String   @id @default(cuid())
-  timestamp DateTime
-  eventType String // The type of alarm or event
-  deviceId  String? // Device identifier if available
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([userId])
-  @@index([timestamp])
-  @@index([eventType])
 }

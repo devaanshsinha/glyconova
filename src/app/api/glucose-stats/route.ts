@@ -1,7 +1,6 @@
 import { auth } from '@clerk/nextjs/server';
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
-import { calculateGlucoseStats } from '@/lib/glucose-stats';
 
 export async function GET(request: NextRequest) {
   try {
@@ -25,14 +24,13 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    // Only get pre-calculated stats from the database - no on-the-fly calculations
+    // Get pre-calculated stats from the database
     const stats = await prisma.glucoseStats.findUnique({
       where: { userId: user.id },
     });
 
     // If stats exist in the database, return them
     if (stats) {
-      // Format the stats to match the expected structure from calculateGlucoseStats
       const formattedStats = {
         average: stats.average,
         standardDeviation: stats.standardDeviation,
@@ -46,19 +44,19 @@ export async function GET(request: NextRequest) {
         minGlucose: stats.minGlucose,
         maxGlucose: stats.maxGlucose,
         timeInRange: stats.timeInRange,
-        readings: [], // Empty array since we don't need to return all readings
+        estimatedA1C: stats.estimatedA1C,
         lastCalculated: stats.lastCalculated,
       };
 
       return NextResponse.json({ stats: formattedStats });
     }
 
-    // If no pre-calculated stats exist, return empty stats with a flag indicating recalculation is needed
-    return NextResponse.json({
-      stats: calculateGlucoseStats([]),
-      needsCalculation: true,
-      message: "No statistics have been calculated yet. Please upload data or recalculate statistics."
+    // If no pre-calculated stats exist, return null
+    return NextResponse.json({ 
+      stats: null,
+      message: "No glucose statistics available. Please upload Dexcom data first."
     });
+
   } catch (error) {
     console.error('Error fetching glucose statistics:', error);
     return NextResponse.json(
@@ -69,4 +67,4 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}
