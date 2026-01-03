@@ -130,27 +130,185 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.GlucoseReadingScalarFieldEnum = {
+exports.Prisma.DexcomUploadScalarFieldEnum = {
   id: 'id',
+  userId: 'userId',
+  uploadedAt: 'uploadedAt',
+  patientFirstName: 'patientFirstName',
+  patientLastName: 'patientLastName',
+  deviceInfo: 'deviceInfo',
+  sourceDeviceId: 'sourceDeviceId'
+};
+
+exports.Prisma.DexcomReadingScalarFieldEnum = {
+  id: 'id',
+  uploadId: 'uploadId',
+  index: 'index',
   timestamp: 'timestamp',
-  glucoseValue: 'glucoseValue',
-  rateOfChange: 'rateOfChange',
   eventType: 'eventType',
   eventSubtype: 'eventSubtype',
-  transmitterId: 'transmitterId',
-  transmitterTime: 'transmitterTime',
+  patientInfo: 'patientInfo',
+  deviceInfo: 'deviceInfo',
   sourceDeviceId: 'sourceDeviceId',
-  userId: 'userId',
+  glucoseValue: 'glucoseValue',
+  insulinValue: 'insulinValue',
+  carbValue: 'carbValue',
+  duration: 'duration',
+  glucoseRateOfChange: 'glucoseRateOfChange',
+  transmitterTime: 'transmitterTime',
+  transmitterId: 'transmitterId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.DataUploadScalarFieldEnum = {
+exports.Prisma.OmnipodUploadScalarFieldEnum = {
   id: 'id',
-  fileName: 'fileName',
-  fileSize: 'fileSize',
+  userId: 'userId',
   uploadedAt: 'uploadedAt',
-  userId: 'userId'
+  fileName: 'fileName',
+  dateRange: 'dateRange'
+};
+
+exports.Prisma.OmnipodBgReadingScalarFieldEnum = {
+  id: 'id',
+  uploadId: 'uploadId',
+  timestamp: 'timestamp',
+  glucoseValue: 'glucoseValue',
+  manualReading: 'manualReading',
+  serialNumber: 'serialNumber',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OmnipodCgmReadingScalarFieldEnum = {
+  id: 'id',
+  uploadId: 'uploadId',
+  timestamp: 'timestamp',
+  cgmGlucoseValue: 'cgmGlucoseValue',
+  serialNumber: 'serialNumber',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OmnipodBolusRecordScalarFieldEnum = {
+  id: 'id',
+  uploadId: 'uploadId',
+  timestamp: 'timestamp',
+  insulinType: 'insulinType',
+  bloodGlucoseInput: 'bloodGlucoseInput',
+  carbsInput: 'carbsInput',
+  carbsRatio: 'carbsRatio',
+  insulinDelivered: 'insulinDelivered',
+  initialDelivery: 'initialDelivery',
+  extendedDelivery: 'extendedDelivery',
+  serialNumber: 'serialNumber',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OmnipodBasalRecordScalarFieldEnum = {
+  id: 'id',
+  uploadId: 'uploadId',
+  timestamp: 'timestamp',
+  insulinType: 'insulinType',
+  duration: 'duration',
+  percentage: 'percentage',
+  rate: 'rate',
+  insulinDelivered: 'insulinDelivered',
+  serialNumber: 'serialNumber',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OmnipodInsulinRecordScalarFieldEnum = {
+  id: 'id',
+  uploadId: 'uploadId',
+  timestamp: 'timestamp',
+  insulinType: 'insulinType',
+  amount: 'amount',
+  serialNumber: 'serialNumber',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OmnipodCarbRecordScalarFieldEnum = {
+  id: 'id',
+  uploadId: 'uploadId',
+  timestamp: 'timestamp',
+  carbAmount: 'carbAmount',
+  serialNumber: 'serialNumber',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OmnipodAlarmRecordScalarFieldEnum = {
+  id: 'id',
+  uploadId: 'uploadId',
+  timestamp: 'timestamp',
+  alarmType: 'alarmType',
+  description: 'description',
+  serialNumber: 'serialNumber',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OmnipodExerciseRecordScalarFieldEnum = {
+  id: 'id',
+  uploadId: 'uploadId',
+  timestamp: 'timestamp',
+  exerciseType: 'exerciseType',
+  duration: 'duration',
+  intensity: 'intensity',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OmnipodFoodRecordScalarFieldEnum = {
+  id: 'id',
+  uploadId: 'uploadId',
+  timestamp: 'timestamp',
+  name: 'name',
+  carbs: 'carbs',
+  fat: 'fat',
+  protein: 'protein',
+  calories: 'calories',
+  servingQuantity: 'servingQuantity',
+  numberOfServings: 'numberOfServings',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OmnipodManualInsulinRecordScalarFieldEnum = {
+  id: 'id',
+  uploadId: 'uploadId',
+  timestamp: 'timestamp',
+  insulinType: 'insulinType',
+  amount: 'amount',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OmnipodMedicationRecordScalarFieldEnum = {
+  id: 'id',
+  uploadId: 'uploadId',
+  timestamp: 'timestamp',
+  medicationName: 'medicationName',
+  dosage: 'dosage',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OmnipodNotesRecordScalarFieldEnum = {
+  id: 'id',
+  uploadId: 'uploadId',
+  timestamp: 'timestamp',
+  note: 'note',
+  category: 'category',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.GlucoseStatsScalarFieldEnum = {
@@ -158,16 +316,20 @@ exports.Prisma.GlucoseStatsScalarFieldEnum = {
   userId: 'userId',
   average: 'average',
   standardDeviation: 'standardDeviation',
+  minGlucose: 'minGlucose',
+  maxGlucose: 'maxGlucose',
+  totalReadings: 'totalReadings',
+  timeInRange: 'timeInRange',
   highCount: 'highCount',
   lowCount: 'lowCount',
   inRangeCount: 'inRangeCount',
-  totalReadings: 'totalReadings',
   highPercentage: 'highPercentage',
   lowPercentage: 'lowPercentage',
   inRangePercentage: 'inRangePercentage',
-  minGlucose: 'minGlucose',
-  maxGlucose: 'maxGlucose',
-  timeInRange: 'timeInRange',
+  estimatedA1C: 'estimatedA1C',
+  dataStartDate: 'dataStartDate',
+  dataEndDate: 'dataEndDate',
+  totalDays: 'totalDays',
   lastCalculated: 'lastCalculated',
   updatedAt: 'updatedAt'
 };
@@ -175,61 +337,21 @@ exports.Prisma.GlucoseStatsScalarFieldEnum = {
 exports.Prisma.InsulinStatsScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  totalDays: 'totalDays',
   avgTotalInsulin: 'avgTotalInsulin',
   avgDailyBolus: 'avgDailyBolus',
   avgDailyBasal: 'avgDailyBasal',
   avgDailyCarbs: 'avgDailyCarbs',
   bolusPercentage: 'bolusPercentage',
   basalPercentage: 'basalPercentage',
-  insulinCarbRatio: 'insulinCarbRatio',
+  avgBolusesPerDay: 'avgBolusesPerDay',
   totalBolusCount: 'totalBolusCount',
   totalBasalChanges: 'totalBasalChanges',
-  avgBolusesPerDay: 'avgBolusesPerDay',
-  lastCalculated: 'lastCalculated',
-  updatedAt: 'updatedAt',
+  avgInsulinCarbRatio: 'avgInsulinCarbRatio',
+  avgCorrectionFactor: 'avgCorrectionFactor',
   dataStartDate: 'dataStartDate',
-  dataEndDate: 'dataEndDate'
-};
-
-exports.Prisma.BolusRecordScalarFieldEnum = {
-  id: 'id',
-  timestamp: 'timestamp',
-  amount: 'amount',
-  bolusType: 'bolusType',
-  duration: 'duration',
-  userId: 'userId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.BasalRecordScalarFieldEnum = {
-  id: 'id',
-  timestamp: 'timestamp',
-  rate: 'rate',
-  duration: 'duration',
-  changeType: 'changeType',
-  userId: 'userId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.CarbEntryScalarFieldEnum = {
-  id: 'id',
-  timestamp: 'timestamp',
-  carbAmount: 'carbAmount',
-  userId: 'userId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.AlarmEventScalarFieldEnum = {
-  id: 'id',
-  timestamp: 'timestamp',
-  eventType: 'eventType',
-  deviceId: 'deviceId',
-  userId: 'userId',
-  createdAt: 'createdAt',
+  dataEndDate: 'dataEndDate',
+  totalDays: 'totalDays',
+  lastCalculated: 'lastCalculated',
   updatedAt: 'updatedAt'
 };
 
@@ -251,14 +373,23 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  GlucoseReading: 'GlucoseReading',
-  DataUpload: 'DataUpload',
+  DexcomUpload: 'DexcomUpload',
+  DexcomReading: 'DexcomReading',
+  OmnipodUpload: 'OmnipodUpload',
+  OmnipodBgReading: 'OmnipodBgReading',
+  OmnipodCgmReading: 'OmnipodCgmReading',
+  OmnipodBolusRecord: 'OmnipodBolusRecord',
+  OmnipodBasalRecord: 'OmnipodBasalRecord',
+  OmnipodInsulinRecord: 'OmnipodInsulinRecord',
+  OmnipodCarbRecord: 'OmnipodCarbRecord',
+  OmnipodAlarmRecord: 'OmnipodAlarmRecord',
+  OmnipodExerciseRecord: 'OmnipodExerciseRecord',
+  OmnipodFoodRecord: 'OmnipodFoodRecord',
+  OmnipodManualInsulinRecord: 'OmnipodManualInsulinRecord',
+  OmnipodMedicationRecord: 'OmnipodMedicationRecord',
+  OmnipodNotesRecord: 'OmnipodNotesRecord',
   GlucoseStats: 'GlucoseStats',
-  InsulinStats: 'InsulinStats',
-  BolusRecord: 'BolusRecord',
-  BasalRecord: 'BasalRecord',
-  CarbEntry: 'CarbEntry',
-  AlarmEvent: 'AlarmEvent'
+  InsulinStats: 'InsulinStats'
 };
 
 /**
